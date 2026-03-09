@@ -38,7 +38,7 @@
     </div>
 
     <div class="timeline__footer">
-      <NuxtLink to="/women" class="timeline__cta">
+      <NuxtLink to="/timeline" class="timeline__cta">
         Explore full timeline
         <LucideArrowRight :size="16" />
       </NuxtLink>

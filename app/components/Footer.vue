@@ -14,7 +14,9 @@
         <div class="site-footer__col">
           <h4 class="site-footer__col-title">Explore</h4>
           <NuxtLink to="/women" class="site-footer__link">All Women</NuxtLink>
+          <NuxtLink to="/timeline" class="site-footer__link">Timeline</NuxtLink>
           <NuxtLink to="/articles" class="site-footer__link">Articles</NuxtLink>
+          <NuxtLink to="/about" class="site-footer__link">About</NuxtLink>
         </div>
 
         <div class="site-footer__col">

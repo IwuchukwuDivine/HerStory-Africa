@@ -1,9 +1,9 @@
 <template>
   <article v-if="article" class="article-page">
-    <NuxtLink to="/articles" class="article-page__back">
+    <button class="go-back" @click="goBack">
       <LucideArrowLeft :size="18" />
-      Back to articles
-    </NuxtLink>
+      Back
+    </button>
 
     <header class="article-page__header">
       <time class="article-page__date" :datetime="article.date">
@@ -70,22 +70,6 @@ useSeoMeta({
   .article-page {
     padding: 2rem;
   }
-}
-
-.article-page__back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-decoration: none;
-  margin-bottom: 2rem;
-  transition: color 0.15s ease;
-}
-
-.article-page__back:hover {
-  color: var(--color-primary);
 }
 
 .article-page__header {

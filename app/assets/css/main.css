@@ -372,3 +372,22 @@ select:focus-visible {
 .dark .skeleton {
   background: var(--surface-muted);
 }
+.go-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  transition: color 0.15s ease;
+  cursor: pointer;
+}
+.go-back:hover {
+  color: var(--color-primary);
+}

@@ -1,10 +1,10 @@
 <template>
   <article v-if="woman" class="woman-profile">
     <header class="woman-profile__hero">
-      <NuxtLink to="/women" class="woman-profile__back">
+      <button class="go-back" @click="goBack">
         <LucideArrowLeft :size="18" />
-        All Women
-      </NuxtLink>
+        Back
+      </button>
 
       <div class="woman-profile__hero-inner">
         <div class="woman-profile__image-wrapper">
@@ -32,7 +32,7 @@
             </span>
             <span class="woman-profile__meta-item">
               <LucideCalendar :size="16" />
-              {{ woman.born }}{{ woman.died ? `–${woman.died}` : '–present' }}
+              {{ woman.born }}{{ woman.died ? `–${woman.died}` : "–present" }}
             </span>
           </div>
 
@@ -87,32 +87,32 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
 const { data: woman } = await useAsyncData(`woman-${route.path}`, () =>
-  queryCollection('women').path(route.path).first(),
-)
+  queryCollection("women").path(route.path).first(),
+);
 
 const { data: related } = await useAsyncData(
   `related-${route.path}`,
   async () => {
-    if (!woman.value) return []
-    return queryCollection('women')
-      .where('region', '=', woman.value.region)
-      .where('slug', '<>', woman.value.slug)
+    if (!woman.value) return [];
+    return queryCollection("women")
+      .where("region", "=", woman.value.region)
+      .where("slug", "<>", woman.value.slug)
       .limit(3)
-      .all()
+      .all();
   },
   { watch: [woman] },
-)
+);
 
 useSeoMeta({
-  title: () => woman.value?.name ?? 'Woman not found',
-  description: () => woman.value?.summary ?? '',
-  ogTitle: () => woman.value?.name ?? '',
-  ogDescription: () => woman.value?.summary ?? '',
-  ogImage: () => woman.value?.image ?? '',
-})
+  title: () => woman.value?.name ?? "Woman not found",
+  description: () => woman.value?.summary ?? "",
+  ogTitle: () => woman.value?.name ?? "",
+  ogDescription: () => woman.value?.summary ?? "",
+  ogImage: () => woman.value?.image ?? "",
+});
 </script>
 
 <style scoped>
@@ -126,22 +126,6 @@ useSeoMeta({
   .woman-profile {
     padding: 2rem;
   }
-}
-
-.woman-profile__back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-decoration: none;
-  margin-bottom: 1.5rem;
-  transition: color 0.15s ease;
-}
-
-.woman-profile__back:hover {
-  color: var(--color-primary);
 }
 
 .woman-profile__hero-inner {
@@ -249,7 +233,9 @@ useSeoMeta({
   background: var(--surface-subtle);
   color: var(--text-muted);
   text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .woman-profile__cause-tag:hover {
