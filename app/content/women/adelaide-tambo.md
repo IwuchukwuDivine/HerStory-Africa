@@ -11,8 +11,8 @@ causes:
   - "Women's rights"
   - "Political freedom"
   - "Democracy"
-image: "/women/adelaide-tambo.jpg"
-imageCredit: "Wikimedia Commons / Public Domain"
+image: "/women/placeholder.svg"
+imageCredit: ""
 featured: false
 summary: "South African anti-apartheid activist and wife of ANC president Oliver Tambo. While her husband led the ANC in exile, Adelaide was an activist and organiser in her own right, supporting liberation networks, raising her children alone under constant pressure, and dedicating her life to the freedom of her people."
 ---

@@ -11,8 +11,8 @@ causes:
   - "Children's education"
   - "Pan-Africanism"
   - "African literature"
-image: "/women/efua-sutherland.jpg"
-imageCredit: "Wikimedia Commons / Public Domain"
+image: "/women/placeholder.svg"
+imageCredit: ""
 featured: false
 summary: "Ghanaian playwright, director and educator who built Ghana's modern theatre tradition almost single-handedly. She founded the Ghana Drama Studio, created the first national children's theatre programme in Ghana and wrote plays that placed Ghanaian stories and oral traditions at the centre of African performance."
 ---
