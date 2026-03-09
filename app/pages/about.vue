@@ -39,8 +39,8 @@
       </p>
       <p>
         Every profile is researched, cited, and written to give you the real
-        story: who these women were, what they fought for, what it cost them, and
-        why it matters today.
+        story: who these women were, what they fought for, what it cost them,
+        and why it matters today.
       </p>
     </section>
 
@@ -51,7 +51,8 @@
           <LucideGraduationCap :size="24" class="about__audience-icon" />
           <h3>Students &amp; Teenagers</h3>
           <p>
-            Learning about African history and women's rights for the first time.
+            Learning about African history and women's rights for the first
+            time.
           </p>
         </div>
         <div class="about__audience-card">
@@ -78,8 +79,8 @@
       <p>
         Every profile in the archive is sourced from verifiable references:
         Wikipedia, Encyclopaedia Britannica, national archives, academic
-        publications, and primary historical documents. Sources are listed at the
-        bottom of every profile. Image credits are noted in every page's
+        publications, and primary historical documents. Sources are listed at
+        the bottom of every profile. Image credits are noted in every page's
         metadata.
       </p>
       <p>
@@ -141,7 +142,7 @@ useSeoMeta({
   ogTitle: "About HerStory Africa",
   ogDescription:
     "Why HerStory Africa exists: correcting misconceptions about feminism through real history.",
-  ogImage: "/og-image.png",
+  ogImage: "https://her-story-africa-seven.vercel.app/og-image.png",
 });
 </script>
 
@@ -276,7 +277,9 @@ useSeoMeta({
   background: var(--color-primary);
   color: var(--text-on-primary);
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
 }
 
 .about__github-link:hover {
