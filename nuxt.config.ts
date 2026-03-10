@@ -174,8 +174,7 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#b5451b" },
         {
           name: "viewport",
-          content:
-            "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+          content: "width=device-width, initial-scale=1",
         },
         // Open Graph
         { property: "og:type", content: "website" },

@@ -2,7 +2,7 @@
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div class="site-footer__brand">
-        <NuxtLink to="/" class="site-footer__logo-link">
+        <NuxtLink to="/" class="site-footer__logo-link" aria-label="HerStory Africa home">
           <Logo size="2rem" />
         </NuxtLink>
         <p class="site-footer__tagline">
