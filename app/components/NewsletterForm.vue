@@ -33,7 +33,8 @@
   </form>
 
   <div v-else class="newsletter-form__success">
-    <LucideCheck :size="20" class="newsletter-form__check" />
+    <LucideCheck v-if="alreadySubscribed" :size="20" class="newsletter-form__check" />
+    <LucideMail v-else :size="20" class="newsletter-form__check" />
     <p>{{ successMessage }}</p>
   </div>
 </template>
@@ -70,7 +71,7 @@ const showValidationError = computed(
 const successMessage = computed(() =>
   alreadySubscribed.value
     ? "You're already part of the family!"
-    : "Welcome aboard! Check your inbox for a confirmation email.",
+    : "Check your email to confirm your subscription.",
 );
 
 async function subscribe() {
