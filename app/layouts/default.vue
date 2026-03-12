@@ -7,6 +7,7 @@
     <Footer />
     <ClientOnly>
       <BackToTop />
+      <NewsletterModal />
     </ClientOnly>
   </div>
 </template>

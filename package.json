@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "lint": "eslint .",
     "typecheck": "nuxi typecheck",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "newsletter:draft": "node scripts/draft-newsletter.mjs"
   },
   "dependencies": {
     "@nuxt/content": "^3.12.0",
