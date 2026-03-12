@@ -32,6 +32,11 @@
 
     <div ref="readSentinel" />
 
+    <NewsletterCta
+      title="Enjoyed this article?"
+      description="Get new articles and stories of remarkable African women delivered to your inbox."
+    />
+
     <footer class="article-page__footer">
       <NuxtLink to="/" class="article-page__footer-link">
         <LucideArrowLeft :size="16" />

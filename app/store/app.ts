@@ -5,6 +5,8 @@ export const useAppStore = defineStore(
     const readWomen = ref<string[]>([]);
     const favoriteWomen = ref<string[]>([]);
     const favoriteArticles = ref<string[]>([]);
+    const hasSeenNewsletterPrompt = ref(false);
+    const subscribedEmail = ref("");
 
     function getList(
       kind: "favorite" | "read",
@@ -35,15 +37,31 @@ export const useAppStore = defineStore(
       return getList("read", type).value.includes(slug);
     }
 
+    function dismissNewsletter() {
+      hasSeenNewsletterPrompt.value = true;
+    }
+
+    function setSubscribed(email: string) {
+      subscribedEmail.value = email;
+      hasSeenNewsletterPrompt.value = true;
+    }
+
+    const isSubscribed = computed(() => subscribedEmail.value !== "");
+
     return {
       readWomen,
       readArticles,
       favoriteWomen,
       favoriteArticles,
+      hasSeenNewsletterPrompt,
+      subscribedEmail,
+      isSubscribed,
       toggleFavorite,
       markAsRead,
       isFavorite,
       isRead,
+      dismissNewsletter,
+      setSubscribed,
     };
   },
   {

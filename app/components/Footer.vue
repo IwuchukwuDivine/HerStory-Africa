@@ -54,6 +54,16 @@
         </div>
       </div>
 
+      <div class="site-footer__newsletter">
+        <div class="site-footer__newsletter-text">
+          <h4 class="site-footer__col-title">Stay in the loop</h4>
+          <p class="site-footer__newsletter-desc">
+            New stories of remarkable African women, straight to your inbox.
+          </p>
+        </div>
+        <NewsletterForm placeholder="Your email address" />
+      </div>
+
       <div class="site-footer__bottom">
         <p class="site-footer__copy">
           &copy; {{ currentYear }} HerStory Africa. An educational project.
@@ -137,6 +147,23 @@ const currentYear = new Date().getFullYear()
 
 .site-footer__link:hover {
   color: var(--color-primary);
+}
+
+.site-footer__newsletter {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border-light);
+  margin-bottom: 0.5rem;
+}
+
+.site-footer__newsletter-text {
+  margin-bottom: 1rem;
+}
+
+.site-footer__newsletter-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin: 0.375rem 0 0;
+  max-width: 24rem;
 }
 
 .site-footer__bottom {

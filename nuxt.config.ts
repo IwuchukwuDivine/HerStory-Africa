@@ -6,6 +6,10 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    buttondownApiKey: "",
+  },
+
   modules: [
     "@nuxt/image",
     "@nuxt/content",

@@ -69,6 +69,8 @@
 
     <div ref="readSentinel" />
 
+    <NewsletterCta />
+
     <aside v-if="related?.length" class="woman-profile__related">
       <h2 class="woman-profile__related-title">More from {{ woman.region }}</h2>
       <div class="woman-profile__related-grid">
