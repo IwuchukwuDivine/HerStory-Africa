@@ -23,6 +23,9 @@
 </template>
 
 <script setup lang="ts">
+const { setSubscribed } = useApp();
+setSubscribed("confirmed");
+
 useSeoMeta({
   title: "Subscription Confirmed",
   description:
@@ -49,6 +52,8 @@ useSeoMeta({
 }
 
 .confirmed__icon-wrap {
+  display: flex;
+  justify-content: center;
   margin-bottom: 1.5rem;
 }
 
