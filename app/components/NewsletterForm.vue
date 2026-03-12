@@ -7,12 +7,14 @@
         :placeholder="placeholder"
         required
         class="newsletter-form__input"
+        :class="{ 'newsletter-form__input--invalid': showValidationError }"
         :disabled="loading"
+        @blur="touched = true"
       />
       <button
         type="submit"
         class="newsletter-form__btn"
-        :disabled="loading || !email.trim()"
+        :disabled="loading || !isValidEmail"
       >
         <LucideLoader2
           v-if="loading"
@@ -22,7 +24,10 @@
         <template v-else>Subscribe</template>
       </button>
     </div>
-    <p v-if="error" class="newsletter-form__error">
+    <p v-if="showValidationError" class="newsletter-form__error">
+      Enter a valid email address
+    </p>
+    <p v-else-if="error" class="newsletter-form__error">
       {{ error }}
     </p>
   </form>
@@ -54,6 +59,13 @@ const loading = ref(false);
 const success = ref(false);
 const alreadySubscribed = ref(false);
 const error = ref("");
+const touched = ref(false);
+
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const isValidEmail = computed(() => emailPattern.test(email.value));
+const showValidationError = computed(
+  () => touched.value && email.value.length > 0 && !isValidEmail.value,
+);
 
 const successMessage = computed(() =>
   alreadySubscribed.value
@@ -115,6 +127,10 @@ async function subscribe() {
 
 .newsletter-form__input:focus {
   border-color: var(--color-primary);
+}
+
+.newsletter-form__input--invalid {
+  border-color: var(--color-crimson);
 }
 
 .newsletter-form__btn {
