@@ -33,7 +33,10 @@ const visible = ref(false);
 let scrollCleanup: (() => void) | null = null;
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
+const route = useRoute();
+
 function shouldShow() {
+  if (route.path.startsWith("/newsletter")) return false;
   return !hasSeenNewsletterPrompt.value && !isSubscribed.value;
 }
 
