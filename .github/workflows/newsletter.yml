@@ -32,20 +32,12 @@ jobs:
           git diff --staged --quiet || git commit -m "chore: update newsletter log"
           git push
 
-      - name: Write job summary
+      - name: Notify draft is ready
         run: |
-          LOG=$(cat data/newsletter-log.json)
-          SUBJECT=$(echo "$LOG" | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8');const l=JSON.parse(d);const e=l.editions[l.editions.length-1];console.log(e.subject)")
-          FEATURE=$(echo "$LOG" | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8');const l=JSON.parse(d);const e=l.editions[l.editions.length-1];console.log(e.mainFeature)")
-          TYPE=$(echo "$LOG" | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8');const l=JSON.parse(d);const e=l.editions[l.editions.length-1];console.log(e.type)")
-          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-          ## Newsletter draft ready
-
-          | | |
-          |---|---|
-          | **Subject** | $SUBJECT |
-          | **Type** | $TYPE |
-          | **Spotlight** | $FEATURE |
-
-          [Review and send in Buttondown](https://buttondown.com/emails)
-          EOF
+          SUBJECT=$(node -e "const l=JSON.parse(require('fs').readFileSync('data/newsletter-log.json','utf8'));const e=l.editions[l.editions.length-1];console.log(e.subject)")
+          curl -s \
+            -H "Title: Newsletter draft ready" \
+            -H "Tags: newspaper" \
+            -H "Click: https://buttondown.com/emails" \
+            -d "Your HerStory Africa newsletter draft is ready: ${SUBJECT}. Review and send it in Buttondown." \
+            ntfy.sh/herstory-africa-newsletter
