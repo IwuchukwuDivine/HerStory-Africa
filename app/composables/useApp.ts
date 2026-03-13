@@ -10,6 +10,8 @@ export default () => {
     hasSeenNewsletterPrompt,
     subscribedEmail,
     isSubscribed,
+    preferredVoiceName,
+    playbackSpeed,
   } = storeToRefs(store);
 
   return {
@@ -20,11 +22,13 @@ export default () => {
     hasSeenNewsletterPrompt,
     subscribedEmail,
     isSubscribed,
+    preferredVoiceName,
+    playbackSpeed,
+    setValue: store.setValue,
     toggleFavorite: store.toggleFavorite,
     markAsRead: store.markAsRead,
     isFavorite: store.isFavorite,
     isRead: store.isRead,
-    dismissNewsletter: store.dismissNewsletter,
     setSubscribed: store.setSubscribed,
   };
 };

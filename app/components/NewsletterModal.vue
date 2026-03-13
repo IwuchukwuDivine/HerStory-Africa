@@ -48,8 +48,8 @@ function show() {
 
 function dismiss() {
   visible.value = false;
-  const { dismissNewsletter } = useApp();
-  dismissNewsletter();
+  const { setValue } = useApp();
+  setValue("hasSeenNewsletterPrompt", true);
 }
 
 function onSubscribed() {

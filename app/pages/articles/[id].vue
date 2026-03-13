@@ -24,6 +24,9 @@
       </div>
       <h1 class="article-page__title">{{ article.title }}</h1>
       <p class="article-page__description">{{ article.description }}</p>
+      <ClientOnly>
+        <ListenButton content-selector=".article-page__title, .article-page__description, .article-page__content" />
+      </ClientOnly>
     </header>
 
     <div class="article-page__content">

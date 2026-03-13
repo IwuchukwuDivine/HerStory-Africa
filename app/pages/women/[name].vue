@@ -61,6 +61,9 @@
           </div>
         </div>
       </div>
+      <ClientOnly>
+        <ListenButton content-selector=".woman-profile__name, .woman-profile__summary, .woman-profile__content" />
+      </ClientOnly>
     </header>
 
     <div class="woman-profile__content">

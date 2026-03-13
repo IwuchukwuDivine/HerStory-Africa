@@ -1,3 +1,10 @@
+type SettableState = {
+  hasSeenNewsletterPrompt: boolean;
+  subscribedEmail: string;
+  preferredVoiceName: string;
+  playbackSpeed: number;
+};
+
 export const useAppStore = defineStore(
   "app",
   () => {
@@ -7,6 +14,19 @@ export const useAppStore = defineStore(
     const favoriteArticles = ref<string[]>([]);
     const hasSeenNewsletterPrompt = ref(false);
     const subscribedEmail = ref("");
+    const preferredVoiceName = ref("");
+    const playbackSpeed = ref(1);
+
+    const settableRefs: { [K in keyof SettableState]: Ref<SettableState[K]> } = {
+      hasSeenNewsletterPrompt,
+      subscribedEmail,
+      preferredVoiceName,
+      playbackSpeed,
+    };
+
+    function setValue<K extends keyof SettableState>(key: K, value: SettableState[K]) {
+      settableRefs[key].value = value;
+    }
 
     function getList(
       kind: "favorite" | "read",
@@ -37,10 +57,6 @@ export const useAppStore = defineStore(
       return getList("read", type).value.includes(slug);
     }
 
-    function dismissNewsletter() {
-      hasSeenNewsletterPrompt.value = true;
-    }
-
     function setSubscribed(email: string) {
       subscribedEmail.value = email;
       hasSeenNewsletterPrompt.value = true;
@@ -56,11 +72,13 @@ export const useAppStore = defineStore(
       hasSeenNewsletterPrompt,
       subscribedEmail,
       isSubscribed,
+      preferredVoiceName,
+      playbackSpeed,
+      setValue,
       toggleFavorite,
       markAsRead,
       isFavorite,
       isRead,
-      dismissNewsletter,
       setSubscribed,
     };
   },
