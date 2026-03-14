@@ -46,7 +46,7 @@ useSeoMeta({
   ogTitle: "Subscribe to HerStory Africa",
   ogDescription:
     "Get stories of remarkable African women delivered to your inbox. No spam, just history worth knowing.",
-  ogImage: "https://her-story-africa-seven.vercel.app/og-image.png",
+  ogImage: "https://her-story-africa-seven.vercel.app/newsletter-og.png",
 });
 </script>
 
