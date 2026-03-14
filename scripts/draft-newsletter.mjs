@@ -13,6 +13,7 @@ const SITE_URL = "https://her-story-africa-seven.vercel.app";
 
 const BUTTONDOWN_API_KEY = process.env.BUTTONDOWN_API_KEY;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const FEATURE_SLUG = process.env.FEATURE_SLUG || "";
 
 // ---------------------------------------------------------------------------
 // Frontmatter parser (handles the consistent YAML used in this project)
@@ -314,21 +315,38 @@ async function main() {
   const featuredSlugs = getAllFeaturedSlugs(log);
   console.log(`Previously featured: ${featuredSlugs.size} items`);
 
-  // Alternate between woman and article
-  const last = log.editions[log.editions.length - 1];
-  const nextType = last?.type === "woman" ? "article" : "woman";
-  console.log(`Next edition type: ${nextType}\n`);
+  // Check for a pinned feature override
+  let main;
+  let nextType;
 
-  // Regions from last 5 editions (for variety)
-  const recentRegions = log.editions
-    .slice(-5)
-    .map((e) => e.region)
-    .filter(Boolean);
+  if (FEATURE_SLUG) {
+    main =
+      women.find((w) => w.slug === FEATURE_SLUG) ||
+      articles.find((a) => a.slug === FEATURE_SLUG);
 
-  // Pick content
-  const mainPool = nextType === "woman" ? women : articles;
-  const main = pickMainFeature(mainPool, featuredSlugs, recentRegions);
-  console.log(`Main feature: ${main.name || main.title}`);
+    if (!main) {
+      throw new Error(`FEATURE_SLUG "${FEATURE_SLUG}" not found in women or articles.`);
+    }
+
+    nextType = main.type;
+    console.log(`Pinned feature: ${main.name || main.title} (${nextType})\n`);
+  } else {
+    // Alternate between woman and article
+    const last = log.editions[log.editions.length - 1];
+    nextType = last?.type === "woman" ? "article" : "woman";
+    console.log(`Next edition type: ${nextType}\n`);
+
+    // Regions from last 5 editions (for variety)
+    const recentRegions = log.editions
+      .slice(-5)
+      .map((e) => e.region)
+      .filter(Boolean);
+
+    // Pick content
+    const mainPool = nextType === "woman" ? women : articles;
+    main = pickMainFeature(mainPool, featuredSlugs, recentRegions);
+    console.log(`Main feature: ${main.name || main.title}`);
+  }
 
   const alsoReadPool = nextType === "woman" ? articles : women;
   const alsoRead = pickAlsoRead(alsoReadPool, featuredSlugs, main.slug);
