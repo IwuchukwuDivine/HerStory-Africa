@@ -52,6 +52,22 @@
 
     <div ref="readSentinel" />
 
+    <aside v-if="related?.length" class="article-page__related">
+      <h2 class="article-page__related-title">More {{ article.category }} articles</h2>
+      <div class="article-page__related-grid">
+        <ArticleCard
+          v-for="a in related"
+          :key="a.slug"
+          :title="a.title"
+          :description="a.description"
+          :date="a.date"
+          :slug="a.slug"
+          :category="a.category"
+          :image="a.image"
+        />
+      </div>
+    </aside>
+
     <NewsletterCta
       title="Enjoyed this article?"
       description="Get new articles and stories of remarkable African women delivered to your inbox."
@@ -100,6 +116,19 @@ const formattedDate = computed(() => {
     year: "numeric",
   });
 });
+
+const { data: related } = await useAsyncData(
+  `related-${route.path}`,
+  async () => {
+    if (!article.value) return [];
+    return queryCollection("articles")
+      .where("category", "=", article.value.category)
+      .where("slug", "<>", article.value.slug)
+      .limit(3)
+      .all();
+  },
+  { watch: [article] },
+);
 
 useSeoMeta({
   title: () => article.value?.title ?? "Article not found",
@@ -265,6 +294,26 @@ useSeoMeta({
 
 .article-page__content :deep(a:hover) {
   color: var(--color-primary-600);
+}
+
+/* ── Related articles ── */
+.article-page__related {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.article-page__related-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1.25rem;
+}
+
+.article-page__related-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* ── Footer ── */

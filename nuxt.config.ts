@@ -26,7 +26,31 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: ["/"],
-      crawlLinks: true, // auto-discovers all pages from links
+      crawlLinks: true,
+    },
+  },
+
+  hooks: {
+    async "nitro:config"(nitroConfig) {
+      if (nitroConfig.dev) return;
+      const { resolve } = await import("node:path");
+      const { readdirSync } = await import("node:fs");
+      const contentDir = resolve(__dirname, "app/content");
+
+      const women = readdirSync(resolve(contentDir, "women"))
+        .filter((f: string) => f.endsWith(".md"))
+        .map((f: string) => `/women/${f.replace(".md", "")}`);
+
+      const articles = readdirSync(resolve(contentDir, "articles"))
+        .filter((f: string) => f.endsWith(".md"))
+        .map((f: string) => `/articles/${f.replace(".md", "")}`);
+
+      nitroConfig.prerender = nitroConfig.prerender || {};
+      nitroConfig.prerender.routes = [
+        ...(nitroConfig.prerender.routes || []),
+        ...women,
+        ...articles,
+      ];
     },
   },
 
