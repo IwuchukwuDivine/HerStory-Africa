@@ -17,6 +17,8 @@ export default function useTextToSpeech() {
   let chunkStartProgress = 0;
   let chunkEndProgress = 0;
   let estimatedChunkDuration = 0;
+  let cancelledForPause = false;
+  let isAndroid = false;
 
   const CHARS_PER_SECOND = 14;
 
@@ -129,6 +131,10 @@ export default function useTextToSpeech() {
 
     utterance.onend = () => {
       stopProgressAnimation();
+      if (cancelledForPause) {
+        cancelledForPause = false;
+        return;
+      }
       currentChunkIndex = index + 1;
       progress.value = chunkEndProgress;
       if (status.value === "playing") {
@@ -138,6 +144,10 @@ export default function useTextToSpeech() {
 
     utterance.onerror = (e) => {
       stopProgressAnimation();
+      if (cancelledForPause) {
+        cancelledForPause = false;
+        return;
+      }
       if (e.error !== "interrupted" && e.error !== "canceled") {
         status.value = "idle";
         progress.value = 0;
@@ -174,21 +184,31 @@ export default function useTextToSpeech() {
   }
 
   function pause() {
-    speechSynthesis.pause();
     stopProgressAnimation();
     status.value = "paused";
+    if (isAndroid) {
+      cancelledForPause = true;
+      speechSynthesis.cancel();
+    } else {
+      speechSynthesis.pause();
+    }
   }
 
   function resume() {
-    speechSynthesis.resume();
-    status.value = "playing";
-    chunkStartTime =
-      performance.now() -
-      ((progress.value - chunkStartProgress) /
-        (chunkEndProgress - chunkStartProgress || 1)) *
-        estimatedChunkDuration *
-        1000;
-    startProgressAnimation();
+    if (isAndroid) {
+      status.value = "playing";
+      speakChunk(currentChunkIndex);
+    } else {
+      speechSynthesis.resume();
+      status.value = "playing";
+      chunkStartTime =
+        performance.now() -
+        ((progress.value - chunkStartProgress) /
+          (chunkEndProgress - chunkStartProgress || 1)) *
+          estimatedChunkDuration *
+          1000;
+      startProgressAnimation();
+    }
   }
 
   function stop() {
@@ -239,6 +259,8 @@ export default function useTextToSpeech() {
   onMounted(() => {
     isSupported.value = "speechSynthesis" in window;
     if (!isSupported.value) return;
+
+    isAndroid = /android/i.test(navigator.userAgent);
 
     loadVoices();
     speechSynthesis.addEventListener("voiceschanged", loadVoices);
