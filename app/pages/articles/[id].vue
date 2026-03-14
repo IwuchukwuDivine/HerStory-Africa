@@ -53,7 +53,7 @@
     <div ref="readSentinel" />
 
     <aside v-if="related?.length" class="article-page__related">
-      <h2 class="article-page__related-title">More {{ article.category }} articles</h2>
+      <h2 class="article-page__related-title">Related articles</h2>
       <div class="article-page__related-grid">
         <ArticleCard
           v-for="a in related"
