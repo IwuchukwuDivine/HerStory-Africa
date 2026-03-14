@@ -19,7 +19,10 @@
           </ClientOnly>
         </div>
         <ClientOnly>
-          <FavoriteButton type="article" :slug="article.slug" :size="20" />
+          <div class="article-page__actions">
+            <ShareButton :title="article.title" :text="article.description" :size="20" />
+            <FavoriteButton type="article" :slug="article.slug" :size="20" />
+          </div>
         </ClientOnly>
       </div>
       <h1 class="article-page__title">{{ article.title }}</h1>
@@ -116,6 +119,12 @@ useSeoMeta({
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.article-page__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .article-page__top-left {

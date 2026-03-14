@@ -25,7 +25,10 @@
           <div class="woman-profile__top-row">
             <span class="woman-profile__era-badge">{{ woman.era }} era</span>
             <ClientOnly>
-              <FavoriteButton type="woman" :slug="woman.slug" :size="22" />
+              <div class="woman-profile__actions">
+                <ShareButton :title="woman.name" :text="woman.summary" :size="22" />
+                <FavoriteButton type="woman" :slug="woman.slug" :size="22" />
+              </div>
             </ClientOnly>
           </div>
           <h1 class="woman-profile__name">{{ woman.name }}</h1>
@@ -209,6 +212,12 @@ useSeoMeta({
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.woman-profile__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .woman-profile__era-badge {
