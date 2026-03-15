@@ -155,9 +155,38 @@ useSeoMeta({
   twitterImage: ogImageUrl,
 });
 
-useHead({
-  link: [{ rel: "canonical", href: canonicalUrl }],
-});
+useHead(() => ({
+  link: [{ rel: "canonical", href: canonicalUrl.value }],
+  script: article.value
+    ? [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: article.value.title,
+            description: article.value.description,
+            image: ogImageUrl.value,
+            url: canonicalUrl.value,
+            datePublished: article.value.date,
+            author: {
+              "@type": "Organization",
+              name: "HerStory Africa",
+              url: "https://her-story-africa-seven.vercel.app",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "HerStory Africa",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://her-story-africa-seven.vercel.app/og-image.png",
+              },
+            },
+          }),
+        },
+      ]
+    : [],
+}));
 </script>
 
 <style scoped>

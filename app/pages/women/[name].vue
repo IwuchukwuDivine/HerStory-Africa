@@ -167,9 +167,27 @@ useSeoMeta({
   twitterImage: ogImageUrl,
 });
 
-useHead({
-  link: [{ rel: "canonical", href: canonicalUrl }],
-});
+useHead(() => ({
+  link: [{ rel: "canonical", href: canonicalUrl.value }],
+  script: woman.value
+    ? [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: woman.value.name,
+            description: woman.value.summary,
+            image: ogImageUrl.value,
+            url: canonicalUrl.value,
+            birthDate: woman.value.born?.toString(),
+            deathDate: woman.value.died?.toString(),
+            nationality: woman.value.country,
+          }),
+        },
+      ]
+    : [],
+}));
 </script>
 
 <style scoped>
