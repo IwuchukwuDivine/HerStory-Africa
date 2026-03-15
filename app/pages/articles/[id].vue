@@ -168,7 +168,7 @@ useHead(() => ({
             description: article.value.description,
             image: ogImageUrl.value,
             url: canonicalUrl.value,
-            datePublished: article.value.date,
+            datePublished: `${article.value.date}T00:00:00+00:00`,
             author: {
               "@type": "Organization",
               name: "HerStory Africa",
