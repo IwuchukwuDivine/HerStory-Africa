@@ -116,6 +116,19 @@
       </p>
     </section>
 
+    <section class="about__section about__suggest">
+      <h2 class="about__heading">Know someone whose story should be here?</h2>
+      <p>
+        If you know an African woman who fought, built, led, or changed
+        something and her story isn't in the archive yet, we want to hear
+        about her.
+      </p>
+      <NuxtLink to="/suggest" class="about__suggest-link">
+        <LucideSend :size="18" />
+        Suggest a woman
+      </NuxtLink>
+    </section>
+
     <footer class="about__footer">
       <p class="about__built-by">
         Built by
@@ -283,6 +296,35 @@ useSeoMeta({
 }
 
 .about__github-link:hover {
+  background: var(--color-primary-600);
+  transform: translateY(-1px);
+}
+
+/* ── Suggest CTA ── */
+.about__suggest {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--surface-elevated);
+  border: 1.5px solid var(--border-light);
+}
+
+.about__suggest-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  color: var(--text-on-primary);
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.about__suggest-link:hover {
   background: var(--color-primary-600);
   transform: translateY(-1px);
 }

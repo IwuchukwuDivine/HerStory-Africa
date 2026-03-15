@@ -8,6 +8,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     buttondownApiKey: "",
+    githubToken: "",
   },
 
   modules: [
