@@ -77,6 +77,16 @@
 
     <NewsletterCta />
 
+    <div class="woman-profile__suggest">
+      <p class="woman-profile__suggest-text">
+        Know an African woman whose story should be here?
+      </p>
+      <NuxtLink to="/suggest" class="woman-profile__suggest-link">
+        <LucideSend :size="16" />
+        Suggest a woman
+      </NuxtLink>
+    </div>
+
     <aside v-if="related?.length" class="woman-profile__related">
       <h2 class="woman-profile__related-title">More from {{ woman.region }}</h2>
       <div class="woman-profile__related-grid">
@@ -387,6 +397,42 @@ useHead({
 }
 
 .woman-profile__content :deep(a:hover) {
+  color: var(--color-primary-600);
+}
+
+/* ── Suggest CTA ── */
+.woman-profile__suggest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--surface-elevated);
+  border: 1.5px solid var(--border-light);
+}
+
+.woman-profile__suggest-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.woman-profile__suggest-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.woman-profile__suggest-link:hover {
   color: var(--color-primary-600);
 }
 
