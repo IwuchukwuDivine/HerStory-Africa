@@ -30,7 +30,9 @@
     "pinia-plugin-persistedstate": "^4.5.0",
     "tailwindcss": "^4.2.1",
     "vue": "^3.5.29",
-    "vue-router": "^4.6.4"
+    "vue-router": "^4.6.4",
+    "@vite-pwa/assets-generator": "^1.0.2",
+    "@vite-pwa/nuxt": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^24.9.2",

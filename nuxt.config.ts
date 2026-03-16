@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
     "@vercel/speed-insights",
+    "@vite-pwa/nuxt",
   ],
 
   // ── Static Site Generation ──────────────────────────────────────────
@@ -205,7 +206,12 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#b5451b" },
         {
           name: "viewport",
-          content: "width=device-width, initial-scale=1",
+          content: "width=device-width, initial-scale=1, viewport-fit=cover",
+        },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
+        {
+          name: "apple-mobile-web-app-status-bar-style",
+          content: "black-translucent",
         },
         // Open Graph
         { property: "og:type", content: "website" },
@@ -249,6 +255,79 @@ export default defineNuxtConfig({
           rel: "icon",
           type: "image/svg+xml",
           href: "/herstory-africa-favicon.svg",
+        },
+        {
+          rel: "apple-touch-icon",
+          href: "/icons/apple-icon-180.png",
+        },
+        {
+          rel: "manifest",
+          href: "/manifest.webmanifest",
+        },
+      ],
+    },
+  },
+  pwa: {
+    registerType: "prompt",
+    devOptions: {
+      enabled: false,
+      suppressWarnings: true,
+      type: "module",
+    },
+    manifest: {
+      name: "HerStory Africa",
+      lang: "en",
+      short_name: "HerStory Africa",
+      description: "The women history forgot to teach you.",
+      theme_color: "#b5451b",
+      background_color: "#fdf8f3",
+      display: "standalone",
+      scope: "/",
+      start_url: "/?source=pwa",
+      icons: [
+        {
+          src: "/icons/manifest-icon-192.maskable.png",
+          sizes: "192x192",
+          type: "image/png",
+          purpose: "any",
+        },
+        {
+          src: "/icons/manifest-icon-192.maskable.png",
+          sizes: "192x192",
+          type: "image/png",
+          purpose: "maskable",
+        },
+        {
+          src: "/icons/manifest-icon-512.maskable.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "any",
+        },
+        {
+          src: "/icons/manifest-icon-512.maskable.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "maskable",
+        },
+      ],
+    },
+    workbox: {
+      navigateFallback: "/",
+      globPatterns: ["**/*.{html,js,css,svg,png,ico,woff2}"],
+      ignoreURLParametersMatching: [/^utm_/, /^fbclid$/, /^source/],
+      cleanupOutdatedCaches: true,
+      clientsClaim: true,
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:jpg|jpeg|webp|gif)$/i,
+          handler: "CacheFirst",
+          options: {
+            cacheName: "images",
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 30 * 24 * 60 * 60,
+            },
+          },
         },
       ],
     },

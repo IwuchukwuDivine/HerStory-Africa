@@ -9,6 +9,7 @@
     <ClientOnly>
       <BackToTop />
       <NewsletterModal />
+      <IOSInstallPrompt />
     </ClientOnly>
   </div>
 </template>

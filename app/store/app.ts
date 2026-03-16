@@ -16,6 +16,7 @@ export const useAppStore = defineStore(
     const subscribedEmail = ref("");
     const preferredVoiceName = ref("");
     const playbackSpeed = ref(1);
+    const iosPromptDismissedAt = ref<number | null>(null);
 
     const settableRefs: { [K in keyof SettableState]: Ref<SettableState[K]> } = {
       hasSeenNewsletterPrompt,
@@ -64,6 +65,19 @@ export const useAppStore = defineStore(
 
     const isSubscribed = computed(() => subscribedEmail.value !== "");
 
+    const IOS_DISMISS_DAYS = 30;
+
+    const isIosPromptDismissed = (): boolean => {
+      if (!iosPromptDismissedAt.value) return false;
+      const daysSince =
+        (Date.now() - iosPromptDismissedAt.value) / (1000 * 60 * 60 * 24);
+      return daysSince < IOS_DISMISS_DAYS;
+    };
+
+    const dismissIosPrompt = () => {
+      iosPromptDismissedAt.value = Date.now();
+    };
+
     return {
       readWomen,
       readArticles,
@@ -74,6 +88,9 @@ export const useAppStore = defineStore(
       isSubscribed,
       preferredVoiceName,
       playbackSpeed,
+      iosPromptDismissedAt,
+      isIosPromptDismissed,
+      dismissIosPrompt,
       setValue,
       toggleFavorite,
       markAsRead,

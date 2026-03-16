@@ -30,5 +30,7 @@ export default () => {
     isFavorite: store.isFavorite,
     isRead: store.isRead,
     setSubscribed: store.setSubscribed,
+    isIosPromptDismissed: store.isIosPromptDismissed,
+    dismissIosPrompt: store.dismissIosPrompt,
   };
 };
