@@ -32,52 +32,60 @@
       </button>
     </div>
 
-    <template v-if="activeTab === 'women'">
-      <div v-if="favWomenList.length" class="favorites__grid">
-        <WomanCard
-          v-for="w in favWomenList"
-          :key="w.slug"
-          :name="w.name"
-          :slug="w.slug"
-          :image="w.image"
-          :country="w.country"
-          :born="w.born"
-          :died="w.died"
-          :era="w.era"
-          :summary="w.summary"
-          :causes="w.causes"
-        />
-      </div>
-      <div v-else class="favorites__empty">
-        <LucideHeart :size="40" />
-        <p>No favorite women yet.</p>
-        <NuxtLink to="/women" class="favorites__browse-btn">
-          Browse women
-        </NuxtLink>
-      </div>
-    </template>
+    <ClientOnly>
+      <template v-if="activeTab === 'women'">
+        <div v-if="favWomenList.length" class="favorites__grid">
+          <WomanCard
+            v-for="w in favWomenList"
+            :key="w.slug"
+            :name="w.name"
+            :slug="w.slug"
+            :image="w.image"
+            :country="w.country"
+            :born="w.born"
+            :died="w.died"
+            :era="w.era"
+            :summary="w.summary"
+            :causes="w.causes"
+          />
+        </div>
+        <div v-else class="favorites__empty">
+          <LucideHeart :size="40" />
+          <p>No favorite women yet.</p>
+          <NuxtLink to="/women" class="favorites__browse-btn">
+            Browse women
+          </NuxtLink>
+        </div>
+      </template>
 
-    <template v-else>
-      <div v-if="favArticlesList.length" class="favorites__list">
-        <ArticleCard
-          v-for="a in favArticlesList"
-          :key="a.slug"
-          :title="a.title"
-          :description="a.description"
-          :date="a.date"
-          :slug="a.slug"
-          :category="a.category"
-          :image="a.image"
-        />
-      </div>
-      <div v-else class="favorites__empty">
-        <LucideHeart :size="40" />
-        <p>No favorite articles yet.</p>
-        <NuxtLink to="/articles" class="favorites__browse-btn">
-          Browse articles
-        </NuxtLink>
-      </div>
-    </template>
+      <template v-else>
+        <div v-if="favArticlesList.length" class="favorites__list">
+          <ArticleCard
+            v-for="a in favArticlesList"
+            :key="a.slug"
+            :title="a.title"
+            :description="a.description"
+            :date="a.date"
+            :slug="a.slug"
+            :category="a.category"
+            :image="a.image"
+          />
+        </div>
+        <div v-else class="favorites__empty">
+          <LucideHeart :size="40" />
+          <p>No favorite articles yet.</p>
+          <NuxtLink to="/articles" class="favorites__browse-btn">
+            Browse articles
+          </NuxtLink>
+        </div>
+      </template>
+
+      <template #fallback>
+        <div class="favorites__empty">
+          <p>Loading your favorites…</p>
+        </div>
+      </template>
+    </ClientOnly>
   </div>
 </template>
 

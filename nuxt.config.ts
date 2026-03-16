@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "@vercel/speed-insights",
   ],
 
   // ── Static Site Generation ──────────────────────────────────────────
