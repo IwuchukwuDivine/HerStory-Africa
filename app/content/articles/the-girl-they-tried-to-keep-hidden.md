@@ -4,8 +4,8 @@ description: "Shipped from Nigeria to Ireland as a child with the promise of a b
 date: 2026-03-17
 slug: the-girl-they-tried-to-keep-hidden
 category: "Profiles"
-image: "/articles/the-girl-they-tried-to-keep-hidden.jpg"
-imageCredit: "Destiny Ayo Vaughan / Mind the Gap Ireland / Used with permission"
+image: "/articles/the-girl-they-tried-to-keep-hidden.png"
+imageCredit: "Destiny Ayo Vaughan / Women in STEM Summit / Business Post"
 ---
 
 Imagine you are five years old. You live in Nigeria. You do not yet know what the word "arranged" means, but the adults around you have already used it to describe your future. Your marriage has been decided. Your life has been planned. You have not been asked. You are five.
