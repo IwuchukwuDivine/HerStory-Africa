@@ -3,15 +3,15 @@ name: "Isatou Ceesay"
 slug: "isatou-ceesay"
 country: "The Gambia"
 region: "West Africa"
-born: null
+born: 1972
 died: null
 era: "Contemporary"
 causes:
   - "Environmental sustainability"
   - "Women's economic empowerment"
   - "Plastic waste reduction"
-image: "/women/placeholder.svg"
-imageCredit: ""
+image: "/women/isatou-ceesay.jpg"
+imageCredit: "Isatou Ceesay at a waste site in The Gambia / Photo: Luke Duggleby / Climate Heroes"
 featured: false
 summary: "Gambian environmental activist known as the 'Queen of Recycling' who empowers women by transforming plastic waste into income-generating products."
 ---
