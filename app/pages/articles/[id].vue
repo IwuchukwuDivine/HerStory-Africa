@@ -179,7 +179,7 @@ useHead(() => ({
               name: "HerStory Africa",
               logo: {
                 "@type": "ImageObject",
-                url: "https://her-story-africa-seven.vercel.app/og-image.png",
+                url: "https://herstoryafrica.com.ng/og-image.png",
               },
             },
           }),

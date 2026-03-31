@@ -21,17 +21,26 @@
         <div class="newsletter-page__perk">
           <LucideBookOpen :size="22" class="newsletter-page__perk-icon" />
           <h3>New stories</h3>
-          <p>Profiles of queens, scientists, activists, and rebels as they're published.</p>
+          <p>
+            Profiles of queens, scientists, activists, and rebels as they're
+            published.
+          </p>
         </div>
         <div class="newsletter-page__perk">
           <LucideNewspaper :size="22" class="newsletter-page__perk-icon" />
           <h3>Articles and essays</h3>
-          <p>Deeper dives into the movements and moments that shaped the continent.</p>
+          <p>
+            Deeper dives into the movements and moments that shaped the
+            continent.
+          </p>
         </div>
         <div class="newsletter-page__perk">
           <LucideHeart :size="22" class="newsletter-page__perk-icon" />
           <h3>No noise</h3>
-          <p>No spam, no fluff, no daily emails. Just stories that matter, when they're ready.</p>
+          <p>
+            No spam, no fluff, no daily emails. Just stories that matter, when
+            they're ready.
+          </p>
         </div>
       </div>
     </section>
@@ -46,7 +55,7 @@ useSeoMeta({
   ogTitle: "Subscribe to HerStory Africa",
   ogDescription:
     "Get stories of remarkable African women delivered to your inbox. No spam, just history worth knowing.",
-  ogImage: "https://her-story-africa-seven.vercel.app/newsletter-og.png",
+  ogImage: "https://herstoryafrica.com.ng/newsletter-og.png",
 });
 </script>
 

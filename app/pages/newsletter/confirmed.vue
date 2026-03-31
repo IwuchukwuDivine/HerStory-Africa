@@ -33,7 +33,7 @@ useSeoMeta({
   ogTitle: "Subscription Confirmed — HerStory Africa",
   ogDescription:
     "You're officially part of HerStory Africa. Stories of remarkable African women are on their way to your inbox.",
-  ogImage: "https://her-story-africa-seven.vercel.app/og-image.png",
+  ogImage: "https://herstoryafrica.com.ng/og-image.png",
 });
 </script>
 

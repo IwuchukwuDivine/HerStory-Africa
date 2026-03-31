@@ -9,16 +9,12 @@
     </header>
 
     <div v-if="groupedEras.length" class="tl-page__body">
-      <section
-        v-for="era in groupedEras"
-        :key="era.label"
-        class="tl-era"
-      >
+      <section v-for="era in groupedEras" :key="era.label" class="tl-era">
         <div class="tl-era__badge" :style="{ '--era-color': era.color }">
           <span class="tl-era__label">{{ era.label }}</span>
           <span class="tl-era__count">
             {{ era.women.length }}
-            {{ era.women.length === 1 ? 'profile' : 'profiles' }}
+            {{ era.women.length === 1 ? "profile" : "profiles" }}
           </span>
         </div>
 
@@ -31,10 +27,7 @@
             <div class="tl-item__marker" :style="{ '--era-color': era.color }">
               <span class="tl-item__year">{{ woman.born ?? "?" }}</span>
               <span class="tl-item__dot" />
-              <span
-                v-if="index < era.women.length - 1"
-                class="tl-item__line"
-              />
+              <span v-if="index < era.women.length - 1" class="tl-item__line" />
             </div>
 
             <NuxtLink :to="`/women/${woman.slug}`" class="tl-item__card">
@@ -51,7 +44,9 @@
               </div>
               <div class="tl-item__body">
                 <h3 class="tl-item__name">{{ woman.name }}</h3>
-                <p class="tl-item__meta">{{ woman.country }} · {{ woman.era }}</p>
+                <p class="tl-item__meta">
+                  {{ woman.country }} · {{ woman.era }}
+                </p>
                 <p class="tl-item__summary">{{ woman.summary }}</p>
               </div>
               <LucideChevronRight :size="16" class="tl-item__chevron" />
@@ -65,39 +60,37 @@
 
 <script setup lang="ts">
 const ERA_ORDER = [
-  { label: 'Pre-Colonial', color: 'var(--color-secondary)' },
-  { label: 'Colonial', color: 'var(--color-crimson)' },
-  { label: 'Independence', color: 'var(--color-forest)' },
-  { label: 'Modern', color: 'var(--color-primary)' },
-  { label: 'Contemporary', color: 'var(--color-forest)' },
-] as const
+  { label: "Pre-Colonial", color: "var(--color-secondary)" },
+  { label: "Colonial", color: "var(--color-crimson)" },
+  { label: "Independence", color: "var(--color-forest)" },
+  { label: "Modern", color: "var(--color-primary)" },
+  { label: "Contemporary", color: "var(--color-forest)" },
+] as const;
 
-const { data: allWomen } = await useAsyncData('timeline-all', () =>
-  queryCollection('women').order('born', 'ASC').all(),
-)
+const { data: allWomen } = await useAsyncData("timeline-all", () =>
+  queryCollection("women").order("born", "ASC").all(),
+);
 
-const totalCount = computed(() => allWomen.value?.length ?? 0)
+const totalCount = computed(() => allWomen.value?.length ?? 0);
 
 const groupedEras = computed(() => {
-  if (!allWomen.value) return []
+  if (!allWomen.value) return [];
 
-  return ERA_ORDER
-    .map(era => ({
-      ...era,
-      women: allWomen.value!.filter(w => w.era === era.label),
-    }))
-    .filter(era => era.women.length > 0)
-})
+  return ERA_ORDER.map((era) => ({
+    ...era,
+    women: allWomen.value!.filter((w) => w.era === era.label),
+  })).filter((era) => era.women.length > 0);
+});
 
 useSeoMeta({
-  title: 'Timeline',
+  title: "Timeline",
   description:
-    'A chronological timeline of African women who shaped history, from pre-colonial queens to contemporary leaders.',
-  ogTitle: 'Timeline — HerStory Africa',
+    "A chronological timeline of African women who shaped history, from pre-colonial queens to contemporary leaders.",
+  ogTitle: "Timeline — HerStory Africa",
   ogDescription:
-    'Explore the full timeline of African women who fought for equality across the centuries.',
-  ogImage: 'https://her-story-africa-seven.vercel.app/og-image.png',
-})
+    "Explore the full timeline of African women who fought for equality across the centuries.",
+  ogImage: "https://herstoryafrica.com.ng/og-image.png",
+});
 </script>
 
 <style scoped>
@@ -219,7 +212,9 @@ useSeoMeta({
   color: inherit;
   margin-bottom: 0.75rem;
   flex: 1;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .tl-item__card:hover {
@@ -273,7 +268,9 @@ useSeoMeta({
   flex-shrink: 0;
   color: var(--text-muted);
   margin-top: 0.25rem;
-  transition: transform 0.15s ease, color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease;
 }
 
 .tl-item__card:hover .tl-item__chevron {

@@ -120,8 +120,8 @@
       <h2 class="about__heading">Know someone whose story should be here?</h2>
       <p>
         If you know an African woman who fought, built, led, or changed
-        something and her story isn't in the archive yet, we want to hear
-        about her.
+        something and her story isn't in the archive yet, we want to hear about
+        her.
       </p>
       <NuxtLink to="/suggest" class="about__suggest-link">
         <LucideSend :size="18" />
@@ -155,7 +155,7 @@ useSeoMeta({
   ogTitle: "About HerStory Africa",
   ogDescription:
     "Why HerStory Africa exists: correcting misconceptions about feminism through real history.",
-  ogImage: "https://her-story-africa-seven.vercel.app/og-image.png",
+  ogImage: "https://herstoryafrica.com.ng/og-image.png",
 });
 </script>
 

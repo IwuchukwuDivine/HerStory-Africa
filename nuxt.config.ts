@@ -221,7 +221,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:image",
-          content: "https://her-story-africa-seven.vercel.app/og-image.png",
+          content: "https://herstoryafrica.com.ng/og-image.png",
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
@@ -240,7 +240,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://her-story-africa-seven.vercel.app/og-image.png",
+          content: "https://herstoryafrica.com.ng/og-image.png",
         },
       ],
 
