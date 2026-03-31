@@ -13,6 +13,7 @@ causes:
 image: "/women/derartu-tulu.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Derartu Tulu's victory lap at Barcelona 1992 with white South African rival Elana Meyer became an iconic symbol of post-apartheid reconciliation."
 summary: "Ethiopian long-distance runner who became the first Black African woman to win an Olympic gold medal, at Barcelona 1992. Her victory lap with white South African Elana Meyer became a symbol of post-apartheid reconciliation."
 ---
 

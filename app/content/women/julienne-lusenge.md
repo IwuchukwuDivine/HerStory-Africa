@@ -14,6 +14,7 @@ causes:
 image: "/women/julienne-lusenge.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Julienne Lusenge founded organisations providing legal aid, counselling, and economic support to survivors of sexual violence used as a weapon of war in the DRC."
 summary: "Congolese human rights activist who has spent decades fighting sexual violence as a weapon of war in the DRC, founding organisations that provide legal aid, counselling, and economic support to survivors."
 ---
 

@@ -13,6 +13,7 @@ causes:
 image: "/women/placeholder.svg"
 imageCredit: "No free image available"
 featured: false
+funFact: "Mekatilili wa Menza used traditional oaths and dance to mobilise the Giriama people into mass resistance against British colonial rule in coastal Kenya."
 summary: "Giriama leader who organised mass resistance against British colonial rule in coastal Kenya, using traditional oaths and dance to unite her people against forced labour and land seizure."
 ---
 

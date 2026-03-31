@@ -14,6 +14,7 @@ causes:
 image: "/women/adenike-osofisan.jpg"
 imageCredit: "Courtesy photo"
 featured: false
+funFact: "In 1989, Adenike Osofisan became the first Nigerian woman to earn a PhD in Computer Science, later pioneering artificial intelligence and machine learning research at the University of Ibadan."
 summary: "First Nigerian woman to earn a PhD in Computer Science (1989) and first female professor of Computer Science at the University of Ibadan. Pioneer in artificial intelligence, machine learning, and computing education in Nigeria."
 ---
 

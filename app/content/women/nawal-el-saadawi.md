@@ -15,6 +15,7 @@ causes:
 image: "/women/nawal-el-saadawi.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
+funFact: "Nawal El Saadawi authored over 50 books translated into more than 30 languages, earning her the title 'the Simone de Beauvoir of the Arab world.'"
 summary: "Egyptian feminist writer, psychiatrist, and activist who spent five decades fighting patriarchy, religious conservatism, and female genital mutilation at great personal cost: losing her job, being imprisoned, and living under death threats. Author of over 50 books translated into more than 30 languages. Called 'the Simone de Beauvoir of the Arab world.'"
 ---
 

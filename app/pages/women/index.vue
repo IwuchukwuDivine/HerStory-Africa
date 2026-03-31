@@ -5,6 +5,9 @@
       <p class="women-listing__subtitle">
         {{ totalCount }} women across the archive. Search, filter, and explore.
       </p>
+      <ClientOnly>
+        <ExplorationProgress :total="totalCount" />
+      </ClientOnly>
     </header>
 
     <div class="women-listing__toolbar">
@@ -186,6 +189,9 @@ useSeoMeta({
 }
 
 .women-listing__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 

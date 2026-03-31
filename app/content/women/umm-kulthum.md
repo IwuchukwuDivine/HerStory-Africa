@@ -14,6 +14,7 @@ causes:
 image: "/women/umm-kulthum.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Umm Kulthum's funeral in 1975 drew four million mourners — a crowd even larger than the one that turned out for Egyptian President Nasser."
 summary: "Egyptian singer known as the Star of the East and the most famous Arab singer of the 20th century. Born around 1898 in a small Delta village, she rose to become a cultural icon whose concerts lasted four to six hours. Her funeral in 1975 drew four million mourners, a crowd larger than that for Nasser."
 ---
 

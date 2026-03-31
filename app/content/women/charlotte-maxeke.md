@@ -14,6 +14,7 @@ causes:
 image: "/women/charlotte-maxeke.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
+funFact: "Charlotte Maxeke was the first Black South African woman to earn a university degree and is called the 'Mother of Black Freedom in South Africa.'"
 summary: "First Black South African woman to earn a university degree. Founded the Bantu Women's League and fought pass laws. Called the 'Mother of Black Freedom in South Africa'."
 ---
 

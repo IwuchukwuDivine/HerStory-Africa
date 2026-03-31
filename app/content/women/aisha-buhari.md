@@ -14,6 +14,7 @@ causes:
 image: "/women/aisha-buhari.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "As First Lady of Nigeria from 2015 to 2023, Aisha Buhari was unusually outspoken on governance and women's participation, publicly challenging policies and advocating for women's and children's welfare."
 summary: "First Lady of Nigeria (2015–2023); advocate for women's and children's welfare, health, and education. Outspoken on governance and women's participation in public life."
 ---
 

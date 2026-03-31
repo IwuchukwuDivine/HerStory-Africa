@@ -13,6 +13,7 @@ causes:
 image: "/women/nehanda-charwe-nyakasikana.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Nehanda's last words before execution — 'my bones will rise' — became the rallying cry of Zimbabwe's independence movement 80 years later."
 summary: "Zimbabwean spirit medium and revolutionary leader who commanded the First Chimurenga uprising against British colonisation. Her last words, 'my bones will rise,' became the rallying cry of Zimbabwe's independence movement 80 years later."
 ---
 

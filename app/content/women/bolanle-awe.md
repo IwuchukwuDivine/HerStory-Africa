@@ -14,6 +14,7 @@ causes:
 image: "/women/bolanle-awe.jpg"
 imageCredit: "DAWN Commission"
 featured: false
+funFact: "Bolanle Awe founded Nigeria's Women's Research and Documentation Centre, creating a pioneering institution for gender research while serving as the first female history professor at the University of Ibadan."
 summary: "First female professor in the Department of History at the University of Ibadan. Pioneering historian and gender studies scholar who founded the Women's Research and Documentation Centre to promote gender research and advocacy in Nigeria."
 ---
 

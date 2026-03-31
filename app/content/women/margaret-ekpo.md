@@ -14,6 +14,7 @@ causes:
 image: "/women/margaret-ekpo.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Margaret Ekpo mobilised thousands of women in Eastern Nigeria to break into a political system that was deliberately designed to exclude them."
 summary: "Nigerian women's rights activist and pioneer politician who mobilised thousands of women in Eastern Nigeria during the independence era, breaking into a political system designed to exclude them."
 ---
 

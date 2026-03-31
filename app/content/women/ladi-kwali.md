@@ -14,6 +14,7 @@ causes:
 image: "/women/ladi-kwali.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Ladi Kwali's artistry was so nationally celebrated that her image was featured on the Nigerian 20-naira banknote."
 summary: "Nigerian potter who brought Gwari pottery to world attention. Featured on the Nigerian 20-naira note; MBE; bridged traditional hand-building and studio ceramics."
 ---
 

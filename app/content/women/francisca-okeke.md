@@ -14,6 +14,7 @@ causes:
 image: "/women/francisca-okeke.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
+funFact: "Francisca Okeke's groundbreaking research in ionospheric physics made her the first female physics professor in Nigeria and earned her the prestigious L'Oréal-UNESCO For Women in Science award."
 summary: "First female professor of physics in Nigeria. Her research in space science and ionospheric physics earned international recognition, including the L'Oreal-UNESCO For Women in Science award."
 ---
 

@@ -13,6 +13,7 @@ causes:
   - "Grassroots organising"
 image: "/women/placeholder.svg"
 featured: false
+funFact: "Esther Afua Ocloo co-founded Women's World Banking, pioneering microfinance to ensure poor women across the globe had access to credit."
 summary: "Ghanaian entrepreneur and pioneer of microfinance who co-founded Women's World Banking, dedicating her life to ensuring poor women had access to credit and economic opportunity."
 ---
 

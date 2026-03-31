@@ -25,6 +25,7 @@ export default defineContentConfig({
         imageCredit: z.string(),
         featured: z.boolean(),
         summary: z.string(),
+        funFact: z.string().optional(),
       }),
     }),
     articles: defineCollection({

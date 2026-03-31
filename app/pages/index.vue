@@ -2,6 +2,7 @@
   <div>
     <HomeHero />
     <HomeFeaturedWomen />
+    <HomeDidYouKnow />
     <HomeArticlesPreview />
     <HomeBrowseByRegion />
     <HomeBrowseByCause />
