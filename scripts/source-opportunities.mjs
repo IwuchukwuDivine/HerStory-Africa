@@ -89,6 +89,21 @@ function writeLog(log) {
 }
 
 // ---------------------------------------------------------------------------
+// Reject Gemini Search grounding redirect URLs (not permanent program links)
+// ---------------------------------------------------------------------------
+function isGroundingRedirectUrl(url) {
+  try {
+    const u = new URL(url);
+    return (
+      u.hostname === "vertexaisearch.cloud.google.com" ||
+      u.pathname.includes("grounding-api-redirect")
+    );
+  } catch {
+    return true;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Validate a URL returns a non-error response
 // ---------------------------------------------------------------------------
 async function validateLink(url) {
@@ -161,7 +176,7 @@ SEARCH STRATEGY:
 
 STRICT RULES:
 1. ONLY include opportunities that are CONFIRMED OPEN for applications right now or opening within the next 30 days. If the deadline has passed, do NOT include it.
-2. Every opportunity MUST have a working official URL. Use the program's own website, not a third-party aggregator link.
+2. Every opportunity MUST have a working official URL: the real program or application page (https:// from the host organization). Never use search-result or redirect wrapper URLs.
 3. Deadlines must be verified. If you cannot confirm the exact deadline, set it to null.
 4. Do NOT fabricate or hallucinate programs. If you are unsure whether something exists, leave it out.
 5. Spread results across all four categories: scholarship, grant, fellowship, job.
@@ -386,6 +401,11 @@ async function main() {
     const dedupKey = `${opp.title.toLowerCase()}|${opp.organization.toLowerCase()}`;
     if (dedupSet.has(dedupKey)) {
       console.log(`  ⏭ Duplicate: ${opp.title}`);
+      continue;
+    }
+
+    if (isGroundingRedirectUrl(opp.link)) {
+      console.log(`  ⏭ Grounding redirect URL (not a stable program link): ${opp.title}`);
       continue;
     }
 

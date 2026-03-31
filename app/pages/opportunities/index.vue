@@ -13,6 +13,7 @@
         v-model="searchQuery"
         placeholder="Search by title or organization…"
         class="opportunities__search"
+        @submit="currentPage = 1"
       />
 
       <div class="opportunities__categories">
@@ -32,7 +33,7 @@
 
     <div v-if="filteredOpportunities.length" class="opportunities__grid">
       <OpportunityCard
-        v-for="opp in filteredOpportunities"
+        v-for="opp in paginatedOpportunities"
         :key="opp.slug"
         :title="opp.title"
         :slug="opp.slug"
@@ -52,10 +53,17 @@
         Clear filters
       </button>
     </div>
+
+    <Pagination v-model="currentPage" :total-pages="totalPages" />
   </div>
 </template>
 
 <script setup lang="ts">
+const route = useRoute();
+const router = useRouter();
+
+const PER_PAGE = 9;
+
 const categories = [
   { value: "", label: "All" },
   { value: "scholarship", label: "Scholarships" },
@@ -64,8 +72,13 @@ const categories = [
   { value: "fellowship", label: "Fellowships" },
 ] as const;
 
-const searchQuery = ref("");
-const activeCategory = ref("");
+const initialCategory = (route.query.category as string) ?? "";
+const activeCategory = ref(
+  categories.some((c) => c.value === initialCategory) ? initialCategory : "",
+);
+
+const searchQuery = ref((route.query.q as string) ?? "");
+const currentPage = ref(Number(route.query.page) || 1);
 
 const { data: allOpportunities } = await useAsyncData("opportunities", () =>
   queryCollection("opportunities").all(),
@@ -102,6 +115,36 @@ const filteredOpportunities = computed(() => {
     if (!b.deadline) return -1;
     return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
   });
+});
+
+const totalPages = computed(() =>
+  Math.ceil(filteredOpportunities.value.length / PER_PAGE),
+);
+
+const paginatedOpportunities = computed(() => {
+  const start = (currentPage.value - 1) * PER_PAGE;
+  return filteredOpportunities.value.slice(start, start + PER_PAGE);
+});
+
+function syncUrl() {
+  const query: Record<string, string> = {};
+  if (searchQuery.value) query.q = searchQuery.value;
+  if (activeCategory.value) query.category = activeCategory.value;
+  if (currentPage.value > 1) query.page = String(currentPage.value);
+  router.replace({ query });
+}
+
+watch([searchQuery, activeCategory], () => {
+  currentPage.value = 1;
+  syncUrl();
+});
+
+watch(currentPage, syncUrl);
+
+watch(totalPages, (tp) => {
+  if (currentPage.value > tp) {
+    currentPage.value = Math.max(1, tp);
+  }
 });
 
 function clearFilters() {
