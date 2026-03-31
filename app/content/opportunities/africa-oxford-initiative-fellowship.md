@@ -5,7 +5,7 @@ category: fellowship
 organization: "Africa Oxford Initiative"
 description: "Research fellowships for early-career African academics to spend time at the University of Oxford, collaborate with Oxford researchers, and build lasting partnerships."
 deadline: "2026-05-15"
-link: "https://www.afox.ox.ac.uk/fellowships"
+link: "https://www.afox.ox.ac.uk/research/afox_visiting_fellowship_programme"
 featured: false
 ---
 
@@ -31,4 +31,4 @@ The 2026 programme combines 10 months of virtual collaboration with Oxford acade
 
 ## How to Apply
 
-Review fellowship types and deadlines on [afox.ox.ac.uk/fellowships](https://www.afox.ox.ac.uk/fellowships). Prepare your CV, project summary, letters of support, and any host confirmation the call requests. Submit through the official Oxford/AfOx application route.
+Review fellowship types and deadlines on [afox.ox.ac.uk](https://www.afox.ox.ac.uk/research/afox_visiting_fellowship_programme). Prepare your CV, project summary, letters of support, and any host confirmation the call requests. Submit through the official Oxford/AfOx application route.
