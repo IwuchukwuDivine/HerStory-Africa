@@ -7,6 +7,7 @@
         viewBox="0 0 800 900"
         class="africa-map__svg"
         @mouseleave="activeCountry = null"
+        @click.self="onMapBackgroundTap"
       >
         <path
           v-for="country in countryPaths"
@@ -23,7 +24,7 @@
           @mouseenter="onCountryHover(country, $event)"
           @mousemove="onCountryMove($event)"
           @mouseleave="activeCountry = null"
-          @click="onCountryClick(country)"
+          @click="onCountryClick(country, $event)"
         />
         <circle
           v-for="island in islandCircles"
@@ -42,7 +43,7 @@
           @mouseenter="onCountryHover(island, $event)"
           @mousemove="onCountryMove($event)"
           @mouseleave="activeCountry = null"
-          @click="onCountryClick(island)"
+          @click="onCountryClick(island, $event)"
         />
       </svg>
 
@@ -58,6 +59,12 @@
             {{
               (countryCounts[activeCountry.name] ?? 0) === 1 ? "woman" : "women"
             }}
+          </span>
+          <span
+            v-if="isTouchDevice && (countryCounts[activeCountry.name] ?? 0) > 0"
+            class="africa-map__tooltip-hint"
+          >
+            Tap again to explore
           </span>
         </div>
       </Transition>
@@ -97,6 +104,11 @@ const svgWrap = ref<HTMLDivElement>();
 
 const activeCountry = ref<CountryData | null>(null);
 const tooltipPos = ref<{ x: number; y: number } | null>(null);
+
+const isTouchDevice = ref(false);
+onMounted(() => {
+  isTouchDevice.value = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+});
 
 // Parse SVG paths and circles from the static SVG data
 // We inline the SVG data to have full reactive control over each path
@@ -193,11 +205,13 @@ function getCountryColor(name: string): string {
 }
 
 function onCountryHover(country: CountryData, event: MouseEvent) {
+  if (isTouchDevice.value) return;
   activeCountry.value = country;
   updateTooltipPos(event);
 }
 
 function onCountryMove(event: MouseEvent) {
+  if (isTouchDevice.value) return;
   updateTooltipPos(event);
 }
 
@@ -210,10 +224,24 @@ function updateTooltipPos(event: MouseEvent) {
   };
 }
 
-function onCountryClick(country: CountryData) {
+function onCountryClick(country: CountryData, event: MouseEvent) {
   const count = props.countryCounts[country.name] ?? 0;
+
+  if (isTouchDevice.value && activeCountry.value?.id !== country.id) {
+    activeCountry.value = country;
+    updateTooltipPos(event);
+    return;
+  }
+
   if (count > 0) {
     navigateTo(`/women?q=${encodeURIComponent(country.name)}`);
+  }
+}
+
+function onMapBackgroundTap() {
+  if (isTouchDevice.value) {
+    activeCountry.value = null;
+    tooltipPos.value = null;
   }
 }
 
@@ -302,6 +330,13 @@ const sortedCountryList = computed(() => {
 .africa-map__tooltip-count {
   font-size: 0.8125rem;
   color: var(--text-secondary);
+}
+
+.africa-map__tooltip-hint {
+  font-size: 0.6875rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-top: 0.125rem;
 }
 
 .tooltip-enter-active,
