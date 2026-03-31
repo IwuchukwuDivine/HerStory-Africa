@@ -19,10 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import { CAUSES } from '~/utils/constants/content'
+import { CAUSES } from "~/utils/constants/content";
 </script>
 
 <style scoped>
+.causes {
+  padding-top: 0rem;
+}
 .causes__pills {
   display: flex;
   flex-wrap: wrap;
