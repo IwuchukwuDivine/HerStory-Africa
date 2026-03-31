@@ -175,7 +175,8 @@ WRITING STYLE:
 - Write numbers as digits, not words (e.g. "$5,000" not "five thousand dollars").
 
 OUTPUT FORMAT:
-Return a JSON array of 8 to 15 objects. Each object must have these fields:
+Return ONLY a single raw JSON array (no markdown, no code fences, no commentary before or after). The response must start with "[" and end with "]".
+The array must have 8 to 15 objects. Each object must have these fields:
 {
   "title": "Official program name, include year if applicable",
   "category": "scholarship" | "job" | "grant" | "fellowship",
@@ -190,9 +191,31 @@ Return a JSON array of 8 to 15 objects. Each object must have these fields:
 }`;
 }
 
-async function searchWithQuery(query) {
+/** Google Search grounding does not support JSON / controlled generation (responseMimeType). Parse array from plain text. */
+function parseOpportunityJsonArray(text) {
+  if (!text || typeof text !== "string") return [];
+  let s = text.trim();
+  const fence = s.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (fence) s = fence[1].trim();
+  const start = s.indexOf("[");
+  const end = s.lastIndexOf("]");
+  if (start === -1 || end <= start) {
+    return [];
+  }
+  s = s.slice(start, end + 1);
+  try {
+    const parsed = JSON.parse(s);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+async function searchWithQuery(query, attempt = 1) {
+  const maxAttempts = 4;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
+  // responseMimeType / JSON mode is incompatible with googleSearch — omit controlled generation.
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -207,10 +230,16 @@ async function searchWithQuery(query) {
       tools: [{ googleSearch: {} }],
       generationConfig: {
         temperature: 0.2,
-        responseMimeType: "application/json",
       },
     }),
   });
+
+  if (res.status === 429 && attempt < maxAttempts) {
+    const waitMs = Math.min(90_000, 3000 * 2 ** (attempt - 1));
+    console.log(`    Rate limited (429), waiting ${Math.round(waitMs / 1000)}s before retry ${attempt + 1}/${maxAttempts}...`);
+    await new Promise((r) => setTimeout(r, waitMs));
+    return searchWithQuery(query, attempt + 1);
+  }
 
   if (!res.ok) {
     const err = await res.text();
@@ -221,13 +250,11 @@ async function searchWithQuery(query) {
   const raw = data.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!raw) return [];
 
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    console.error("  Failed to parse response for query:", query);
-    return [];
+  const parsed = parseOpportunityJsonArray(raw);
+  if (parsed.length === 0 && raw.trim().length > 0) {
+    console.error("  Failed to parse JSON array for query:", query);
   }
+  return parsed;
 }
 
 async function findOpportunities() {
@@ -256,7 +283,7 @@ async function findOpportunities() {
     } catch (err) {
       console.error(`    Query failed: ${err.message}`);
     }
-    await new Promise((r) => setTimeout(r, 1500));
+    await new Promise((r) => setTimeout(r, 2500));
   }
 
   return allResults;
