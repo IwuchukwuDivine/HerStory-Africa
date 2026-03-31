@@ -112,6 +112,7 @@ watch(
 const navLinks = [
   { to: "/", label: "Home", icon: resolveComponent("LucideHome") },
   { to: "/women", label: "Women", icon: resolveComponent("LucideUsers") },
+  { to: "/map", label: "Map", icon: resolveComponent("LucideMap") },
   { to: "/timeline", label: "Timeline", icon: resolveComponent("LucideClock") },
   {
     to: "/articles",
