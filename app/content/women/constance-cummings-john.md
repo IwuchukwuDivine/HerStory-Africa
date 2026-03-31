@@ -14,6 +14,7 @@ causes:
 image: "/women/constance-cummings-john.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "In 1966, Constance Cummings-John made history as the first woman ever elected mayor of an African city when she won the Freetown mayoral race."
 summary: "Sierra Leonean politician and educator who became the first female mayor of a city in Africa when she was elected Mayor of Freetown in 1966. She spent her life fighting for women's political rights and access to education at a time when both were considered radical ideas."
 ---
 

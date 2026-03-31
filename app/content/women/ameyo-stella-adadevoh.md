@@ -14,6 +14,7 @@ causes:
 image: "/women/placeholder.svg"
 imageCredit: "Image needed"
 featured: false
+funFact: "Dr. Ameyo Stella Adadevoh single-handedly prevented a catastrophic Ebola outbreak in Lagos by identifying and containing Nigeria's first case in 2014, ultimately giving her own life in the process."
 summary: "Nigerian physician who identified and contained Nigeria's first Ebola case in 2014, preventing a wider outbreak. She died of the disease; honoured as a national hero."
 ---
 

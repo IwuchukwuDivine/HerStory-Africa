@@ -14,6 +14,7 @@ causes:
 image: "/women/maimuna-waziri.jpg"
 imageCredit: "Courtesy photo"
 featured: false
+funFact: "Maimuna Waziri was selected from a pool of 47 competing professors to become the first female Vice-Chancellor of Federal University, Gashua in 2021."
 summary: "Nigerian professor of chemistry and the first female Vice-Chancellor of Federal University, Gashua. She emerged from a field of 47 professors to lead the institution in 2021."
 ---
 

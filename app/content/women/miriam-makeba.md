@@ -14,6 +14,7 @@ causes:
 image: "/women/miriam-makeba.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Known as 'Mama Africa', her anti-apartheid activism led to 31 years of exile from South Africa"
 summary: "South African singer and activist known as 'Mama Africa' who used music as a weapon against apartheid, addressed the United Nations, and was exiled from her homeland for 31 years."
 ---
 

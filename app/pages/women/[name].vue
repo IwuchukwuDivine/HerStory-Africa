@@ -26,6 +26,7 @@
             <span class="woman-profile__era-badge">{{ woman.era }} era</span>
             <ClientOnly>
               <div class="woman-profile__actions">
+                <ShareCardButton :woman="woman" :size="22" />
                 <ShareButton :title="woman.name" :text="woman.summary" :size="22" />
                 <FavoriteButton type="woman" :slug="woman.slug" :size="22" />
               </div>

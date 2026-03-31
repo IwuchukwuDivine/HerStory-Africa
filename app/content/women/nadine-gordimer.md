@@ -14,6 +14,7 @@ causes:
 image: "/women/nadine-gordimer.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Nadine Gordimer won the 1991 Nobel Prize in Literature for decades of writing that opposed apartheid and explored race, power, and moral responsibility."
 summary: "South African novelist and short-story writer. Nobel Prize in Literature (1991); used her work to oppose apartheid and to explore race, power, and moral responsibility."
 ---
 

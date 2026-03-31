@@ -14,6 +14,7 @@ causes:
 image: "/women/ayoka-adebambo.jpg"
 imageCredit: "Nigeria Book of Records"
 featured: false
+funFact: "Ayoka Adebambo made history as Nigeria's first female professor of Animal Breeding and Genetics, dedicating her career to livestock improvement that directly advanced the nation's food security."
 summary: "First female professor and first Head of the Department of Animal Breeding and Genetics in Nigeria. Her research on livestock improvement and sustainable farming has contributed to food security and agricultural development."
 ---
 

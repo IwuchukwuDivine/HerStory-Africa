@@ -14,6 +14,7 @@ causes:
 image: "/women/aisha-yesufu.png"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Aisha Yesufu co-convened the global #BringBackOurGirls movement and later became an iconic voice in Nigeria's End SARS protests."
 summary: "Co-convener of #BringBackOurGirls; prominent voice in End SARS protests. Nigerian activist for accountability, human rights, and good governance."
 ---
 

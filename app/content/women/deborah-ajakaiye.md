@@ -14,6 +14,7 @@ causes:
 image: "/women/deborah-ajakaiye.jpg"
 imageCredit: "Courtesy photo"
 featured: false
+funFact: "Deborah Ajakaiye was the first female physics professor on the entire African continent, and her geophysics research was instrumental in Nigeria's mining and natural resource exploration."
 summary: "First female physics professor in Africa and a leading Nigerian geophysicist. Her work in geophysics played an important role in mining and natural resource exploration in Nigeria."
 ---
 

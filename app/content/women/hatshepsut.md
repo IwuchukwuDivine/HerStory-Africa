@@ -14,6 +14,7 @@ causes:
 image: "/women/hatshepsut.jpg"
 imageCredit: "Wikimedia Commons / Metropolitan Museum of Art / Public Domain"
 featured: true
+funFact: "Ruled Egypt for over 20 years — her successors tried to erase her from history and failed"
 summary: "Ancient Egyptian pharaoh who ruled one of the most powerful empires in the world for over 20 years, around 3,500 years ago. She launched great trade expeditions, built some of Egypt's most magnificent monuments, and was so threatening to those who came after her that they tried to erase her from history entirely. They failed."
 ---
 

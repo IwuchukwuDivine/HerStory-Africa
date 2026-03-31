@@ -14,6 +14,7 @@ causes:
 image: "/women/dihya.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
+funFact: "Also known as Kahina — meaning 'prophetess' — Dihya held off one of the most powerful military forces in the medieval world for years with her coalition of North African tribes."
 summary: "Berber warrior queen and military leader who commanded a coalition of North African tribes against the Arab conquest of North Africa in the late 7th century. She held off one of the most powerful military forces in the medieval world for years. Also known as Kahina, meaning prophetess, she remains one of the most celebrated symbols of Algerian and Berber identity."
 ---
 

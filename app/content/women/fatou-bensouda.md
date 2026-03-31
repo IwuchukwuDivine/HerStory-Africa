@@ -13,6 +13,7 @@ causes:
 image: "/women/fatou-bensouda.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
+funFact: "As Chief Prosecutor of the International Criminal Court from 2012 to 2021, Fatou Bensouda was one of the most powerful legal figures in the world."
 summary: "Gambian lawyer who served as Chief Prosecutor of the International Criminal Court from 2012 to 2021, making her one of the most powerful legal figures in the world. She prosecuted war criminals, challenged powerful governments, and showed that African women belong in the highest rooms of international justice."
 ---
 

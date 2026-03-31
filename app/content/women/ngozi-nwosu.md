@@ -14,6 +14,7 @@ causes:
 image: "/women/ngozi-nwosu.png"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "After her own battle with kidney disease became public, Ngozi Nwosu transformed her personal health journey into a powerful advocacy platform for kidney disease awareness in Nigeria."
 summary: "Nigerian actress; veteran of Nollywood and television. Advocate for health and kidney disease awareness after her own public health journey; beloved for roles in 'Fuji House of Commotion' and others."
 ---
 

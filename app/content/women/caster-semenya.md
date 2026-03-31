@@ -14,6 +14,7 @@ causes:
 image: "/women/caster-semenya.jpg"
 imageCredit: "Wikimedia Commons / Erik van Leeuwen / CC BY-SA"
 featured: false
+funFact: "Despite winning Olympic gold and two World Championship titles in the 800m, Caster Semenya has been barred from competing in her own event by World Athletics testosterone regulations."
 summary: "South African middle-distance runner who won Olympic gold in the 800m at Rio 2016 and is a two-time World Champion. She has been forced to fight World Athletics testosterone regulations and has become a global symbol of bodily autonomy and the right of women athletes to define themselves."
 ---
 

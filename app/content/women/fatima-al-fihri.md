@@ -13,6 +13,7 @@ causes:
 image: "/women/fatima-al-fihri.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 4.0 (al-Qarawiyyin University, Fez)"
 featured: true
+funFact: "Founded the University of al-Qarawiyyin in 859 AD — the world's oldest existing university"
 summary: "Tunisian-born founder of al-Qarawiyyin in Fez, Morocco, recognised by UNESCO and Guinness World Records as the oldest existing, continually operating university in the world."
 ---
 

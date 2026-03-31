@@ -14,6 +14,7 @@ causes:
 image: "/women/blessing-okagbare.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Blessing Okagbare is one of Africa's most decorated track and field athletes, with medals at both the Olympics and World Championships."
 summary: "Nigerian sprinter and long jumper; Olympic and World Championships medallist. One of Africa's most decorated track and field athletes; advocate for clean sport."
 ---
 

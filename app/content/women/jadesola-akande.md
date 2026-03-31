@@ -14,6 +14,7 @@ causes:
 image: "/women/jadesola-akande.jpg"
 imageCredit: "DAWN Commission"
 featured: false
+funFact: "Jadesola Akande made history twice over — as both the first Nigerian female professor of Law and as Vice-Chancellor of Lagos State University, earning the national honours of CON and OFR."
 summary: "First Nigerian female professor of Law and Vice-Chancellor of Lagos State University. A respected authority on constitutional law who held the national honours of CON and OFR."
 ---
 

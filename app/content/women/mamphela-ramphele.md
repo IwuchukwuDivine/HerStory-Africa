@@ -13,6 +13,7 @@ causes:
 image: "/women/mamphela-ramphele.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 3.0"
 featured: false
+funFact: "After surviving apartheid harassment and banishment as Steve Biko's life partner, Mamphela Ramphele went on to become a Managing Director of the World Bank."
 summary: "South African doctor, academic, activist, and former World Bank Managing Director. She was the life partner of Steve Biko, survived apartheid harassment and banishment, and went on to become one of the most accomplished South African women of her generation."
 ---
 

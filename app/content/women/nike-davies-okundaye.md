@@ -13,6 +13,7 @@ causes:
 image: "/women/nike-davies-okundaye.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
+funFact: "Simply known as 'Mama Nike,' Nike Davies-Okundaye has trained over 3,000 Nigerian women and children through her free arts education programmes."
 summary: "Nigerian textile artist and cultural icon who turned her own story of survival into a movement. She runs free arts education programmes that have trained over 3,000 Nigerian women and children. Her galleries in Lagos and Osogbo house one of the largest collections of Nigerian art in private hands. She is simply known as Mama Nike."
 ---
 

@@ -14,6 +14,7 @@ causes:
 image: "/women/gambo-sawaba.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Gambo Sawaba was arrested over 17 times for fighting for women's right to vote in Northern Nigeria."
 summary: "Nigerian activist who fought for women's right to vote in Northern Nigeria at enormous personal cost, arrested over 17 times and imprisoned repeatedly for defying the political establishment."
 ---
 

@@ -14,6 +14,7 @@ causes:
 image: "/women/ameenah-gurib-fakim.jpg"
 imageCredit: "Wikimedia Commons / CC BY 2.0"
 featured: false
+funFact: "Before becoming the first female President of Mauritius, Ameenah Gurib-Fakim was a world-leading researcher in the medicinal plants of the Mascarene Islands."
 summary: "Mauritian biodiversity scientist who became the sixth President of Mauritius (2015–2018) and the first woman to hold the office. A world-leading researcher in medicinal plants of the Mascarene Islands, she has bridged science, politics, and advocacy for women and the environment."
 ---
 

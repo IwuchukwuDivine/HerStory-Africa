@@ -14,6 +14,7 @@ causes:
 image: "/women/buchi-emecheta.png"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Buchi Emecheta wrote 20 novels and children's books exploring women's lives, race, and migration between Nigeria and Britain."
 summary: "Nigerian-British novelist who wrote about women's lives, race, and migration. Author of The Joys of Motherhood and Second Class Citizen; 20 novels and children's books."
 ---
 

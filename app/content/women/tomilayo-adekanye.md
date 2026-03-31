@@ -14,6 +14,7 @@ causes:
 image: "/women/tomilayo-adekanye.jpg"
 imageCredit: "DAWN Commission"
 featured: false
+funFact: "Tomilayo Adekanye holds the distinction of being the first professor of agricultural economics in all of Africa, while also serving as Commissioner for both Trade and Agriculture in Oyo State."
 summary: "First female professor in any agricultural field in Nigeria and the first professor of agricultural economics in Africa. She also served as Commissioner for Trade and Investment and Commissioner for Agriculture in Oyo State."
 ---
 

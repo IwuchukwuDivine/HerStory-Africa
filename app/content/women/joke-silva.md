@@ -14,6 +14,7 @@ causes:
 image: "/women/joke-silva.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Joke Silva co-founded the Lufodo Group, making her a pioneer of both Nigerian theatre and the film industry."
 summary: "Nigerian actress, director, and producer; pioneer of Nigerian theatre and film. Co-founder of Lufodo Group; advocate for arts education and women in the industry."
 ---
 

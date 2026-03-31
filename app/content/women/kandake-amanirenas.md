@@ -13,6 +13,7 @@ causes:
 image: "/women/kandake-amanirenas.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Led the Kushite army against Rome and forced Emperor Augustus to negotiate peace on her terms"
 summary: "Queen of the Kingdom of Kush who led her armies against the Roman Empire, famously defeating Roman forces in battle and negotiating a peace treaty that kept her kingdom independent for generations."
 ---
 

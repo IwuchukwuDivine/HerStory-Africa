@@ -13,6 +13,7 @@ causes:
 image: "/women/cesaria-evora.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 3.0"
 featured: false
+funFact: "Known as the 'Barefoot Diva' for performing without shoes, Cesária Évora became the most internationally acclaimed African lusophone artist of all time."
 summary: "Cape Verdean singer known as the 'Barefoot Diva' who brought the melancholic morna music of Cape Verde to the world stage, becoming the most internationally acclaimed African lusophone artist of all time."
 ---
 

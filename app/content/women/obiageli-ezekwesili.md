@@ -14,6 +14,7 @@ causes:
 image: "/women/obiageli-ezekwesili.jpg"
 imageCredit: "Wikimedia Commons / World Economic Forum / CC BY-SA 2.0"
 featured: true
+funFact: "Obiageli Ezekwesili co-launched the #BringBackOurGirls campaign in 2014, turning the Chibok kidnappings into a global movement that changed how the world talks about violence against girls."
 summary: "Nigerian economist, public servant, and global advocate for education and accountability. Co-founder of Transparency International Nigeria, Vice President of the World Bank for Africa, and Nigeria's Federal Minister of Education. Co-launched the #BringBackOurGirls campaign in 2014 after the Chibok kidnappings, a global movement that changed how the world talks about violence against girls."
 ---
 

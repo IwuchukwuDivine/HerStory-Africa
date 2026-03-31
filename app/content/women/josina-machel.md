@@ -14,6 +14,7 @@ causes:
 image: "/women/josina-machel.png"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Josina Machel organised women within FRELIMO and created social programmes for orphans and displaced women during Mozambique's war for independence."
 summary: "Mozambican revolutionary and women's rights activist who organised women within FRELIMO's liberation struggle, creating social programmes for orphans and displaced women during the war for independence."
 ---
 
