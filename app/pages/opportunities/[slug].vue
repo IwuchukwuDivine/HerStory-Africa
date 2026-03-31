@@ -67,6 +67,8 @@
 </template>
 
 <script setup lang="ts">
+import { Briefcase, Coins, GraduationCap, Lightbulb } from "lucide-vue-next";
+
 const route = useRoute();
 
 const { data: opp } = await useAsyncData(`opp-${route.path}`, () =>
@@ -82,18 +84,18 @@ const categoryMap = {
   scholarship: {
     label: "Scholarship",
     color: "var(--color-forest)",
-    icon: "LucideGraduationCap",
+    icon: GraduationCap,
   },
   job: {
     label: "Job / Internship",
     color: "var(--color-secondary)",
-    icon: "LucideBriefcase",
+    icon: Briefcase,
   },
-  grant: { label: "Grant", color: "var(--color-primary)", icon: "LucideCoins" },
+  grant: { label: "Grant", color: "var(--color-primary)", icon: Coins },
   fellowship: {
     label: "Fellowship",
     color: "var(--color-crimson)",
-    icon: "LucideLightbulb",
+    icon: Lightbulb,
   },
 } as const;
 
@@ -105,10 +107,9 @@ const categoryLabel = computed(
 const categoryColor = computed(
   () => categoryMap[opp.value?.category as Category]?.color ?? "",
 );
-const categoryIcon = computed(() => {
-  const icon = categoryMap[opp.value?.category as Category]?.icon;
-  return icon ? resolveComponent(icon) : null;
-});
+const categoryIcon = computed(
+  () => categoryMap[opp.value?.category as Category]?.icon ?? null,
+);
 
 const daysLeft = computed(() => {
   if (!opp.value?.deadline) return null;

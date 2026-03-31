@@ -37,51 +37,65 @@
 </template>
 
 <script setup lang="ts">
+import { Briefcase, Coins, GraduationCap, Lightbulb } from "lucide-vue-next";
+
 const props = defineProps<{
-  title: string
-  slug: string
-  category: 'scholarship' | 'job' | 'grant' | 'fellowship'
-  organization: string
-  description: string
-  deadline: string | null
-  link: string
-  featured: boolean
-}>()
+  title: string;
+  slug: string;
+  category: "scholarship" | "job" | "grant" | "fellowship";
+  organization: string;
+  description: string;
+  deadline: string | null;
+  link: string;
+  featured: boolean;
+}>();
 
 const categoryMap = {
-  scholarship: { label: 'Scholarship', color: 'var(--color-forest)', icon: 'LucideGraduationCap' },
-  job: { label: 'Job / Internship', color: 'var(--color-secondary)', icon: 'LucideBriefcase' },
-  grant: { label: 'Grant', color: 'var(--color-primary)', icon: 'LucideCoins' },
-  fellowship: { label: 'Fellowship', color: 'var(--color-crimson)', icon: 'LucideLightbulb' },
-} as const
+  scholarship: {
+    label: "Scholarship",
+    color: "var(--color-forest)",
+    icon: GraduationCap,
+  },
+  job: {
+    label: "Job / Internship",
+    color: "var(--color-secondary)",
+    icon: Briefcase,
+  },
+  grant: { label: "Grant", color: "var(--color-primary)", icon: Coins },
+  fellowship: {
+    label: "Fellowship",
+    color: "var(--color-crimson)",
+    icon: Lightbulb,
+  },
+} as const;
 
-const categoryLabel = computed(() => categoryMap[props.category].label)
-const categoryColor = computed(() => categoryMap[props.category].color)
-const categoryIcon = computed(() => resolveComponent(categoryMap[props.category].icon))
+const categoryLabel = computed(() => categoryMap[props.category].label);
+const categoryColor = computed(() => categoryMap[props.category].color);
+const categoryIcon = computed(() => categoryMap[props.category].icon);
 
 const daysLeft = computed(() => {
-  if (!props.deadline) return null
-  const diff = new Date(props.deadline).getTime() - Date.now()
-  return Math.ceil(diff / (1000 * 60 * 60 * 24))
-})
+  if (!props.deadline) return null;
+  const diff = new Date(props.deadline).getTime() - Date.now();
+  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+});
 
 const deadlineLabel = computed(() => {
-  if (!props.deadline) return 'Ongoing'
-  const days = daysLeft.value!
-  if (days < 0) return 'Expired'
-  if (days === 0) return 'Last day!'
-  if (days === 1) return '1 day left'
-  return `${days} days left`
-})
+  if (!props.deadline) return "Ongoing";
+  const days = daysLeft.value!;
+  if (days < 0) return "Expired";
+  if (days === 0) return "Last day!";
+  if (days === 1) return "1 day left";
+  return `${days} days left`;
+});
 
 const deadlineClass = computed(() => {
-  if (!props.deadline) return 'opp-card__deadline--ongoing'
-  const days = daysLeft.value!
-  if (days < 0) return 'opp-card__deadline--expired'
-  if (days <= 7) return 'opp-card__deadline--urgent'
-  if (days <= 30) return 'opp-card__deadline--soon'
-  return 'opp-card__deadline--plenty'
-})
+  if (!props.deadline) return "opp-card__deadline--ongoing";
+  const days = daysLeft.value!;
+  if (days < 0) return "opp-card__deadline--expired";
+  if (days <= 7) return "opp-card__deadline--urgent";
+  if (days <= 30) return "opp-card__deadline--soon";
+  return "opp-card__deadline--plenty";
+});
 </script>
 
 <style scoped>
@@ -95,7 +109,9 @@ const deadlineClass = computed(() => {
   border: 1.5px solid var(--border-light);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .opp-card:hover {
@@ -216,7 +232,9 @@ const deadlineClass = computed(() => {
 
 .opp-card__arrow {
   color: var(--text-muted);
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .opp-card:hover .opp-card__arrow {
