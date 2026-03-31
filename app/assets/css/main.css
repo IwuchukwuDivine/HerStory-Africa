@@ -395,6 +395,22 @@ select:focus-visible {
 .dark .skeleton {
   background: var(--surface-muted);
 }
+/* ─── Shared Tag Styles ─── */
+.cause-tag {
+  padding: 0.1875rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--surface-subtle);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.cause-tag--more {
+  background: var(--surface-muted);
+  color: var(--text-muted);
+}
+
 .go-back {
   display: inline-flex;
   align-items: center;

@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomeHero />
+    <HomeWomanOfTheDay />
     <HomeFeaturedWomen />
     <HomeArticlesPreview />
     <HomeBrowseByRegion />
