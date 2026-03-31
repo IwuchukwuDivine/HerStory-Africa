@@ -7,7 +7,6 @@
     <HomeBrowseByRegion />
     <HomeBrowseByCause />
     <HomeTimelineTeaser />
-    <HomeOnThisDay />
     <HomeLatestAdditions />
   </div>
 </template>
