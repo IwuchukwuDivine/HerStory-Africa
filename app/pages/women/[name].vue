@@ -88,24 +88,12 @@
       </NuxtLink>
     </div>
 
-    <aside v-if="related?.length" class="woman-profile__related">
-      <h2 class="woman-profile__related-title">More from {{ woman.region }}</h2>
-      <div class="woman-profile__related-grid">
-        <WomanCard
-          v-for="w in related"
-          :key="w.slug"
-          :name="w.name"
-          :slug="w.slug"
-          :image="w.image"
-          :country="w.country"
-          :born="w.born"
-          :died="w.died"
-          :era="w.era"
-          :summary="w.summary"
-          :causes="w.causes"
-        />
-      </div>
-    </aside>
+    <RelatedWomen
+      :slug="woman.slug"
+      :region="woman.region"
+      :era="woman.era"
+      :causes="woman.causes"
+    />
   </article>
 
   <div v-else class="woman-profile__not-found">
@@ -135,19 +123,6 @@ const womanRead = computed(() =>
 if (woman.value?.slug) {
   useReadTracker("woman", woman.value.slug, readSentinel);
 }
-
-const { data: related } = await useAsyncData(
-  `related-${route.path}`,
-  async () => {
-    if (!woman.value) return [];
-    return queryCollection("women")
-      .where("region", "=", woman.value.region)
-      .where("slug", "<>", woman.value.slug)
-      .limit(3)
-      .all();
-  },
-  { watch: [woman] },
-);
 
 const canonicalUrl = computed(() =>
   woman.value ? getAbsoluteUrl(`/women/${woman.value.slug}`) : "",
@@ -453,38 +428,6 @@ useHead(() => ({
 
 .woman-profile__suggest-link:hover {
   color: var(--color-primary-600);
-}
-
-/* ── Related section ── */
-.woman-profile__related {
-  margin-top: 3.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.woman-profile__related-title {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 1.25rem;
-}
-
-.woman-profile__related-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .woman-profile__related-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .woman-profile__related-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 /* ── Not found ── */
