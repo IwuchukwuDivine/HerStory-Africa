@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+  <!-- African-inspired geometric pattern tile -->
+  <path d="M30 0L60 30L30 60L0 30Z" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+  <circle cx="30" cy="30" r="8" stroke="currentColor" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="30" cy="30" r="3" fill="currentColor" opacity="0.08"/>
+  <path d="M30 0L30 60M0 30L60 30" stroke="currentColor" stroke-width="0.3" opacity="0.06"/>
+  <path d="M15 15L45 15L45 45L15 45Z" stroke="currentColor" stroke-width="0.4" opacity="0.1"/>
+</svg>
