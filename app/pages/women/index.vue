@@ -1,10 +1,16 @@
 <template>
   <div class="women-listing">
     <header class="women-listing__header">
-      <h1 class="women-listing__title">Women of HerStory Africa</h1>
-      <p class="women-listing__subtitle">
-        {{ totalCount }} women across the archive. Search, filter, and explore.
-      </p>
+      <div class="women-listing__header-top">
+        <div>
+          <h1 class="women-listing__title">Women of HerStory Africa</h1>
+          <p class="women-listing__subtitle">
+            {{ totalCount }} women across the archive. Search, filter, and
+            explore.
+          </p>
+        </div>
+      </div>
+
       <ClientOnly>
         <ExplorationProgress :total="totalCount" />
       </ClientOnly>
@@ -18,14 +24,25 @@
         @submit="currentPage = 1"
       />
 
-      <button class="women-listing__filter-toggle" @click="filtersOpen = !filtersOpen">
+      <button
+        class="women-listing__filter-toggle"
+        @click="filtersOpen = !filtersOpen"
+      >
         <LucideSlidersHorizontal :size="16" />
         Filters
-        <span v-if="activeFilterCount" class="women-listing__filter-badge">{{ activeFilterCount }}</span>
-        <LucideChevronDown :size="16" :class="{ 'women-listing__chevron--open': filtersOpen }" />
+        <span v-if="activeFilterCount" class="women-listing__filter-badge">{{
+          activeFilterCount
+        }}</span>
+        <LucideChevronDown
+          :size="16"
+          :class="{ 'women-listing__chevron--open': filtersOpen }"
+        />
       </button>
 
-      <div class="women-listing__filter-panel" :class="{ 'women-listing__filter-panel--open': filtersOpen }">
+      <div
+        class="women-listing__filter-panel"
+        :class="{ 'women-listing__filter-panel--open': filtersOpen }"
+      >
         <div class="women-listing__filter-panel-inner">
           <div class="women-listing__filters">
             <FilterBy
@@ -33,11 +50,7 @@
               label="Region"
               :options="[...REGIONS]"
             />
-            <FilterBy
-              v-model="activeEra"
-              label="Era"
-              :options="[...ERAS]"
-            />
+            <FilterBy v-model="activeEra" label="Era" :options="[...ERAS]" />
           </div>
 
           <FilterBy
@@ -74,105 +87,115 @@
       </button>
     </div>
 
-    <Pagination
-      v-model="currentPage"
-      :total-pages="totalPages"
-    />
+    <Pagination v-model="currentPage" :total-pages="totalPages" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { REGIONS, ERAS } from '~/utils/constants/content'
+import { REGIONS, ERAS } from "~/utils/constants/content";
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
-const PER_PAGE = 9
+const PER_PAGE = 9;
 
-const searchQuery = ref((route.query.q as string) ?? '')
-const activeRegion = ref((route.query.region as string) ?? '')
-const activeEra = ref((route.query.era as string) ?? '')
-const activeCause = ref((route.query.cause as string) ?? '')
-const readFilter = ref('')
-const currentPage = ref(Number(route.query.page) || 1)
-const filtersOpen = ref(false)
+const searchQuery = ref((route.query.q as string) ?? "");
+const activeRegion = ref((route.query.region as string) ?? "");
+const activeEra = ref((route.query.era as string) ?? "");
+const activeCause = ref((route.query.cause as string) ?? "");
+const readFilter = ref("");
+const currentPage = ref(Number(route.query.page) || 1);
+const filtersOpen = ref(false);
 
-const activeFilterCount = computed(() =>
-  [activeRegion.value, activeEra.value, activeCause.value, readFilter.value].filter(Boolean).length,
-)
+const activeFilterCount = computed(
+  () =>
+    [
+      activeRegion.value,
+      activeEra.value,
+      activeCause.value,
+      readFilter.value,
+    ].filter(Boolean).length,
+);
 
-const { isRead } = useApp()
+const { isRead } = useApp();
 
-const { data: allWomen } = await useAsyncData('all-women', () =>
-  queryCollection('women').order('name', 'ASC').all(),
-)
+const { data: allWomen } = await useAsyncData("all-women", () =>
+  queryCollection("women").order("name", "ASC").all(),
+);
 
 const filteredWomen = computed(() => {
-  if (!allWomen.value) return []
+  if (!allWomen.value) return [];
 
   return allWomen.value.filter((w) => {
-    const q = searchQuery.value.toLowerCase().trim()
-    if (q && !w.name.toLowerCase().includes(q) && !w.country.toLowerCase().includes(q)) {
-      return false
+    const q = searchQuery.value.toLowerCase().trim();
+    if (
+      q &&
+      !w.name.toLowerCase().includes(q) &&
+      !w.country.toLowerCase().includes(q)
+    ) {
+      return false;
     }
-    if (activeRegion.value && w.region !== activeRegion.value) return false
-    if (activeEra.value && w.era !== activeEra.value) return false
-    if (activeCause.value && !w.causes.some(c => c === activeCause.value)) return false
-    if (readFilter.value === 'Read' && !isRead('woman', w.slug)) return false
-    if (readFilter.value === 'Unread' && isRead('woman', w.slug)) return false
-    return true
-  })
-})
+    if (activeRegion.value && w.region !== activeRegion.value) return false;
+    if (activeEra.value && w.era !== activeEra.value) return false;
+    if (activeCause.value && !w.causes.some((c) => c === activeCause.value))
+      return false;
+    if (readFilter.value === "Read" && !isRead("woman", w.slug)) return false;
+    if (readFilter.value === "Unread" && isRead("woman", w.slug)) return false;
+    return true;
+  });
+});
 
-const totalCount = computed(() => allWomen.value?.length ?? 0)
-const totalPages = computed(() => Math.ceil(filteredWomen.value.length / PER_PAGE))
+const totalCount = computed(() => allWomen.value?.length ?? 0);
+const totalPages = computed(() =>
+  Math.ceil(filteredWomen.value.length / PER_PAGE),
+);
 
 const paginatedWomen = computed(() => {
-  const start = (currentPage.value - 1) * PER_PAGE
-  return filteredWomen.value.slice(start, start + PER_PAGE)
-})
+  const start = (currentPage.value - 1) * PER_PAGE;
+  return filteredWomen.value.slice(start, start + PER_PAGE);
+});
 
 function syncUrl() {
-  const query: Record<string, string> = {}
-  if (searchQuery.value) query.q = searchQuery.value
-  if (activeRegion.value) query.region = activeRegion.value
-  if (activeEra.value) query.era = activeEra.value
-  if (activeCause.value) query.cause = activeCause.value
-  if (currentPage.value > 1) query.page = String(currentPage.value)
-  router.replace({ query })
+  const query: Record<string, string> = {};
+  if (searchQuery.value) query.q = searchQuery.value;
+  if (activeRegion.value) query.region = activeRegion.value;
+  if (activeEra.value) query.era = activeEra.value;
+  if (activeCause.value) query.cause = activeCause.value;
+  if (currentPage.value > 1) query.page = String(currentPage.value);
+  router.replace({ query });
 }
 
 watch([searchQuery, activeRegion, activeEra, activeCause, readFilter], () => {
-  currentPage.value = 1
-  syncUrl()
-})
+  currentPage.value = 1;
+  syncUrl();
+});
 
-watch(currentPage, syncUrl)
+watch(currentPage, syncUrl);
 
 function clearFilters() {
-  searchQuery.value = ''
-  activeRegion.value = ''
-  activeEra.value = ''
-  activeCause.value = ''
-  readFilter.value = ''
+  searchQuery.value = "";
+  activeRegion.value = "";
+  activeEra.value = "";
+  activeCause.value = "";
+  readFilter.value = "";
 }
 
 const womenDescription =
-  'Browse the full archive of African women who shaped history — filter by region, era, or cause.'
+  "Browse the full archive of African women who shaped history — filter by region, era, or cause.";
 
 useSeoMeta({
-  title: 'All Women',
+  title: "All Women",
   description: womenDescription,
-  ogTitle: 'All Women',
+  ogTitle: "All Women",
   ogDescription: womenDescription,
   ogImage: getAbsoluteUrl(),
-  ogUrl: getAbsoluteUrl('/women'),
-  ogType: 'website',
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'All Women',
+  ogUrl: getAbsoluteUrl("/women"),
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterTitle: "All Women",
   twitterDescription: womenDescription,
   twitterImage: getAbsoluteUrl(),
-})
+});
 </script>
 
 <style scoped>
@@ -191,8 +214,23 @@ useSeoMeta({
 .women-listing__header {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   margin-bottom: 2rem;
+}
+
+.women-listing__header-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .women-listing__header-top {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
 }
 
 .women-listing__title {
