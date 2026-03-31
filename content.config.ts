@@ -44,5 +44,21 @@ export default defineContentConfig({
         imageCredit: z.string().optional(),
       }),
     }),
+    collections: defineCollection({
+      type: 'page',
+      source: {
+        include: 'collections/*.md',
+        cwd: contentDir,
+        prefix: '/collections',
+      },
+      schema: z.object({
+        title: z.string(),
+        slug: z.string(),
+        description: z.string(),
+        theme: z.string(),
+        women: z.array(z.string()),
+        image: z.string().optional(),
+      }),
+    }),
   },
 })
