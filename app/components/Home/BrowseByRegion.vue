@@ -2,132 +2,105 @@
   <section class="section regions">
     <div class="section__header">
       <h2 class="section__title">Browse by Region</h2>
+      <p class="section__subtitle">
+        {{ totalCountries }} countries, {{ totalWomen }} women — tap a country
+        to explore.
+      </p>
     </div>
 
-    <div class="regions__grid">
-      <NuxtLink
-        v-for="region in regionData"
-        :key="region.name"
-        :to="{ path: '/women', query: { region: region.name } }"
-        class="region-card"
-        :style="{ '--accent': region.accent }"
-      >
-        <div class="region-card__icon">
-          <LucideMapPin :size="24" />
-        </div>
-        <h3 class="region-card__name">{{ region.name }}</h3>
-        <p class="region-card__count">
-          {{ region.count }} {{ region.count === 1 ? 'woman' : 'women' }}
-        </p>
-        <LucideArrowRight :size="16" class="region-card__arrow" />
-      </NuxtLink>
+    <div class="regions__legend">
+      <span class="regions__legend-label">Fewer</span>
+      <span class="regions__legend-swatch regions__legend-swatch--empty" />
+      <span class="regions__legend-swatch regions__legend-swatch--low" />
+      <span class="regions__legend-swatch regions__legend-swatch--mid" />
+      <span class="regions__legend-swatch regions__legend-swatch--high" />
+      <span class="regions__legend-swatch regions__legend-swatch--max" />
+      <span class="regions__legend-label">More</span>
     </div>
+
+    <ClientOnly>
+      <AfricaMap :country-counts="countryCounts" />
+    </ClientOnly>
   </section>
 </template>
 
 <script setup lang="ts">
-const regionMeta = [
-  { name: 'West Africa', accent: 'var(--color-primary)' },
-  { name: 'East Africa', accent: 'var(--color-forest)' },
-  { name: 'Southern Africa', accent: 'var(--color-secondary)' },
-  { name: 'Central Africa', accent: 'var(--color-crimson)' },
-  { name: 'North Africa', accent: 'var(--color-forest)' },
-] as const
+import { normalizeCountryName } from "~/utils/constants/countries";
 
-const { data: counts } = await useAsyncData('region-counts', async () => {
-  const results = await Promise.all(
-    regionMeta.map(r =>
-      queryCollection('women').where('region', '=', r.name).count(),
-    ),
-  )
-  return results
-})
+const { data: allWomen } = await useAsyncData("browse-region-women", () =>
+  queryCollection("women").order("name", "ASC").all(),
+);
 
-const regionData = computed(() =>
-  regionMeta.map((r, i) => ({
-    ...r,
-    count: counts.value?.[i] ?? 0,
-  })),
-)
+const countryCounts = computed(() => {
+  const counts: Record<string, number> = {};
+  if (!allWomen.value) return counts;
+  for (const woman of allWomen.value) {
+    const name = normalizeCountryName(woman.country);
+    counts[name] = (counts[name] ?? 0) + 1;
+  }
+  return counts;
+});
+
+const totalWomen = computed(() => allWomen.value?.length ?? 0);
+const totalCountries = computed(() => Object.keys(countryCounts.value).length);
 </script>
 
 <style scoped>
-.regions__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+.regions {
+  padding: 2rem 1.5rem 0rem;
 }
 
-@media (min-width: 640px) {
-  .regions__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 960px) {
-  .regions__grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.region-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background: var(--surface-elevated);
-  border: 1.5px solid var(--border-light);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
-}
-
-.region-card:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-soft);
-}
-
-.region-card__icon {
+.regions__legend {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 0.75rem;
-  background: var(--surface-subtle);
-  color: var(--accent);
+  gap: 0.375rem;
+  margin-bottom: 1.5rem;
 }
 
-.region-card:hover .region-card__icon {
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-}
-
-.region-card__name {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0.25rem 0 0;
-}
-
-.region-card__count {
-  font-size: 0.875rem;
+.regions__legend-label {
+  font-size: 0.75rem;
+  font-weight: 600;
   color: var(--text-muted);
-  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.region-card__arrow {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  color: var(--text-muted);
-  transition: transform 0.2s ease, color 0.2s ease;
+.regions__legend-swatch {
+  width: 1.5rem;
+  height: 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border-light);
 }
 
-.region-card:hover .region-card__arrow {
-  transform: translateX(3px);
-  color: var(--accent);
+.regions__legend-swatch--empty {
+  background: var(--surface-muted);
+}
+
+.regions__legend-swatch--low {
+  background: color-mix(
+    in srgb,
+    var(--color-primary) 25%,
+    var(--surface-muted)
+  );
+}
+
+.regions__legend-swatch--mid {
+  background: color-mix(
+    in srgb,
+    var(--color-primary) 45%,
+    var(--surface-muted)
+  );
+}
+
+.regions__legend-swatch--high {
+  background: color-mix(
+    in srgb,
+    var(--color-primary) 70%,
+    var(--surface-muted)
+  );
+}
+
+.regions__legend-swatch--max {
+  background: var(--color-primary);
 }
 </style>

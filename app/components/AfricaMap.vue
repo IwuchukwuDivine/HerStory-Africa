@@ -69,26 +69,6 @@
         </div>
       </Transition>
     </div>
-
-    <!-- Mobile fallback list -->
-    <div class="africa-map__list">
-      <h3 class="africa-map__list-title">Countries in the Archive</h3>
-      <ul class="africa-map__list-items">
-        <li
-          v-for="entry in sortedCountryList"
-          :key="entry.name"
-          class="africa-map__list-item"
-        >
-          <NuxtLink
-            :to="`/women?q=${encodeURIComponent(entry.name)}`"
-            class="africa-map__list-link"
-          >
-            <span class="africa-map__list-name">{{ entry.name }}</span>
-            <span class="africa-map__list-count">{{ entry.count }}</span>
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 
@@ -245,13 +225,6 @@ function onMapBackgroundTap() {
   }
 }
 
-// Sorted list for mobile fallback
-const sortedCountryList = computed(() => {
-  return Object.entries(props.countryCounts)
-    .filter(([, count]) => count > 0)
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count);
-});
 </script>
 
 <style scoped>
@@ -349,73 +322,4 @@ const sortedCountryList = computed(() => {
   opacity: 0;
 }
 
-/* Mobile fallback list */
-.africa-map__list {
-  display: none;
-  margin-top: 2rem;
-}
-
-.africa-map__list-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 1rem;
-}
-
-.africa-map__list-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.5rem;
-}
-
-.africa-map__list-item {
-  margin: 0;
-}
-
-.africa-map__list-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.625rem 0.875rem;
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-light);
-  border-radius: 0.5rem;
-  text-decoration: none;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  font-weight: 600;
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease;
-}
-
-.africa-map__list-link:hover {
-  background: var(--surface-muted);
-  border-color: var(--color-primary);
-}
-
-.africa-map__list-count {
-  background: var(--color-primary);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.125rem 0.5rem;
-  border-radius: 999px;
-  min-width: 1.5rem;
-  text-align: center;
-}
-
-/* Show list on very small screens as fallback */
-@media (max-width: 480px) {
-  .africa-map__svg-wrap {
-    max-width: 100%;
-  }
-
-  .africa-map__list {
-    display: block;
-  }
-}
 </style>
