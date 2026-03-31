@@ -1,0 +1,120 @@
+name: Source Opportunities
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Every Monday at 9 AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  cleanup:
+    name: Remove expired opportunities
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Delete expired .md files
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          DELETED=0
+
+          for file in app/content/opportunities/*.md; do
+            [ -f "$file" ] || continue
+            DEADLINE=$(grep '^deadline:' "$file" | sed 's/deadline: *//;s/"//g;s/^ *//;s/ *$//')
+
+            # Skip ongoing opportunities (null or empty)
+            [ "$DEADLINE" = "null" ] && continue
+            [ -z "$DEADLINE" ] && continue
+
+            # Delete if deadline has passed
+            if [ "$DEADLINE" \< "$TODAY" ]; then
+              echo "Expired: $file (deadline: $DEADLINE)"
+              rm "$file"
+              DELETED=$((DELETED + 1))
+            fi
+          done
+
+          echo "Deleted $DELETED expired opportunities."
+          echo "deleted=$DELETED" >> "$GITHUB_OUTPUT"
+        id: cleanup
+
+      - name: Commit cleanup
+        if: steps.cleanup.outputs.deleted != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A app/content/opportunities/
+          git diff --staged --quiet || git commit -m "chore: remove expired opportunities"
+          git push
+
+  source:
+    name: Find new opportunities
+    needs: cleanup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Pull latest (after cleanup)
+        run: git pull origin main
+
+      - name: Source new opportunities
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/source-opportunities.mjs
+
+      - name: Check for new files
+        id: check
+        run: |
+          NEW_FILES=$(git status --porcelain app/content/opportunities/ | wc -l | tr -d ' ')
+          echo "new_files=$NEW_FILES" >> "$GITHUB_OUTPUT"
+          echo "Found $NEW_FILES new opportunity files."
+
+      - name: Create PR with new opportunities
+        if: steps.check.outputs.new_files != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          WEEK=$(date +%Y-%m-%d)
+          BRANCH="chore/opportunities-$WEEK"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b "$BRANCH"
+          git add app/content/opportunities/ data/opportunities-log.json
+          git commit -m "chore: add new opportunities (week of $WEEK)"
+          git push -u origin "$BRANCH"
+
+          # Build PR body with list of new files
+          BODY="## New Opportunities\n\nAutomatically sourced via Gemini with web search grounding.\n\n**Please review each link before merging.**\n\n### Files added\n"
+          for file in $(git diff --name-only main..."$BRANCH" -- app/content/opportunities/); do
+            TITLE=$(grep '^title:' "$file" | sed 's/title: *//;s/"//g')
+            LINK=$(grep '^link:' "$file" | sed 's/link: *//;s/"//g')
+            BODY="$BODY\n- **$TITLE** — [verify link]($LINK)"
+          done
+
+          gh pr create \
+            --title "chore: add new opportunities (week of $WEEK)" \
+            --body "$(echo -e "$BODY")" \
+            --base main \
+            --head "$BRANCH"
+
+      - name: Notify
+        if: steps.check.outputs.new_files != '0'
+        run: |
+          COUNT=${{ steps.check.outputs.new_files }}
+          curl -s \
+            -H "Title: New opportunities found" \
+            -H "Tags: sparkles" \
+            -H "Click: https://github.com/${{ github.repository }}/pulls" \
+            -d "$COUNT new opportunities sourced. Review the PR on GitHub." \
+            ntfy.sh/herstory-africa-newsletter || true
