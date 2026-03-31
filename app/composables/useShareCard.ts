@@ -58,12 +58,15 @@ export function useShareCard() {
     URL.revokeObjectURL(url)
   }
 
-  async function share(blob: Blob, name: string) {
+  async function share(blob: Blob, name: string, slug?: string) {
     const file = new File([blob], `${name}.png`, { type: 'image/png' })
+    const profileUrl = slug ? `${window.location.origin}/women/${slug}` : undefined
 
     if (navigator.share && navigator.canShare?.({ files: [file] })) {
       await navigator.share({
         title: `${name} — HerStory Africa`,
+        text: 'Read her story on HerStory Africa — the women history forgot to teach you.',
+        url: profileUrl,
         files: [file],
       })
       return true

@@ -120,7 +120,7 @@ async function handleDownload() {
 async function handleShare() {
   if (!lastBlob) return
   const slug = props.woman.slug || props.woman.name.toLowerCase().replace(/\s+/g, '-')
-  await share(lastBlob, `herstory-${slug}`)
+  await share(lastBlob, `herstory-${slug}`, slug)
 }
 
 watch(() => props.open, (isOpen) => {
