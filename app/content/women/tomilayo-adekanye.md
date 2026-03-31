@@ -3,7 +3,7 @@ name: "Tomilayo Adekanye"
 slug: "tomilayo-adekanye"
 country: "Nigeria"
 region: "West Africa"
-born: null
+born: 1942
 died: null
 era: "Modern"
 causes:

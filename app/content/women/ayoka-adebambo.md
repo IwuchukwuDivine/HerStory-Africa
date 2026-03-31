@@ -3,7 +3,7 @@ name: "Ayoka Olufunmilayo Adebambo"
 slug: "ayoka-adebambo"
 country: "Nigeria"
 region: "West Africa"
-born: null
+born: 1948
 died: null
 era: "Modern"
 causes:

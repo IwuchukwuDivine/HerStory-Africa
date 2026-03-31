@@ -3,7 +3,7 @@ name: "Maimuna Waziri"
 slug: "maimuna-waziri"
 country: "Nigeria"
 region: "West Africa"
-born: null
+born: 1966
 died: null
 era: "Modern"
 causes:

@@ -3,7 +3,7 @@ name: "Adenike Osofisan"
 slug: "adenike-osofisan"
 country: "Nigeria"
 region: "West Africa"
-born: null
+born: 1950
 died: null
 era: "Modern"
 causes:
