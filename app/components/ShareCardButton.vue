@@ -1,7 +1,7 @@
 <template>
   <button
     class="share-card-btn"
-    aria-label="Create share card"
+    aria-label="Spread her story — Stories or feed"
     @click="showModal = true"
   >
     <LucideImage :size="size" />

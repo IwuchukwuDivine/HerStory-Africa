@@ -4,7 +4,7 @@
       <div v-if="open" class="share-card-overlay" @click.self="$emit('close')">
         <div class="share-card-modal">
           <div class="share-card-modal__header">
-            <h2 class="share-card-modal__title">Create Share Card</h2>
+            <h2 class="share-card-modal__title">Spread her story</h2>
             <button class="share-card-modal__close" aria-label="Close" @click="$emit('close')">
               <LucideX :size="20" />
             </button>
