@@ -119,6 +119,11 @@ const navLinks = [
     icon: resolveComponent("LucideBookOpen"),
   },
   {
+    to: "/opportunities",
+    label: "Opportunities",
+    icon: resolveComponent("LucideRocket"),
+  },
+  {
     to: "/favorites",
     label: "Favorites",
     icon: resolveComponent("LucideHeart"),

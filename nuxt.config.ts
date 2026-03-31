@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   ssr: true,
   nitro: {
     prerender: {
-      routes: ["/", "/sitemap.xml"],
+      routes: ["/", "/sitemap.xml", "/opportunities"],
       crawlLinks: true,
     },
   },
@@ -47,11 +47,20 @@ export default defineNuxtConfig({
         .filter((f: string) => f.endsWith(".md"))
         .map((f: string) => `/articles/${f.replace(".md", "")}`);
 
+      const { existsSync } = await import("node:fs");
+      const oppDir = resolve(contentDir, "opportunities");
+      const opportunities = existsSync(oppDir)
+        ? readdirSync(oppDir)
+            .filter((f: string) => f.endsWith(".md"))
+            .map((f: string) => `/opportunities/${f.replace(".md", "")}`)
+        : [];
+
       nitroConfig.prerender = nitroConfig.prerender || {};
       nitroConfig.prerender.routes = [
         ...(nitroConfig.prerender.routes || []),
         ...women,
         ...articles,
+        ...opportunities,
       ];
     },
   },
