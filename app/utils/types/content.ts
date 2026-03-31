@@ -22,3 +22,13 @@ export interface Article {
   category: string
   path?: string
 }
+
+export interface Collection {
+  title: string
+  slug: string
+  description: string
+  theme: string
+  women: string[]
+  image?: string
+  path?: string
+}

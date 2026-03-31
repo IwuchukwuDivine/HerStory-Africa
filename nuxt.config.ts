@@ -47,11 +47,20 @@ export default defineNuxtConfig({
         .filter((f: string) => f.endsWith(".md"))
         .map((f: string) => `/articles/${f.replace(".md", "")}`);
 
+      const collectionsDir = resolve(contentDir, "collections");
+      const { existsSync } = await import("node:fs");
+      const collections = existsSync(collectionsDir)
+        ? readdirSync(collectionsDir)
+            .filter((f: string) => f.endsWith(".md"))
+            .map((f: string) => `/collections/${f.replace(".md", "")}`)
+        : [];
+
       nitroConfig.prerender = nitroConfig.prerender || {};
       nitroConfig.prerender.routes = [
         ...(nitroConfig.prerender.routes || []),
         ...women,
         ...articles,
+        ...collections,
       ];
     },
   },
