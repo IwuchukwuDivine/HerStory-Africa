@@ -9,7 +9,7 @@ const ROOT = resolve(__dirname, "..");
 const WOMEN_DIR = join(ROOT, "app/content/women");
 const ARTICLES_DIR = join(ROOT, "app/content/articles");
 const LOG_PATH = join(ROOT, "data/newsletter-log.json");
-const SITE_URL = "https://her-story-africa-seven.vercel.app";
+const SITE_URL = "https://herstoryafrica.com.ng";
 
 const BUTTONDOWN_API_KEY = process.env.BUTTONDOWN_API_KEY;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -325,7 +325,9 @@ async function main() {
       articles.find((a) => a.slug === FEATURE_SLUG);
 
     if (!main) {
-      throw new Error(`FEATURE_SLUG "${FEATURE_SLUG}" not found in women or articles.`);
+      throw new Error(
+        `FEATURE_SLUG "${FEATURE_SLUG}" not found in women or articles.`,
+      );
     }
 
     nextType = main.type;
@@ -379,7 +381,9 @@ async function main() {
 
   console.log("\nDone! Check your Buttondown drafts.");
   if (result.preview) {
-    console.log("(This was a preview. Set BUTTONDOWN_API_KEY to create a real draft.)");
+    console.log(
+      "(This was a preview. Set BUTTONDOWN_API_KEY to create a real draft.)",
+    );
   }
 }
 

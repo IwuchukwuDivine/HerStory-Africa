@@ -1,4 +1,4 @@
-const SITE_URL = "https://her-story-africa-seven.vercel.app";
+const SITE_URL = "https://herstoryafrica.com.ng/";
 
 export default (path?: string) => {
   if (!path) return `${SITE_URL}/og-image.png`;

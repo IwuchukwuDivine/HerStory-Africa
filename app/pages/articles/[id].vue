@@ -172,7 +172,7 @@ useHead(() => ({
             author: {
               "@type": "Organization",
               name: "HerStory Africa",
-              url: "https://her-story-africa-seven.vercel.app",
+              url: "https://herstoryafrica.com.ng",
             },
             publisher: {
               "@type": "Organization",
