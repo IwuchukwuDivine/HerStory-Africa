@@ -16,6 +16,7 @@
           <NuxtLink to="/women" class="site-footer__link">All Women</NuxtLink>
           <NuxtLink to="/timeline" class="site-footer__link">Timeline</NuxtLink>
           <NuxtLink to="/articles" class="site-footer__link">Articles</NuxtLink>
+          <NuxtLink to="/opportunities" class="site-footer__link">Opportunities</NuxtLink>
           <NuxtLink to="/about" class="site-footer__link">About</NuxtLink>
           <NuxtLink to="/suggest" class="site-footer__link">Suggest a Woman</NuxtLink>
         </div>
