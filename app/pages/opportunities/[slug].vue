@@ -1,7 +1,7 @@
 <template>
   <article v-if="opp" class="opp-detail">
     <header class="opp-detail__header">
-      <button class="go-back" @click="goBack">
+      <button class="go-back" @click="goBack('/opportunities')">
         <LucideArrowLeft :size="18" />
         Back
       </button>

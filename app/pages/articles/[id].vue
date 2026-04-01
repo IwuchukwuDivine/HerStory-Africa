@@ -1,6 +1,6 @@
 <template>
   <article v-if="article" class="article-page">
-    <button class="go-back" @click="goBack">
+    <button class="go-back" @click="goBack('/articles')">
       <LucideArrowLeft :size="18" />
       Back
     </button>

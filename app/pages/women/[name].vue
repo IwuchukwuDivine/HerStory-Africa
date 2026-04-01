@@ -1,7 +1,7 @@
 <template>
   <article v-if="woman" class="woman-profile">
     <header class="woman-profile__hero">
-      <button class="go-back" @click="goBack">
+      <button class="go-back" @click="goBack('/women')">
         <LucideArrowLeft :size="18" />
         Back
       </button>
@@ -27,7 +27,11 @@
             <ClientOnly>
               <div class="woman-profile__actions">
                 <ShareCardButton :woman="woman" :size="22" />
-                <ShareButton :title="woman.name" :text="woman.summary" :size="22" />
+                <ShareButton
+                  :title="woman.name"
+                  :text="woman.summary"
+                  :size="22"
+                />
                 <FavoriteButton type="woman" :slug="woman.slug" :size="22" />
               </div>
             </ClientOnly>
@@ -41,7 +45,10 @@
             </span>
             <span class="woman-profile__meta-item">
               <LucideCalendar :size="16" />
-              {{ woman.born ?? "Unknown" }}{{ woman.died ? `–${woman.died}` : woman.born ? "–present" : "" }}
+              {{ woman.born ?? "Unknown"
+              }}{{
+                woman.died ? `–${woman.died}` : woman.born ? "–present" : ""
+              }}
             </span>
             <ClientOnly>
               <span v-if="womanRead" class="woman-profile__read-badge">
@@ -66,7 +73,9 @@
         </div>
       </div>
       <ClientOnly>
-        <ListenButton content-selector=".woman-profile__name, .woman-profile__summary, .woman-profile__content" />
+        <ListenButton
+          content-selector=".woman-profile__name, .woman-profile__summary, .woman-profile__content"
+        />
       </ClientOnly>
     </header>
 
