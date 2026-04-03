@@ -139,7 +139,17 @@ const canonicalUrl = computed(() =>
 const ogImageUrl = computed(() => getAbsoluteUrl(woman.value?.image));
 
 useSeoMeta({
-  title: () => woman.value?.name ?? "Woman not found",
+  title: () => {
+    if (!woman.value) return "Woman not found";
+    const maxLen = 55 - woman.value.name.length - 2;
+    const words = woman.value.summary.split(" ");
+    let snippet = "";
+    for (const word of words) {
+      if ((snippet + " " + word).trim().length > maxLen) break;
+      snippet = (snippet + " " + word).trim();
+    }
+    return `${woman.value.name}: ${snippet}`;
+  },
   description: () => woman.value?.summary ?? "",
   ogTitle: () => woman.value?.name ?? "",
   ogDescription: () => woman.value?.summary ?? "",
