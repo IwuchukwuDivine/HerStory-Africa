@@ -33,7 +33,12 @@ useSeoMeta({
   ogTitle: "Subscription Confirmed — HerStory Africa",
   ogDescription:
     "You're officially part of HerStory Africa. Stories of remarkable African women are on their way to your inbox.",
-  ogImage: "https://herstoryafrica.com.ng/og-image.png",
+  ogImage: getAbsoluteUrl(),
+  ogUrl: getAbsoluteUrl("/newsletter/confirmed"),
+});
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/newsletter/confirmed") }],
 });
 </script>
 

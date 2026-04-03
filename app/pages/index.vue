@@ -28,4 +28,8 @@ useSeoMeta({
   twitterDescription: siteDescription,
   twitterImage: getAbsoluteUrl(),
 });
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/") }],
+});
 </script>

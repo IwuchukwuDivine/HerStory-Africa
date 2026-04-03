@@ -196,6 +196,10 @@ useSeoMeta({
   twitterDescription: womenDescription,
   twitterImage: getAbsoluteUrl(),
 });
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/women") }],
+});
 </script>
 
 <style scoped>

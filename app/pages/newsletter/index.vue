@@ -55,7 +55,12 @@ useSeoMeta({
   ogTitle: "Subscribe to HerStory Africa",
   ogDescription:
     "Get stories of remarkable African women delivered to your inbox. No spam, just history worth knowing.",
-  ogImage: "https://herstoryafrica.com.ng/newsletter-og.png",
+  ogImage: getAbsoluteUrl("/newsletter-og.png"),
+  ogUrl: getAbsoluteUrl("/newsletter"),
+});
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/newsletter") }],
 });
 </script>
 

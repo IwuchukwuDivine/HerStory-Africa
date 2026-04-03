@@ -168,6 +168,10 @@ useSeoMeta({
   twitterDescription: pageDescription,
   twitterImage: getAbsoluteUrl(),
 });
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/opportunities") }],
+});
 </script>
 
 <style scoped>

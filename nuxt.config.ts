@@ -182,7 +182,7 @@ export default defineNuxtConfig({
 
   // ── Site URL (required by sitemap + SEO modules) ───────────────────
   site: {
-    url: "https://her-story-africa-seven.vercel.app",
+    url: "https://herstoryafrica.com.ng",
   },
 
   // ── Sitemap ─────────────────────────────────────────────────────────

@@ -89,7 +89,12 @@ useSeoMeta({
   ogTitle: "Timeline — HerStory Africa",
   ogDescription:
     "Explore the full timeline of African women who fought for equality across the centuries.",
-  ogImage: "https://herstoryafrica.com.ng/og-image.png",
+  ogImage: getAbsoluteUrl(),
+  ogUrl: getAbsoluteUrl("/timeline"),
+});
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/timeline") }],
 });
 </script>
 

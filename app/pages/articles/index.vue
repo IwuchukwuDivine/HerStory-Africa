@@ -148,6 +148,10 @@ useSeoMeta({
   twitterDescription: articlesDescription,
   twitterImage: getAbsoluteUrl(),
 })
+
+useHead({
+  link: [{ rel: 'canonical', href: getAbsoluteUrl('/articles') }],
+})
 </script>
 
 <style scoped>
