@@ -183,18 +183,34 @@ function clearFilters() {
 const womenDescription =
   "Browse the full archive of African women who shaped history — filter by region, era, or cause.";
 
+const hasQueryFilters = computed(() =>
+  Boolean(
+    route.query.q ||
+      route.query.region ||
+      route.query.era ||
+      route.query.cause ||
+      route.query.page,
+  ),
+);
+
+const womenTitle = computed(
+  () => `Explore ${totalCount.value} African Women in History`,
+);
+
 useSeoMeta({
-  title: "All Women",
+  title: womenTitle,
   description: womenDescription,
-  ogTitle: "All Women",
+  ogTitle: womenTitle,
   ogDescription: womenDescription,
   ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/women"),
   ogType: "website",
   twitterCard: "summary_large_image",
-  twitterTitle: "All Women",
+  twitterTitle: womenTitle,
   twitterDescription: womenDescription,
   twitterImage: getAbsoluteUrl(),
+  robots: () =>
+    hasQueryFilters.value ? "noindex, follow" : "index, follow",
 });
 
 useHead({

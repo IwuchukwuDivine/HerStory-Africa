@@ -135,18 +135,28 @@ function clearFilters() {
 const articlesDescription =
   'Context, analysis, and the bigger picture behind the stories of African women who shaped history.'
 
+const articlesTitle = computed(
+  () => `${totalCount.value} Articles on African Women's History`,
+)
+
+const hasQueryFilters = computed(() =>
+  Boolean(route.query.q || route.query.category || route.query.page),
+)
+
 useSeoMeta({
-  title: 'Articles & Explainers',
+  title: articlesTitle,
   description: articlesDescription,
-  ogTitle: 'Articles & Explainers',
+  ogTitle: articlesTitle,
   ogDescription: articlesDescription,
   ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl('/articles'),
   ogType: 'website',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Articles & Explainers',
+  twitterTitle: articlesTitle,
   twitterDescription: articlesDescription,
   twitterImage: getAbsoluteUrl(),
+  robots: () =>
+    hasQueryFilters.value ? 'noindex, follow' : 'index, follow',
 })
 
 useHead({
