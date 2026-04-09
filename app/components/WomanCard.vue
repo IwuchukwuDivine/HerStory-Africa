@@ -195,18 +195,4 @@ const read = computed(() => isRead('woman', props.slug));
   margin-top: 0.5rem;
 }
 
-.cause-tag {
-  padding: 0.1875rem 0.625rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  background: var(--surface-subtle);
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-
-.cause-tag--more {
-  background: var(--surface-muted);
-  color: var(--text-muted);
-}
 </style>
