@@ -43,6 +43,7 @@ export default defineContentConfig({
         category: z.string(),
         image: z.string().optional(),
         imageCredit: z.string().optional(),
+        reflectionPrompt: z.string().optional(),
       }),
     }),
     opportunities: defineCollection({
