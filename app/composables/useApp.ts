@@ -7,6 +7,7 @@ export default () => {
     readWomen,
     favoriteWomen,
     favoriteArticles,
+    reflectionResponses,
     hasSeenNewsletterPrompt,
     subscribedEmail,
     isSubscribed,
@@ -19,6 +20,7 @@ export default () => {
     readWomen,
     favoriteWomen,
     favoriteArticles,
+    reflectionResponses,
     hasSeenNewsletterPrompt,
     subscribedEmail,
     isSubscribed,
@@ -30,5 +32,7 @@ export default () => {
     isFavorite: store.isFavorite,
     isRead: store.isRead,
     setSubscribed: store.setSubscribed,
+    saveReflection: store.saveReflection,
+    getReflection: store.getReflection,
   };
 };

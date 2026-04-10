@@ -58,6 +58,13 @@
 
     <div ref="readSentinel" />
 
+    <ReflectionPrompt
+      v-if="article.reflectionPrompt"
+      :prompt="article.reflectionPrompt"
+      :slug="article.slug"
+      :article-title="article.title"
+    />
+
     <aside v-if="related?.length" class="article-page__related">
       <h2 class="article-page__related-title">Related articles</h2>
       <div class="article-page__related-grid">
