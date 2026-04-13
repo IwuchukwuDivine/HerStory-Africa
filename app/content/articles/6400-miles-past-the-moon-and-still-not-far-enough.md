@@ -15,7 +15,7 @@ She already held the record for the longest single spaceflight by a woman. 328 c
 
 On April 10th, she returned safely. History had been made. And across the internet, thousands of people responded with the same handful of ideas.
 
-*Who would make the sandwiches?*
+_Who would make the sandwiches?_
 
 ## What the comments said
 
@@ -56,14 +56,6 @@ There is always a follow-up response to this kind of criticism. "It's just jokes
 These are not neutral jokes. They carry a message. And that message is received by every girl who reads them. Every girl watching the Artemis mission and thinking "I want to do that one day" will also see thousands of people saying that a woman doing exactly that is ridiculous, laughable, or wrong.
 
 The jokes are not harmless. They are the atmosphere that girls grow up breathing.
-
-## "We don't need feminism anymore, it's 2026"
-
-One of the TikTok slides that compiled these comments ended with this quote, placed over a photo of Christina Koch floating inside the spacecraft, Earth glowing through the window behind her.
-
-Every single comment above it proves why that statement is wrong. In 2026, a woman can travel around the Moon and a man will type "also the farthest from a kitchen" and over a thousand people will agree with him. In 2026, a woman can make history for the entire human species and the conversation will be about whether her husband is okay with it.
-
-That is not a post-feminist world. That is a world where the work is nowhere near finished.
 
 ## The pattern is old
 
