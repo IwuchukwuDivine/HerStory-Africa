@@ -43,6 +43,17 @@
       ],
       "region": null,
       "subject": "Did you know African women once held all the power?"
+    },
+    {
+      "date": "2026-05-01",
+      "type": "woman",
+      "mainFeature": "tegla-loroupe",
+      "alsoRead": [
+        "what-are-gender-roles",
+        "the-revolution-is-uncomfortable"
+      ],
+      "region": "East Africa",
+      "subject": "Meet Tegla Loroupe"
     }
   ]
 }
