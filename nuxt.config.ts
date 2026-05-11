@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
     "@vercel/speed-insights",
+    "nuxt-gtag",
   ],
 
   // ── Static Site Generation ──────────────────────────────────────────
@@ -31,7 +32,23 @@ export default defineNuxtConfig({
       crawlLinks: true,
     },
   },
-
+  gtag: {
+    id: "G-V5FFHGH864",
+    enabled: process.env.NODE_ENV === "production",
+    initCommands: [
+      [
+        "consent",
+        "default",
+        {
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          wait_for_update: 500,
+        },
+      ],
+    ],
+  },
   hooks: {
     async "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) return;

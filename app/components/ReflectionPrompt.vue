@@ -67,6 +67,7 @@ const props = defineProps<{
 }>()
 
 const { saveReflection, getReflection } = useApp()
+const { track } = useTag()
 
 const savedResponse = ref(getReflection(props.slug))
 const saved = ref(!!savedResponse.value)
@@ -79,6 +80,7 @@ function save() {
   saveReflection(props.slug, trimmed)
   savedResponse.value = trimmed
   saved.value = true
+  track('reflection_save', { slug: props.slug })
 }
 
 function edit() {

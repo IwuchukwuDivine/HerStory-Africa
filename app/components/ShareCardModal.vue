@@ -93,6 +93,7 @@ const format = ref<CardFormat>('square')
 const theme = ref<CardTheme>('light')
 
 const { rendering, error, render, download, share } = useShareCard()
+const { track } = useTag()
 
 let lastBlob: Blob | null = null
 
@@ -115,12 +116,14 @@ async function handleDownload() {
   if (!lastBlob) return
   const slug = props.woman.slug || props.woman.name.toLowerCase().replace(/\s+/g, '-')
   await download(lastBlob, `herstory-${slug}`)
+  track('share_card', { slug, format: format.value, theme: theme.value, action: 'download' })
 }
 
 async function handleShare() {
   if (!lastBlob) return
   const slug = props.woman.slug || props.woman.name.toLowerCase().replace(/\s+/g, '-')
   await share(lastBlob, `herstory-${slug}`, slug)
+  track('share_card', { slug, format: format.value, theme: theme.value, action: 'share' })
 }
 
 watch(() => props.open, (isOpen) => {

@@ -55,6 +55,7 @@ const emit = defineEmits<{
 }>();
 
 const { setSubscribed } = useApp();
+const { track } = useTag();
 
 const email = ref("");
 const loading = ref(false);
@@ -91,6 +92,7 @@ async function subscribe() {
     success.value = true;
     alreadySubscribed.value = res.alreadySubscribed ?? false;
     setSubscribed(email.value);
+    track("newsletter_subscribe", { already_subscribed: alreadySubscribed.value });
     emit("subscribed", email.value);
   } catch (err: unknown) {
     const message =

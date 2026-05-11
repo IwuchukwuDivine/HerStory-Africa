@@ -9,6 +9,7 @@
     <ClientOnly>
       <BackToTop />
       <NewsletterModal />
+      <ConsentBanner />
     </ClientOnly>
   </div>
 </template>

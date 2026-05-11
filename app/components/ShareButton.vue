@@ -25,8 +25,23 @@ const props = withDefaults(
 const showCopied = ref(false);
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
+const route = useRoute();
+const { track } = useTag();
+
+function shareContext(): { content_type: "article" | "woman" | "page"; slug?: string } {
+  const segments = route.path.split("/").filter(Boolean);
+  if (segments[0] === "articles" && segments[1]) {
+    return { content_type: "article", slug: segments[1] };
+  }
+  if (segments[0] === "women" && segments[1]) {
+    return { content_type: "woman", slug: segments[1] };
+  }
+  return { content_type: "page" };
+}
+
 async function handleShare() {
   const url = window.location.href;
+  const ctx = shareContext();
 
   if (navigator.share) {
     try {
@@ -35,6 +50,7 @@ async function handleShare() {
         text: props.text || props.title,
         url,
       });
+      track("share", { ...ctx, method: "native" });
     } catch {
       // User cancelled the share dialog — that's fine
     }
@@ -44,6 +60,7 @@ async function handleShare() {
   try {
     await navigator.clipboard.writeText(url);
     showCopied.value = true;
+    track("share", { ...ctx, method: "clipboard" });
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
       showCopied.value = false;
