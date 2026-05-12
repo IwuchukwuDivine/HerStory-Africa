@@ -118,7 +118,7 @@ const toggleDark = useToggle(isDark);
 const mounted = useMounted();
 
 const drawerOpen = ref(false);
-const searchOpen = ref(false);
+const searchOpen = useSearchOpen();
 
 const route = useRoute();
 watch(

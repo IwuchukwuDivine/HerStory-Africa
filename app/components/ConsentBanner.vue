@@ -1,6 +1,6 @@
 <template>
   <Transition name="consent">
-    <div v-if="visible" class="consent-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <div v-if="visible && !searchOpen" class="consent-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
       <p class="consent-banner__text">
         We use cookies to understand how stories are read and shared. Your choice is saved on this device.
       </p>
@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 const visible = ref(false);
+const searchOpen = useSearchOpen();
 const tag = useTag();
 
 onMounted(() => {
