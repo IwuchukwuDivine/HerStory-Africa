@@ -85,6 +85,13 @@
 
     <div ref="readSentinel" />
 
+    <CiteThisPage
+      :title="woman.name"
+      :url="canonicalUrl"
+      :year="woman.died ?? woman.born ?? ''"
+      type="biography"
+    />
+
     <NewsletterCta />
 
     <div class="woman-profile__suggest">
@@ -138,6 +145,17 @@ const canonicalUrl = computed(() =>
 );
 const ogImageUrl = computed(() => getAbsoluteUrl(woman.value?.image));
 
+const womanDates = computed(() => {
+  if (!woman.value) return "";
+  const born = woman.value.born ?? "Unknown";
+  const died = woman.value.died
+    ? `–${woman.value.died}`
+    : woman.value.born
+      ? "–present"
+      : "";
+  return `${born}${died}`;
+});
+
 useSeoMeta({
   title: () => {
     if (!woman.value) return "Woman not found";
@@ -153,13 +171,20 @@ useSeoMeta({
   description: () => woman.value?.summary ?? "",
   ogTitle: () => woman.value?.name ?? "",
   ogDescription: () => woman.value?.summary ?? "",
-  ogImage: ogImageUrl,
   ogUrl: canonicalUrl,
   ogType: "profile",
   twitterCard: "summary_large_image",
   twitterTitle: () => woman.value?.name ?? "",
   twitterDescription: () => woman.value?.summary ?? "",
-  twitterImage: ogImageUrl,
+});
+
+defineOgImage("Cover", {
+  title: () => woman.value?.name ?? "",
+  pill: () => woman.value?.era ?? "",
+  subtitle: () => womanDates.value,
+  meta: () => woman.value?.country ?? "",
+  image: () => ogImageUrl.value,
+  variant: "woman",
 });
 
 useHead(() => ({

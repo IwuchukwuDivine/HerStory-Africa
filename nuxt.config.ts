@@ -22,13 +22,14 @@ export default defineNuxtConfig({
     "pinia-plugin-persistedstate/nuxt",
     "@vercel/speed-insights",
     "nuxt-gtag",
+    "nuxt-og-image",
   ],
 
   // ── Static Site Generation ──────────────────────────────────────────
   ssr: true,
   nitro: {
     prerender: {
-      routes: ["/", "/sitemap.xml", "/opportunities"],
+      routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
       crawlLinks: true,
     },
   },
@@ -275,6 +276,12 @@ export default defineNuxtConfig({
           rel: "icon",
           type: "image/svg+xml",
           href: "/herstory-africa-favicon.svg",
+        },
+        {
+          rel: "alternate",
+          type: "application/rss+xml",
+          title: "HerStory Africa — Articles",
+          href: "/rss.xml",
         },
       ],
     },

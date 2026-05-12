@@ -17,6 +17,14 @@
 
         <button
           class="navbar__theme-btn"
+          aria-label="Search"
+          @click="searchOpen = true"
+        >
+          <LucideSearch :size="18" />
+        </button>
+
+        <button
+          class="navbar__theme-btn"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleDark()"
         >
@@ -26,6 +34,14 @@
       </div>
 
       <div class="navbar__mobile-actions">
+        <button
+          class="navbar__theme-btn"
+          aria-label="Search"
+          @click="searchOpen = true"
+        >
+          <LucideSearch :size="18" />
+        </button>
+
         <button
           class="navbar__theme-btn"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
@@ -88,6 +104,8 @@
       </aside>
     </Transition>
   </Teleport>
+
+  <GlobalSearch :open="searchOpen" @close="searchOpen = false" />
 </template>
 
 <script setup lang="ts">
@@ -100,14 +118,30 @@ const toggleDark = useToggle(isDark);
 const mounted = useMounted();
 
 const drawerOpen = ref(false);
+const searchOpen = ref(false);
 
 const route = useRoute();
 watch(
   () => route.path,
   () => {
     drawerOpen.value = false;
+    searchOpen.value = false;
   },
 );
+
+function onKeydown(e: KeyboardEvent) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+    e.preventDefault();
+    searchOpen.value = !searchOpen.value;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("keydown", onKeydown);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", onKeydown);
+});
 
 const navLinks = [
   { to: "/", label: "Home", icon: resolveComponent("LucideHome") },

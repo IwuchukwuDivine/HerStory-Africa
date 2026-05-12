@@ -58,6 +58,13 @@
 
     <div ref="readSentinel" />
 
+    <CiteThisPage
+      :title="article.title"
+      :url="canonicalUrl"
+      :year="articleYear"
+      type="article"
+    />
+
     <ReflectionPrompt
       v-if="article.reflectionPrompt"
       :prompt="article.reflectionPrompt"
@@ -130,6 +137,11 @@ const formattedDate = computed(() => {
   });
 });
 
+const articleYear = computed(() => {
+  if (!article.value?.date) return "";
+  return new Date(article.value.date).getFullYear();
+});
+
 const { data: related } = await useAsyncData(
   `related-${route.path}`,
   async () => {
@@ -153,13 +165,20 @@ useSeoMeta({
   description: () => article.value?.description ?? "",
   ogTitle: () => article.value?.title ?? "",
   ogDescription: () => article.value?.description ?? "",
-  ogImage: ogImageUrl,
   ogUrl: canonicalUrl,
   ogType: "article",
   twitterCard: "summary_large_image",
   twitterTitle: () => article.value?.title ?? "",
   twitterDescription: () => article.value?.description ?? "",
-  twitterImage: ogImageUrl,
+});
+
+defineOgImage("Cover", {
+  title: () => article.value?.title ?? "",
+  subtitle: () => article.value?.description ?? "",
+  image: () => ogImageUrl.value,
+  pill: () => article.value?.category ?? "",
+  meta: () => formattedDate.value,
+  variant: "article",
 });
 
 useHead(() => ({
