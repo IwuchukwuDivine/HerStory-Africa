@@ -158,7 +158,7 @@ const { data: related } = await useAsyncData(
 const canonicalUrl = computed(() =>
   article.value ? getAbsoluteUrl(`/articles/${article.value.slug}`) : "",
 );
-const ogImageUrl = computed(() => getAbsoluteUrl(article.value?.image));
+const ogImageUrl = computed(() => article.value?.image ?? "");
 
 useSeoMeta({
   title: () => article.value?.title ?? "Article not found",

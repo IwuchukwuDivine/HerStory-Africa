@@ -4,37 +4,10 @@
       width: '100%',
       height: '100%',
       display: 'flex',
-      position: 'relative',
-      background: 'linear-gradient(135deg, #fdf8f3 0%, #f7ead9 55%, #f3c9ae 100%)',
+      background: 'linear-gradient(135deg, #fdf8f3 0%, #f3c9ae 100%)',
       fontFamily: 'Playfair Display',
-      overflow: 'hidden',
     }"
   >
-    <div
-      :style="{
-        position: 'absolute',
-        top: '-120px',
-        right: '-100px',
-        width: '460px',
-        height: '460px',
-        borderRadius: '999px',
-        background: 'rgba(181, 69, 27, 0.07)',
-        display: 'flex',
-      }"
-    />
-    <div
-      :style="{
-        position: 'absolute',
-        bottom: '-140px',
-        left: '420px',
-        width: '320px',
-        height: '320px',
-        borderRadius: '999px',
-        background: 'rgba(181, 69, 27, 0.05)',
-        display: 'flex',
-      }"
-    />
-
     <div
       :style="{
         width: '500px',

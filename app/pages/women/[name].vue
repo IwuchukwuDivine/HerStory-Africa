@@ -143,7 +143,7 @@ if (woman.value?.slug) {
 const canonicalUrl = computed(() =>
   woman.value ? getAbsoluteUrl(`/women/${woman.value.slug}`) : "",
 );
-const ogImageUrl = computed(() => getAbsoluteUrl(woman.value?.image));
+const ogImageUrl = computed(() => woman.value?.image ?? "");
 
 const womanDates = computed(() => {
   if (!woman.value) return "";
