@@ -5,6 +5,7 @@
       <button
         v-if="isRelevantRoute && !isOpen"
         class="ai-fab"
+        :class="{ 'ai-fab--raised': isScrolledFar }"
         aria-label="Open story assistant"
         @click="open"
       >
@@ -200,6 +201,7 @@ const typedText = ref("");
 const revealedItems = ref<string[]>([]);
 const isTyping = ref(false);
 const showExperimentalBanner = ref(true);
+const isScrolledFar = ref(false);
 
 const contextDoc = ref<WomanDoc | ArticleDoc | null>(null);
 const contextType = ref<"woman" | "article" | "general">("general");
@@ -449,11 +451,23 @@ function onKeydown(e: KeyboardEvent) {
   if (e.key === "Escape" && isOpen.value) close();
 }
 
+function onScroll() {
+  const { scrollY, innerHeight } = window;
+  const docHeight =
+    document.documentElement.scrollHeight || document.body.scrollHeight;
+  const maxScroll = docHeight - innerHeight;
+  const progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
+  // Matches the BackToTop visibility threshold so the FAB stacks above it.
+  isScrolledFar.value = docHeight > innerHeight && progress >= 0.3;
+}
+
 if (import.meta.client) {
   if (window.localStorage.getItem("ai-assistant-banner-dismissed") === "1") {
     showExperimentalBanner.value = false;
   }
   window.addEventListener("keydown", onKeydown);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 }
 
 watch(isOpen, (open) => {
@@ -480,6 +494,7 @@ onBeforeUnmount(() => {
   resetTyping();
   if (import.meta.client) {
     window.removeEventListener("keydown", onKeydown);
+    window.removeEventListener("scroll", onScroll);
     document.documentElement.classList.remove("ai-panel-open");
   }
 });
@@ -507,7 +522,17 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* When BackToTop appears at ~30% scroll, lift the FAB above it. */
+.ai-fab--raised {
+  bottom: calc(1.5rem + 52px + 12px);
+}
+@media (max-width: 640px) {
+  .ai-fab--raised {
+    bottom: calc(1.5rem + 48px + 12px);
+  }
 }
 .ai-fab:hover {
   transform: translateY(-2px) scale(1.03);
