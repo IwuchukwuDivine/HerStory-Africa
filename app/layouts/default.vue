@@ -7,7 +7,10 @@
     </main>
     <Footer />
     <ClientOnly>
-      <BackToTop />
+      <div class="floating-actions">
+        <BackToTop />
+        <AiAssistant />
+      </div>
       <NewsletterModal />
       <ConsentBanner />
     </ClientOnly>
@@ -25,5 +28,21 @@
 
 .app-layout__main {
   flex: 1;
+}
+
+.floating-actions {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+@media (max-width: 640px) {
+  .floating-actions {
+    right: 1rem;
+  }
 }
 </style>

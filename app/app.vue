@@ -1,7 +1,6 @@
 <template>
   <NuxtLayout>
     <NuxtPage />
-    <AiAssistant />
     <Analytics />
   </NuxtLayout>
 </template>
