@@ -4,10 +4,38 @@
       width: '100%',
       height: '100%',
       display: 'flex',
-      background: 'linear-gradient(135deg, #fdf8f3 0%, #f3c9ae 100%)',
+      position: 'relative',
+      background:
+        'linear-gradient(135deg, #fdf8f3 0%, #f7ead9 55%, #f3c9ae 100%)',
       fontFamily: 'Playfair Display',
+      overflow: 'hidden',
     }"
   >
+    <div
+      :style="{
+        position: 'absolute',
+        top: '-280px',
+        right: '-280px',
+        width: '500px',
+        height: '500px',
+        borderRadius: '999px',
+        background: '#b5451b',
+        display: 'flex',
+      }"
+    />
+    <div
+      :style="{
+        position: 'absolute',
+        bottom: '-320px',
+        left: '880px',
+        width: '460px',
+        height: '460px',
+        borderRadius: '999px',
+        background: '#b5451b',
+        display: 'flex',
+      }"
+    />
+
     <div
       :style="{
         width: '500px',
@@ -24,7 +52,7 @@
           height: '630px',
           objectFit: 'cover',
         }"
-      >
+      />
     </div>
 
     <div
@@ -104,6 +132,16 @@
         >
           {{ title }}
         </div>
+
+        <div
+          :style="{
+            display: 'flex',
+            width: '72px',
+            height: '4px',
+            background: '#b5451b',
+            borderRadius: '999px',
+          }"
+        />
 
         <div
           v-if="subtitle"
