@@ -23,7 +23,15 @@
               @keydown.enter.prevent="selectActive"
               @keydown.esc="close"
             >
-            <kbd class="search-modal__kbd">Esc</kbd>
+            <button
+              type="button"
+              class="search-modal__close"
+              aria-label="Close search"
+              @click="close"
+            >
+              <span class="search-modal__close-kbd">Esc</span>
+              <LucideX :size="20" class="search-modal__close-icon" />
+            </button>
           </div>
 
           <div class="search-modal__results">
@@ -300,7 +308,6 @@ onBeforeUnmount(() => {
   color: var(--text-muted);
 }
 
-.search-modal__kbd,
 .search-modal__footer kbd {
   display: inline-flex;
   align-items: center;
@@ -312,6 +319,42 @@ onBeforeUnmount(() => {
   background: var(--surface-muted);
   border: 1px solid var(--border-default);
   border-radius: 4px;
+}
+
+.search-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0.125rem 0.4rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.search-modal__close-kbd {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-muted);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+}
+
+.search-modal__close-icon {
+  display: none;
+}
+
+@media (hover: hover) {
+  .search-modal__close:hover {
+    color: var(--text-primary);
+    background: var(--surface-muted);
+  }
 }
 
 .search-modal__results {
@@ -403,6 +446,23 @@ onBeforeUnmount(() => {
     max-height: 100dvh;
     border-radius: 0;
     border: none;
+  }
+  .search-modal__input-row {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 0.875rem);
+  }
+  .search-modal__close {
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+  }
+  .search-modal__close-kbd {
+    display: none;
+  }
+  .search-modal__close-icon {
+    display: block;
+  }
+  .search-modal__footer {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.625rem);
   }
 }
 </style>

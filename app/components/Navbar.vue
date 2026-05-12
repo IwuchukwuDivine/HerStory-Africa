@@ -217,9 +217,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.navbar__link:hover {
-  color: var(--text-primary);
-  background: var(--surface-muted);
+@media (hover: hover) {
+  .navbar__link:hover {
+    color: var(--text-primary);
+    background: var(--surface-muted);
+  }
 }
 
 .navbar__link.router-link-active {
@@ -242,9 +244,11 @@ const navLinks = [
   margin-left: 0.25rem;
 }
 
-.navbar__theme-btn:hover {
-  color: var(--color-secondary);
-  background: var(--surface-muted);
+@media (hover: hover) {
+  .navbar__theme-btn:hover {
+    color: var(--color-secondary);
+    background: var(--surface-muted);
+  }
 }
 
 /* ── Mobile actions ── */
@@ -275,9 +279,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.navbar__hamburger:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .navbar__hamburger:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 
 /* ── Drawer overlay ── */
@@ -345,9 +351,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.drawer__close:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .drawer__close:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 
 .drawer__links {
@@ -373,9 +381,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.drawer__link:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .drawer__link:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 
 .drawer__link.router-link-active {
