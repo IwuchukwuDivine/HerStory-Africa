@@ -19,7 +19,7 @@
         width: '500px',
         height: '500px',
         borderRadius: '999px',
-        background: '#b5451b',
+        background: '#e89968',
         display: 'flex',
       }"
     />
@@ -31,7 +31,7 @@
         width: '460px',
         height: '460px',
         borderRadius: '999px',
-        background: '#b5451b',
+        background: '#e89968',
         display: 'flex',
       }"
     />
