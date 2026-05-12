@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "typecheck": "nuxi typecheck",
     "postinstall": "nuxt prepare",
-    "newsletter:draft": "node scripts/draft-newsletter.mjs"
+    "newsletter:draft": "node --env-file=.env scripts/draft-newsletter.mjs",
+    "ai:generate": "node --env-file=.env scripts/generate-ai-content.mjs"
   },
   "dependencies": {
     "@nuxt/content": "^3.12.0",
