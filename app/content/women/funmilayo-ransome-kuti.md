@@ -14,6 +14,7 @@ causes:
 image: "/women/funmilayo-ransome-kuti.png"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
+funFact: "Led 10,000 women in a tax revolt against colonial authorities in Abeokuta in 1949"
 summary: "Nigerian activist who led the Abeokuta Women's Union, fought colonial taxation, and became the first woman to drive a car in Nigeria. Mother of Afrobeat legend Fela Kuti."
 ---
 

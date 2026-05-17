@@ -121,6 +121,14 @@ const totalCount = computed(
 useSeoMeta({
   title: "Your Favorites",
   description: "Your saved women and articles from HerStory Africa.",
+  ogTitle: "Your Favorites",
+  ogDescription: "Your saved women and articles from HerStory Africa.",
+  ogImage: getAbsoluteUrl(),
+  ogUrl: getAbsoluteUrl("/favorites"),
+});
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/favorites") }],
 });
 </script>
 

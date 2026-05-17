@@ -185,6 +185,10 @@ useSeoMeta({
   twitterDescription: suggestDescription,
   twitterImage: getAbsoluteUrl("/suggest-og.png"),
 });
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/suggest") }],
+});
 </script>
 
 <style scoped>

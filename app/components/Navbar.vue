@@ -17,6 +17,14 @@
 
         <button
           class="navbar__theme-btn"
+          aria-label="Search"
+          @click="searchOpen = true"
+        >
+          <LucideSearch :size="18" />
+        </button>
+
+        <button
+          class="navbar__theme-btn"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleDark()"
         >
@@ -26,6 +34,14 @@
       </div>
 
       <div class="navbar__mobile-actions">
+        <button
+          class="navbar__theme-btn"
+          aria-label="Search"
+          @click="searchOpen = true"
+        >
+          <LucideSearch :size="18" />
+        </button>
+
         <button
           class="navbar__theme-btn"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
@@ -88,6 +104,8 @@
       </aside>
     </Transition>
   </Teleport>
+
+  <GlobalSearch :open="searchOpen" @close="searchOpen = false" />
 </template>
 
 <script setup lang="ts">
@@ -100,14 +118,30 @@ const toggleDark = useToggle(isDark);
 const mounted = useMounted();
 
 const drawerOpen = ref(false);
+const searchOpen = useSearchOpen();
 
 const route = useRoute();
 watch(
   () => route.path,
   () => {
     drawerOpen.value = false;
+    searchOpen.value = false;
   },
 );
+
+function onKeydown(e: KeyboardEvent) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+    e.preventDefault();
+    searchOpen.value = !searchOpen.value;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("keydown", onKeydown);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", onKeydown);
+});
 
 const navLinks = [
   { to: "/", label: "Home", icon: resolveComponent("LucideHome") },
@@ -117,6 +151,11 @@ const navLinks = [
     to: "/articles",
     label: "Articles",
     icon: resolveComponent("LucideBookOpen"),
+  },
+  {
+    to: "/opportunities",
+    label: "Opportunities",
+    icon: resolveComponent("LucideRocket"),
   },
   {
     to: "/favorites",
@@ -178,9 +217,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.navbar__link:hover {
-  color: var(--text-primary);
-  background: var(--surface-muted);
+@media (hover: hover) {
+  .navbar__link:hover {
+    color: var(--text-primary);
+    background: var(--surface-muted);
+  }
 }
 
 .navbar__link.router-link-active {
@@ -203,9 +244,11 @@ const navLinks = [
   margin-left: 0.25rem;
 }
 
-.navbar__theme-btn:hover {
-  color: var(--color-secondary);
-  background: var(--surface-muted);
+@media (hover: hover) {
+  .navbar__theme-btn:hover {
+    color: var(--color-secondary);
+    background: var(--surface-muted);
+  }
 }
 
 /* ── Mobile actions ── */
@@ -236,9 +279,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.navbar__hamburger:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .navbar__hamburger:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 
 /* ── Drawer overlay ── */
@@ -306,9 +351,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.drawer__close:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .drawer__close:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 
 .drawer__links {
@@ -334,9 +381,11 @@ const navLinks = [
     background 0.15s ease;
 }
 
-.drawer__link:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .drawer__link:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 
 .drawer__link.router-link-active {

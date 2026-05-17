@@ -14,6 +14,7 @@ causes:
 image: "/women/bessie-head.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
+funFact: "Bessie Head spent her adult life as a stateless refugee in Botswana, yet from exile she produced some of the most powerful African novels of the 20th century."
 summary: "South African-born writer who spent her adult life as a refugee in Botswana and wrote some of the most powerful African novels of the 20th century. Her books explore race, mental illness, exile, and the search for belonging with a rawness that no one who reads them forgets."
 ---
 

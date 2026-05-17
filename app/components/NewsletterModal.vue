@@ -28,10 +28,12 @@
 
 <script setup lang="ts">
 const { hasSeenNewsletterPrompt, isSubscribed } = useApp();
+const searchOpen = useSearchOpen();
 
 const visible = ref(false);
 let scrollCleanup: (() => void) | null = null;
 let timeout: ReturnType<typeof setTimeout> | null = null;
+let pendingShow = false;
 
 const route = useRoute();
 
@@ -42,9 +44,23 @@ function shouldShow() {
 
 function show() {
   if (!shouldShow()) return;
+  if (searchOpen.value) {
+    pendingShow = true;
+    return;
+  }
   visible.value = true;
+  pendingShow = false;
   cleanup();
 }
+
+watch(searchOpen, (isOpen) => {
+  if (isOpen && visible.value) {
+    visible.value = false;
+    pendingShow = true;
+  } else if (!isOpen && pendingShow) {
+    show();
+  }
+});
 
 function dismiss() {
   visible.value = false;

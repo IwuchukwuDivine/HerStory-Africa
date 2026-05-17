@@ -14,6 +14,7 @@ causes:
 image: "/women/funke-akindele.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Funke Akindele's hit series 'Jenifa's Diary' made her one of Nollywood's biggest and most bankable stars."
 summary: "Nigerian actress, producer, and screenwriter; one of Nollywood's biggest stars. Known for 'Jenifa's Diary'; advocate for women in film and business."
 ---
 

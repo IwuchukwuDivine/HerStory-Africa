@@ -21,6 +21,50 @@
       ],
       "region": null,
       "subject": "To the Mamas Who Made Us"
+    },
+    {
+      "date": "2026-04-01",
+      "type": "woman",
+      "mainFeature": "luisa-diogo",
+      "alsoRead": [
+        "a-conversation-with-my-father",
+        "beyond-the-kitchen"
+      ],
+      "region": "Southern Africa",
+      "subject": "Meet Luisa Diogo, Mozambique's trailblazing PM"
+    },
+    {
+      "date": "2026-04-15",
+      "type": "article",
+      "mainFeature": "how-colonialism-rewrote-the-rules",
+      "alsoRead": [
+        "kudirat-abiola",
+        "nana-konadu-rawlings"
+      ],
+      "region": null,
+      "subject": "Did you know African women once held all the power?"
+    },
+    {
+      "date": "2026-05-01",
+      "type": "woman",
+      "mainFeature": "tegla-loroupe",
+      "alsoRead": [
+        "what-are-gender-roles",
+        "the-revolution-is-uncomfortable"
+      ],
+      "region": "East Africa",
+      "subject": "Meet Tegla Loroupe"
+    },
+    {
+      "date": "2026-05-15",
+      "type": "article",
+      "mainFeature": "what-her-cloth-said-when-she-could-not-speak",
+      "alsoRead": [
+        "lalla-fatma-nsoumer",
+        "joyce-banda"
+      ],
+      "region": null,
+      "subject": "The secret language of East African textiles"
     }
   ]
 }

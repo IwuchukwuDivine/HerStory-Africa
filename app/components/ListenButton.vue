@@ -86,6 +86,8 @@ const props = defineProps<{
 const speeds = [0.75, 1, 1.25, 1.5, 2];
 
 const { preferredVoiceName, playbackSpeed, setValue } = useApp();
+const { track } = useTag();
+const route = useRoute();
 const {
   status,
   voices,
@@ -147,8 +149,13 @@ function getContentText(): string {
 }
 
 function handleToggle() {
-  const text = status.value === "idle" ? getContentText() : "";
+  const wasIdle = status.value === "idle";
+  const text = wasIdle ? getContentText() : "";
   toggle(text);
+  if (wasIdle) {
+    const segments = route.path.split("/").filter(Boolean);
+    track("listen_play", { slug: segments[1] });
+  }
 }
 
 function handleVoiceChange(event: Event) {

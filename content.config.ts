@@ -25,6 +25,7 @@ export default defineContentConfig({
         imageCredit: z.string(),
         featured: z.boolean(),
         summary: z.string(),
+        funFact: z.string().optional(),
       }),
     }),
     articles: defineCollection({
@@ -42,6 +43,25 @@ export default defineContentConfig({
         category: z.string(),
         image: z.string().optional(),
         imageCredit: z.string().optional(),
+        reflectionPrompt: z.string().optional(),
+      }),
+    }),
+    opportunities: defineCollection({
+      type: 'page',
+      source: {
+        include: 'opportunities/*.md',
+        cwd: contentDir,
+        prefix: '/opportunities',
+      },
+      schema: z.object({
+        title: z.string(),
+        slug: z.string(),
+        category: z.enum(['scholarship', 'job', 'grant', 'fellowship']),
+        organization: z.string(),
+        description: z.string(),
+        deadline: z.string().nullable(),
+        link: z.string(),
+        featured: z.boolean(),
       }),
     }),
   },

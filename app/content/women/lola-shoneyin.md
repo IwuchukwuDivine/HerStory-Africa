@@ -14,6 +14,7 @@ causes:
 image: "/women/lola-shoneyin.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Lola Shoneyin founded the Ake Arts & Book Festival, one of Africa's premier literary gatherings championing African literature and free expression."
 summary: "Nigerian poet and novelist; author of The Secret Lives of Baba Segi's Wives. Founder of the Ake Arts & Book Festival; champion of African literature and free expression."
 ---
 

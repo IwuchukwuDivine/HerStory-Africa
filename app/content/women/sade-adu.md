@@ -14,6 +14,7 @@ causes:
 image: "/women/sade-adu.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Sade Adu is one of the most successful female artists in British music history, with her Grammy-winning hits like 'Smooth Operator' and 'No Ordinary Love' achieving global iconic status."
 summary: "British-Nigerian singer-songwriter; lead singer of the band Sade. Grammy-winning artist known for 'Smooth Operator' and 'No Ordinary Love'; one of the most successful female artists in British music history."
 ---
 

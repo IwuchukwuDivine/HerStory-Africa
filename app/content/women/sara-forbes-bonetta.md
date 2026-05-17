@@ -14,6 +14,7 @@ causes:
 image: "/women/sara-forbes-bonetta.jpg"
 imageCredit: "Wikimedia Commons / Camille Silvy / National Portrait Gallery / Public Domain"
 featured: false
+funFact: "Born Aina in Yorubaland, Sara Forbes Bonetta was given as a 'gift' to Queen Victoria by King Ghezo of Dahomey and became a remarkable figure in Victorian England."
 summary: "Born Aina in Yorubaland around 1843, she was orphaned in the Dahomey slave raids, then given to Queen Victoria as a gift by King Ghezo of Dahomey. She became a remarkable figure in Victorian England, educated and cultured, yet always defined by her origins. Her life illuminates the complexity of African identity under colonialism."
 ---
 

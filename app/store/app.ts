@@ -12,6 +12,7 @@ export const useAppStore = defineStore(
     const readWomen = ref<string[]>([]);
     const favoriteWomen = ref<string[]>([]);
     const favoriteArticles = ref<string[]>([]);
+    const reflectionResponses = ref<Record<string, string>>({});
     const hasSeenNewsletterPrompt = ref(false);
     const subscribedEmail = ref("");
     const preferredVoiceName = ref("");
@@ -63,6 +64,14 @@ export const useAppStore = defineStore(
       hasSeenNewsletterPrompt.value = true;
     }
 
+    function saveReflection(slug: string, response: string) {
+      reflectionResponses.value[slug] = response;
+    }
+
+    function getReflection(slug: string) {
+      return reflectionResponses.value[slug] ?? '';
+    }
+
     const isSubscribed = computed(() => subscribedEmail.value !== "");
 
     const IOS_DISMISS_DAYS = 30;
@@ -83,6 +92,7 @@ export const useAppStore = defineStore(
       readArticles,
       favoriteWomen,
       favoriteArticles,
+      reflectionResponses,
       hasSeenNewsletterPrompt,
       subscribedEmail,
       isSubscribed,
@@ -97,6 +107,8 @@ export const useAppStore = defineStore(
       isFavorite,
       isRead,
       setSubscribed,
+      saveReflection,
+      getReflection,
     };
   },
   {

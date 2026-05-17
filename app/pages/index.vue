@@ -2,6 +2,7 @@
   <div>
     <HomeHero />
     <HomeFeaturedWomen />
+    <HomeDidYouKnow />
     <HomeArticlesPreview />
     <HomeBrowseByRegion />
     <HomeBrowseByCause />
@@ -26,5 +27,9 @@ useSeoMeta({
   twitterTitle: "HerStory Africa — The women history forgot to teach you",
   twitterDescription: siteDescription,
   twitterImage: getAbsoluteUrl(),
+});
+
+useHead({
+  link: [{ rel: "canonical", href: getAbsoluteUrl("/") }],
 });
 </script>

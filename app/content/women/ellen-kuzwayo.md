@@ -14,6 +14,7 @@ causes:
 image: "/women/ellen-kuzwayo.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Ellen Kuzwayo was among the accused in South Africa's historic Treason Trial and later authored the groundbreaking memoir Call Me Woman."
 summary: "South African teacher, social worker, and activist. President of the Black Consumer Union; accused in the Treason Trial; author of Call Me Woman; champion of Black women's voices."
 ---
 

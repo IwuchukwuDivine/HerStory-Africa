@@ -14,6 +14,7 @@ causes:
 image: "/women/placeholder.svg"
 imageCredit: "Image needed"
 featured: false
+funFact: "Folake Solanke earned the distinction of being the very first woman to be conferred the title of Senior Advocate of Nigeria (SAN), the country's highest rank for legal practitioners."
 summary: "Nigerian lawyer; first female Senior Advocate of Nigeria (SAN). Pioneer for women in the legal profession; advocate for education and women's advancement."
 ---
 

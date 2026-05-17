@@ -14,6 +14,7 @@ causes:
 image: "/women/lilian-ngoyi.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: true
+funFact: "Lilian Ngoyi was the first woman ever elected to the executive committee of the African National Congress."
 summary: "Anti-apartheid leader who became the first woman elected to the ANC executive. Led the 1956 Women's March against pass laws and was tried in the Treason Trial."
 ---
 

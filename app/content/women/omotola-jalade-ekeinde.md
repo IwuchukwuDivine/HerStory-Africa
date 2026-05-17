@@ -13,6 +13,7 @@ causes:
 image: "/women/omotola-jalade-ekeinde.png"
 imageCredit: "Wikimedia Commons / World Economic Forum / CC BY-SA 2.0"
 featured: false
+funFact: "With over 300 films to her name, Omotola Jalade-Ekeinde was named by Time magazine as one of the 100 most influential people in the world."
 summary: "Nigerian actress and humanitarian who has starred in over 300 films, been named by Time magazine as one of the 100 most influential people in the world, and used her platform to campaign for women and girls across Africa. She is one of the most recognisable faces on the continent and one of Nollywood's greatest stars."
 ---
 

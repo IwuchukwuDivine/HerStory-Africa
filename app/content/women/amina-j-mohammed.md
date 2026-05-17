@@ -14,6 +14,7 @@ causes:
 image: "/women/amina-j-mohammed.jpg"
 imageCredit: "Wikimedia Commons / UN Photo / CC BY-NC-ND 2.0"
 featured: true
+funFact: "Amina J. Mohammed is the highest-ranking Nigerian in the history of the United Nations and one of the chief architects of the Sustainable Development Goals."
 summary: "Nigerian diplomat and UN Deputy Secretary-General since 2017. Formerly Nigeria's Minister of Environment. One of the chief architects of the United Nations' Sustainable Development Goals (SDGs), the global framework guiding international development until 2030. The highest-ranking Nigerian in the history of the United Nations."
 ---
 

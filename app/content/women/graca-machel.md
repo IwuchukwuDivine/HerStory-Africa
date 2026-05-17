@@ -14,6 +14,7 @@ causes:
 image: "/women/graca-machel.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
+funFact: "The only woman in history to have been First Lady of two different nations — Mozambique and South Africa"
 summary: "Mozambique's first Minister of Education, international advocate for children and women, and the only woman to have been First Lady of two nations (Mozambique and South Africa)."
 ---
 

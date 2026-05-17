@@ -13,6 +13,7 @@ causes:
 image: "/women/winnie-byanyima.jpg"
 imageCredit: "Wikimedia Commons / Oxfam International / CC BY-NC-ND 2.0"
 featured: false
+funFact: "Trained as an engineer, Winnie Byanyima went from fighting inequality to leading the global response to the HIV/AIDS epidemic as Executive Director of UNAIDS."
 summary: "Ugandan engineer, diplomat, and global health leader who has spent her career fighting inequality at the highest levels. Currently Executive Director of UNAIDS, leading the global response to the HIV/AIDS epidemic. One of the most powerful African women in international institutions today."
 ---
 

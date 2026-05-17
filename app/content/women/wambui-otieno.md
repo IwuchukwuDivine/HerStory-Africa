@@ -13,6 +13,7 @@ causes:
   - "Human rights"
 image: "/women/placeholder.svg"
 featured: false
+funFact: "Wambui Otieno fought in the Mau Mau uprising as a teenager before becoming one of Kenya's fiercest defenders of women's property and inheritance rights."
 summary: "Kenyan freedom fighter and women's rights advocate who fought in the Mau Mau uprising as a teenager, later becoming a fierce defender of women's property and inheritance rights."
 ---
 

@@ -1,6 +1,6 @@
 <template>
   <article v-if="article" class="article-page">
-    <button class="go-back" @click="goBack">
+    <button class="go-back" @click="goBack('/articles')">
       <LucideArrowLeft :size="18" />
       Back
     </button>
@@ -57,6 +57,20 @@
     </div>
 
     <div ref="readSentinel" />
+
+    <CiteThisPage
+      :title="article.title"
+      :url="canonicalUrl"
+      :year="articleYear"
+      type="article"
+    />
+
+    <ReflectionPrompt
+      v-if="article.reflectionPrompt"
+      :prompt="article.reflectionPrompt"
+      :slug="article.slug"
+      :article-title="article.title"
+    />
 
     <aside v-if="related?.length" class="article-page__related">
       <h2 class="article-page__related-title">Related articles</h2>
@@ -123,6 +137,11 @@ const formattedDate = computed(() => {
   });
 });
 
+const articleYear = computed(() => {
+  if (!article.value?.date) return "";
+  return new Date(article.value.date).getFullYear();
+});
+
 const { data: related } = await useAsyncData(
   `related-${route.path}`,
   async () => {
@@ -139,20 +158,27 @@ const { data: related } = await useAsyncData(
 const canonicalUrl = computed(() =>
   article.value ? getAbsoluteUrl(`/articles/${article.value.slug}`) : "",
 );
-const ogImageUrl = computed(() => getAbsoluteUrl(article.value?.image));
+const ogImageUrl = computed(() => article.value?.image ?? "");
 
 useSeoMeta({
   title: () => article.value?.title ?? "Article not found",
   description: () => article.value?.description ?? "",
   ogTitle: () => article.value?.title ?? "",
   ogDescription: () => article.value?.description ?? "",
-  ogImage: ogImageUrl,
   ogUrl: canonicalUrl,
   ogType: "article",
   twitterCard: "summary_large_image",
   twitterTitle: () => article.value?.title ?? "",
   twitterDescription: () => article.value?.description ?? "",
-  twitterImage: ogImageUrl,
+});
+
+defineOgImage("Cover", {
+  title: () => article.value?.title ?? "",
+  subtitle: () => article.value?.description ?? "",
+  image: () => ogImageUrl.value,
+  pill: () => article.value?.category ?? "",
+  meta: () => formattedDate.value,
+  variant: "article",
 });
 
 useHead(() => ({
@@ -172,14 +198,14 @@ useHead(() => ({
             author: {
               "@type": "Organization",
               name: "HerStory Africa",
-              url: "https://her-story-africa-seven.vercel.app",
+              url: "https://herstoryafrica.com.ng",
             },
             publisher: {
               "@type": "Organization",
               name: "HerStory Africa",
               logo: {
                 "@type": "ImageObject",
-                url: "https://her-story-africa-seven.vercel.app/og-image.png",
+                url: "https://herstoryafrica.com.ng/og-image.png",
               },
             },
           }),

@@ -14,6 +14,7 @@ causes:
 image: "/women/helen-suzman.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "For 13 consecutive years, Helen Suzman stood as the sole voice in South Africa's parliament opposing apartheid, and she personally visited Nelson Mandela in prison."
 summary: "South African MP who was for 13 years the sole parliamentary voice against apartheid. Twice nominated for the Nobel Peace Prize; visited political prisoners including Mandela."
 ---
 

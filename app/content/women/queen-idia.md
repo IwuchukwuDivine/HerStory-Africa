@@ -14,6 +14,7 @@ causes:
 image: "/women/queen-idia.jpg"
 imageCredit: "Wikimedia Commons / Memorial bust, Ethnological Museum Berlin / CC BY-SA 3.0"
 featured: true
+funFact: "Her iconic ivory mask became the symbol of FESTAC '77 and one of Africa's most recognized artworks"
 summary: "Powerful 15th/16th-century Queen Mother of the Benin Kingdom (modern Nigeria). The first woman to hold the title of Iyoba (created for her by her son, Oba Esigie) in recognition of her military and political role in securing his throne. Her face lives on in the iconic Benin ivory mask, now at the British Museum, and at the centre of a decades-long repatriation debate."
 ---
 

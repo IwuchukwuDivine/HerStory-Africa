@@ -14,6 +14,7 @@ causes:
 image: "/women/ngozi-okonjo-iweala.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
+funFact: "First woman and first African to serve as Director-General of the World Trade Organization"
 summary: "Nigerian-American economist who became the first woman and first African Director-General of the WTO. Former Nigerian Finance Minister and World Bank Managing Director."
 ---
 

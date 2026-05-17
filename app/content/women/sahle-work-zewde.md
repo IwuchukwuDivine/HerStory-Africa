@@ -14,6 +14,7 @@ causes:
 image: "/women/sahle-work-zewde.jpg"
 imageCredit: "Wikimedia Commons / ITU Pictures / CC BY 2.0"
 featured: false
+funFact: "Before becoming Ethiopia's first female president in 2018, Sahle-Work Zewde served as Director-General of the United Nations Office at Nairobi."
 summary: "Ethiopia's first female president, elected in 2018. A career UN diplomat who served as Director-General of UNON in Nairobi, she brought decades of international experience to a role that, while ceremonial, carries enormous symbolic weight."
 ---
 

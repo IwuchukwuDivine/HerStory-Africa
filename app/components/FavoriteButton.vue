@@ -21,11 +21,18 @@ const props = withDefaults(
 );
 
 const { toggleFavorite, isFavorite } = useApp();
+const { track } = useTag();
 
 const active = computed(() => isFavorite(props.type, props.slug));
 
 function toggle() {
+  const action = active.value ? "remove" : "add";
   toggleFavorite(props.type, props.slug);
+  track("favorite_toggle", {
+    content_type: props.type,
+    slug: props.slug,
+    action,
+  });
 }
 </script>
 

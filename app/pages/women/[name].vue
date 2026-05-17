@@ -1,7 +1,7 @@
 <template>
   <article v-if="woman" class="woman-profile">
     <header class="woman-profile__hero">
-      <button class="go-back" @click="goBack">
+      <button class="go-back" @click="goBack('/women')">
         <LucideArrowLeft :size="18" />
         Back
       </button>
@@ -26,7 +26,12 @@
             <span class="woman-profile__era-badge">{{ woman.era }} era</span>
             <ClientOnly>
               <div class="woman-profile__actions">
-                <ShareButton :title="woman.name" :text="woman.summary" :size="22" />
+                <ShareCardButton :woman="woman" :size="22" />
+                <ShareButton
+                  :title="woman.name"
+                  :text="woman.summary"
+                  :size="22"
+                />
                 <FavoriteButton type="woman" :slug="woman.slug" :size="22" />
               </div>
             </ClientOnly>
@@ -40,7 +45,10 @@
             </span>
             <span class="woman-profile__meta-item">
               <LucideCalendar :size="16" />
-              {{ woman.born ?? "Unknown" }}{{ woman.died ? `–${woman.died}` : woman.born ? "–present" : "" }}
+              {{ woman.born ?? "Unknown"
+              }}{{
+                woman.died ? `–${woman.died}` : woman.born ? "–present" : ""
+              }}
             </span>
             <ClientOnly>
               <span v-if="womanRead" class="woman-profile__read-badge">
@@ -65,7 +73,9 @@
         </div>
       </div>
       <ClientOnly>
-        <ListenButton content-selector=".woman-profile__name, .woman-profile__summary, .woman-profile__content" />
+        <ListenButton
+          content-selector=".woman-profile__name, .woman-profile__summary, .woman-profile__content"
+        />
       </ClientOnly>
     </header>
 
@@ -74,6 +84,13 @@
     </div>
 
     <div ref="readSentinel" />
+
+    <CiteThisPage
+      :title="woman.name"
+      :url="canonicalUrl"
+      :year="woman.died ?? woman.born ?? ''"
+      type="biography"
+    />
 
     <NewsletterCta />
 
@@ -87,24 +104,12 @@
       </NuxtLink>
     </div>
 
-    <aside v-if="related?.length" class="woman-profile__related">
-      <h2 class="woman-profile__related-title">More from {{ woman.region }}</h2>
-      <div class="woman-profile__related-grid">
-        <WomanCard
-          v-for="w in related"
-          :key="w.slug"
-          :name="w.name"
-          :slug="w.slug"
-          :image="w.image"
-          :country="w.country"
-          :born="w.born"
-          :died="w.died"
-          :era="w.era"
-          :summary="w.summary"
-          :causes="w.causes"
-        />
-      </div>
-    </aside>
+    <RelatedWomen
+      :slug="woman.slug"
+      :region="woman.region"
+      :era="woman.era"
+      :causes="woman.causes"
+    />
   </article>
 
   <div v-else class="woman-profile__not-found">
@@ -135,36 +140,51 @@ if (woman.value?.slug) {
   useReadTracker("woman", woman.value.slug, readSentinel);
 }
 
-const { data: related } = await useAsyncData(
-  `related-${route.path}`,
-  async () => {
-    if (!woman.value) return [];
-    return queryCollection("women")
-      .where("region", "=", woman.value.region)
-      .where("slug", "<>", woman.value.slug)
-      .limit(3)
-      .all();
-  },
-  { watch: [woman] },
-);
-
 const canonicalUrl = computed(() =>
   woman.value ? getAbsoluteUrl(`/women/${woman.value.slug}`) : "",
 );
-const ogImageUrl = computed(() => getAbsoluteUrl(woman.value?.image));
+const ogImageUrl = computed(() => woman.value?.image ?? "");
+
+const womanDates = computed(() => {
+  if (!woman.value) return "";
+  const born = woman.value.born ?? "Unknown";
+  const died = woman.value.died
+    ? `–${woman.value.died}`
+    : woman.value.born
+      ? "–present"
+      : "";
+  return `${born}${died}`;
+});
 
 useSeoMeta({
-  title: () => woman.value?.name ?? "Woman not found",
+  title: () => {
+    if (!woman.value) return "Woman not found";
+    const maxLen = 55 - woman.value.name.length - 2;
+    const words = woman.value.summary.split(" ");
+    let snippet = "";
+    for (const word of words) {
+      if ((snippet + " " + word).trim().length > maxLen) break;
+      snippet = (snippet + " " + word).trim();
+    }
+    return `${woman.value.name}: ${snippet}`;
+  },
   description: () => woman.value?.summary ?? "",
   ogTitle: () => woman.value?.name ?? "",
   ogDescription: () => woman.value?.summary ?? "",
-  ogImage: ogImageUrl,
   ogUrl: canonicalUrl,
   ogType: "profile",
   twitterCard: "summary_large_image",
   twitterTitle: () => woman.value?.name ?? "",
   twitterDescription: () => woman.value?.summary ?? "",
-  twitterImage: ogImageUrl,
+});
+
+defineOgImage("Cover", {
+  title: () => woman.value?.name ?? "",
+  pill: () => woman.value?.era ?? "",
+  subtitle: () => womanDates.value,
+  meta: () => woman.value?.country ?? "",
+  image: () => ogImageUrl.value,
+  variant: "woman",
 });
 
 useHead(() => ({
@@ -452,38 +472,6 @@ useHead(() => ({
 
 .woman-profile__suggest-link:hover {
   color: var(--color-primary-600);
-}
-
-/* ── Related section ── */
-.woman-profile__related {
-  margin-top: 3.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.woman-profile__related-title {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 1.25rem;
-}
-
-.woman-profile__related-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .woman-profile__related-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .woman-profile__related-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 /* ── Not found ── */

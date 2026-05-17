@@ -14,6 +14,7 @@ causes:
 image: "/women/chimamanda-ngozi-adichie.png"
 imageCredit: "Wikimedia Commons / Lvklock / CC BY-SA 4.0"
 featured: true
+funFact: "Her TED Talk 'The Danger of a Single Story' has been viewed over 30 million times"
 summary: "Award-winning Nigerian novelist and feminist icon. Author of Purple Hibiscus, Half of a Yellow Sun, Americanah, and the viral TED talk 'We Should All Be Feminists', which reached hundreds of millions of listeners after Beyoncé sampled it. One of the most influential voices on feminism, race, and African identity in the world today."
 ---
 

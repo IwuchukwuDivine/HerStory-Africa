@@ -14,6 +14,7 @@ causes:
 image: "/women/ama-ata-aidoo.png"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
+funFact: "In addition to five decades of groundbreaking literary work, Ama Ata Aidoo also served as Ghana's Minister of Education."
 summary: "Ghanaian author, playwright, and poet who spent over five decades writing some of the most important African literature in the world. Her work put African women at the centre of the story at a time when they were almost always pushed to the edges. She also served as Ghana's Minister of Education."
 ---
 

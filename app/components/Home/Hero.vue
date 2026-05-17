@@ -29,20 +29,20 @@
 </template>
 
 <script setup lang="ts">
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside } from "@vueuse/core";
 
-const router = useRouter()
-const searchQuery = ref('')
-const searchWrapperRef = ref<HTMLElement>()
+const router = useRouter();
+const searchQuery = ref("");
+const searchWrapperRef = ref<HTMLElement>();
 
 onClickOutside(searchWrapperRef, () => {
-  searchQuery.value = ''
-})
+  searchQuery.value = "";
+});
 
 function handleSearch() {
-  if (!searchQuery.value.trim()) return
-  router.push({ path: '/women', query: { q: searchQuery.value.trim() } })
-  searchQuery.value = ''
+  if (!searchQuery.value.trim()) return;
+  router.push({ path: "/women", query: { q: searchQuery.value.trim() } });
+  searchQuery.value = "";
 }
 </script>
 
@@ -83,7 +83,11 @@ function handleSearch() {
 }
 
 .hero__tagline-accent {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -14,6 +14,7 @@ causes:
 image: "/women/placeholder.svg"
 imageCredit: "Image needed"
 featured: false
+funFact: "At the 1996 Atlanta Olympics, Chioma Ajunwa became the first black African woman ever to win an Olympic gold medal in a track and field event with her historic long jump victory."
 summary: "Nigerian athlete and police officer; first Nigerian and first black African woman to win Olympic gold in athletics (long jump, Atlanta 1996). Pioneer for African women in sport."
 ---
 

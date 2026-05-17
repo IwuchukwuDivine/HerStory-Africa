@@ -14,6 +14,7 @@ causes:
 image: "/women/hauwa-ibrahim.jpg"
 imageCredit: "Wikimedia Commons / Anna Rauchenberger / CC BY-SA 4.0"
 featured: false
+funFact: "Hauwa Ibrahim was the first woman ever to argue before Sharia courts in northern Nigeria, defending women sentenced to death by stoning."
 summary: "Nigerian human rights lawyer who defended women sentenced to death by stoning under Sharia law, at great personal risk. The first woman to argue before Sharia courts in northern Nigeria. Awarded the European Parliament's Sakharov Prize for Freedom of Thought in 2005."
 ---
 

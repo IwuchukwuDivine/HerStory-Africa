@@ -14,6 +14,7 @@ causes:
 image: "/women/dupe-ademola-popoola.jpg"
 imageCredit: "Wikimedia Commons"
 featured: false
+funFact: "Dupe Ademola-Popoola developed the TELVIS vision screening tool, a pioneering instrument for detecting eye conditions in children and preventing childhood blindness in Nigeria."
 summary: "Nigerian ophthalmologist and professor; pioneer in paediatric ophthalmology and childhood blindness prevention. Developer of TELVIS vision screening tool; leader in ROP and retinoblastoma care."
 ---
 

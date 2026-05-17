@@ -14,6 +14,7 @@ causes:
 image: "/women/mariama-ba.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
+funFact: "Mariama Bâ's novel So Long a Letter became a landmark of African women's writing, redefining how women's inner lives were portrayed in African literature."
 summary: "Senegalese novelist and feminist whose novel So Long a Letter became a landmark of African women's writing. Teacher and advocate for women's education and equality."
 ---
 

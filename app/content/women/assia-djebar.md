@@ -14,6 +14,7 @@ causes:
 image: "/women/placeholder.svg"
 imageCredit: ""
 featured: false
+funFact: "Assia Djebar was both the first Algerian woman admitted to the prestigious École Normale Supérieure in Paris and one of the rare authors elected to the Académie Française in 2005."
 summary: "Algerian novelist and filmmaker born Fatima-Zohra Imalayen in Cherchell. The first Algerian woman admitted to the Ecole Normale Superieure in Paris, she wrote about Algerian women's silenced histories, war, colonialism, and identity. Elected to the Academie Francaise in 2005."
 ---
 

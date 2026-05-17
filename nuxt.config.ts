@@ -22,17 +22,35 @@ export default defineNuxtConfig({
     "pinia-plugin-persistedstate/nuxt",
     "@vercel/speed-insights",
     "@vite-pwa/nuxt",
+    "nuxt-gtag",
+    "nuxt-og-image",
   ],
 
   // ── Static Site Generation ──────────────────────────────────────────
   ssr: true,
   nitro: {
     prerender: {
-      routes: ["/", "/sitemap.xml"],
+      routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
       crawlLinks: true,
     },
   },
-
+  gtag: {
+    id: "G-V5FFHGH864",
+    enabled: process.env.NODE_ENV === "production",
+    initCommands: [
+      [
+        "consent",
+        "default",
+        {
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          wait_for_update: 500,
+        },
+      ],
+    ],
+  },
   hooks: {
     async "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) return;
@@ -48,11 +66,20 @@ export default defineNuxtConfig({
         .filter((f: string) => f.endsWith(".md"))
         .map((f: string) => `/articles/${f.replace(".md", "")}`);
 
+      const { existsSync } = await import("node:fs");
+      const oppDir = resolve(contentDir, "opportunities");
+      const opportunities = existsSync(oppDir)
+        ? readdirSync(oppDir)
+            .filter((f: string) => f.endsWith(".md"))
+            .map((f: string) => `/opportunities/${f.replace(".md", "")}`)
+        : [];
+
       nitroConfig.prerender = nitroConfig.prerender || {};
       nitroConfig.prerender.routes = [
         ...(nitroConfig.prerender.routes || []),
         ...women,
         ...articles,
+        ...opportunities,
       ];
     },
   },
@@ -174,7 +201,7 @@ export default defineNuxtConfig({
 
   // ── Site URL (required by sitemap + SEO modules) ───────────────────
   site: {
-    url: "https://her-story-africa-seven.vercel.app",
+    url: "https://herstoryafrica.com.ng",
   },
 
   // ── Sitemap ─────────────────────────────────────────────────────────
@@ -227,7 +254,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:image",
-          content: "https://her-story-africa-seven.vercel.app/og-image.png",
+          content: "https://herstoryafrica.com.ng/og-image.png",
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
@@ -246,7 +273,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://her-story-africa-seven.vercel.app/og-image.png",
+          content: "https://herstoryafrica.com.ng/og-image.png",
         },
       ],
 
@@ -328,6 +355,12 @@ export default defineNuxtConfig({
               maxAgeSeconds: 30 * 24 * 60 * 60,
             },
           },
+        },
+        {
+          rel: "alternate",
+          type: "application/rss+xml",
+          title: "HerStory Africa — Articles",
+          href: "/rss.xml",
         },
       ],
     },

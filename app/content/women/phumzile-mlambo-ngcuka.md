@@ -14,6 +14,7 @@ causes:
 image: "/women/placeholder.svg"
 imageCredit: ""
 featured: false
+funFact: "Phumzile Mlambo-Ngcuka made history as both the first female Deputy President of South Africa and later as Executive Director of UN Women, leading the global women's rights agenda."
 summary: "South African politician and activist who became the first female Deputy President of South Africa (2005–2008) and served as Executive Director of UN Women (2013–2021). She has championed the Generation Equality Forum and the global women's rights agenda."
 ---
 

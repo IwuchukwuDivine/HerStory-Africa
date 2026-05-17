@@ -14,6 +14,7 @@ causes:
 image: "/women/ellen-johnson-sirleaf.jpg"
 imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
+funFact: "Became Africa's first elected female head of state at age 67"
 summary: "Harvard-trained economist who became Africa's first elected female head of state, serving as President of Liberia from 2006 to 2018 and rebuilding a country shattered by 14 years of civil war."
 ---
 
