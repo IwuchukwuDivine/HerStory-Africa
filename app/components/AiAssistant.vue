@@ -14,11 +14,7 @@
 
     <!-- Backdrop (mobile only — hidden via CSS on desktop) -->
     <Transition name="fade">
-      <div
-        v-if="isOpen"
-        class="ai-backdrop"
-        @click="close"
-      />
+      <div v-if="isOpen" class="ai-backdrop" @click="close" />
     </Transition>
 
     <!-- Panel: side panel on desktop, full-screen on mobile -->
@@ -34,24 +30,18 @@
             <LucideSparkles :size="18" />
             <span>Story Assistant</span>
           </div>
-          <button
-            class="ai-panel__close"
-            aria-label="Close"
-            @click="close"
-          >
+          <button class="ai-panel__close" aria-label="Close" @click="close">
             <LucideX :size="20" />
           </button>
         </header>
 
-        <div
-          v-if="showExperimentalBanner"
-          class="ai-banner"
-        >
+        <div v-if="showExperimentalBanner" class="ai-banner">
           <div class="ai-banner__icon">
             <LucideFlaskConical :size="16" />
           </div>
           <p class="ai-banner__text">
-            <strong>Experimental.</strong> Quick facts are pre-written. Free-form questions are coming soon.
+            <strong>Experimental.</strong> Quick facts are pre-written.
+            Free-form questions are coming soon.
           </p>
           <button
             class="ai-banner__dismiss"
@@ -78,52 +68,28 @@
             <h3 class="ai-panel__output-heading">
               {{ activeChip.label }}
             </h3>
-            <div
-              v-if="loading"
-              class="ai-typing-dots"
-              aria-label="Loading"
-            >
+            <div v-if="loading" class="ai-typing-dots" aria-label="Loading">
               <span /><span /><span />
             </div>
-            <div
-              v-else
-              class="ai-panel__output-body"
-            >
-              <p
-                v-if="activeChip.kind === 'text'"
-                class="ai-panel__text"
-              >
-                {{ typedText }}<span
-                  v-if="isTyping"
-                  class="ai-caret"
-                />
+            <div v-else class="ai-panel__output-body">
+              <p v-if="activeChip.kind === 'text'" class="ai-panel__text">
+                {{ typedText }}<span v-if="isTyping" class="ai-caret" />
               </p>
-              <ul
-                v-else-if="activeChip.kind === 'list'"
-                class="ai-panel__list"
-              >
-                <li
-                  v-for="(item, i) in revealedItems"
-                  :key="i"
-                >
+              <ul v-else-if="activeChip.kind === 'list'" class="ai-panel__list">
+                <li v-for="(item, i) in revealedItems" :key="i">
                   {{ item }}
                 </li>
               </ul>
             </div>
           </template>
-          <p
-            v-else
-            class="ai-panel__hint"
-          >
+          <p v-else class="ai-panel__hint">
             Tap a suggestion below to learn more about
-            <strong>{{ contextShort }}</strong>.
+            <strong>{{ contextShort }}</strong
+            >.
           </p>
         </div>
 
-        <div
-          v-if="chips.length"
-          class="ai-chips"
-        >
+        <div v-if="chips.length" class="ai-chips">
           <button
             v-for="chip in chips"
             :key="chip.id"
@@ -135,10 +101,7 @@
           </button>
         </div>
 
-        <p
-          v-else
-          class="ai-empty-note"
-        >
+        <p v-else class="ai-empty-note">
           Open this on a woman's profile or article page to explore with AI.
         </p>
 
@@ -246,7 +209,12 @@ const chips = computed<Chip[]>(() => {
     const list: Chip[] = [];
     const summaryText = aiW?.summary || w.summary;
     if (summaryText) {
-      list.push({ id: "summary", label: "Summary", kind: "text", text: summaryText });
+      list.push({
+        id: "summary",
+        label: "Summary",
+        kind: "text",
+        text: summaryText,
+      });
     }
     list.push({
       id: "quick-facts",
@@ -271,7 +239,12 @@ const chips = computed<Chip[]>(() => {
       });
     }
     if (w.funFact) {
-      list.push({ id: "fun", label: "Did you know?", kind: "text", text: w.funFact });
+      list.push({
+        id: "fun",
+        label: "Did you know?",
+        kind: "text",
+        text: w.funFact,
+      });
     }
     return list;
   }
@@ -282,7 +255,12 @@ const chips = computed<Chip[]>(() => {
     const list: Chip[] = [];
     const summaryText = aiA?.summary || a.description;
     if (summaryText) {
-      list.push({ id: "summary", label: "Summary", kind: "text", text: summaryText });
+      list.push({
+        id: "summary",
+        label: "Summary",
+        kind: "text",
+        text: summaryText,
+      });
     }
     if (aiA?.keyTakeaways?.length) {
       list.push({
@@ -502,17 +480,21 @@ onBeforeUnmount(() => {
   );
   color: var(--text-on-primary);
   border: none;
-  box-shadow: 0 10px 25px -10px rgba(181, 69, 27, 0.6),
+  box-shadow:
+    0 10px 25px -10px rgba(181, 69, 27, 0.6),
     0 4px 10px -4px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .ai-fab:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 14px 30px -10px rgba(181, 69, 27, 0.7),
+  box-shadow:
+    0 14px 30px -10px rgba(181, 69, 27, 0.7),
     0 6px 14px -4px rgba(0, 0, 0, 0.18);
 }
 .ai-fab:focus-visible {
@@ -541,6 +523,7 @@ onBeforeUnmount(() => {
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
+  padding: var(--top) var(--right) 0 var(--left);
   /* Mobile: full-screen */
   inset: 0;
   height: 100vh;
@@ -798,7 +781,9 @@ onBeforeUnmount(() => {
 /* Transitions */
 .fab-enter-active,
 .fab-leave-active {
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 .fab-enter-from,
 .fab-leave-to {
@@ -817,7 +802,9 @@ onBeforeUnmount(() => {
 
 .panel-enter-active,
 .panel-leave-active {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
 }
 .panel-enter-from,
 .panel-leave-to {
