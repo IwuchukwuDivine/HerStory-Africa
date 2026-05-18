@@ -14,10 +14,12 @@
             <LucideSearch :size="20" class="search-modal__input-icon" />
             <input
               ref="inputRef"
-              v-model="query"
+              :value="query"
               type="search"
               placeholder="Search women, articles, opportunities…"
               class="search-modal__input"
+              @input="onInput"
+              @compositionupdate="onInput"
               @keydown.down.prevent="move(1)"
               @keydown.up.prevent="move(-1)"
               @keydown.enter.prevent="selectActive"
@@ -217,6 +219,10 @@ function selectActive() {
   if (!item) return;
   navigateTo(item.to);
   close();
+}
+
+function onInput(event: Event) {
+  query.value = (event.target as HTMLInputElement).value;
 }
 
 function close() {
