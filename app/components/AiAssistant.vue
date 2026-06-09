@@ -1,6 +1,6 @@
 <template>
   <div class="ai-assistant">
-    <!-- Floating action button (only on woman / article detail pages) -->
+    <!-- Floating action button -->
     <Transition name="fab">
       <button
         v-if="isRelevantRoute && !isOpen"
@@ -12,7 +12,7 @@
       </button>
     </Transition>
 
-    <!-- Backdrop (mobile only — hidden via CSS on desktop) -->
+    <!-- Backdrop (mobile only) -->
     <Transition name="fade">
       <div
         v-if="isOpen"
@@ -21,7 +21,7 @@
       />
     </Transition>
 
-    <!-- Panel: side panel on desktop, full-screen on mobile -->
+    <!-- Panel -->
     <Transition name="panel">
       <aside
         v-if="isOpen"
@@ -51,7 +51,13 @@
             <LucideFlaskConical :size="16" />
           </div>
           <p class="ai-banner__text">
-            <strong>Experimental.</strong> Quick facts are pre-written. Free-form questions are coming soon.
+            <strong>Experimental.</strong>
+            <template v-if="ollamaLive === true">
+              Chat may occasionally make mistakes — verify important facts.
+            </template>
+            <template v-else>
+              Quick facts are pre-written. Free-form questions are coming soon.
+            </template>
           </p>
           <button
             class="ai-banner__dismiss"
@@ -69,12 +75,42 @@
           </p>
         </div>
 
+        <!-- Output area: chat history OR chip content -->
         <div
+          ref="outputEl"
           class="ai-panel__output"
-          :class="{ 'ai-panel__output--empty': !activeChip }"
-          @click="completeTyping"
+          :class="{ 'ai-panel__output--empty': !activeChip && !chatMode }"
+          @click="!chatMode && completeTyping()"
         >
-          <template v-if="activeChip">
+          <!-- Chat history -->
+          <template v-if="chatMode">
+            <div
+              v-for="(msg, i) in chatHistory"
+              :key="i"
+              class="ai-chat-msg"
+              :class="
+                msg.role === 'user'
+                  ? 'ai-chat-msg--user'
+                  : 'ai-chat-msg--assistant'
+              "
+            >
+              <span class="ai-chat-msg__bubble">{{ msg.content }}</span>
+            </div>
+            <div
+              v-if="chatLoading"
+              class="ai-chat-msg ai-chat-msg--assistant"
+            >
+              <div
+                class="ai-typing-dots"
+                aria-label="Thinking"
+              >
+                <span /><span /><span />
+              </div>
+            </div>
+          </template>
+
+          <!-- Chip content -->
+          <template v-else-if="activeChip">
             <h3 class="ai-panel__output-heading">
               {{ activeChip.label }}
             </h3>
@@ -103,20 +139,25 @@
                 class="ai-panel__list"
               >
                 <li
-                  v-for="(item, i) in revealedItems"
-                  :key="i"
+                  v-for="(item, idx) in revealedItems"
+                  :key="idx"
                 >
                   {{ item }}
                 </li>
               </ul>
             </div>
           </template>
+
+          <!-- Empty state -->
           <p
             v-else
             class="ai-panel__hint"
           >
             Tap a suggestion below to learn more about
             <strong>{{ contextShort }}</strong>.
+            <template v-if="ollamaLive === true">
+              Or ask your own question below.
+            </template>
           </p>
         </div>
 
@@ -128,7 +169,7 @@
             v-for="chip in chips"
             :key="chip.id"
             class="ai-chip"
-            :class="{ 'ai-chip--active': activeChip?.id === chip.id }"
+            :class="{ 'ai-chip--active': !chatMode && activeChip?.id === chip.id }"
             @click="selectChip(chip)"
           >
             {{ chip.label }}
@@ -142,7 +183,53 @@
           Open this on a woman's profile or article page to explore with AI.
         </p>
 
-        <footer class="ai-panel__footer">
+        <!-- Footer: 3 states based on ollama availability -->
+        <footer
+          v-if="ollamaLive === true"
+          class="ai-chat-input"
+        >
+          <input
+            ref="chatInputEl"
+            v-model="chatInput"
+            class="ai-chat-input__field"
+            type="text"
+            :placeholder="`Ask anything about ${contextShort}…`"
+            :disabled="chatLoading"
+            maxlength="500"
+            autocomplete="off"
+            @keydown.enter.prevent="sendChat"
+          />
+          <button
+            class="ai-chat-input__send"
+            :disabled="!chatInput.trim() || chatLoading"
+            aria-label="Send message"
+            @click="sendChat"
+          >
+            <LucideSend
+              v-if="!chatLoading"
+              :size="15"
+            />
+            <LucideLoader2
+              v-else
+              :size="15"
+              class="ai-spin"
+            />
+          </button>
+        </footer>
+        <footer
+          v-else-if="ollamaLive === null"
+          class="ai-panel__footer"
+        >
+          <LucideLoader2
+            :size="14"
+            class="ai-spin"
+          />
+          <span>Connecting to AI…</span>
+        </footer>
+        <footer
+          v-else
+          class="ai-panel__footer"
+        >
           <LucideMessageCircle :size="14" />
           <span>Free-form questions coming soon</span>
         </footer>
@@ -152,7 +239,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 type Chip = {
@@ -192,18 +279,40 @@ type AiContent = {
   articles: Record<string, { summary?: string; keyTakeaways?: string[] }>;
 };
 
+type ChatMessage = { role: "user" | "assistant"; content: string };
+
 const route = useRoute();
+
+// Panel state
 const isOpen = ref(false);
 const loading = ref(false);
 const activeChip = ref<Chip | null>(null);
+const showExperimentalBanner = ref(true);
+
+// Typewriter state
 const typedText = ref("");
 const revealedItems = ref<string[]>([]);
 const isTyping = ref(false);
-const showExperimentalBanner = ref(true);
+let typeTimer: ReturnType<typeof setInterval> | null = null;
+let listTimer: ReturnType<typeof setInterval> | null = null;
+let pendingText = "";
+let pendingList: string[] = [];
 
+// Context state
 const contextDoc = ref<WomanDoc | ArticleDoc | null>(null);
 const contextType = ref<"woman" | "article" | "general">("general");
 const aiContent = ref<AiContent | null>(null);
+
+// Chat state
+const ollamaLive = ref<boolean | null>(null);
+const chatMode = ref(false);
+const chatInput = ref("");
+const chatLoading = ref(false);
+const chatHistory = ref<ChatMessage[]>([]);
+const outputEl = ref<HTMLElement | null>(null);
+const chatInputEl = ref<HTMLInputElement | null>(null);
+
+// ── Computed ────────────────────────────────────────────────────────────────
 
 const isRelevantRoute = computed(() => {
   const path = route.path;
@@ -212,11 +321,6 @@ const isRelevantRoute = computed(() => {
     (path.startsWith("/articles/") && path.length > "/articles/".length)
   );
 });
-
-let typeTimer: ReturnType<typeof setInterval> | null = null;
-let listTimer: ReturnType<typeof setInterval> | null = null;
-let pendingText = "";
-let pendingList: string[] = [];
 
 const contextTitle = computed(() => {
   if (contextType.value === "woman") {
@@ -246,7 +350,12 @@ const chips = computed<Chip[]>(() => {
     const list: Chip[] = [];
     const summaryText = aiW?.summary || w.summary;
     if (summaryText) {
-      list.push({ id: "summary", label: "Summary", kind: "text", text: summaryText });
+      list.push({
+        id: "summary",
+        label: "Summary",
+        kind: "text",
+        text: summaryText,
+      });
     }
     list.push({
       id: "quick-facts",
@@ -271,7 +380,12 @@ const chips = computed<Chip[]>(() => {
       });
     }
     if (w.funFact) {
-      list.push({ id: "fun", label: "Did you know?", kind: "text", text: w.funFact });
+      list.push({
+        id: "fun",
+        label: "Did you know?",
+        kind: "text",
+        text: w.funFact,
+      });
     }
     return list;
   }
@@ -282,7 +396,12 @@ const chips = computed<Chip[]>(() => {
     const list: Chip[] = [];
     const summaryText = aiA?.summary || a.description;
     if (summaryText) {
-      list.push({ id: "summary", label: "Summary", kind: "text", text: summaryText });
+      list.push({
+        id: "summary",
+        label: "Summary",
+        kind: "text",
+        text: summaryText,
+      });
     }
     if (aiA?.keyTakeaways?.length) {
       list.push({
@@ -305,6 +424,8 @@ const chips = computed<Chip[]>(() => {
   return [];
 });
 
+// ── Helpers ─────────────────────────────────────────────────────────────────
+
 function buildWomanFacts(w: WomanDoc): string[] {
   const facts: string[] = [];
   if (w.country) {
@@ -319,15 +440,84 @@ function buildWomanFacts(w: WomanDoc): string[] {
   return facts;
 }
 
+function getContextBody(): string {
+  if (contextType.value === "woman") {
+    const w = contextDoc.value as WomanDoc | null;
+    if (!w) return "";
+    const aiW = aiContent.value?.women?.[w.slug];
+    const parts: string[] = [];
+    const summary = aiW?.summary || w.summary;
+    if (summary) parts.push(summary);
+    if (aiW?.whyShematters) parts.push(`Why she matters: ${aiW.whyShematters}`);
+    const facts = buildWomanFacts(w);
+    if (facts.length) parts.push(facts.join(", "));
+    return parts.join("\n");
+  }
+  if (contextType.value === "article") {
+    const a = contextDoc.value as ArticleDoc | null;
+    if (!a) return "";
+    const aiA = aiContent.value?.articles?.[a.slug];
+    const parts: string[] = [];
+    const summary = aiA?.summary || a.description;
+    if (summary) parts.push(summary);
+    if (aiA?.keyTakeaways?.length) parts.push(aiA.keyTakeaways.join("; "));
+    return parts.join("\n");
+  }
+  return "";
+}
+
+async function scrollToBottom() {
+  await nextTick();
+  if (outputEl.value) {
+    outputEl.value.scrollTop = outputEl.value.scrollHeight;
+  }
+}
+
+// ── Panel actions ────────────────────────────────────────────────────────────
+
+let savedScrollY = 0;
+
+function lockBodyScroll() {
+  if (!import.meta.client) return;
+  document.documentElement.classList.add("ai-panel-open");
+  if (window.innerWidth < 768) {
+    savedScrollY = window.scrollY;
+    const body = document.body;
+    body.style.position = "fixed";
+    body.style.top = `-${savedScrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+  }
+}
+
+function unlockBodyScroll() {
+  if (!import.meta.client) return;
+  document.documentElement.classList.remove("ai-panel-open");
+  const body = document.body;
+  if (body.style.position === "fixed") {
+    body.style.position = "";
+    body.style.top = "";
+    body.style.left = "";
+    body.style.right = "";
+    body.style.width = "";
+    window.scrollTo(0, savedScrollY);
+  }
+}
+
 async function open() {
   isOpen.value = true;
+  lockBodyScroll();
+  checkOllamaStatus();
   await loadContext();
 }
 
 function close() {
   isOpen.value = false;
+  unlockBodyScroll();
   resetTyping();
   activeChip.value = null;
+  resetChat();
 }
 
 function dismissBanner() {
@@ -336,6 +526,8 @@ function dismissBanner() {
     window.localStorage.setItem("ai-assistant-banner-dismissed", "1");
   }
 }
+
+// ── Typewriter ───────────────────────────────────────────────────────────────
 
 function resetTyping() {
   if (typeTimer) clearInterval(typeTimer);
@@ -396,6 +588,7 @@ function startListReveal(items: string[]) {
 
 function selectChip(chip: Chip) {
   resetTyping();
+  chatMode.value = false;
   activeChip.value = chip;
   if (chip.kind === "text" && chip.text) {
     startTypewriter(chip.text);
@@ -403,6 +596,8 @@ function selectChip(chip: Chip) {
     startListReveal(chip.items);
   }
 }
+
+// ── Data loading ─────────────────────────────────────────────────────────────
 
 async function loadAiContent() {
   if (aiContent.value) return;
@@ -445,20 +640,81 @@ async function loadContext() {
   }
 }
 
+// ── Chat ─────────────────────────────────────────────────────────────────────
+
+function resetChat() {
+  chatMode.value = false;
+  chatHistory.value = [];
+  chatInput.value = "";
+  chatLoading.value = false;
+  ollamaLive.value = null;
+}
+
+async function checkOllamaStatus() {
+  ollamaLive.value = null;
+  try {
+    const result = await $fetch<{ live: boolean }>("/api/ai-status");
+    ollamaLive.value = result.live;
+  } catch {
+    ollamaLive.value = false;
+  }
+}
+
+async function sendChat() {
+  const msg = chatInput.value.trim();
+  if (!msg || chatLoading.value) return;
+
+  chatHistory.value.push({ role: "user", content: msg });
+  chatInput.value = "";
+  chatLoading.value = true;
+  chatMode.value = true;
+  resetTyping();
+  activeChip.value = null;
+
+  await scrollToBottom();
+
+  try {
+    const result = await $fetch<{ reply: string }>("/api/chat", {
+      method: "POST",
+      body: {
+        message: msg,
+        history: chatHistory.value.slice(0, -1),
+        contextType: contextType.value,
+        contextTitle: contextTitle.value,
+        contextBody: getContextBody(),
+      },
+    });
+    chatHistory.value.push({ role: "assistant", content: result.reply });
+  } catch {
+    chatHistory.value.push({
+      role: "assistant",
+      content: "I couldn't reach the AI right now. Please try again shortly.",
+    });
+    ollamaLive.value = false;
+  } finally {
+    chatLoading.value = false;
+  }
+}
+
+// ── Keyboard ─────────────────────────────────────────────────────────────────
+
 function onKeydown(e: KeyboardEvent) {
   if (e.key === "Escape" && isOpen.value) close();
 }
 
-if (import.meta.client) {
-  if (window.localStorage.getItem("ai-assistant-banner-dismissed") === "1") {
-    showExperimentalBanner.value = false;
-  }
-  window.addEventListener("keydown", onKeydown);
-}
+// ── Watchers ─────────────────────────────────────────────────────────────────
 
-watch(isOpen, (open) => {
-  if (!import.meta.client) return;
-  document.documentElement.classList.toggle("ai-panel-open", open);
+watch(chatHistory, scrollToBottom, { deep: true });
+
+watch(chatLoading, async (val) => {
+  if (val && chatMode.value) await scrollToBottom();
+});
+
+watch(ollamaLive, async (val) => {
+  if (val === true) {
+    await nextTick();
+    chatInputEl.value?.focus();
+  }
 });
 
 watch(
@@ -470,17 +726,28 @@ watch(
     }
     if (isOpen.value) {
       resetTyping();
+      resetChat();
       activeChip.value = null;
+      checkOllamaStatus();
       loadContext();
     }
   },
 );
 
+// ── Lifecycle ────────────────────────────────────────────────────────────────
+
+if (import.meta.client) {
+  if (window.localStorage.getItem("ai-assistant-banner-dismissed") === "1") {
+    showExperimentalBanner.value = false;
+  }
+  window.addEventListener("keydown", onKeydown);
+}
+
 onBeforeUnmount(() => {
   resetTyping();
   if (import.meta.client) {
     window.removeEventListener("keydown", onKeydown);
-    document.documentElement.classList.remove("ai-panel-open");
+    unlockBodyScroll();
   }
 });
 </script>
@@ -489,6 +756,8 @@ onBeforeUnmount(() => {
 .ai-assistant {
   display: contents;
 }
+
+/* ── FAB ──────────────────────────────────────────────────────────────────── */
 
 .ai-fab {
   position: relative;
@@ -502,17 +771,21 @@ onBeforeUnmount(() => {
   );
   color: var(--text-on-primary);
   border: none;
-  box-shadow: 0 10px 25px -10px rgba(181, 69, 27, 0.6),
+  box-shadow:
+    0 10px 25px -10px rgba(181, 69, 27, 0.6),
     0 4px 10px -4px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .ai-fab:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 14px 30px -10px rgba(181, 69, 27, 0.7),
+  box-shadow:
+    0 14px 30px -10px rgba(181, 69, 27, 0.7),
     0 6px 14px -4px rgba(0, 0, 0, 0.18);
 }
 .ai-fab:focus-visible {
@@ -520,37 +793,40 @@ onBeforeUnmount(() => {
   outline-offset: 3px;
 }
 
+/* ── Backdrop ─────────────────────────────────────────────────────────────── */
+
 .ai-backdrop {
   position: fixed;
   inset: 0;
   z-index: 300;
   background: var(--overlay-default);
   backdrop-filter: blur(2px);
+  touch-action: none;
 }
 @media (min-width: 768px) {
-  /* Desktop: panel is part of layout, no backdrop */
   .ai-backdrop {
     display: none;
   }
 }
 
+/* ── Panel ────────────────────────────────────────────────────────────────── */
+
 .ai-panel {
   position: fixed;
   z-index: 310;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100dvh;
   background: var(--surface-elevated);
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  /* Mobile: full-screen */
-  inset: 0;
-  height: 100vh;
-  height: 100dvh;
-  border-radius: 0;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 @media (min-width: 768px) {
   .ai-panel {
-    /* Desktop: full-height right side panel */
     inset: auto;
     top: 0;
     right: 0;
@@ -561,12 +837,15 @@ onBeforeUnmount(() => {
   }
 }
 
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
 .ai-panel__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
 }
 .ai-panel__title {
   display: flex;
@@ -587,11 +866,14 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.15s ease;
 }
 .ai-panel__close:hover {
   background: var(--surface-muted);
   color: var(--text-primary);
 }
+
+/* ── Banner ───────────────────────────────────────────────────────────────── */
 
 .ai-banner {
   display: flex;
@@ -604,6 +886,7 @@ onBeforeUnmount(() => {
   border-radius: 0.5rem;
   font-size: 0.8125rem;
   color: var(--text-secondary);
+  flex-shrink: 0;
 }
 .ai-banner__icon {
   flex-shrink: 0;
@@ -631,8 +914,11 @@ onBeforeUnmount(() => {
   background: var(--color-primary-100);
 }
 
+/* ── Context ──────────────────────────────────────────────────────────────── */
+
 .ai-panel__context {
   padding: 1rem 1.25rem 0.5rem;
+  flex-shrink: 0;
 }
 .ai-panel__context-label {
   display: block;
@@ -651,6 +937,8 @@ onBeforeUnmount(() => {
   line-height: 1.3;
 }
 
+/* ── Output ───────────────────────────────────────────────────────────────── */
+
 .ai-panel__output {
   flex: 1 1 0;
   min-height: 0;
@@ -658,6 +946,7 @@ onBeforeUnmount(() => {
   overscroll-behavior: contain;
   padding: 1rem 1.25rem;
   cursor: text;
+  scroll-behavior: smooth;
 }
 .ai-panel__output--empty {
   cursor: default;
@@ -695,6 +984,41 @@ onBeforeUnmount(() => {
   color: var(--text-muted);
 }
 
+/* ── Chat messages ────────────────────────────────────────────────────────── */
+
+.ai-chat-msg {
+  display: flex;
+  margin-bottom: 0.75rem;
+}
+.ai-chat-msg--user {
+  justify-content: flex-end;
+}
+.ai-chat-msg--assistant {
+  justify-content: flex-start;
+}
+.ai-chat-msg__bubble {
+  display: inline-block;
+  max-width: 88%;
+  padding: 0.625rem 0.875rem;
+  border-radius: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.ai-chat-msg--user .ai-chat-msg__bubble {
+  background: var(--color-primary);
+  color: var(--text-on-primary);
+  border-bottom-right-radius: 0.25rem;
+}
+.ai-chat-msg--assistant .ai-chat-msg__bubble {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  border-bottom-left-radius: 0.25rem;
+}
+
+/* ── Caret ────────────────────────────────────────────────────────────────── */
+
 .ai-caret {
   display: inline-block;
   width: 2px;
@@ -709,6 +1033,8 @@ onBeforeUnmount(() => {
     opacity: 0;
   }
 }
+
+/* ── Typing dots ──────────────────────────────────────────────────────────── */
 
 .ai-typing-dots {
   display: inline-flex;
@@ -742,12 +1068,26 @@ onBeforeUnmount(() => {
   }
 }
 
+/* ── Spin ─────────────────────────────────────────────────────────────────── */
+
+.ai-spin {
+  animation: ai-spin 1s linear infinite;
+}
+@keyframes ai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Chips ────────────────────────────────────────────────────────────────── */
+
 .ai-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
   border-top: 1px solid var(--border-light);
+  flex-shrink: 0;
 }
 .ai-chip {
   font-size: 0.8125rem;
@@ -774,6 +1114,8 @@ onBeforeUnmount(() => {
   color: var(--text-on-primary);
 }
 
+/* ── Empty note ───────────────────────────────────────────────────────────── */
+
 .ai-empty-note {
   margin: 0;
   padding: 1rem 1.25rem;
@@ -781,7 +1123,10 @@ onBeforeUnmount(() => {
   color: var(--text-muted);
   text-align: center;
   border-top: 1px solid var(--border-light);
+  flex-shrink: 0;
 }
+
+/* ── Footer (status / coming soon) ───────────────────────────────────────── */
 
 .ai-panel__footer {
   display: flex;
@@ -793,12 +1138,83 @@ onBeforeUnmount(() => {
   color: var(--text-muted);
   background: var(--surface-muted);
   border-top: 1px solid var(--border-light);
+  flex-shrink: 0;
 }
 
-/* Transitions */
+/* ── Chat input ───────────────────────────────────────────────────────────── */
+
+.ai-chat-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-light);
+  background: var(--surface-elevated);
+  flex-shrink: 0;
+}
+.ai-chat-input__field {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5625rem 1rem;
+  border: 1px solid var(--border-default);
+  border-radius: 9999px;
+  background: var(--surface-muted);
+  /* 1rem (16px) prevents iOS auto-zoom on focus */
+  font-size: 1rem;
+  color: var(--text-primary);
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+.ai-chat-input__field::placeholder {
+  color: var(--text-muted);
+}
+.ai-chat-input__field:focus {
+  border-color: var(--color-primary-400);
+  background: var(--surface-elevated);
+}
+.ai-chat-input__field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.ai-chat-input__send {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: none;
+  background: var(--color-primary);
+  color: var(--text-on-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    opacity 0.15s ease;
+}
+.ai-chat-input__send:hover:not(:disabled) {
+  background: var(--color-primary-600);
+  transform: scale(1.06);
+}
+.ai-chat-input__send:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.ai-chat-input__send:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Transitions ──────────────────────────────────────────────────────────── */
+
 .fab-enter-active,
 .fab-leave-active {
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 .fab-enter-from,
 .fab-leave-to {
@@ -817,7 +1233,9 @@ onBeforeUnmount(() => {
 
 .panel-enter-active,
 .panel-leave-active {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
 }
 .panel-enter-from,
 .panel-leave-to {
@@ -833,17 +1251,12 @@ onBeforeUnmount(() => {
 </style>
 
 <style>
-/* Global layout hooks — applied to <html> when the AI panel is open */
+/* Global layout hooks */
 
-/* Mobile: panel is a full-screen overlay, lock body scroll */
-@media (max-width: 767px) {
-  html.ai-panel-open,
-  html.ai-panel-open body {
-    overflow: hidden;
-  }
-}
+/* Mobile scroll lock handled entirely via JS (position:fixed on body).
+   overflow:hidden alone does not reliably block iOS Safari scroll
+   when the virtual keyboard is open. */
 
-/* Desktop: panel is part of the layout — push page content left */
 @media (min-width: 768px) {
   html.ai-panel-open body {
     padding-right: 420px;

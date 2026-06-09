@@ -9,6 +9,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     buttondownApiKey: "",
     githubToken: "",
+    ollamaBaseUrl: "",
+    ollamaModel: "llama3.1",
   },
 
   modules: [
@@ -232,7 +234,8 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#b5451b" },
         {
           name: "viewport",
-          content: "width=device-width, initial-scale=1",
+          content:
+            "width=device-width, initial-scale=1, interactive-widget=resizes-content",
         },
         // Open Graph
         { property: "og:type", content: "website" },
