@@ -87,6 +87,17 @@
       ],
       "region": null,
       "subject": "What Your Timeline Won't Teach You"
+    },
+    {
+      "date": "2026-07-01",
+      "type": "woman",
+      "mainFeature": "kimpa-vita",
+      "alsoRead": [
+        "what-is-consent",
+        "ten-years-in-prison-for-a-pill"
+      ],
+      "region": "Central Africa",
+      "subject": "Meet Kimpa Vita"
     }
   ]
 }
