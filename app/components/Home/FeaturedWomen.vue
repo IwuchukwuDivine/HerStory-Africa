@@ -45,7 +45,12 @@
 
 <script setup lang="ts">
 const { data: women } = await useAsyncData("featured-women", () =>
-  queryCollection("women").order("dateAdded", "DESC").limit(5).all(),
+  queryCollection("women")
+    .where("image", "<>", "/women/placeholder.svg")
+    .where("image", "<>", "")
+    .order("dateAdded", "DESC")
+    .limit(5)
+    .all(),
 );
 </script>
 
