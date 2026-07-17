@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Graça Machel"
 slug: "graca-machel"
 country: "Mozambique"

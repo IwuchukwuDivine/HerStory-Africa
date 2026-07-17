@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Ladi Kwali"
 slug: "ladi-kwali"
 country: "Nigeria"

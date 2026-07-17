@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Joke Silva"
 slug: "joke-silva"
 country: "Nigeria"

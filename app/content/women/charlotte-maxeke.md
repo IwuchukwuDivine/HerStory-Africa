@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Charlotte Maxeke"
 slug: "charlotte-maxeke"
 country: "South Africa"

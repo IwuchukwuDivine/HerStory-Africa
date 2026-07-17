@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Olive Schreiner"
 slug: "olive-schreiner"
 country: "South Africa"

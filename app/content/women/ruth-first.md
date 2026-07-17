@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Ruth First"
 slug: "ruth-first"
 country: "South Africa"

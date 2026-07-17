@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Nana Konadu Agyeman Rawlings"
 slug: "nana-konadu-rawlings"
 country: "Ghana"

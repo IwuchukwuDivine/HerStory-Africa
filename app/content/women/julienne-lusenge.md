@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Julienne Lusenge"
 slug: "julienne-lusenge"
 country: "Democratic Republic of the Congo"

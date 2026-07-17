@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Funmilayo Ransome-Kuti"
 slug: "funmilayo-ransome-kuti"
 country: "Nigeria"

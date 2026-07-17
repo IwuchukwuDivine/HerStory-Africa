@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Assia Djebar"
 slug: "assia-djebar"
 country: "Algeria"

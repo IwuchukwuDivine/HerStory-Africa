@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Nawal El Saadawi"
 slug: "nawal-el-saadawi"
 country: "Egypt"

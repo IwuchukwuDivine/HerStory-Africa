@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Nadine Gordimer"
 slug: "nadine-gordimer"
 country: "South Africa"

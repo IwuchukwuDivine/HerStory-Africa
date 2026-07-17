@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Winnie Byanyima"
 slug: "winnie-byanyima"
 country: "Uganda"

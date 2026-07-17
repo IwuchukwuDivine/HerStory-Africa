@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Yaa Asantewaa"
 slug: "yaa-asantewaa"
 country: "Ghana"

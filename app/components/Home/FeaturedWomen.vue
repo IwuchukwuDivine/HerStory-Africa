@@ -1,7 +1,7 @@
 <template>
   <section class="section featured">
     <div class="section__header">
-      <h2 class="section__title">Women Who Changed History</h2>
+      <h2 class="section__title">Newest in the Archive</h2>
       <NuxtLink to="/women" class="section__cta">
         View all
         <LucideArrowRight :size="16" />
@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 const { data: women } = await useAsyncData("featured-women", () =>
-  queryCollection("women").where("featured", "=", true).limit(5).all(),
+  queryCollection("women").order("dateAdded", "DESC").limit(5).all(),
 );
 </script>
 

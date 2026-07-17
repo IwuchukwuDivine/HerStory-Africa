@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Kimpa Vita"
 slug: "kimpa-vita"
 country: "Democratic Republic of the Congo"

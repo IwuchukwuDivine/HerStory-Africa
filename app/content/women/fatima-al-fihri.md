@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Fatima al-Fihri"
 slug: "fatima-al-fihri"
 country: "Morocco"

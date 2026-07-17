@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Mekatilili wa Menza"
 slug: "mekatilili-wa-menza"
 country: "Kenya"

@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Sahle-Work Zewde"
 slug: "sahle-work-zewde"
 country: "Ethiopia"

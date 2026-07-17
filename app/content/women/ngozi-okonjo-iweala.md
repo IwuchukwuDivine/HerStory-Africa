@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Ngozi Okonjo-Iweala"
 slug: "ngozi-okonjo-iweala"
 country: "Nigeria"

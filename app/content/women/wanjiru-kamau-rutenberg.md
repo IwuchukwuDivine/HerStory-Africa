@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Wanjiru Kamau-Rutenberg"
 slug: "wanjiru-kamau-rutenberg"
 country: "Kenya"

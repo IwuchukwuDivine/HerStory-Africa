@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Ama Ata Aidoo"
 slug: "ama-ata-aidoo"
 country: "Ghana"

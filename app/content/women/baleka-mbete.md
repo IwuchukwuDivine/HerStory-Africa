@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Baleka Mbete"
 slug: "baleka-mbete"
 country: "South Africa"

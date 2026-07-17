@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Josina Machel"
 slug: "josina-machel"
 country: "Mozambique"

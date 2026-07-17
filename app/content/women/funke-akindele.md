@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Funke Akindele"
 slug: "funke-akindele"
 country: "Nigeria"

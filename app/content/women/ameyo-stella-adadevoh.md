@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Ameyo Stella Adadevoh"
 slug: "ameyo-stella-adadevoh"
 country: "Nigeria"

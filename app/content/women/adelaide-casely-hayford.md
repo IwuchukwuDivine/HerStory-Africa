@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Adelaide Casely-Hayford"
 slug: "adelaide-casely-hayford"
 country: "Sierra Leone"

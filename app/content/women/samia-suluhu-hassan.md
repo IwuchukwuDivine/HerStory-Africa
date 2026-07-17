@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Samia Suluhu Hassan"
 slug: "samia-suluhu-hassan"
 country: "Tanzania"

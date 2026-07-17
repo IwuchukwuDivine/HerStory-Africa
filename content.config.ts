@@ -26,6 +26,7 @@ export default defineContentConfig({
         featured: z.boolean(),
         summary: z.string(),
         funFact: z.string().optional(),
+        dateAdded: z.string(),
       }),
     }),
     articles: defineCollection({

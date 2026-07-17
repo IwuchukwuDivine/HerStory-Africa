@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Aisha Yesufu"
 slug: "aisha-yesufu"
 country: "Nigeria"

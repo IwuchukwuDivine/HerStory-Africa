@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Mariama Bâ"
 slug: "mariama-ba"
 country: "Senegal"

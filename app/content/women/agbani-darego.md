@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Agbani Darego"
 slug: "agbani-darego"
 country: "Nigeria"

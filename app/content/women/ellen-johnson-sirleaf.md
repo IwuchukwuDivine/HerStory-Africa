@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-08"
 name: "Ellen Johnson Sirleaf"
 slug: "ellen-johnson-sirleaf"
 country: "Liberia"

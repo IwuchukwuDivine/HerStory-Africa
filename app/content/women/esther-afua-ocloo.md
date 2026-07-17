@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-10"
 name: "Esther Afua Ocloo"
 slug: "esther-afua-ocloo"
 country: "Ghana"

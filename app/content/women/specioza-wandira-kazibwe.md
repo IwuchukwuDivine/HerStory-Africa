@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Specioza Wandira-Kazibwe"
 slug: "specioza-wandira-kazibwe"
 country: "Uganda"

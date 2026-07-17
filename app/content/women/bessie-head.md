@@ -1,4 +1,5 @@
 ---
+dateAdded: "2026-03-09"
 name: "Bessie Head"
 slug: "bessie-head"
 country: "Botswana"
