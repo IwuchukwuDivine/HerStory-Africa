@@ -198,11 +198,16 @@ useHead(() => ({
             "@type": "Person",
             name: woman.value.name,
             description: woman.value.summary,
-            image: ogImageUrl.value,
+            image: getAbsoluteUrl(woman.value.image),
             url: canonicalUrl.value,
+            mainEntityOfPage: canonicalUrl.value,
             birthDate: woman.value.born?.toString(),
             deathDate: woman.value.died?.toString(),
             nationality: woman.value.country,
+            knowsAbout: woman.value.causes,
+            ...(woman.value.sameAs?.length
+              ? { sameAs: woman.value.sameAs }
+              : {}),
           }),
         },
       ]
