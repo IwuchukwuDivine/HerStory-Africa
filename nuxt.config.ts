@@ -99,6 +99,7 @@ export default defineNuxtConfig({
         name: "Playfair Display",
         src: "~/assets/fonts/PlayfairDisplay-Regular.ttf",
         weight: 400,
+        global: true,
       },
       {
         name: "Playfair Display",
