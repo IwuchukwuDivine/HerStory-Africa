@@ -120,6 +120,17 @@
       ],
       "region": "East Africa",
       "subject": "Meet Waris Dirie"
+    },
+    {
+      "date": "2026-08-15",
+      "type": "article",
+      "mainFeature": "the-tignon-laws",
+      "alsoRead": [
+        "bibi-titi-mohammed",
+        "theresa-kachindamoto"
+      ],
+      "region": null,
+      "subject": "The Tignon Laws: When a Headwrap Became Resistance"
     }
   ]
 }
