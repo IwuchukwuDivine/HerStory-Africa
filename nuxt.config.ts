@@ -9,6 +9,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     buttondownApiKey: "",
     githubToken: "",
+    adminPassphrase: "",
+    sessionPassword: "",
+    resendApiKey: "",
+    ga4PropertyId: "",
+    ga4Credentials: "",
   },
 
   modules: [
@@ -31,7 +36,15 @@ export default defineNuxtConfig({
     prerender: {
       routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
       crawlLinks: true,
+      ignore: ["/admin", "/admin/**"],
     },
+  },
+
+  // ── Route Rules ─────────────────────────────────────────────────────
+  // Admin is SSR-only (rendered per request), never prerendered. noindex is
+  // enforced by the admin layout's <meta robots> tag + sitemap exclusion.
+  routeRules: {
+    "/admin/**": { prerender: false },
   },
   gtag: {
     id: "G-V5FFHGH864",
@@ -206,6 +219,7 @@ export default defineNuxtConfig({
 
   // ── Sitemap ─────────────────────────────────────────────────────────
   sitemap: {
+    exclude: ["/admin", "/admin/**"],
     defaults: {
       changefreq: "weekly",
       priority: 0.7,
