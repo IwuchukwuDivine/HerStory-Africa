@@ -14,6 +14,7 @@
     "ai:generate": "node --env-file=.env scripts/generate-ai-content.mjs"
   },
   "dependencies": {
+    "@google-analytics/data": "^7.0.0",
     "@nuxt/content": "^3.12.0",
     "@nuxt/eslint": "^1.15.2",
     "@nuxt/fonts": "^0.14.0",
