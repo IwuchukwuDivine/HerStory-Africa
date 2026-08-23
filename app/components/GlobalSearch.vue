@@ -8,6 +8,7 @@
         aria-modal="true"
         aria-label="Search HerStory Africa"
         @click.self="close"
+        @touchmove="onTouchMove"
       >
         <div class="search-modal">
           <div class="search-modal__input-row">
@@ -36,13 +37,25 @@
             </button>
           </div>
 
-          <div class="search-modal__results">
+          <div
+            class="search-modal__results"
+            :style="resultsStyle"
+            @touchstart.passive="dismissKeyboard"
+          >
             <div v-if="!query.trim()" class="search-modal__empty">
               Start typing to search across the archive.
             </div>
 
+            <div v-else-if="failed" class="search-modal__empty">
+              Search is unavailable right now. Please try again later.
+            </div>
+
+            <div v-else-if="!ready" class="search-modal__empty">
+              Preparing the archive…
+            </div>
+
             <div
-              v-else-if="results.length === 0"
+              v-else-if="flatResults.length === 0"
               class="search-modal__empty"
             >
               No matches for "{{ query }}".
@@ -77,6 +90,16 @@
                     >
                       {{ item.subtitle }}
                     </div>
+                    <div v-if="item.snippet" class="search-modal__item-snippet">
+                      <template v-for="(part, i) in item.snippet" :key="i">
+                        <span
+                          v-if="part.match"
+                          class="search-modal__item-snippet-match"
+                          >{{ part.text }}</span
+                        >
+                        <template v-else>{{ part.text }}</template>
+                      </template>
+                    </div>
                   </div>
                 </NuxtLink>
               </section>
@@ -95,6 +118,11 @@
 </template>
 
 <script setup lang="ts">
+import type {
+  ArchiveSearchResult,
+  ArchiveSearchResultType,
+} from "~/utils/types/search";
+
 const props = defineProps<{ open: boolean }>();
 const emit = defineEmits<{ close: [] }>();
 
@@ -102,111 +130,44 @@ const query = ref("");
 const activeIndex = ref(0);
 const inputRef = ref<HTMLInputElement | null>(null);
 
-type ItemType = "woman" | "article" | "opportunity";
-type Item = {
-  type: ItemType;
-  slug: string;
-  title: string;
-  subtitle?: string;
-  to: string;
-  haystack: string;
-};
+const { ready, failed, ensureLoaded, search } = useArchiveSearch();
 
-const { data: women } = useLazyAsyncData(
-  "global-search-women",
-  () =>
-    queryCollection("women")
-      .select("name", "slug", "country", "region", "era", "summary", "causes")
-      .all(),
-  { default: () => [] },
-);
-
-const { data: articles } = useLazyAsyncData(
-  "global-search-articles",
-  () =>
-    queryCollection("articles")
-      .select("title", "slug", "description", "category")
-      .all(),
-  { default: () => [] },
-);
-
-const { data: opportunities } = useLazyAsyncData(
-  "global-search-opportunities",
-  () =>
-    queryCollection("opportunities")
-      .select("title", "slug", "description", "organization")
-      .all(),
-  { default: () => [] },
-);
-
-const items = computed<Item[]>(() => {
-  const list: Item[] = [];
-  for (const w of women.value ?? []) {
-    list.push({
-      type: "woman",
-      slug: w.slug,
-      title: w.name,
-      subtitle: [w.country, w.era && `${w.era} era`].filter(Boolean).join(" · "),
-      to: `/women/${w.slug}`,
-      haystack:
-        `${w.name} ${w.country} ${w.region} ${w.era} ${w.summary} ${(w.causes ?? []).join(" ")}`.toLowerCase(),
-    });
-  }
-  for (const a of articles.value ?? []) {
-    list.push({
-      type: "article",
-      slug: a.slug,
-      title: a.title,
-      subtitle: a.category,
-      to: `/articles/${a.slug}`,
-      haystack:
-        `${a.title} ${a.description ?? ""} ${a.category ?? ""}`.toLowerCase(),
-    });
-  }
-  for (const o of opportunities.value ?? []) {
-    list.push({
-      type: "opportunity",
-      slug: o.slug,
-      title: o.title,
-      subtitle: o.organization,
-      to: `/opportunities/${o.slug}`,
-      haystack:
-        `${o.title} ${o.description ?? ""} ${o.organization ?? ""}`.toLowerCase(),
-    });
-  }
-  return list;
-});
-
-const results = computed(() => {
-  const q = query.value.trim().toLowerCase();
-  if (!q) return [];
-  const terms = q.split(/\s+/);
-  return items.value
-    .filter((item) => terms.every((t) => item.haystack.includes(t)))
-    .slice(0, 24);
-});
+type IndexedResult = ArchiveSearchResult & { index: number };
 
 const groupedResults = computed(() => {
-  const flat = results.value.map((r, i) => ({ ...r, index: i }));
-  const groups: { type: ItemType; label: string; items: typeof flat }[] = [
+  const q = query.value.trim();
+  if (!q) return [];
+  const groups: {
+    type: ArchiveSearchResultType;
+    label: string;
+    items: IndexedResult[];
+  }[] = [
     { type: "woman", label: "Women", items: [] },
     { type: "article", label: "Articles", items: [] },
     { type: "opportunity", label: "Opportunities", items: [] },
   ];
-  for (const item of flat) {
-    groups.find((g) => g.type === item.type)?.items.push(item);
+  for (const result of search(q)) {
+    groups
+      .find((g) => g.type === result.type)
+      ?.items.push({ ...result, index: 0 });
+  }
+  let index = 0;
+  for (const group of groups) {
+    for (const item of group.items) item.index = index++;
   }
   return groups.filter((g) => g.items.length > 0);
 });
 
-function iconFor(type: ItemType) {
+const flatResults = computed(() => groupedResults.value.flatMap((g) => g.items));
+
+function iconFor(type: ArchiveSearchResultType) {
   if (type === "woman") return resolveComponent("LucideUser");
   if (type === "article") return resolveComponent("LucideBookOpen");
   return resolveComponent("LucideRocket");
 }
 
 function move(delta: number) {
-  const max = results.value.length - 1;
+  const max = flatResults.value.length - 1;
   if (max < 0) return;
   let next = activeIndex.value + delta;
   if (next < 0) next = max;
@@ -215,7 +176,7 @@ function move(delta: number) {
 }
 
 function selectActive() {
-  const item = results.value[activeIndex.value];
+  const item = flatResults.value[activeIndex.value];
   if (!item) return;
   navigateTo(item.to);
   close();
@@ -233,23 +194,112 @@ watch(query, () => {
   activeIndex.value = 0;
 });
 
+// iOS Safari ignores `overflow: hidden` on body for touch scrolling, so the
+// page behind the modal keeps moving. Pinning body with position: fixed is the
+// only reliable lock; the saved scroll offset is restored on unlock.
+let scrollLockY = 0;
+
+function lockBodyScroll() {
+  scrollLockY = window.scrollY;
+  const { style } = document.body;
+  style.position = "fixed";
+  style.top = `-${scrollLockY}px`;
+  style.left = "0";
+  style.right = "0";
+  style.width = "100%";
+  style.overflow = "hidden";
+}
+
+function unlockBodyScroll() {
+  const { style } = document.body;
+  style.position = "";
+  style.top = "";
+  style.left = "";
+  style.right = "";
+  style.width = "";
+  style.overflow = "";
+  window.scrollTo(0, scrollLockY);
+}
+
+// The modal itself is a stable 100% of the viewport and never resizes with
+// the keyboard. The keyboard is handled purely as extra bottom padding on the
+// results list, so every result stays reachable above it.
+const keyboardInset = ref(0);
+
+const resultsStyle = computed(() =>
+  keyboardInset.value > 0
+    ? { paddingBottom: `calc(0.5rem + ${keyboardInset.value}px)` }
+    : undefined,
+);
+
+function syncKeyboardInset() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  keyboardInset.value = Math.max(
+    0,
+    Math.round(window.innerHeight - vv.height - vv.offsetTop),
+  );
+}
+
+function attachViewportListeners() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  syncKeyboardInset();
+  vv.addEventListener("resize", syncKeyboardInset);
+  vv.addEventListener("scroll", syncKeyboardInset);
+}
+
+function detachViewportListeners() {
+  const vv = window.visualViewport;
+  if (vv) {
+    vv.removeEventListener("resize", syncKeyboardInset);
+    vv.removeEventListener("scroll", syncKeyboardInset);
+  }
+  keyboardInset.value = 0;
+}
+
+// Dragging with the iOS keyboard open makes the browser pan the visual
+// viewport (an uncancelable browser-chrome behavior), which drags the pinned
+// input row off-screen. Standard mobile search UX: dismiss the keyboard the
+// moment the user touches the results, so all scrolling happens with the
+// keyboard closed and the input row stays fixed.
+function dismissKeyboard() {
+  const input = inputRef.value;
+  if (input && document.activeElement === input) input.blur();
+}
+
+// Block touch drags outside the results pane so nothing reaches the page
+// behind the modal; real scrolls inside the results pane pass through.
+function onTouchMove(event: TouchEvent) {
+  const target = event.target instanceof Element ? event.target : null;
+  const results = target?.closest(".search-modal__results");
+  if (results && results.scrollHeight > results.clientHeight) return;
+  event.preventDefault();
+}
+
 watch(
   () => props.open,
   async (isOpen) => {
     if (isOpen) {
+      ensureLoaded();
       query.value = "";
       activeIndex.value = 0;
+      lockBodyScroll();
+      attachViewportListeners();
       await nextTick();
       inputRef.value?.focus();
-      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      detachViewportListeners();
+      unlockBodyScroll();
     }
   },
 );
 
 onBeforeUnmount(() => {
-  document.body.style.overflow = "";
+  if (props.open) {
+    detachViewportListeners();
+    unlockBodyScroll();
+  }
 });
 </script>
 
@@ -365,7 +415,12 @@ onBeforeUnmount(() => {
 
 .search-modal__results {
   flex: 1;
+  /* Without min-height: 0, Safari sizes this flex child to its content and
+     overflow never engages, so touch scrolls fall through to the page. */
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
   padding: 0.5rem;
 }
 
@@ -427,6 +482,21 @@ onBeforeUnmount(() => {
   text-overflow: ellipsis;
 }
 
+.search-modal__item-snippet {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.search-modal__item-snippet-match {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 .search-modal__footer {
   display: flex;
   gap: 1rem;
@@ -445,11 +515,15 @@ onBeforeUnmount(() => {
 @media (max-width: 640px) {
   .search-overlay {
     padding: 0;
+    overscroll-behavior: contain;
   }
   .search-modal {
+    /* A stable 100% of the fixed overlay — never resized by the keyboard,
+       so the flex layout and scroll geometry can never break. The keyboard
+       is compensated with bottom padding on the results list instead. */
     width: 100%;
-    height: 100dvh;
-    max-height: 100dvh;
+    height: 100%;
+    max-height: 100%;
     border-radius: 0;
     border: none;
   }
@@ -467,8 +541,12 @@ onBeforeUnmount(() => {
   .search-modal__close-icon {
     display: block;
   }
+  .search-modal__results {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
+  }
+  /* Desktop keyboard hints are meaningless on touch devices. */
   .search-modal__footer {
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.625rem);
+    display: none;
   }
 }
 </style>
