@@ -16,6 +16,8 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Genevieve Nnaji directed Lionheart, making it the first-ever Netflix original film from Nigeria."
 summary: "Nigerian actress and filmmaker who became the face of Nollywood for a generation and then directed Lion Heart, the first Netflix original film from Nigeria. She proved that African stories told by Africans can reach the entire world."
+movements:
+  - "Nollywood"
 ---
 
 ## Biography

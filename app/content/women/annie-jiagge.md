@@ -18,6 +18,16 @@ imageCredit: "DwAseye / CC0 1.0 via Wikimedia Commons"
 featured: false
 funFact: "She reportedly drafted the core text of the 1967 UN Declaration on the Elimination of Discrimination Against Women in a single overnight session, and today Geneva has a street, Chemin Annie-Jiagge, named in her honour."
 summary: "Ghanaian jurist who became the first woman judge in the Commonwealth of Nations and the principal drafter of the 1967 UN declaration that grew into CEDAW, the world's bill of rights for women."
+organizations:
+  - "UN Commission on the Status of Women"
+  - "World Council of Churches"
+  - "Ghana National Council on Women and Development"
+  - "Women's World Banking"
+  - "Council of State"
+movements:
+  - "Ghanaian independence movement"
+  - "Anti-apartheid movement"
+  - "International women's rights movement"
 ---
 
 ## Biography

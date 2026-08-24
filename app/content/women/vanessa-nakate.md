@@ -16,6 +16,13 @@ imageCredit: "Paul Wamala Ssegujja / Wikimedia Commons / CC BY-SA 4.0"
 featured: true
 funFact: "When a news agency cropped her, the only Black activist, out of a photo in 2020, the backlash turned 'Say her name: Vanessa Nakate' into a global rallying cry."
 summary: "Ugandan climate justice activist who became the leading voice for Africa and the Global South after being literally cropped out of a photo with white activists. She turned that act of erasure into a platform heard at the UN, at Davos and at every major climate summit."
+organizations:
+  - "Rise Up Movement"
+  - "Green Schools Project"
+  - "UNICEF"
+movements:
+  - "Climate justice movement"
+  - "Youth climate movement"
 ---
 
 ## Biography

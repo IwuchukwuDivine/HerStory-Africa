@@ -16,6 +16,8 @@ imageCredit: "Wikipedia / Fair use"
 featured: false
 funFact: "Aline Sitoé Diatta was only 24 when she died in exile in Timbuktu after being deported for leading resistance against French colonial rice requisitions during World War II."
 summary: "Diola spiritual leader in Casamance, Senegal, who led resistance against French colonial rice requisitions during World War II. Arrested and deported to Timbuktu, where she died at 24."
+movements:
+  - "Anti-colonial resistance in Senegal"
 ---
 
 ## Biography

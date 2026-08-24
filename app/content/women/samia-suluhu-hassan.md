@@ -17,6 +17,11 @@ imageCredit: "Wikimedia Commons / CC BY 2.0"
 featured: false
 funFact: "Samia Suluhu Hassan became Tanzania's first female president in March 2021 and immediately shifted the country's COVID response, reopened diplomatic relations, and liberalised the media."
 summary: "Tanzania's first female president, sworn in March 2021 after the death of John Magufuli. She shifted the country's COVID response, reopened diplomatic relations, and liberalised the media."
+movements:
+  - "Women's political leadership"
+relatedWomen:
+  - "carmen-pereira"
+  - "elisabeth-domitien"
 ---
 
 ## Biography

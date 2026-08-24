@@ -1,9 +1,9 @@
 <template>
   <div class="ai-assistant">
-    <!-- Floating action button (only on woman / article detail pages) -->
+    <!-- Floating action button (site-wide; context adapts per page) -->
     <Transition name="fab">
       <button
-        v-if="isRelevantRoute && !isOpen"
+        v-if="!isOpen"
         class="ai-fab"
         aria-label="Open story assistant"
         @click="open"
@@ -51,7 +51,7 @@
             <LucideFlaskConical :size="16" />
           </div>
           <p class="ai-banner__text">
-            <strong>Experimental.</strong> Quick facts are pre-written. Free-form questions are coming soon.
+            <strong>Experimental.</strong> Quick facts are pre-written. Answers to questions are AI-generated from the archive and may be imperfect.
           </p>
           <button
             class="ai-banner__dismiss"
@@ -70,11 +70,12 @@
         </div>
 
         <div
+          ref="outputEl"
           class="ai-panel__output"
-          :class="{ 'ai-panel__output--empty': !activeChip }"
+          :class="{ 'ai-panel__output--empty': !activeChip && !exchanges.length }"
           @click="completeTyping"
         >
-          <template v-if="activeChip">
+          <template v-if="outputMode === 'chip' && activeChip">
             <h3 class="ai-panel__output-heading">
               {{ activeChip.label }}
             </h3>
@@ -111,12 +112,67 @@
               </ul>
             </div>
           </template>
+          <div
+            v-else-if="outputMode === 'qa' && exchanges.length"
+            class="ai-qa"
+          >
+            <div
+              v-for="(exchange, i) in exchanges"
+              :key="i"
+              class="ai-qa__exchange"
+            >
+              <p class="ai-qa__question">
+                {{ exchange.question }}
+              </p>
+              <div
+                v-if="exchange.status === 'loading'"
+                class="ai-typing-dots"
+                aria-label="Thinking"
+              >
+                <span /><span /><span />
+              </div>
+              <p
+                v-else-if="exchange.status === 'error'"
+                class="ai-qa__error"
+              >
+                {{ exchange.error }}
+              </p>
+              <template v-else>
+                <p class="ai-panel__text">
+                  {{ answerTextFor(exchange, i) }}<span
+                    v-if="isTyping && i === exchanges.length - 1"
+                    class="ai-caret"
+                  />
+                </p>
+                <div
+                  v-if="exchange.citations.length && !(isTyping && i === exchanges.length - 1)"
+                  class="ai-qa__citations"
+                >
+                  <span class="ai-qa__citations-label">Sources</span>
+                  <NuxtLink
+                    v-for="citation in exchange.citations"
+                    :key="citation.path"
+                    :to="citation.path"
+                    class="ai-qa__citation"
+                  >
+                    {{ citation.title }}
+                  </NuxtLink>
+                </div>
+              </template>
+            </div>
+          </div>
           <p
             v-else
             class="ai-panel__hint"
           >
-            Tap a suggestion below to learn more about
-            <strong>{{ contextShort }}</strong>.
+            <template v-if="chips.length">
+              Tap a suggestion below or ask your own question about
+              <strong>{{ contextShort }}</strong>.
+            </template>
+            <template v-else>
+              Ask anything about <strong>{{ contextShort }}</strong> using the
+              box below.
+            </template>
           </p>
         </div>
 
@@ -139,21 +195,40 @@
           v-else
           class="ai-empty-note"
         >
-          Open this on a woman's profile or article page to explore with AI.
+          Answers are drawn from the archive's own profiles and articles.
         </p>
 
-        <footer class="ai-panel__footer">
-          <LucideMessageCircle :size="14" />
-          <span>Free-form questions coming soon</span>
-        </footer>
+        <form
+          class="ai-ask"
+          @submit.prevent="ask"
+        >
+          <input
+            v-model="questionInput"
+            class="ai-ask__input"
+            type="text"
+            maxlength="300"
+            :placeholder="`Ask about ${contextShort}...`"
+            :disabled="asking"
+            aria-label="Ask a question about the archive"
+          >
+          <button
+            class="ai-ask__send"
+            type="submit"
+            :disabled="asking || questionInput.trim().length < 3"
+            aria-label="Send question"
+          >
+            <LucideSend :size="16" />
+          </button>
+        </form>
       </aside>
     </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import { FetchError } from "ofetch";
 
 type Chip = {
   id: string;
@@ -161,6 +236,16 @@ type Chip = {
   kind: "text" | "list";
   text?: string;
   items?: string[];
+};
+
+type Citation = { title: string; path: string };
+
+type Exchange = {
+  question: string;
+  answer: string;
+  citations: Citation[];
+  status: "loading" | "done" | "error";
+  error?: string;
 };
 
 type WomanDoc = {
@@ -205,13 +290,11 @@ const contextDoc = ref<WomanDoc | ArticleDoc | null>(null);
 const contextType = ref<"woman" | "article" | "general">("general");
 const aiContent = ref<AiContent | null>(null);
 
-const isRelevantRoute = computed(() => {
-  const path = route.path;
-  return (
-    (path.startsWith("/women/") && path.length > "/women/".length) ||
-    (path.startsWith("/articles/") && path.length > "/articles/".length)
-  );
-});
+const outputMode = ref<"chip" | "qa">("chip");
+const exchanges = ref<Exchange[]>([]);
+const questionInput = ref("");
+const asking = ref(false);
+const outputEl = ref<HTMLElement | null>(null);
 
 let typeTimer: ReturnType<typeof setInterval> | null = null;
 let listTimer: ReturnType<typeof setInterval> | null = null;
@@ -396,11 +479,71 @@ function startListReveal(items: string[]) {
 
 function selectChip(chip: Chip) {
   resetTyping();
+  outputMode.value = "chip";
   activeChip.value = chip;
   if (chip.kind === "text" && chip.text) {
     startTypewriter(chip.text);
   } else if (chip.kind === "list" && chip.items) {
     startListReveal(chip.items);
+  }
+}
+
+function answerTextFor(exchange: Exchange, index: number): string {
+  if (isTyping.value && index === exchanges.value.length - 1) {
+    return typedText.value;
+  }
+  return exchange.answer;
+}
+
+function scrollOutput() {
+  nextTick(() => {
+    outputEl.value?.scrollTo({ top: outputEl.value.scrollHeight });
+  });
+}
+
+async function ask() {
+  const question = questionInput.value.trim();
+  if (question.length < 3 || asking.value) return;
+
+  resetTyping();
+  activeChip.value = null;
+  outputMode.value = "qa";
+  questionInput.value = "";
+  asking.value = true;
+
+  const exchange: Exchange = {
+    question,
+    answer: "",
+    citations: [],
+    status: "loading",
+  };
+  exchanges.value.push(exchange);
+  scrollOutput();
+
+  const slug = (contextDoc.value as { slug?: string } | null)?.slug;
+  const context =
+    contextType.value !== "general" && slug
+      ? { type: contextType.value, slug }
+      : undefined;
+
+  try {
+    const res = await $fetch<{ answer: string; citations: Citation[] }>(
+      "/api/ask",
+      { method: "POST", body: { question, context } },
+    );
+    exchange.answer = res.answer;
+    exchange.citations = res.citations ?? [];
+    exchange.status = "done";
+    startTypewriter(res.answer);
+  } catch (err) {
+    exchange.status = "error";
+    exchange.error =
+      err instanceof FetchError && err.statusCode === 429
+        ? "You're asking quickly. Give it a minute and try again."
+        : "Something went wrong. Please try again.";
+  } finally {
+    asking.value = false;
+    scrollOutput();
   }
 }
 
@@ -464,17 +607,20 @@ watch(isOpen, (open) => {
 watch(
   () => route.path,
   () => {
-    if (!isRelevantRoute.value) {
-      if (isOpen.value) close();
-      return;
-    }
     if (isOpen.value) {
       resetTyping();
       activeChip.value = null;
       loadContext();
     }
+    exchanges.value = [];
+    outputMode.value = "chip";
   },
 );
+
+// Keep the newest answer in view while it types out.
+watch(typedText, () => {
+  if (outputMode.value === "qa") scrollOutput();
+});
 
 onBeforeUnmount(() => {
   resetTyping();
@@ -783,16 +929,104 @@ onBeforeUnmount(() => {
   border-top: 1px solid var(--border-light);
 }
 
-.ai-panel__footer {
+.ai-qa {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.ai-qa__question {
+  margin: 0 0 0.5rem;
+  align-self: flex-end;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-primary);
+}
+.ai-qa__error {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.ai-qa__citations {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.625rem;
+}
+.ai-qa__citations-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.ai-qa__citation {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.ai-qa__citation:hover {
+  border-color: var(--color-primary-400);
+  background: var(--color-primary-50);
+  color: var(--color-primary);
+}
+
+.ai-ask {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--surface-muted);
+  border-top: 1px solid var(--border-light);
+}
+.ai-ask__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.ai-ask__input:focus {
+  outline: none;
+  border-color: var(--color-primary-400);
+}
+.ai-ask__input:disabled {
+  opacity: 0.6;
+}
+.ai-ask__input::placeholder {
+  color: var(--text-muted);
+}
+.ai-ask__send {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border: none;
+  background: var(--color-primary);
+  color: var(--text-on-primary);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.375rem;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  background: var(--surface-muted);
-  border-top: 1px solid var(--border-light);
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.ai-ask__send:hover:not(:disabled) {
+  background: var(--color-primary-600);
+}
+.ai-ask__send:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 
 /* Transitions */

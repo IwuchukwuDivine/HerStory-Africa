@@ -17,6 +17,13 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "A niece of legendary activist Funmilayo Ransome-Kuti and cousin of Fela Kuti, Yemisi Ransome-Kuti co-founded the Nigerian Network of Non-Governmental Organisations, carrying on her family's legacy of advocacy."
 summary: "Nigerian physician and community health advocate; niece of Funmilayo Ransome-Kuti and cousin of Fela Kuti. Co-founder of the Nigerian Network of Non-Governmental Organisations; advocate for women's and community health."
+organizations:
+  - "Nigerian Network of Non-Governmental Organisations"
+movements:
+  - "Women's rights movement"
+  - "Civil society movement"
+relatedWomen:
+  - "funmilayo-ransome-kuti"
 ---
 
 ## Biography

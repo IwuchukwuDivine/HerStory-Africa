@@ -16,6 +16,13 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Joyce Banda rose from humble beginnings to become not only Malawi's first female president but only the second woman to serve as head of state in all of African history."
 summary: "Malawian politician who became the first female president of Malawi and only the second female head of state in African history. She rose from humble beginnings to lead a country through a genuine economic crisis, and never stopped fighting for women and girls."
+organizations:
+  - "National Association of Business Women"
+movements:
+  - "Women's empowerment movement"
+relatedWomen:
+  - "elisabeth-domitien"
+  - "ellen-johnson-sirleaf"
 ---
 
 ## Biography

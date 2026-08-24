@@ -18,6 +18,13 @@ imageCredit: "Evaline Mudondo / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "In 2003, after publicly defending gay and lesbian rights, a Ugandan newspaper poll named her 'Worst Woman of the Year'. She had the title made into a button and wore it, in her words, 'with a lot of pride'."
 summary: "Uganda's trailblazing feminist legal scholar: the first female Dean of Law at Makerere University, whose books on gender, sexuality and decolonisation have become core texts across Africa and beyond."
+organizations:
+  - "Makerere University"
+  - "Law, Gender and Sexuality Research Centre"
+  - "American Academy of Arts and Sciences"
+movements:
+  - "African feminism"
+  - "LGBT rights movement"
 ---
 
 ## Biography

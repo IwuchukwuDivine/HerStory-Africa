@@ -16,6 +16,14 @@ imageCredit: "Photo: HankBate123 / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "As a schoolgirl she invented a nonsense word, batonga, to shut down bullies. It meant roughly 'get off my back, I can be whoever I want to be', and she later named her girls' education foundation after it."
 summary: "Beninese singer who refused to perform propaganda for a dictatorship, fled to Paris in 1983, and became a five-time Grammy winner, UNICEF ambassador, and the first Black African artist honored with a star on the Hollywood Walk of Fame."
+organizations:
+  - "Batonga Foundation"
+  - "UNICEF"
+movements:
+  - "Girls' education movement"
+relatedWomen:
+  - "miriam-makeba"
+  - "yvonne-chaka-chaka"
 ---
 
 ## Biography

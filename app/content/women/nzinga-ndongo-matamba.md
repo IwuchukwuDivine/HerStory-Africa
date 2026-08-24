@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Fought Portuguese colonisation for 40 years while building alliances across Central Africa"
 summary: "Queen of Ndongo and Matamba who resisted Portuguese colonisation and the slave trade for four decades through diplomacy, alliance-building, and military leadership."
+movements:
+  - "Resistance to Portuguese colonization"
 ---
 
 ## Biography

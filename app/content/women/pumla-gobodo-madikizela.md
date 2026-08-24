@@ -17,6 +17,10 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Pumla Gobodo-Madikizela served on South Africa's Truth and Reconciliation Commission and wrote the acclaimed A Human Being Died That Night on trauma and forgiveness."
 summary: "South African psychologist and author. Served on the Truth and Reconciliation Commission; wrote A Human Being Died That Night on trauma and forgiveness; research professor."
+organizations:
+  - "Truth and Reconciliation Commission"
+movements:
+  - "Reconciliation movement"
 ---
 
 ## Biography

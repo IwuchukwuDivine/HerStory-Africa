@@ -18,6 +18,15 @@ imageCredit: "Placeholder image; no freely licensed photograph has been located"
 featured: false
 funFact: "In 1934 she wrote a serialised satire answering George Bernard Shaw's 'The Adventures of the Black Girl in Her Search for God', cheekily retitled '...in her Search for Mr Shaw': one of the first African literary clapbacks at a European Nobel laureate, exhibited at the British Library eight decades later."
 summary: "Ghanaian journalist and satirist who, in 1954, became the first woman elected to any African legislative assembly, after two decades of skewering colonial power in the press under a rotation of witty pen names."
+organizations:
+  - "Convention People's Party"
+  - "Accra Evening News"
+movements:
+  - "Ghanaian independence movement"
+  - "African feminist movement"
+relatedWomen:
+  - "ama-ata-aidoo"
+  - "efua-sutherland"
 ---
 
 ## Biography

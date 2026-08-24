@@ -17,6 +17,11 @@ imageCredit: "Wikimedia Commons / Desert Flower Foundation / CC BY-SA 4.0"
 featured: false
 funFact: "Walked across the Somali desert alone at age 13 to escape an arranged marriage"
 summary: "Somali-born supermodel turned United Nations Special Ambassador who transformed her personal trauma of FGM into a global campaign. Her memoir Desert Flower sold 12 million copies and became an internationally released film. Founder of the Desert Flower Foundation, which has reached millions of women and girls worldwide in the fight to end female genital mutilation."
+organizations:
+  - "United Nations"
+  - "Desert Flower Foundation"
+movements:
+  - "Anti-Female Genital Mutilation Movement"
 ---
 
 ## Biography

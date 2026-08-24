@@ -17,6 +17,14 @@ imageCredit: "Wikimedia Commons / CC BY-SA 3.0"
 featured: false
 funFact: "Spent over 60 years in the anti-apartheid struggle while raising her own and others' children"
 summary: "South African anti-apartheid activist and nurse who kept the resistance alive while her husband Walter Sisulu was imprisoned for 26 years alongside Nelson Mandela. She was banned, arrested, and surveilled for decades, and never stopped."
+organizations:
+  - "United Democratic Front"
+  - "African National Congress"
+  - "ANC Women's League"
+movements:
+  - "Anti-apartheid movement"
+relatedWomen:
+  - "lilian-ngoyi"
 ---
 
 ## Biography

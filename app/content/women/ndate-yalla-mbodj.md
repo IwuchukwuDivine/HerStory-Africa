@@ -17,6 +17,8 @@ imageCredit: "Lithograph after Abbé Boilat / Wikimedia Commons / Public Domain"
 featured: true
 funFact: "She left an actual paper trail of defiance: a surviving 1847 letter in which she told the French governor plainly that the kingdom of Waalo was not his to take."
 summary: "The last great queen of Waalo in northern Senegal, who governed, taxed and went to war against French expansion in the 1850s. Defeated but never forgotten, she is one of Senegal's enduring symbols of resistance and female sovereignty."
+movements:
+  - "French colonial conquest of Senegal resistance"
 ---
 
 ## Biography

@@ -17,6 +17,15 @@ imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
 funFact: "The only woman in history to have been First Lady of two different nations — Mozambique and South Africa"
 summary: "Mozambique's first Minister of Education, international advocate for children and women, and the only woman to have been First Lady of two nations (Mozambique and South Africa)."
+organizations:
+  - "Mozambique Liberation Front"
+  - "United Nations"
+  - "African Union"
+  - "The Elders"
+movements:
+  - "Mozambican independence movement"
+  - "Children's rights movement"
+  - "Women's leadership movement"
 ---
 
 ## Biography

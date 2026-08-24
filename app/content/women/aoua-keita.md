@@ -17,6 +17,11 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Aoua Keita was a trained midwife who became the first woman ever elected to Mali's National Assembly."
 summary: "Malian midwife, politician, and activist who became the first woman elected to Mali's National Assembly. Campaigned for women's suffrage, healthcare, and independence from France."
+organizations:
+  - "Union Soudanaise-RDA"
+movements:
+  - "Malian independence movement"
+  - "Women's suffrage movement"
 ---
 
 ## Biography

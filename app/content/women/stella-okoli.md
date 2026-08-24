@@ -17,6 +17,13 @@ imageCredit: "Image needed"
 featured: false
 funFact: "Stella Okoli founded Emzor Pharmaceutical Industries, building it into one of Nigeria's leading pharmaceutical manufacturing companies and pioneering local drug production."
 summary: "Nigerian pharmacist and entrepreneur; founder of Emzor Pharmaceutical Industries. Pioneer in Nigerian pharmaceutical manufacturing; advocate for quality healthcare and women in business."
+organizations:
+  - "Emzor Pharmaceutical Industries"
+movements:
+  - "Local pharmaceutical manufacturing movement"
+  - "Women's entrepreneurship movement"
+relatedWomen:
+  - "onyeka-onwenu"
 ---
 
 ## Biography
