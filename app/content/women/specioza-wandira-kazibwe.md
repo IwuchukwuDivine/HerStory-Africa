@@ -16,6 +16,11 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "In 1994, Specioza Wandira-Kazibwe became Africa's first female vice president — a doctor who championed public health from one of the continent's highest political offices for a decade."
 summary: "Ugandan doctor and politician who became Africa's first female vice president when she was elected to that office in 1994. She served for ten years, championing public health and women's rights from one of the continent's highest political positions."
+organizations:
+  - "Makerere University Medical School"
+movements:
+  - "Women's rights movement"
+  - "HIV/AIDS advocacy"
 ---
 
 ## Biography

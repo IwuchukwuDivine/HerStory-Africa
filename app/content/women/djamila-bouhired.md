@@ -17,6 +17,11 @@ imageCredit: "Djamila Bouhired (far right) with fellow FLN fighters / Wikimedia 
 featured: true
 funFact: "She later married Jacques Vergès, the very lawyer whose daring defence had saved her from the guillotine."
 summary: "Algerian resistance fighter of the Battle of Algiers whose torture and death sentence became a global scandal that helped expose the brutality of French colonial rule. She walked free as Algeria won independence and remains one of the revolution's most enduring faces."
+organizations:
+  - "National Liberation Front"
+movements:
+  - "Algerian War of Independence"
+  - "Anti-colonial struggle"
 ---
 
 ## Biography

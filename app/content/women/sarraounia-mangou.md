@@ -17,6 +17,8 @@ imageCredit: "No free-use portrait available"
 featured: false
 funFact: "'Sarraounia' was not a name but a title, a hereditary word among the animist Azna for a female ruler who held both political and priestly power."
 summary: "Azna warrior-queen and priestess of Lougou who, in 1899, stood against one of the most violent French military columns ever sent into Africa and refused to surrender her people. Her defiance became a Nigerien legend and an award-winning film."
+movements:
+  - "Anti-colonial resistance"
 ---
 
 ## Biography

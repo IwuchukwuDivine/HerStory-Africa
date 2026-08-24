@@ -18,6 +18,14 @@ imageCredit: "Rune Stoltz Bertinussen / Norwegian Ministry of Justice / CC BY 2.
 featured: false
 funFact: "She was effectively Ban Ki-moon's first major appointment, announced as his deputy within his first week as UN Secretary-General, and only two people in history had ever held the post before her."
 summary: "Tanzanian lawyer and diplomat who became the first African woman to serve as Deputy Secretary-General of the United Nations, after breaking a 45-year barrier as her country's first female foreign minister."
+organizations:
+  - "University of Dar es Salaam"
+  - "United Nations"
+  - "Open University of Tanzania"
+movements:
+  - "Millennium Development Goals"
+  - "Gender equality movement"
+  - "HIV/AIDS advocacy"
 ---
 
 ## Biography

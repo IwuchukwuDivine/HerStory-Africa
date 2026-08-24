@@ -16,6 +16,14 @@ imageCredit: "Illustrated portrait / HerStory Africa (no freely licensed photogr
 featured: false
 funFact: "In a single month in 1960 she signed up 45,000 members for Congo's independence movement, and the colonial press called her the most dangerous woman in Africa."
 summary: "A Pan-African organizer from the Central African Republic who turned the death of her small son, denied malaria medicine reserved for Europeans, into a fight that helped free Guinea and put her at Patrice Lumumba's side in Congo."
+organizations:
+  - "Rassemblement Démocratique Africain"
+  - "Parti Solidaire Africain"
+  - "Feminine Movement for African Solidarity"
+movements:
+  - "Guinean independence movement"
+  - "Congolese independence movement"
+  - "African independence movements"
 ---
 
 ## Biography

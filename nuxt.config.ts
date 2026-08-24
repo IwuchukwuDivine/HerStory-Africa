@@ -9,6 +9,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     buttondownApiKey: "",
     githubToken: "",
+    anthropicApiKey: "",
+    voyageApiKey: "",
   },
 
   modules: [
@@ -25,12 +27,22 @@ export default defineNuxtConfig({
     "nuxt-og-image",
   ],
 
-  // ── Static Site Generation ──────────────────────────────────────────
+  // ── Hybrid rendering: pages prerendered, /api/* served by Nitro ─────
+  // Deployed with `nuxt build` (Vercel preset auto-detected); API routes
+  // run as serverless functions while every page stays static.
   ssr: true,
+  routeRules: {
+    "/api/**": { prerender: false },
+  },
   nitro: {
     prerender: {
-      routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
+      routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities", "/graph"],
       crawlLinks: true,
+    },
+    vercel: {
+      functions: {
+        maxDuration: 30,
+      },
     },
   },
   gtag: {

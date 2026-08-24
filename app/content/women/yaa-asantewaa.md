@@ -16,6 +16,9 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Led the Ashanti army against the British at nearly 60 years old in the War of the Golden Stool"
 summary: "Queen Mother of Ejisu who led the Ashanti army against British colonial forces in the War of the Golden Stool, one of the last major anti-colonial wars in West Africa, led by a woman."
+movements:
+  - "War of the Golden Stool"
+  - "Anti-colonial resistance"
 ---
 
 ## Biography

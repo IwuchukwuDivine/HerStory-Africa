@@ -15,6 +15,8 @@ image: "/women/tin-hinan.jpg"
 imageCredit: "Public domain"
 featured: false
 summary: "Legendary 4th-century Tuareg queen and ancestral mother of the Kel Ahaggar confederacy, whose tomb in the Algerian Sahara remains one of the most significant archaeological discoveries in North African history."
+movements:
+  - "Indigenous rights movement"
 ---
 
 ## Biography

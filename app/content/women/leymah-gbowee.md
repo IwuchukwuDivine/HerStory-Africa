@@ -17,6 +17,14 @@ imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
 funFact: "Organized a women's sex strike that helped end Liberia's devastating second civil war"
 summary: "Liberian peace activist who organised women across religious lines to end the Second Liberian Civil War through non-violent protest, including a sex strike that made international headlines."
+organizations:
+  - "Women of Liberia Mass Action for Peace"
+  - "Gbowee Peace Foundation Africa"
+movements:
+  - "Liberian women's peace movement"
+  - "Second Liberian Civil War peace process"
+relatedWomen:
+  - "ellen-johnson-sirleaf"
 ---
 
 ## Biography

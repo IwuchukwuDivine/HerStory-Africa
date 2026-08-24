@@ -18,6 +18,12 @@ imageCredit: "Side by Side International LGBT Film Festival (Bok-o-Bok), St. Pet
 featured: false
 funFact: "In 2021 Muholi turned their museum-feted 'Somnyama Ngonyama' self-portraits into a children's colouring book, running free workshops so South African schoolkids could colour in, and talk about, Blackness and self-image."
 summary: "South African visual activist whose portrait archives of Black lesbian and trans lives, and searing self-portrait series 'Somnyama Ngonyama', have filled the world's great museums and won photography's most prestigious prize."
+organizations:
+  - "Forum for the Empowerment of Women"
+  - "Inkanyiso"
+movements:
+  - "LGBTQIA+ rights movement"
+  - "Visual activism"
 ---
 
 ## Biography

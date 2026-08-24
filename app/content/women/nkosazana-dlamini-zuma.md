@@ -16,6 +16,13 @@ imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: false
 funFact: "Nkosazana Dlamini-Zuma became the first woman ever to chair the African Union Commission."
 summary: "South African politician and physician who served as the first woman Chairperson of the African Union Commission, having previously led South Africa's transformation of its healthcare system as Minister of Health."
+organizations:
+  - "South African Students' Organisation"
+  - "African National Congress"
+  - "African Union Commission"
+movements:
+  - "Anti-apartheid movement"
+  - "African independence and unity movement"
 ---
 
 ## Biography

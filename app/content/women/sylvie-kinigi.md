@@ -17,6 +17,15 @@ imageCredit: "RTNB (Burundi National Radio and Television) / CC BY 3.0 via Wikim
 featured: false
 funFact: "For a few months in late 1993, two neighbouring countries in the Great Lakes were both led by women: Sylvie Kinigi in Burundi and Agathe Uwilingiyimana in Rwanda. Within a year, one had survived a coup and the other had been assassinated."
 summary: "Economist who became Burundi's first female Prime Minister in 1993, survived the coup that killed the president three months later, and as acting head of state held a shattered government together long enough to hand power back to an elected successor."
+organizations:
+  - "Union of Burundian Women"
+  - "Union for National Progress"
+movements:
+  - "Burundian ethnic reconciliation"
+  - "Burundian civil war"
+relatedWomen:
+  - "agathe-uwilingiyimana"
+  - "carmen-pereira"
 ---
 
 ## Biography

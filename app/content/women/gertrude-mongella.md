@@ -18,6 +18,13 @@ imageCredit: "Jan Van de Vel / © European Communities 2003, EC Audiovisual Serv
 featured: false
 funFact: "Africa affectionately calls her 'Mama Beijing', a nickname that followed her home from the 1995 conference she led, and she hails from Ukerewe, the largest inland island in Africa, in the middle of Lake Victoria."
 summary: "Tanzanian stateswoman who served as Secretary-General of the 1995 Beijing World Conference on Women, the summit that produced the world's defining gender-equality blueprint, and became the first President of the Pan-African Parliament."
+organizations:
+  - "Pan-African Parliament"
+  - "United Nations"
+movements:
+  - "UN Decade for Women"
+  - "Women's rights movement"
+  - "African Union integration"
 ---
 
 ## Biography

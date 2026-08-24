@@ -17,6 +17,10 @@ imageCredit: ""
 featured: false
 funFact: "While her husband Oliver Tambo led the ANC in exile, Adelaide Tambo ran liberation support networks and raised their children alone under constant apartheid pressure."
 summary: "South African anti-apartheid activist and wife of ANC president Oliver Tambo. While her husband led the ANC in exile, Adelaide was an activist and organiser in her own right, supporting liberation networks, raising her children alone under constant pressure, and dedicating her life to the freedom of her people."
+organizations:
+  - "African National Congress"
+movements:
+  - "Anti-apartheid movement"
 ---
 
 ## Biography

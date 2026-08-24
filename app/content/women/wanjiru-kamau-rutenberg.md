@@ -16,6 +16,12 @@ imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Wanjiru Kamau-Rutenberg founded one of the most ambitious scholarship programmes for African women in STEM, ensuring brilliant women get the funding and mentorship they deserve."
 summary: "Kenyan academic and activist who founded the African Women in Leadership Organisation and led one of the most ambitious scholarship programmes for African women in STEM. She has spent her career making sure brilliant African women get the funding, mentorship and platforms they deserve."
+organizations:
+  - "African Women in Leadership Organisation"
+  - "Akili Dada"
+  - "African Academy of Sciences"
+movements:
+  - "African women in science and leadership empowerment"
 ---
 
 ## Biography

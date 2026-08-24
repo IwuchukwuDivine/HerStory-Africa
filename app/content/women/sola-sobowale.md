@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Sola Sobowale's portrayal of the fearsome Alhaja Eniola Salami in 'King of Boys' cemented her status as one of Nollywood's most powerful and respected on-screen presences."
 summary: "Nigerian actress, writer, and producer; star of 'King of Boys' and 'The Wedding Party'. One of Nollywood's most respected veterans; advocate for strong female roles."
+movements:
+  - "Nollywood industry advocacy for women's roles"
 ---
 
 ## Biography

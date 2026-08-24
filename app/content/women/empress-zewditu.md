@@ -16,6 +16,9 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Empress Zewditu was the first woman to head an internationally recognised African state in modern history, ruling Ethiopia from 1916 to 1930."
 summary: "Empress of Ethiopia from 1916 to 1930, the first woman to head an internationally recognised African state in modern history. She preserved Ethiopian sovereignty during the scramble for Africa."
+organizations:
+  - "League of Nations"
+  - "Ethiopian Orthodox Church"
 ---
 
 ## Biography

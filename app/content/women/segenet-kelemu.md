@@ -18,6 +18,15 @@ imageCredit: "ILRI / Samuel Mungai / CC BY-SA 2.0 via Wikimedia Commons"
 featured: false
 funFact: "Bill Gates featured her in his 2018 'Heroes in the Field' series, and she is the rare scientist to have led major agricultural research on two continents, spending fifteen years in Colombia before coming home to run a world-class institute in Nairobi."
 summary: "Ethiopian molecular plant pathologist who rose from a farming family in Gojjam to become the first woman to lead the International Centre of Insect Physiology and Ecology, putting insect science at the heart of Africa's food security."
+organizations:
+  - "International Center for Tropical Agriculture"
+  - "Biosciences eastern and central Africa Hub"
+  - "Alliance for a Green Revolution in Africa"
+  - "International Centre of Insect Physiology and Ecology"
+  - "The World Academy of Sciences"
+  - "Royal Society"
+movements:
+  - "African scientific brain drain reversal"
 ---
 
 ## Biography
