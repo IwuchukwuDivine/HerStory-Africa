@@ -17,6 +17,11 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Grace Alele-Williams became the first woman to serve as Vice-Chancellor of any Nigerian university, shattering a barrier that had been exclusively held by men."
 summary: "Nigerian mathematician and the first woman to become a Vice-Chancellor of a Nigerian university. She spent her life fighting for girls to study mathematics and science at a time when most people believed those subjects were not for women."
+organizations:
+  - "University of Lagos"
+  - "University of Benin"
+movements:
+  - "Women in STEM education advocacy"
 ---
 
 ## Biography

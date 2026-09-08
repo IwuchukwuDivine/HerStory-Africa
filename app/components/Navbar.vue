@@ -147,6 +147,7 @@ const navLinks = [
   { to: "/", label: "Home", icon: resolveComponent("LucideHome") },
   { to: "/women", label: "Women", icon: resolveComponent("LucideUsers") },
   { to: "/timeline", label: "Timeline", icon: resolveComponent("LucideClock") },
+  { to: "/graph", label: "Graph", icon: resolveComponent("LucideNetwork") },
   {
     to: "/articles",
     label: "Articles",

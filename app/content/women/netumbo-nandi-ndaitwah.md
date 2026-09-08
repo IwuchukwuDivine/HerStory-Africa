@@ -16,6 +16,11 @@ imageCredit: "Photo: Emmanuel Berrod / WIPO / CC BY 2.0 via Wikimedia Commons"
 featured: false
 funFact: "She joined the liberation movement at 14, and 59 years later was sworn in as Namibia's first woman president on the country's Independence Day."
 summary: "Namibian freedom fighter and veteran diplomat, known simply as NNN, who joined SWAPO at 14, survived arrest and exile under apartheid rule, and in March 2025 became Namibia's first female president, leading a country where women also held the vice presidency and the Speaker's chair."
+organizations:
+  - "South West Africa People's Organisation"
+movements:
+  - "Namibian independence movement"
+  - "Anti-apartheid movement"
 ---
 
 ## Biography

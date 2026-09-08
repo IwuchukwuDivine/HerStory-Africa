@@ -17,6 +17,14 @@ imageCredit: ""
 featured: false
 funFact: "Efua Sutherland built Ghana's modern theatre tradition almost single-handedly, founding the Ghana Drama Studio and creating the country's first national children's theatre programme."
 summary: "Ghanaian playwright, director and educator who built Ghana's modern theatre tradition almost single-handedly. She founded the Ghana Drama Studio, created the first national children's theatre programme in Ghana and wrote plays that placed Ghanaian stories and oral traditions at the centre of African performance."
+organizations:
+  - "Ghana Drama Studio"
+  - "Kodzidan"
+  - "Ghana Experimental Theatre"
+movements:
+  - "Ghanaian independence movement"
+relatedWomen:
+  - "mabel-dove-danquah"
 ---
 
 ## Biography

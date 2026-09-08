@@ -17,6 +17,15 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Hafsat Abiola founded the Kudirat Initiative for Democracy (KIND), naming it after her mother who was assassinated for her pro-democracy activism."
 summary: "Human rights and democracy activist who founded the Kudirat Initiative for Democracy (KIND) in honour of her mother. Advocates for women's political leadership and civil society."
+organizations:
+  - "Kudirat Initiative for Democracy"
+  - "Women in Africa Initiative"
+  - "China-Africa Bridge"
+movements:
+  - "Nigerian pro-democracy movement"
+  - "Women's empowerment movement"
+relatedWomen:
+  - "kudirat-abiola"
 ---
 
 ## Biography

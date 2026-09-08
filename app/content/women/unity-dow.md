@@ -16,6 +16,14 @@ imageCredit: "Photo: Kris Krüg / PopTech / CC BY-SA 2.0 via Wikimedia Commons"
 featured: false
 funFact: "She sued her own government so that her children could be citizens of the country they were born in, and won, changing the law for a whole nation."
 summary: "Botswana lawyer who took her own government to court in the landmark Attorney General v Dow case, forced the rewriting of a citizenship law that treated women as lesser parents, and went on to become her country's first female High Court judge, a cabinet minister and a novelist."
+organizations:
+  - "Metlhaetsile Women's Information Centre"
+  - "Women and Law in Southern Africa"
+  - "AIDS Action Trust"
+  - "High Court of Botswana"
+movements:
+  - "Women's rights movement"
+  - "African women's citizenship rights movement"
 ---
 
 ## Biography

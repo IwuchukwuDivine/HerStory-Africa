@@ -17,6 +17,15 @@ imageCredit: "No free-use image available"
 featured: false
 funFact: "She wrote Nelson Mandela's first authorised biography, Higher Than Hope, later translated into some thirteen languages."
 summary: "South African sociologist and anti-apartheid activist who built solidarity between Indian and African South Africans, was banned, detained and firebombed for her defiance, and wrote Nelson Mandela's first authorised biography."
+organizations:
+  - "Black Women's Federation"
+  - "Federation of South African Women"
+  - "Institute for Black Research"
+movements:
+  - "Anti-apartheid movement"
+  - "Indian Passive Resistance Campaign"
+relatedWomen:
+  - "winnie-madikizela-mandela"
 ---
 
 ## Biography

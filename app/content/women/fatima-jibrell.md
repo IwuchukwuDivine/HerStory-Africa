@@ -18,6 +18,14 @@ imageCredit: "Solar Cookers International Network / Public domain via Wikimedia 
 featured: false
 funFact: "At sixty she turned filmmaker, writing and co-producing 'Charcoal Traffic' (2008), a fiction short shot in Somalia with nomad actors, using drama rather than reports to teach the link between charcoal and war."
 summary: "Somali environmentalist who took on the warlord-financed 'charcoal wars' devastating her country's acacia forests, won an 80% cut in charcoal exports, and earned the Goldman Environmental Prize, all in a country with no functioning state."
+organizations:
+  - "Horn of Africa Relief and Development Organization"
+  - "Sun Fire Cooking"
+  - "Women's Coalition for Peace"
+movements:
+  - "Somali Civil War"
+  - "environmental conservation movement"
+  - "women's peacemaking"
 ---
 
 ## Biography

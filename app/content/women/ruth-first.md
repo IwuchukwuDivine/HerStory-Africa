@@ -17,6 +17,11 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Ruth First was assassinated by a letter bomb sent by the South African apartheid regime while she was working in Mozambique in 1982."
 summary: "Anti-apartheid activist, journalist, and scholar. Exposed apartheid brutality through writing; assassinated by letter bomb in Mozambique in 1982."
+organizations:
+  - "Communist Party of South Africa"
+  - "Congress of Democrats"
+movements:
+  - "Anti-apartheid movement"
 ---
 
 ## Biography

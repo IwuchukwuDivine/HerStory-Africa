@@ -18,6 +18,12 @@ imageCredit: "Plus TV Africa / CC BY 3.0 via Wikimedia Commons"
 featured: false
 funFact: "She collapsed minutes after performing at Stella Okoli's 80th birthday celebration in 2024, and in a 2021 essay she had already instructed that her burial be done 'quickly, quietly and privately', saying celebrations should happen while she was alive to enjoy them."
 summary: "Nigeria's 'Elegant Stallion': singer, journalist, actress and public servant whose hit songs preached unity and family planning, whose 1984 documentary indicted oil corruption, and who spent a lifetime refusing to stay in one lane."
+organizations:
+  - "Nigerian Television Authority"
+  - "National Centre for Women Development"
+  - "Imo State Council for Arts and Culture"
+relatedWomen:
+  - "stella-okoli"
 ---
 
 ## Biography

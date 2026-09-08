@@ -18,6 +18,12 @@ imageCredit: "ATV News / CC BY 3.0 via Wikimedia Commons"
 featured: false
 funFact: "She was famous for taking snuff, a traditional spiritual practice, on stage mid-performance: a deliberate act connecting her concerts to ancestral ceremony."
 summary: "Zimbabwe's 'Queen of Mbira', who defied a sacred male-only taboo and colonial bans to master the mbira dzavadzimu, scored a gold record with her debut single, and carried Shona spiritual music onto the world's stages."
+organizations:
+  - "National Dance Company of Zimbabwe"
+  - "The Earthquake"
+  - "Zimbabwe Musicians Union"
+movements:
+  - "Chimurenga liberation struggle"
 ---
 
 ## Biography

@@ -17,6 +17,12 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Tsitsi Dangarembga's debut novel Nervous Conditions was the first novel in English published by a Black Zimbabwean woman."
 summary: "Zimbabwean novelist and filmmaker whose debut, Nervous Conditions, became the first novel in English by a Black Zimbabwean woman. Arrested in 2020 for protesting government corruption."
+organizations:
+  - "International Images Film Festival for Women"
+  - "Women Filmmakers of Zimbabwe"
+movements:
+  - "Freedom of expression movement"
+  - "Anti-government protests in Zimbabwe"
 ---
 
 ## Biography

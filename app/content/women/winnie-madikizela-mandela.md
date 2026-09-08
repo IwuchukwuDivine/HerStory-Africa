@@ -17,6 +17,14 @@ imageCredit: "Wikimedia Commons / CC BY-SA 3.0"
 featured: true
 funFact: "Kept the anti-apartheid movement alive inside South Africa during Nelson Mandela's 27-year imprisonment"
 summary: "South African anti-apartheid activist who kept resistance alive inside the country while Nelson Mandela was imprisoned for 27 years. Known as the 'Mother of the Nation.'"
+organizations:
+  - "African National Congress"
+  - "ANC Women's League"
+  - "National Assembly of South Africa"
+movements:
+  - "Anti-apartheid movement"
+relatedWomen:
+  - "fatima-meer"
 ---
 
 ## Biography

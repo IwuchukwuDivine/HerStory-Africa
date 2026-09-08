@@ -17,6 +17,14 @@ imageCredit: "Wikimedia Commons"
 featured: true
 funFact: "Flora Nwapa became the first African woman novelist published in Britain with Efuru in 1966, earning her the title 'Mother of Modern African Literature.'"
 summary: "First African woman novelist published in Britain (Efuru, 1966). Founded Tana Press and served as commissioner; called the 'Mother of Modern African Literature'."
+organizations:
+  - "Tana Press"
+  - "Flora Nwapa Company"
+movements:
+  - "Nigerian independence movement"
+  - "African literature movement"
+relatedWomen:
+  - "chimamanda-ngozi-adichie"
 ---
 
 ## Biography

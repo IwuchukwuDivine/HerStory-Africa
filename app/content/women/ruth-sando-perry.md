@@ -18,6 +18,17 @@ imageCredit: "Copyright holder unknown / fair use (no free image known)"
 featured: false
 funFact: "When she took office, Liberia's feared warlords reportedly told her, 'As a mother, take us as your children and we will cooperate', and she publicly warned them she would treat them exactly as a mother would: 'and, if necessary, that means discipline.'"
 summary: "Liberian schoolteacher and senator who became the first woman to head an African state in modern times. Handed a country of warring warlords in 1996, she disarmed the fighters, brought the refugees home, and delivered free elections in eleven months."
+organizations:
+  - "Unity Party"
+  - "Council of State"
+  - "Economic Community of West African States"
+movements:
+  - "Liberian Civil War"
+  - "Liberian peace process"
+  - "Women in leadership movement"
+relatedWomen:
+  - "carmen-pereira"
+  - "ellen-johnson-sirleaf"
 ---
 
 ## Biography

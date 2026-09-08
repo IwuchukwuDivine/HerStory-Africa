@@ -17,6 +17,13 @@ imageCredit: "Wikimedia Commons / Laureus / CC BY-SA 3.0"
 featured: false
 funFact: "Tegla Loroupe served as Chef de Mission for the first-ever Refugee Olympic Team at the 2016 Rio Olympics."
 summary: "Kenyan marathon champion who broke world records and then used the platform of sport to build peace in conflict-torn communities across East Africa. Chef de Mission for the first-ever Refugee Olympic Team at Rio 2016. Founder of the Tegla Loroupe Peace Foundation and multiple peace race initiatives in war zones."
+organizations:
+  - "Tegla Loroupe Peace Foundation"
+  - "International Olympic Committee"
+  - "Laureus World Sports Academy"
+movements:
+  - "Peacebuilding through sport"
+  - "Refugee advocacy"
 ---
 
 ## Biography

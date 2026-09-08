@@ -17,6 +17,12 @@ imageCredit: "Placeholder image; no freely licensed photograph has been located"
 featured: false
 funFact: "When appointed Prime Minister she belonged to no political party: she was a career magistrate and banker, chosen precisely as a nonpartisan. She is also one of the few former heads of government anywhere to have had an international arrest warrant issued against her (2008) and then annulled on appeal (2009)."
 summary: "Career magistrate who broke Senegal's highest glass ceiling in 2001 as the country's first female Prime Minister, then carried her jurist's discipline to the African Union as envoy for the protection of civilians in armed conflict."
+organizations:
+  - "Association of Senegalese Women Lawyers"
+  - "International Federation of Women Lawyers"
+  - "African Union"
+movements:
+  - "Women's rights movement"
 ---
 
 ## Biography

@@ -28,6 +28,9 @@ export default defineContentConfig({
         funFact: z.string().optional(),
         dateAdded: z.string(),
         sameAs: z.array(z.string()).optional(),
+        organizations: z.array(z.string()).optional(),
+        movements: z.array(z.string()).optional(),
+        relatedWomen: z.array(z.string()).optional(),
       }),
     }),
     articles: defineCollection({

@@ -17,6 +17,10 @@ imageCredit: "National Archives / Wikimedia Commons / Public Domain"
 featured: false
 funFact: "She bet her kingdom's future on schooling, telling her people the land would be won back not by the spear but by the pen and the book, and sent her grandson to be educated to prove it."
 summary: "The formidable queen regent known as Gwamile, 'the indomitable', who ruled Swaziland through its harshest colonial decades, financed early Black South African nationalism, and preserved the monarchy for her grandson Sobhuza II."
+organizations:
+  - "South African Native National Congress"
+movements:
+  - "Swazi resistance to colonial partition"
 ---
 
 ## Biography

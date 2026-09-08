@@ -17,6 +17,12 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Abike Dabiri-Erewa transitioned from a celebrated broadcasting career to chair NIDCOM, becoming Nigeria's chief advocate for millions of Nigerians living abroad."
 summary: "Nigerian politician and former broadcaster; Chair of NIDCOM (Nigerians in Diaspora Commission). Advocate for diaspora engagement, accountability, and women in public life."
+organizations:
+  - "Nigerian Television Authority"
+  - "Nigerians in Diaspora Commission"
+  - "House of Representatives"
+movements:
+  - "Women's political participation movement"
 ---
 
 ## Biography

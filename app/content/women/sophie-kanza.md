@@ -18,6 +18,14 @@ imageCredit: "LihNka / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "In September 2025 a street was named after her in Ixelles, Brussels: a symbolic reversal that honours a Congolese woman in the heart of the former colonial capital."
 summary: "Sociologist and stateswoman who became the first Congolese woman to earn a university degree and, at twenty-six, the first woman ever to hold government office in the DRC, before rising to senior leadership at UNESCO."
+organizations:
+  - "Mouvement Populaire de la Révolution"
+  - "Organisation of African Unity"
+  - "United Nations Educational, Scientific and Cultural Organization"
+  - "United Nations Institute for Training and Research"
+movements:
+  - "Disability rights advocacy"
+  - "Women's education movement"
 ---
 
 ## Biography

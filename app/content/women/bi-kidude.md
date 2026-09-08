@@ -17,6 +17,9 @@ imageCredit: "Erik (HASH) Hersman / CC BY 2.0 via Wikimedia Commons"
 featured: false
 funFact: "Nobody, including Bi Kidude herself, knew exactly how old she was. When she won the WOMEX world music award in 2005 she was somewhere in her nineties, still touring internationally, still drumming, and still outlasting musicians a third her age at festival after-parties."
 summary: "Zanzibar's legendary taarab singer, who ran away from a forced marriage as a teenager, sang barefoot and unveiled when both were scandalous, kept the island's musical traditions alive across a century, and became a world music star in her nineties."
+movements:
+  - "Taarab music tradition"
+  - "Unyago initiation tradition"
 ---
 
 ## Biography

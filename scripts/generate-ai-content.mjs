@@ -4,10 +4,10 @@
 // Calls Claude Haiku once per story; skips items whose body hash matches
 // the previous run. Output: public/ai-content.json (consumed by AiAssistant.vue).
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
-import { createHash } from "node:crypto";
+import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadDir, hashOf } from "./lib/frontmatter.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -21,50 +21,6 @@ const MODEL = "claude-haiku-4-5-20251001";
 const FORCE = process.env.FORCE === "1";
 // Bump when the prompt/output schema changes so cached entries regenerate.
 const SCHEMA_VERSION = "v2";
-
-function parseFrontmatter(raw) {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) return { data: {}, body: raw };
-
-  const fm = {};
-  let currentKey = "";
-  for (const line of match[1].split("\n")) {
-    const kv = line.match(/^([a-zA-Z_]\w*):\s*(.*)?$/);
-    if (kv) {
-      const [, key, rawVal = ""] = kv;
-      const val = rawVal.trim();
-      currentKey = key;
-      if (val === "") fm[key] = [];
-      else if (val === "true") fm[key] = true;
-      else if (val === "false") fm[key] = false;
-      else if (val === "null") fm[key] = null;
-      else if (/^-?\d+$/.test(val)) fm[key] = Number(val);
-      else fm[key] = val.replace(/^["']|["']$/g, "");
-    } else {
-      const item = line.match(/^\s+-\s+"?([^"]*)"?$/);
-      if (item && Array.isArray(fm[currentKey])) {
-        fm[currentKey].push(item[1]);
-      }
-    }
-  }
-  const body = raw.slice(match[0].length).trim();
-  return { data: fm, body };
-}
-
-function loadDir(dir, type) {
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir)
-    .filter((f) => f.endsWith(".md"))
-    .map((f) => {
-      const raw = readFileSync(join(dir, f), "utf-8");
-      const { data, body } = parseFrontmatter(raw);
-      return { ...data, type, body, _file: f };
-    });
-}
-
-function hashOf(text) {
-  return createHash("sha256").update(text).digest("hex").slice(0, 16);
-}
 
 function readLog() {
   try {

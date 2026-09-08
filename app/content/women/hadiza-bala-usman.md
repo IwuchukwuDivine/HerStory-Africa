@@ -17,6 +17,12 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Hadiza Bala Usman co-founded the globally recognized Bring Back Our Girls movement before going on to lead the Nigerian Ports Authority as its Managing Director."
 summary: "Nigerian activist and public servant; co-founder of Bring Back Our Girls and former MD of Nigerian Ports Authority. Advocate for accountability, transparency, and women in leadership."
+organizations:
+  - "#BringBackOurGirls"
+  - "Nigerian Ports Authority"
+movements:
+  - "#BringBackOurGirls"
+  - "Women's leadership movement"
 ---
 
 ## Biography

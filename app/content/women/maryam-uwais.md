@@ -17,6 +17,10 @@ imageCredit: "Image needed"
 featured: false
 funFact: "Maryam Uwais served as Special Adviser to the President on Social Investments, becoming one of Nigeria's most influential voices for children's rights and social protection reform."
 summary: "Nigerian lawyer and advocate; Special Adviser to the President on Social Investments. Leading voice for children's rights, legal reform, and social protection in Nigeria."
+movements:
+  - "Children's rights movement"
+  - "Access to justice movement"
+  - "Social protection movement"
 ---
 
 ## Biography

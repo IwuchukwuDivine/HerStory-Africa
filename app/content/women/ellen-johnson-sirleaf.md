@@ -17,6 +17,18 @@ imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
 funFact: "Became Africa's first elected female head of state at age 67"
 summary: "Harvard-trained economist who became Africa's first elected female head of state, serving as President of Liberia from 2006 to 2018 and rebuilding a country shattered by 14 years of civil war."
+organizations:
+  - "African Union Panel of the Wise"
+  - "Truth and Reconciliation Commission"
+movements:
+  - "Liberian civil war peace process"
+  - "Women's peace movement"
+relatedWomen:
+  - "carmen-pereira"
+  - "elisabeth-domitien"
+  - "joyce-banda"
+  - "leymah-gbowee"
+  - "ruth-sando-perry"
 ---
 
 ## Biography

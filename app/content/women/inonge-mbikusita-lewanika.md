@@ -17,6 +17,11 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Inonge Mbikusita-Lewanika served as Zambia's Ambassador to both the United States and Ethiopia while championing multiparty democracy."
 summary: "Zambian politician and diplomat. MP and minister; Ambassador to the US and to Ethiopia; advocate for women's rights and multiparty democracy in Zambia."
+organizations:
+  - "African Union"
+movements:
+  - "Women's political participation movement"
+  - "Multiparty democracy movement in Zambia"
 ---
 
 ## Biography

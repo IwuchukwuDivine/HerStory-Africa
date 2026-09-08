@@ -16,6 +16,12 @@ imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Folorunṣo Alakija built a fashion empire before entering the oil industry to become one of Africa's wealthiest women."
 summary: "Nigerian businesswoman, philanthropist, and one of Africa's wealthiest women, who built a fashion empire before entering the oil industry, and now dedicates her wealth to education and poverty alleviation through the Rose of Sharon Foundation."
+organizations:
+  - "Rose of Sharon Foundation"
+  - "Supreme Stitches"
+  - "Famfa Oil"
+movements:
+  - "Women's entrepreneurship"
 ---
 
 ## Biography

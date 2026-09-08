@@ -16,6 +16,15 @@ imageCredit: "Author unknown / Public Domain via Wikimedia Commons"
 featured: false
 funFact: "She never learned to read or write French fluently, yet she could hold a crowd for hours in Sango. Her speeches were so effective that Bokassa, a man who trusted almost no one, made her the voice of his ruling party."
 summary: "Businesswoman and politician who in 1975 became Prime Minister of the Central African Republic, the first woman ever to lead a government anywhere in Africa, and who lost the job within a year for telling Bokassa to his face that he should not crown himself emperor."
+organizations:
+  - "MESAN"
+movements:
+  - "Central African Republic independence movement"
+relatedWomen:
+  - "ellen-johnson-sirleaf"
+  - "joyce-banda"
+  - "sahle-work-zewde"
+  - "samia-suluhu-hassan"
 ---
 
 ## Biography

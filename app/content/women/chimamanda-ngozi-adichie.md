@@ -17,6 +17,10 @@ imageCredit: "Wikimedia Commons / Lvklock / CC BY-SA 4.0"
 featured: true
 funFact: "Her TED Talk 'The Danger of a Single Story' has been viewed over 30 million times"
 summary: "Award-winning Nigerian novelist and feminist icon. Author of Purple Hibiscus, Half of a Yellow Sun, Americanah, and the viral TED talk 'We Should All Be Feminists', which reached hundreds of millions of listeners after Beyoncé sampled it. One of the most influential voices on feminism, race, and African identity in the world today."
+movements:
+  - "Feminist movement"
+relatedWomen:
+  - "flora-nwapa"
 ---
 
 ## Biography
@@ -47,6 +51,8 @@ She has spoken out on race in America, on the experience of being African in the
 - **Americanah** (2013), National Book Critics Circle Award; explores race, identity, and hair
 - **We Should All Be Feminists** (2014), adapted from TED talk; distributed to every secondary school student in Sweden
 - **Dear Ijeawele** (2017), feminist manifesto in letters
+- **Notes on Grief** (2021), a memoir written after the death of her father
+- **Dream Count** (2025), her first novel in over a decade, following the interwoven lives of four women
 - **MacArthur Fellowship ("Genius Grant")** (2008)
 - **Inducted into the American Academy of Arts and Sciences** (2017)
 - **Honorary degrees** from Johns Hopkins, Yale, and multiple universities worldwide

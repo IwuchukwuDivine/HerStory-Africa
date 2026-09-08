@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Luisa Diogo became Mozambique's first female Prime Minister and led the country's post-war economic recovery and debt relief efforts."
 summary: "Mozambique's first female Prime Minister (2004–2010). Economist who led post-war economic policy and debt relief; one of Africa's most prominent female heads of government."
+movements:
+  - "Women's political leadership in Africa"
 ---
 
 ## Biography

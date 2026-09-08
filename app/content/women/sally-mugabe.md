@@ -17,6 +17,10 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Sally Mugabe supported Zimbabwe's liberation struggle from exile as a teacher and activist before becoming the country's First Lady from 1980 to 1992."
 summary: "First wife of Robert Mugabe; teacher and activist who supported the liberation struggle from exile. First Lady of Zimbabwe (1980–1992); advocated for refugees and education."
+organizations:
+  - "Zimbabwe African National Union"
+movements:
+  - "Zimbabwean liberation struggle"
 ---
 
 ## Biography

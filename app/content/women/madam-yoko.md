@@ -17,6 +17,11 @@ imageCredit: "Photographer unknown, before 1906 / Public domain"
 featured: false
 funFact: "Having no children of her own, she built her 'family' politically: strategically marrying graduates of her famous Sande school to powerful men, creating a kinship network by diplomacy rather than blood."
 summary: "Mende leader who rose from celebrated Sande dancer to Paramount Chief of the Kpaa Mende Confederacy of fourteen chiefdoms, wielding the greatest political authority ever held by a woman in Sierra Leone up to her time."
+organizations:
+  - "Sande society"
+  - "Kpaa Mende Confederacy"
+movements:
+  - "Hut Tax War"
 ---
 
 ## Biography

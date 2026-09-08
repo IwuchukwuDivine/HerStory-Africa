@@ -18,6 +18,17 @@ imageCredit: "Placeholder image; no freely licensed photograph has been located"
 featured: false
 funFact: "Guinea-Bissau's 1984 Constitution, the document whose entry into force made her head of state, was promulgated over her own signature as President of the National Assembly. Her three-day presidency remains one of the shortest head-of-state tenures in world history."
 summary: "PAIGC political commissar who commanded the southern front of Guinea-Bissau's liberation war and, in May 1984, became the first woman ever to act as head of state of an African country."
+organizations:
+  - "African Party for the Independence of Guinea and Cape Verde"
+  - "Pan-African Women's Organisation"
+movements:
+  - "Guinea-Bissau independence movement"
+  - "Anti-colonial struggle"
+relatedWomen:
+  - "ellen-johnson-sirleaf"
+  - "ruth-sando-perry"
+  - "samia-suluhu-hassan"
+  - "sylvie-kinigi"
 ---
 
 ## Biography

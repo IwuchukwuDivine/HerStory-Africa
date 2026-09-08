@@ -16,6 +16,8 @@ imageCredit: "Photo: Claudia_midori / CC BY 2.0 via Wikimedia Commons"
 featured: false
 funFact: "She paints her razor-straight lines completely freehand, no ruler, no masking tape, using a brush made from chicken feathers."
 summary: "South African Ndebele artist who learned to paint murals at ten with chicken feathers, and in 1991 became the first woman and first African to paint a BMW Art Car, carrying her people's geometric patterns from a village wall to museums around the world."
+movements:
+  - "Ndebele mural art tradition"
 ---
 
 ## Biography

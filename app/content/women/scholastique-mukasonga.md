@@ -16,6 +16,10 @@ imageCredit: "Photo: ActuaLitté / CC BY-SA 2.0 via Wikimedia Commons"
 featured: false
 funFact: "She keeps a notebook with the names of her murdered family. 'I write down their names,' she says. 'I have nothing left of my family but that paper grave.'"
 summary: "Rwandan writer who lost 37 members of her family, including her mother, in the 1994 genocide, and turned memory into literature, winning France's Renaudot Prize for Our Lady of the Nile."
+organizations:
+  - "UNICEF"
+movements:
+  - "Rwandan genocide"
 ---
 
 ## Biography

@@ -17,6 +17,10 @@ imageCredit: "Wikimedia Commons"
 featured: true
 funFact: "Cut counterfeit drugs in Nigeria from 70% to under 20% and survived multiple assassination attempts"
 summary: "NAFDAC Director-General who cut counterfeit drugs in Nigeria from roughly 70% to under 20%. Survived assassination attempts; later Minister of Information."
+organizations:
+  - "National Agency for Food and Drug Administration and Control"
+movements:
+  - "Anti-counterfeit drugs movement"
 ---
 
 ## Biography

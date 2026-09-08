@@ -18,6 +18,12 @@ imageCredit: "Illustration by Rori, 100 Days of Women in History (2016), via Tea
 featured: false
 funFact: "She was one of the first people in Onitsha to own a motor car, and she ran a side business renting out her legendary jewellery collection to families for ceremonies."
 summary: "The 'Merchant Queen of Ossomari': an Igbo trading titan who rose from selling poultry to commanding 20,000 gallons of palm oil, a canoe fleet and vast Onitsha real estate, and was crowned Omu, the last queen of her people's women."
+organizations:
+  - "Niger Company"
+  - "Onitsha Native Court"
+  - "Council of Mothers"
+movements:
+  - "Igbo dual-sex governance system"
 ---
 
 ## Biography

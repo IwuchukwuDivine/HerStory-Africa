@@ -17,6 +17,11 @@ imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Rose Chibambo was a founding leader of the Malawi Congress Party who mobilised women across the country in the fight against British colonial rule."
 summary: "Malawian independence activist and politician who was a founding leader of the Malawi Congress Party, mobilising women across the country in the fight against British colonial rule."
+organizations:
+  - "Nyasaland African Congress"
+  - "Malawi Congress Party"
+movements:
+  - "Malawian independence movement"
 ---
 
 ## Biography

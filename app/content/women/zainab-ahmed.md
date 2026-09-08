@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Zainab Ahmed rose to become one of Nigeria's most senior female cabinet members ever, serving as Minister of Finance, Budget and National Planning."
 summary: "Nigerian economist and minister; served as Minister of Finance, Budget and National Planning. One of Nigeria's most senior female cabinet members; advocate for fiscal reform and women in policy."
+movements:
+  - "Women in leadership"
 ---
 
 ## Biography

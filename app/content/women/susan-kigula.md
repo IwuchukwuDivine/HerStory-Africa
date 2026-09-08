@@ -18,6 +18,10 @@ imageCredit: "German Coalition to Abolish the Death Penalty (GCADP) / CC BY 4.0 
 featured: false
 funFact: "While on death row she founded and led a prison gospel choir whose recorded songs pleading against the death penalty were broadcast on Ugandan radio: condemned women arguing their case to the nation in song."
 summary: "Sentenced to death at 23, she studied law from her cell, led a petition on behalf of all 417 people on Uganda's death row, and won the landmark ruling that abolished the country's mandatory death penalty."
+organizations:
+  - "Justice Defenders"
+movements:
+  - "Anti-death penalty movement"
 ---
 
 ## Biography

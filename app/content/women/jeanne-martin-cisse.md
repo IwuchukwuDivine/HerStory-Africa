@@ -18,6 +18,16 @@ imageCredit: "Victoria Missick for the Daily World / Public Domain via Wikimedia
 featured: false
 funFact: "When she gavelled open the UN Security Council in November 1972, no woman had ever done it in the Council's 27-year existence. The photographs ran in newspapers worldwide: a schoolteacher from Kankan presiding over the most powerful diplomatic body on earth."
 summary: "Guinean teacher and diplomat who became the first woman ever to preside over the United Nations Security Council, took delivery of 100,000 petitions against apartheid, and served her country from the classroom to the cabinet until a coup swept it all away."
+organizations:
+  - "Rassemblement Démocratique Africain"
+  - "Pan-African Women's Organisation"
+  - "Conference of African Women"
+  - "United Nations Special Committee on Apartheid"
+movements:
+  - "Guinean independence movement"
+  - "Anti-apartheid movement"
+  - "Pan-Africanism"
+  - "West African women's movement"
 ---
 
 ## Biography

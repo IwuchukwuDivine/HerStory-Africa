@@ -16,6 +16,13 @@ imageCredit: "Portrait of Doria Shafik, Al-Ahram Weekly / Wikimedia Commons / Pu
 featured: false
 funFact: "She led 1,500 women into Egypt's all-male parliament and shut it down for more than four hours."
 summary: "The Egyptian philosopher and publisher who stormed parliament with 1,500 women and starved herself until Egypt promised women the vote, then was erased from history for defying Nasser."
+organizations:
+  - "Bint Al-Nil Union"
+movements:
+  - "Egyptian feminist movement"
+  - "Egyptian nationalist movement"
+relatedWomen:
+  - "huda-shaarawi"
 ---
 
 ## Biography
