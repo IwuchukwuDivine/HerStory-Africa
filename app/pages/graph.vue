@@ -364,7 +364,8 @@ const listGroups = computed(() => {
   border: 1px solid var(--border-default);
   background: var(--surface-elevated);
   color: var(--text-primary);
-  font-size: 0.875rem;
+  /* 16px minimum: anything smaller makes iOS Safari zoom in on focus. */
+  font-size: 1rem;
 }
 .graph-page__search:focus {
   outline: none;

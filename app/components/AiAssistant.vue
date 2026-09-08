@@ -28,6 +28,8 @@
         class="ai-panel"
         role="dialog"
         aria-label="Story assistant"
+        :style="panelStyle"
+        @touchmove="onPanelTouchMove"
       >
         <header class="ai-panel__header">
           <div class="ai-panel__title">
@@ -74,6 +76,7 @@
           class="ai-panel__output"
           :class="{ 'ai-panel__output--empty': !activeChip && !exchanges.length }"
           @click="completeTyping"
+          @touchstart.passive="dismissKeyboard"
         >
           <template v-if="outputMode === 'chip' && activeChip">
             <h3 class="ai-panel__output-heading">
@@ -203,6 +206,7 @@
           @submit.prevent="ask"
         >
           <input
+            ref="askInputEl"
             v-model="questionInput"
             class="ai-ask__input"
             type="text"
@@ -295,6 +299,94 @@ const exchanges = ref<Exchange[]>([]);
 const questionInput = ref("");
 const asking = ref(false);
 const outputEl = ref<HTMLElement | null>(null);
+const askInputEl = ref<HTMLInputElement | null>(null);
+
+// ── Mobile keyboard/scroll handling (same approach as GlobalSearch) ───
+// The panel stays a stable full-viewport height; the on-screen keyboard is
+// compensated as bottom padding from visualViewport, and the page behind is
+// pinned with position: fixed (iOS ignores overflow: hidden for touch).
+const keyboardInset = ref(0);
+
+const panelStyle = computed(() =>
+  keyboardInset.value > 0
+    ? { paddingBottom: `${keyboardInset.value}px` }
+    : undefined,
+);
+
+function syncKeyboardInset() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  keyboardInset.value = Math.max(
+    0,
+    Math.round(window.innerHeight - vv.height - vv.offsetTop),
+  );
+}
+
+function attachViewportListeners() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  syncKeyboardInset();
+  vv.addEventListener("resize", syncKeyboardInset);
+  vv.addEventListener("scroll", syncKeyboardInset);
+}
+
+function detachViewportListeners() {
+  const vv = window.visualViewport;
+  if (vv) {
+    vv.removeEventListener("resize", syncKeyboardInset);
+    vv.removeEventListener("scroll", syncKeyboardInset);
+  }
+  keyboardInset.value = 0;
+}
+
+const isMobileViewport = () =>
+  window.matchMedia("(max-width: 767px)").matches;
+
+let scrollLockY = 0;
+let bodyLocked = false;
+
+function lockBodyScroll() {
+  if (!isMobileViewport() || bodyLocked) return;
+  bodyLocked = true;
+  scrollLockY = window.scrollY;
+  const { style } = document.body;
+  style.position = "fixed";
+  style.top = `-${scrollLockY}px`;
+  style.left = "0";
+  style.right = "0";
+  style.width = "100%";
+  style.overflow = "hidden";
+}
+
+function unlockBodyScroll() {
+  if (!bodyLocked) return;
+  bodyLocked = false;
+  const { style } = document.body;
+  style.position = "";
+  style.top = "";
+  style.left = "";
+  style.right = "";
+  style.width = "";
+  style.overflow = "";
+  window.scrollTo(0, scrollLockY);
+}
+
+// Dismiss the keyboard when the user touches the transcript so scrolling
+// happens with the keyboard closed and the input stays pinned.
+function dismissKeyboard() {
+  const input = askInputEl.value;
+  if (input && document.activeElement === input) input.blur();
+}
+
+// Block touch drags that would reach the page behind the panel; real scrolls
+// inside the output area pass through.
+function onPanelTouchMove(event: TouchEvent) {
+  if (!isMobileViewport()) return;
+  const target = event.target instanceof Element ? event.target : null;
+  const output = target?.closest(".ai-panel__output");
+  if (output && output.scrollHeight > output.clientHeight) return;
+  event.preventDefault();
+}
 
 let typeTimer: ReturnType<typeof setInterval> | null = null;
 let listTimer: ReturnType<typeof setInterval> | null = null;
@@ -404,11 +496,15 @@ function buildWomanFacts(w: WomanDoc): string[] {
 
 async function open() {
   isOpen.value = true;
+  lockBodyScroll();
+  attachViewportListeners();
   await loadContext();
 }
 
 function close() {
   isOpen.value = false;
+  detachViewportListeners();
+  unlockBodyScroll();
   resetTyping();
   activeChip.value = null;
 }
@@ -627,6 +723,8 @@ onBeforeUnmount(() => {
   if (import.meta.client) {
     window.removeEventListener("keydown", onKeydown);
     document.documentElement.classList.remove("ai-panel-open");
+    detachViewportListeners();
+    unlockBodyScroll();
   }
 });
 </script>
@@ -687,10 +785,11 @@ onBeforeUnmount(() => {
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  /* Mobile: full-screen */
+  /* Mobile: full-screen. A stable 100vh that the keyboard never resizes
+     (dvh shrinks with the keyboard and halves the panel); the keyboard is
+     compensated with JS-driven bottom padding instead. */
   inset: 0;
   height: 100vh;
-  height: 100dvh;
   border-radius: 0;
   overflow: hidden;
 }
@@ -802,6 +901,7 @@ onBeforeUnmount(() => {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
+  touch-action: pan-y;
   padding: 1rem 1.25rem;
   cursor: text;
 }
@@ -994,7 +1094,8 @@ onBeforeUnmount(() => {
   border: 1px solid var(--border-default);
   background: var(--surface-elevated);
   color: var(--text-primary);
-  font-size: 0.875rem;
+  /* 16px minimum: anything smaller makes iOS Safari zoom in on focus. */
+  font-size: 1rem;
   line-height: 1.4;
 }
 .ai-ask__input:focus {
