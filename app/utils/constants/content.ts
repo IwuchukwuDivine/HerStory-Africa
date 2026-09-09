@@ -70,6 +70,7 @@ export const ARTICLE_CATEGORIES = [
   'History',
   'Concepts',
   'Why It Matters',
+  'Profiles',
 ] as const
 
 export type Region = typeof REGIONS[number]

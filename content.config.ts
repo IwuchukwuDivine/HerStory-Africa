@@ -46,6 +46,9 @@ export default defineContentConfig({
         image: z.string().optional(),
         imageCredit: z.string().optional(),
         reflectionPrompt: z.string().optional(),
+        updated: z.string().optional(),
+        featured: z.boolean().optional(),
+        women: z.array(z.string()).optional(),
       }),
     }),
     opportunities: defineCollection({

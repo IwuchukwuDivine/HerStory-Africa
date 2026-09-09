@@ -20,9 +20,30 @@
 </template>
 
 <script setup lang="ts">
-const { data: articles } = await useAsyncData("latest-articles", () =>
-  queryCollection("articles").order("date", "DESC").limit(5).all(),
-);
+const PREVIEW_COUNT = 5;
+
+const { data: articles } = await useAsyncData("latest-articles", async () => {
+  const [featured, latest] = await Promise.all([
+    queryCollection("articles")
+      .where("featured", "=", true)
+      .order("date", "DESC")
+      .limit(PREVIEW_COUNT)
+      .all(),
+    queryCollection("articles")
+      .order("date", "DESC")
+      .limit(PREVIEW_COUNT)
+      .all(),
+  ]);
+
+  const seen = new Set<string>();
+  const merged = [];
+  for (const a of [...featured, ...latest]) {
+    if (seen.has(a.slug)) continue;
+    seen.add(a.slug);
+    merged.push(a);
+  }
+  return merged.slice(0, PREVIEW_COUNT);
+});
 </script>
 
 <style scoped>

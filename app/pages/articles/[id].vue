@@ -58,6 +58,33 @@
 
     <div ref="readSentinel" />
 
+    <aside v-if="storyWomen?.length" class="article-page__women">
+      <h2 class="article-page__women-title">Women in this story</h2>
+      <p class="article-page__women-subtitle">
+        Profiles from the archive whose lives connect to this one
+      </p>
+      <div class="article-page__women-grid">
+        <WomanCard
+          v-for="w in storyWomen"
+          :key="w.slug"
+          :name="w.name"
+          :slug="w.slug"
+          :image="w.image"
+          :country="w.country"
+          :born="w.born"
+          :died="w.died"
+          :era="w.era"
+          :summary="w.summary"
+          :causes="w.causes"
+        />
+      </div>
+    </aside>
+
+    <NewsletterCta
+      title="Stories like this one, twice a month"
+      description="One remarkable African woman, one article, straight to your inbox. No noise."
+    />
+
     <CiteThisPage
       :title="article.title"
       :url="canonicalUrl"
@@ -87,11 +114,6 @@
         />
       </div>
     </aside>
-
-    <NewsletterCta
-      title="Enjoyed this article?"
-      description="Get new articles and stories of remarkable African women delivered to your inbox."
-    />
 
     <footer class="article-page__footer">
       <NuxtLink to="/" class="article-page__footer-link">
@@ -142,15 +164,47 @@ const articleYear = computed(() => {
   return new Date(article.value.date).getFullYear();
 });
 
+const RELATED_COUNT = 3;
+
 const { data: related } = await useAsyncData(
   `related-${route.path}`,
   async () => {
     if (!article.value) return [];
-    return queryCollection("articles")
+    const sameCategory = await queryCollection("articles")
       .where("category", "=", article.value.category)
       .where("slug", "<>", article.value.slug)
-      .limit(3)
+      .order("date", "DESC")
+      .limit(RELATED_COUNT)
       .all();
+    if (sameCategory.length >= RELATED_COUNT) return sameCategory;
+
+    const exclude = new Set([
+      article.value.slug,
+      ...sameCategory.map((a) => a.slug),
+    ]);
+    const newest = await queryCollection("articles")
+      .order("date", "DESC")
+      .limit(RELATED_COUNT * 2)
+      .all();
+    const backfill = newest
+      .filter((a) => !exclude.has(a.slug))
+      .slice(0, RELATED_COUNT - sameCategory.length);
+    return [...sameCategory, ...backfill];
+  },
+  { watch: [article] },
+);
+
+const { data: storyWomen } = await useAsyncData(
+  `article-women-${route.path}`,
+  async () => {
+    const slugs = article.value?.women;
+    if (!slugs?.length) return [];
+    const women = await queryCollection("women")
+      .where("slug", "IN", slugs)
+      .all();
+    return [...women].sort(
+      (a, b) => slugs.indexOf(a.slug) - slugs.indexOf(b.slug),
+    );
   },
   { watch: [article] },
 );
@@ -192,9 +246,11 @@ useHead(() => ({
             "@type": "Article",
             headline: article.value.title,
             description: article.value.description,
-            image: ogImageUrl.value,
+            image: getAbsoluteUrl(ogImageUrl.value),
             url: canonicalUrl.value,
+            mainEntityOfPage: canonicalUrl.value,
             datePublished: `${article.value.date}T00:00:00+00:00`,
+            dateModified: `${article.value.updated ?? article.value.date}T00:00:00+00:00`,
             author: {
               "@type": "Organization",
               name: "HerStory Africa",
@@ -391,6 +447,38 @@ useHead(() => ({
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+/* ── Women in this story ── */
+.article-page__women {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.article-page__women-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+}
+
+.article-page__women-subtitle {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin: 0 0 1.25rem;
+}
+
+.article-page__women-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 480px) {
+  .article-page__women-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ── Footer ── */

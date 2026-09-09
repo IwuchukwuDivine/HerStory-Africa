@@ -20,5 +20,9 @@ export interface Article {
   date: string
   slug: string
   category: string
+  image?: string
+  updated?: string
+  featured?: boolean
+  women?: string[]
   path?: string
 }
