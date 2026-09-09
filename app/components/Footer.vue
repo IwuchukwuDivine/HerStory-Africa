@@ -54,6 +54,17 @@
             North Africa
           </NuxtLink>
         </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Contact</h4>
+          <a
+            href="mailto:hello.herstoryafrica@gmail.com"
+            class="site-footer__link site-footer__link--contact"
+          >
+            <LucideMail :size="16" />
+            hello.herstoryafrica@gmail.com
+          </a>
+        </div>
       </div>
 
       <div class="site-footer__newsletter">
@@ -149,6 +160,13 @@ const currentYear = new Date().getFullYear()
 
 .site-footer__link:hover {
   color: var(--color-primary);
+}
+
+.site-footer__link--contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  word-break: break-all;
 }
 
 .site-footer__newsletter {
