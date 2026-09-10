@@ -1,6 +1,8 @@
 ---
 title: "What Her Cloth Said When She Could Not Speak"
 description: "Across East Africa, women have been buying, wearing, and gifting printed cloths that carry messages most people cannot read. A kanga is never just a kanga. It is a letter you wear on your body."
+seoTitle: "Kanga Cloth: The Messages East African Women Wear"
+seoDescription: "Every kanga carries a Swahili proverb on its border. Discover how East African women use these printed cloths to say what they cannot say out loud."
 date: 2026-04-09
 slug: what-her-cloth-said-when-she-could-not-speak
 category: "History"

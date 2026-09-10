@@ -21,7 +21,8 @@
           <div class="timeline__card-image">
             <NuxtImg
               :src="woman.image"
-              :alt="woman.name"
+              :provider="imageProvider(woman.image)"
+              :alt="`Portrait of ${woman.name}, ${woman.country}`"
               width="80"
               height="80"
               format="webp"
@@ -49,7 +50,7 @@
 <script setup lang="ts">
 const { data: moments } = await useAsyncData('timeline-teaser', () =>
   queryCollection('women')
-    .select('name', 'slug', 'born', 'summary', 'image')
+    .select('name', 'slug', 'born', 'summary', 'image', 'country')
     .order('born', 'ASC')
     .limit(4)
     .all(),

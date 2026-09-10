@@ -31,7 +31,7 @@ Nigeria's economy has been shaped by oil, debt, and governance challenges. Okonj
 
 ## What She Fought For
 
-Ngozi Okonjo-Iweala has worked for **sound economic policy**, **debt sustainability**, **transparency**, and **anti-corruption** in Nigeria and internationally. She has advocated for **women's economic empowerment** and for **African representation** in global institutions. At the WTO she has emphasised development, sustainability, and reform so that trade benefits more people.
+Ngozi Okonjo-Iweala has worked for **sound economic policy**, **debt sustainability**, **transparency**, and **anti-corruption** in Nigeria and internationally. She has advocated for **[women's economic empowerment](/articles/why-economic-independence-changes-everything)** and for **African representation** in global institutions. At the WTO she has emphasised development, sustainability, and reform so that trade benefits more people.
 
 ## Major Achievements
 

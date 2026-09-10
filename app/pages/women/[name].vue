@@ -10,7 +10,8 @@
         <div class="woman-profile__image-wrapper">
           <NuxtImg
             :src="woman.image"
-            :alt="woman.name"
+            :provider="imageProvider(woman.image)"
+            :alt="`Portrait of ${woman.name}, ${woman.country}`"
             width="480"
             height="600"
             format="webp"
@@ -64,7 +65,7 @@
             <NuxtLink
               v-for="cause in woman.causes"
               :key="cause"
-              :to="{ path: '/women', query: { cause } }"
+              :to="causeLink(cause)"
               class="woman-profile__cause-tag"
             >
               {{ cause }}
@@ -111,25 +112,48 @@
       :causes="woman.causes"
     />
   </article>
-
-  <div v-else class="woman-profile__not-found">
-    <LucideSearchX :size="48" />
-    <h2>Woman not found</h2>
-    <p>The profile you're looking for doesn't exist yet.</p>
-    <NuxtLink to="/women" class="woman-profile__back-btn">
-      Browse all women
-    </NuxtLink>
-  </div>
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
+import { CAUSE_HUB_MIN_WOMEN } from "~/utils/constants/content";
+import { causeHubs } from "~/utils/slugify";
 
-const { data: woman } = await useAsyncData(`woman-${route.path}`, () =>
-  queryCollection("women").path(route.path).first(),
+const route = useRoute();
+// Strip any trailing slash so the content lookup and payload key match the
+// prerendered URL (the canonical form has no trailing slash).
+const contentPath = route.path.replace(/\/+$/, "") || "/";
+
+const { data: woman } = await useAsyncData(`woman-${contentPath}`, () =>
+  queryCollection("women").path(contentPath).first(),
 );
 
+if (!woman.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Woman not found",
+    fatal: true,
+  });
+}
+
 const readSentinel = ref<HTMLElement | null>(null);
+
+// Causes shared by enough women have a static hub page; the rest fall back
+// to the filtered listing. Same cache key as the cause hub pages.
+const { data: causeIndex } = await useAsyncData("hub-cause-index", () =>
+  queryCollection("women").select("causes").all(),
+);
+const hubSlugByCause = new Map(
+  causeHubs(causeIndex.value ?? [], CAUSE_HUB_MIN_WOMEN).map((h) => [
+    h.cause,
+    h.slug,
+  ]),
+);
+function causeLink(cause: string) {
+  const slug = hubSlugByCause.get(cause);
+  return slug
+    ? `/women/cause/${slug}`
+    : { path: "/women", query: { cause } };
+}
 
 const { isRead } = useApp();
 const womanRead = computed(() =>
@@ -156,21 +180,30 @@ const womanDates = computed(() => {
   return `${born}${died}`;
 });
 
+const TITLE_MAX = 60;
+const MIN_HOOK_LENGTH = 12;
+
+/** `${name}: ${hook}` within 60 chars, or the name alone if there is no room for a hook. */
+const seoTitle = computed(() => {
+  if (!woman.value) return "";
+  const { name, summary } = woman.value;
+  const hookMax = TITLE_MAX - name.length - 2;
+  if (hookMax < MIN_HOOK_LENGTH) return name;
+  const hook = clipAtWord(summary, hookMax);
+  return hook ? `${name}: ${hook}` : name;
+});
+
+const metaDescription = computed(() =>
+  woman.value ? seoDescription(woman.value.summary) : "",
+);
+
+useHead({ titleTemplate: "%s" });
+
 useSeoMeta({
-  title: () => {
-    if (!woman.value) return "Woman not found";
-    const maxLen = 55 - woman.value.name.length - 2;
-    const words = woman.value.summary.split(" ");
-    let snippet = "";
-    for (const word of words) {
-      if ((snippet + " " + word).trim().length > maxLen) break;
-      snippet = (snippet + " " + word).trim();
-    }
-    return `${woman.value.name}: ${snippet}`;
-  },
-  description: () => woman.value?.summary ?? "",
+  title: seoTitle,
+  description: metaDescription,
   ogTitle: () => woman.value?.name ?? "",
-  ogDescription: () => woman.value?.summary ?? "",
+  ogDescription: metaDescription,
   ogUrl: canonicalUrl,
   ogType: "profile",
   twitterCard: "summary_large_image",
@@ -477,46 +510,5 @@ useHead(() => ({
 
 .woman-profile__suggest-link:hover {
   color: var(--color-primary-600);
-}
-
-/* ── Not found ── */
-.woman-profile__not-found {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60dvh;
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-muted);
-}
-
-.woman-profile__not-found h2 {
-  margin: 1rem 0 0.25rem;
-  color: var(--text-primary);
-}
-
-.woman-profile__not-found p {
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.woman-profile__back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  background: var(--color-primary);
-  color: var(--text-on-primary);
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.woman-profile__back-btn:hover {
-  background: var(--color-primary-600);
 }
 </style>

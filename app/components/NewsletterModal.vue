@@ -1,41 +1,49 @@
 <template>
-  <Transition name="modal">
-    <div v-if="visible" class="newsletter-modal" @click.self="dismiss">
-      <div class="newsletter-modal__card">
-        <button class="newsletter-modal__close" aria-label="Close" @click="dismiss">
-          <LucideX :size="20" />
-        </button>
+  <Transition name="newsletter-card">
+    <aside
+      v-if="visible"
+      class="newsletter-card"
+      role="complementary"
+      aria-label="Newsletter signup"
+    >
+      <button
+        class="newsletter-card__close"
+        type="button"
+        aria-label="Dismiss newsletter signup"
+        @click="dismiss"
+      >
+        <LucideX :size="18" />
+      </button>
 
-        <div class="newsletter-modal__accent" />
+      <div class="newsletter-card__accent" />
 
-        <div class="newsletter-modal__body">
-          <h2 class="newsletter-modal__title">
-            Don't let these stories stay hidden.
-          </h2>
-          <p class="newsletter-modal__desc">
-            Get new stories of remarkable African women delivered to your inbox.
-            No spam, just history worth knowing.
-          </p>
-          <NewsletterForm
-            placeholder="Your email address"
-            @subscribed="onSubscribed"
-          />
-        </div>
+      <div class="newsletter-card__body">
+        <h2 class="newsletter-card__title">
+          Don't let these stories stay hidden.
+        </h2>
+        <p class="newsletter-card__desc">
+          New stories of remarkable African women, straight to your inbox.
+          No spam, just history worth knowing.
+        </p>
+        <NewsletterForm
+          placeholder="Your email address"
+          @subscribed="onSubscribed"
+        />
       </div>
-    </div>
+    </aside>
   </Transition>
 </template>
 
 <script setup lang="ts">
-const { hasSeenNewsletterPrompt, isSubscribed } = useApp();
+const SCROLL_THRESHOLD = 0.6;
+
+const { hasSeenNewsletterPrompt, isSubscribed, setValue } = useApp();
 const searchOpen = useSearchOpen();
+const route = useRoute();
 
 const visible = ref(false);
 let scrollCleanup: (() => void) | null = null;
-let timeout: ReturnType<typeof setTimeout> | null = null;
 let pendingShow = false;
-
-const route = useRoute();
 
 function shouldShow() {
   if (route.path.startsWith("/newsletter")) return false;
@@ -64,7 +72,6 @@ watch(searchOpen, (isOpen) => {
 
 function dismiss() {
   visible.value = false;
-  const { setValue } = useApp();
   setValue("hasSeenNewsletterPrompt", true);
 }
 
@@ -79,21 +86,16 @@ function cleanup() {
     scrollCleanup();
     scrollCleanup = null;
   }
-  if (timeout) {
-    clearTimeout(timeout);
-    timeout = null;
-  }
 }
 
 onMounted(() => {
   if (!shouldShow()) return;
 
-  timeout = setTimeout(show, 15000);
-
   function onScroll() {
     const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (docHeight > 0 && scrollTop / docHeight >= 0.6) {
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0 && scrollTop / docHeight >= SCROLL_THRESHOLD) {
       show();
     }
   }
@@ -106,111 +108,128 @@ onUnmounted(cleanup);
 </script>
 
 <style scoped>
-.newsletter-modal {
+.newsletter-card {
   position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  background: var(--overlay-default);
-}
-
-.newsletter-modal__card {
-  position: relative;
-  width: 100%;
-  max-width: 28rem;
+  bottom: calc(1.25rem + var(--bottom));
+  right: calc(1.25rem + var(--right));
+  z-index: 250;
+  width: calc(100vw - 2.5rem);
+  max-width: 22rem;
   background: var(--surface-elevated);
+  border: 1px solid var(--border-light);
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: var(--shadow-elevated);
 }
 
-.newsletter-modal__close {
+.newsletter-card__close {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.625rem;
+  right: 0.625rem;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 1.875rem;
+  height: 1.875rem;
   border-radius: 9999px;
   border: none;
   background: transparent;
   color: var(--text-muted);
+  cursor: pointer;
   transition:
     background 0.15s ease,
     color 0.15s ease;
 }
 
-.newsletter-modal__close:hover {
+.newsletter-card__close:hover {
   background: var(--surface-subtle);
   color: var(--text-primary);
 }
 
-.newsletter-modal__accent {
+.newsletter-card__accent {
   height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
 }
 
-.newsletter-modal__body {
-  padding: 2rem 1.75rem 1.75rem;
+.newsletter-card__body {
+  padding: 1.375rem 1.25rem 1.25rem;
 }
 
-.newsletter-modal__title {
-  font-size: 1.375rem;
+.newsletter-card__title {
+  font-size: 1.125rem;
   font-weight: 800;
   color: var(--text-primary);
-  margin: 0 0 0.5rem;
+  margin: 0 1.5rem 0.375rem 0;
   line-height: 1.25;
 }
 
-.newsletter-modal__desc {
-  font-size: 0.9375rem;
-  line-height: 1.6;
+.newsletter-card__desc {
+  font-size: 0.875rem;
+  line-height: 1.55;
   color: var(--text-secondary);
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
+}
+
+@media (max-width: 480px) {
+  .newsletter-card {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: none;
+    max-height: 40vh;
+    overflow-y: auto;
+    border-radius: 1rem 1rem 0 0;
+    border-bottom: none;
+    padding-bottom: var(--bottom);
+  }
+
+  .newsletter-card__body {
+    padding: 1.125rem 1rem 1rem;
+  }
+
+  .newsletter-card__title {
+    font-size: 1rem;
+  }
+
+  .newsletter-card__desc {
+    margin-bottom: 0.75rem;
+  }
 }
 
 /* ── Transition ── */
-.modal-enter-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-enter-active .newsletter-modal__card {
+.newsletter-card-enter-active {
   transition:
-    opacity 0.3s ease,
-    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.modal-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.modal-leave-active .newsletter-modal__card {
+.newsletter-card-leave-active {
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
 }
 
-.modal-enter-from {
+.newsletter-card-enter-from,
+.newsletter-card-leave-to {
   opacity: 0;
+  transform: translateY(1.25rem);
 }
 
-.modal-enter-from .newsletter-modal__card {
-  opacity: 0;
-  transform: translateY(1.5rem) scale(0.96);
-}
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-card-enter-active,
+  .newsletter-card-leave-active {
+    transition: opacity 0.2s ease;
+  }
 
-.modal-leave-to {
-  opacity: 0;
-}
-
-.modal-leave-to .newsletter-modal__card {
-  opacity: 0;
-  transform: translateY(0.5rem) scale(0.98);
+  .newsletter-card-enter-from,
+  .newsletter-card-leave-to {
+    transform: none;
+  }
 }
 </style>

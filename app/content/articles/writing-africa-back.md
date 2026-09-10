@@ -1,6 +1,8 @@
 ---
 title: "Writing Africa Back: The Literary Women Who Refused to Be Invisible"
 description: "The African women writers who put their continent's stories on the world map and fought to make sure those stories were told on their own terms."
+seoTitle: "African Women Writers Who Refused to Be Invisible"
+seoDescription: "From Flora Nwapa's Efuru to Chimamanda Ngozi Adichie, meet the African women writers who put the continent's stories on the world map on their own terms."
 date: 2026-03-09
 slug: writing-africa-back
 category: "Culture"

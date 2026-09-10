@@ -36,7 +36,7 @@ She arrived on the international stage at a moment when “world music” was be
 
 ## What She Fought For
 
-Oumou has said she sings to avenge the wrongs inflicted on her mother. Her songs name the things women were not supposed to name: the pain of sharing a husband, the loss of childhood to early marriage, the quiet dignity of mothers who raise children alone. She has also spoken against female genital mutilation and for the economic independence of women.
+Oumou has said she sings to avenge the wrongs inflicted on her mother. Her songs name the things women were not supposed to name: the pain of sharing a husband, the loss of childhood to early marriage, the quiet dignity of mothers who raise children alone. She has also spoken against female genital mutilation and for the [economic independence](/articles/why-economic-independence-changes-everything) of women.
 
 She never claimed to be inventing feminism. She simply refused to stay silent in a musical form that people already loved and trusted. That refusal, repeated across albums and decades, made her one of the most important feminist voices in modern West African music.
 

@@ -31,7 +31,7 @@ Mozambique emerged from a long civil war in 1992. Diogo’s tenure focused on st
 
 ## What She Fought For
 
-Luisa Diogo worked for **economic development**, **transparent governance**, and **women’s representation** in leadership. She promoted pro-poor policies and represented Mozambique at international forums including the World Economic Forum.
+Luisa Diogo worked for **economic development**, **transparent governance**, and **[women’s representation](/articles/why-representation-matters)** in leadership. She promoted pro-poor policies and represented Mozambique at international forums including the World Economic Forum.
 
 ## Major Achievements
 

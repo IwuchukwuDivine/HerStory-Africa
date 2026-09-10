@@ -1,6 +1,8 @@
 ---
 title: "What Your Timeline Won't Teach You"
 description: "Social media has turned feminism into a debate. History tells a different story. One that is harder to argue with."
+seoTitle: "What Social Media Gets Wrong About Feminism"
+seoDescription: "Social media turned feminism into a shouting match. History tells a different story, from the Aba Women's War to Gambo Sawaba, and it is harder to dismiss."
 date: 2026-03-10
 slug: what-your-timeline-wont-teach-you
 category: "Concepts"

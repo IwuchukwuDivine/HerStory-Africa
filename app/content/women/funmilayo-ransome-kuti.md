@@ -33,7 +33,7 @@ This was the world she decided to fight.
 
 ## What She Fought For
 
-In the 1940s, Ransome-Kuti transformed a small women's club into the **Abeokuta Women's Union (AWU)**, eventually 100,000 members strong. The Union mobilised women traders against the colonial-era flat-rate tax on women, which fell disproportionately on the poor.
+In the 1940s, Ransome-Kuti transformed a small women's club into the **Abeokuta Women's Union (AWU)**, eventually 100,000 members strong. The Union mobilised [women traders](/articles/she-ran-the-market) against the colonial-era flat-rate tax on women, which fell disproportionately on the poor.
 
 Her campaign forced the resignation of the Alake (king) of Abeokuta in 1949, a remarkable achievement in a society built on deference to male authority. She then pushed for the abolition of tax on women entirely. She won.
 
@@ -50,7 +50,7 @@ She later founded the **Nigerian Women's Union** and the **Federation of Nigeria
 
 ## Her Impact Today
 
-Funmilayo Ransome-Kuti is a foundational figure in Nigerian feminism and African political history. Her son, **Fela Anikulapo-Kuti**, became one of Africa's greatest musicians, and his politics were, in no small part, shaped by watching his mother organise. When the Nigerian military threw her from a window during a 1977 raid, she died from her injuries the following year.
+Funmilayo Ransome-Kuti is a foundational figure in [Nigerian feminism](/articles/they-didnt-call-it-feminism-either) and African political history. Her son, **Fela Anikulapo-Kuti**, became one of Africa's greatest musicians, and his politics were, in no small part, shaped by watching his mother organise. When the Nigerian military threw her from a window during a 1977 raid, she died from her injuries the following year.
 
 She appears on the Nigerian 200-naira note. Streets, schools, and institutions bear her name. Her methods (mass mobilisation, civil disobedience, and an unshakeable belief in women's right to participate in public life) remain a template for African feminist organising today.
 

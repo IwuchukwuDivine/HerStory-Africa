@@ -125,6 +125,7 @@ useSeoMeta({
   ogDescription: "Your saved women and articles from HerStory Africa.",
   ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/favorites"),
+  robots: "noindex, follow",
 });
 
 useHead({

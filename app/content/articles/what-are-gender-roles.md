@@ -1,6 +1,8 @@
 ---
 title: "What Are Gender Roles and Who Decides Them?"
 description: "A clear look at where gender roles come from, how they shape everyday life, and why understanding them gives you the freedom to question what you have been told."
+seoTitle: "What Are Gender Roles and Who Decides Them"
+seoDescription: "A plain explanation of gender roles: where they come from, how they shape daily life from birth, and why questioning them lets you choose your own path."
 date: 2026-03-08
 slug: what-are-gender-roles
 category: "Concepts"

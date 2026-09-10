@@ -27,7 +27,7 @@ After her reign she pursued modelling and appeared in international campaigns. S
 
 ## Historical Context
 
-Beauty pageants were often criticised for narrow standards; Agbani Darego’s win was celebrated as a breakthrough for African representation on a global stage. She used the platform to speak about health and education rather than only fashion and appearance.
+Beauty pageants were often criticised for narrow standards; Agbani Darego’s win was celebrated as a breakthrough for [African representation](/articles/why-representation-matters) on a global stage. She used the platform to speak about health and education rather than only fashion and appearance.
 
 ## What She Fought For
 

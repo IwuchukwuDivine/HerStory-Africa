@@ -27,11 +27,11 @@ She was **Zambia’s Ambassador to the United States** and later **Ambassador to
 
 ## Historical Context
 
-Zambia gained independence in 1964. After decades of one-party rule, the move to multiparty politics in the 1990s opened space for figures like Mbikusita-Lewanika to combine ministerial and diplomatic roles with advocacy for gender equality and governance.
+Zambia gained independence in 1964. After decades of one-party rule, the move to multiparty politics in the 1990s opened space for figures like Mbikusita-Lewanika to combine ministerial and diplomatic roles with advocacy for [gender equality](/articles/what-does-gender-equality-look-like) and governance.
 
 ## What She Fought For
 
-Inonge Mbikusita-Lewanika has fought for **women’s representation** in politics and public life, for **democratic governance**, and for **development** that includes women and rural communities. She has represented Zambia internationally and has worked with regional and global bodies on gender and governance.
+Inonge Mbikusita-Lewanika has fought for **[women’s representation](/articles/why-representation-matters)** in politics and public life, for **democratic governance**, and for **development** that includes women and rural communities. She has represented Zambia internationally and has worked with regional and global bodies on gender and governance.
 
 ## Major Achievements
 

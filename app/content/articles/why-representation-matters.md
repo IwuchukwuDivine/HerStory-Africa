@@ -1,6 +1,8 @@
 ---
 title: "Why Representation Matters: What Happens When Girls See Women Who Look Like Them Leading"
 description: "How seeing women in positions of power changes what girls believe is possible, and why African women's visibility in leadership matters for the next generation."
+seoTitle: "Why Representation Matters for African Girls"
+seoDescription: "When Ellen Johnson Sirleaf became Africa's first elected female president, girls saw something new. Learn why seeing women lead changes what girls believe."
 date: 2026-03-08
 slug: why-representation-matters
 category: "Why It Matters"

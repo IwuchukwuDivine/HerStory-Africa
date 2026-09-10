@@ -1,6 +1,8 @@
 ---
 title: "What Is Patriarchy and How Does It Show Up in Everyday Life?"
 description: "A clear and simple explanation of what patriarchy means, how it works, and how young people can learn to recognise it in the world around them."
+seoTitle: "What Is Patriarchy and How It Shows Up Daily"
+seoDescription: "A clear explanation of patriarchy: what the word means, where the system comes from, and how young people can spot it in laws, traditions, and habits."
 date: 2026-03-08
 slug: what-is-patriarchy
 category: "Concepts"

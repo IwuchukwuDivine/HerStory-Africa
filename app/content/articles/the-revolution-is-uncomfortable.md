@@ -1,6 +1,8 @@
 ---
 title: "The Revolution Is Uncomfortable. That's the Point."
 description: "Every generation of African women who pushed for change made people uncomfortable. The discomfort is not a flaw in the movement. It is proof that the movement is working."
+seoTitle: "Why the Feminist Revolution Is Uncomfortable"
+seoDescription: "From Funmilayo Ransome-Kuti to Huda Shaarawi, every push for African women's rights made people uncomfortable. That discomfort means the work is working."
 date: 2026-03-10
 slug: the-revolution-is-uncomfortable
 category: "Why It Matters"

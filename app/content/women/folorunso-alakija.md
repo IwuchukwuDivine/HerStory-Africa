@@ -47,7 +47,7 @@ Beyond business, Alakija has dedicated significant resources to philanthropy thr
 
 ## Her Impact Today
 
-Folorunṣo Alakija's story challenges the narrative that African women cannot compete in the highest echelons of global business. She has used her platform to advocate for women's entrepreneurship and economic independence, and her philanthropy has directly changed thousands of lives. She represents a model of African wealth creation that is reinvested in the continent's people.
+Folorunṣo Alakija's story challenges the narrative that African women cannot compete in the highest echelons of global business. She has used her platform to advocate for women's entrepreneurship and [economic independence](/articles/why-economic-independence-changes-everything), and her philanthropy has directly changed thousands of lives. She represents a model of African wealth creation that is reinvested in the continent's people.
 
 ---
 

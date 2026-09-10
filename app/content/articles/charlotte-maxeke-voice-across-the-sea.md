@@ -1,6 +1,8 @@
 ---
 title: "The Voice That Crossed the Sea: Charlotte Maxeke and the Long Road Home"
 description: "Before she was the Mother of Black Freedom in South Africa, she was a girl with a voice that filled concert halls in London. This is how a singer became a scholar, then a force the colonial state could not ignore."
+seoTitle: "Charlotte Maxeke: From Singer to Freedom Fighter"
+seoDescription: "How Charlotte Maxeke went from singing in London concert halls to earning a degree in America and becoming the Mother of Black Freedom in South Africa."
 date: 2026-03-26
 slug: charlotte-maxeke-voice-across-the-sea
 category: "History"

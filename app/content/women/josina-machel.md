@@ -37,7 +37,7 @@ FRELIMO's leadership initially resisted women's full participation in the strugg
 
 Josina Machel became head of the Department of Social Affairs within FRELIMO, where she organised programmes for war orphans, created literacy initiatives, and established networks to support women displaced by the war. She also led the FRELIMO Women's Detachment, training women as soldiers and political organisers.
 
-She fought for the idea that liberation could not be complete if women remained subjugated — that national freedom and women's freedom were inseparable. She challenged both colonial oppression and patriarchal structures within the liberation movement itself.
+She fought for the idea that liberation could not be complete if women remained subjugated — that national freedom and women's freedom were inseparable. She challenged both colonial oppression and [patriarchal structures](/articles/what-is-patriarchy) within the liberation movement itself.
 
 ## Major Achievements
 

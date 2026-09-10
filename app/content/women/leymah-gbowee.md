@@ -39,7 +39,7 @@ When negotiations between Taylor's government and rebel factions stalled in Ghan
 
 They did not walk out. The deal was signed.
 
-Her activism helped pave the way for a free election in 2005, which Ellen Johnson Sirleaf won, making her Africa's first female head of state.
+Her activism helped pave the way for a free election in 2005, which [Ellen Johnson Sirleaf](/women/ellen-johnson-sirleaf) won, making her Africa's first female head of state.
 
 ## Major Achievements
 

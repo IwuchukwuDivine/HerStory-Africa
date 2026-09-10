@@ -122,21 +122,25 @@
       </NuxtLink>
     </footer>
   </article>
-
-  <div v-else class="article-page__not-found">
-    <LucideFileX :size="48" />
-    <h2>Article not found</h2>
-    <p>The article you're looking for doesn't exist.</p>
-    <NuxtLink to="/" class="article-page__back-btn"> Go home </NuxtLink>
-  </div>
 </template>
 
 <script setup lang="ts">
 const route = useRoute();
+// Strip any trailing slash so the content lookup and payload key match the
+// prerendered URL (the canonical form has no trailing slash).
+const contentPath = route.path.replace(/\/+$/, "") || "/";
 
-const { data: article } = await useAsyncData(`article-${route.path}`, () =>
-  queryCollection("articles").path(route.path).first(),
+const { data: article } = await useAsyncData(`article-${contentPath}`, () =>
+  queryCollection("articles").path(contentPath).first(),
 );
+
+if (!article.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Article not found",
+    fatal: true,
+  });
+}
 
 const readSentinel = ref<HTMLElement | null>(null);
 
@@ -167,7 +171,7 @@ const articleYear = computed(() => {
 const RELATED_COUNT = 3;
 
 const { data: related } = await useAsyncData(
-  `related-${route.path}`,
+  `related-${contentPath}`,
   async () => {
     if (!article.value) return [];
     const sameCategory = await queryCollection("articles")
@@ -195,7 +199,7 @@ const { data: related } = await useAsyncData(
 );
 
 const { data: storyWomen } = await useAsyncData(
-  `article-women-${route.path}`,
+  `article-women-${contentPath}`,
   async () => {
     const slugs = article.value?.women;
     if (!slugs?.length) return [];
@@ -214,11 +218,25 @@ const canonicalUrl = computed(() =>
 );
 const ogImageUrl = computed(() => article.value?.image ?? "");
 
+const seoTitle = computed(() => {
+  if (!article.value) return "";
+  return article.value.seoTitle ?? clipAtWord(article.value.title, 60);
+});
+
+const metaDescription = computed(() => {
+  if (!article.value) return "";
+  return (
+    article.value.seoDescription ?? seoDescription(article.value.description)
+  );
+});
+
+useHead({ titleTemplate: "%s" });
+
 useSeoMeta({
-  title: () => article.value?.title ?? "Article not found",
-  description: () => article.value?.description ?? "",
+  title: seoTitle,
+  description: metaDescription,
   ogTitle: () => article.value?.title ?? "",
-  ogDescription: () => article.value?.description ?? "",
+  ogDescription: metaDescription,
   ogUrl: canonicalUrl,
   ogType: "article",
   twitterCard: "summary_large_image",
@@ -501,46 +519,5 @@ useHead(() => ({
 
 .article-page__footer-link:hover {
   color: var(--color-primary);
-}
-
-/* ── Not found ── */
-.article-page__not-found {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60dvh;
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-muted);
-}
-
-.article-page__not-found h2 {
-  margin: 1rem 0 0.25rem;
-  color: var(--text-primary);
-}
-
-.article-page__not-found p {
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.article-page__back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  background: var(--color-primary);
-  color: var(--text-on-primary);
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.article-page__back-btn:hover {
-  background: var(--color-primary-600);
 }
 </style>

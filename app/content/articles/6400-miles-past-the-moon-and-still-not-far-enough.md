@@ -1,6 +1,8 @@
 ---
 title: "6,400 Miles Past the Moon and Still Not Far Enough"
 description: "Christina Koch just became the first woman to travel around the Moon. The comment sections proved exactly why that milestone still matters."
+seoTitle: "Christina Koch and the Comments After Artemis II"
+seoDescription: "Christina Koch became the first woman to fly around the Moon on Artemis II. This piece reads the online reaction and asks why it still unsettles people."
 date: 2026-04-13
 slug: 6400-miles-past-the-moon-and-still-not-far-enough
 category: "Why It Matters"

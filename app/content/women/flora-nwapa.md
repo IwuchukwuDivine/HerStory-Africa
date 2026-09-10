@@ -31,7 +31,7 @@ Nwapa wrote in the years around Nigerian independence and after the Biafran War 
 
 ## What She Fought For
 
-Flora Nwapa fought for **women's visibility in literature** and for **African control of African stories**. She did not call herself a feminist but portrayed Igbo women with complexity and respect. In 1974 she founded **Tana Press** in Nigeria, one of the first publishing houses run by an African woman, and later Flora Nwapa Company, to publish African writers and promote women in society.
+Flora Nwapa fought for **[women's visibility in literature](/articles/writing-africa-back)** and for **African control of African stories**. She [did not call herself a feminist](/articles/they-didnt-call-it-feminism-either) but portrayed Igbo women with complexity and respect. In 1974 she founded **Tana Press** in Nigeria, one of the first publishing houses run by an African woman, and later Flora Nwapa Company, to publish African writers and promote women in society.
 
 After the war she served as Commissioner for Health and Social Welfare in East Central State, working on reconstruction and with orphans and refugees. She held the chieftaincy title **Ogbuefi**, traditionally reserved for men.
 

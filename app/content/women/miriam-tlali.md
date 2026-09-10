@@ -30,7 +30,7 @@ She took part in the International Writing Program in Iowa in 1978, published th
 
 ## Historical Context
 
-Tlali wrote under high apartheid, when censorship boards banned Black protest literature, Black students were barred from white universities, and the 1976 Soweto Uprising radicalised township writing. Publishing at all, as a Black woman, in South Africa, about apartheid's daily humiliations, was itself an act of defiance. Bessie Head had published earlier, but from exile; Tlali did it from inside the machine.
+Tlali wrote under high apartheid, when censorship boards banned Black protest literature, Black students were barred from white universities, and the 1976 Soweto Uprising radicalised township writing. Publishing at all, as a Black woman, in South Africa, about apartheid's daily humiliations, was itself an act of defiance. [Bessie Head](/women/bessie-head) had published earlier, but from exile; Tlali did it from inside the machine.
 
 ## What She Fought For
 
@@ -47,7 +47,7 @@ The right of Black South Africans, and Black women in particular, to tell their 
 
 ## Her Impact Today
 
-Tlali opened the door for generations of Black South African women writers, and "Muriel at Metropolitan" is a set text in African literature courses worldwide. Her Staffrider interviews preserved ordinary Soweto voices as historical record, and Skotaville proved that Black South Africans could own the means of literary production. The censors who banned her are footnotes now; her books are the curriculum.
+Tlali opened the door for generations of Black South African women writers, and "Muriel at Metropolitan" is a set text in [African literature](/articles/writing-africa-back) courses worldwide. Her Staffrider interviews preserved ordinary Soweto voices as historical record, and Skotaville proved that Black South Africans could own the means of literary production. The censors who banned her are footnotes now; her books are the curriculum.
 
 ---
 

@@ -21,11 +21,24 @@
     <ClientOnly>
       <AfricaMap :country-counts="countryCounts" />
     </ClientOnly>
+
+    <nav class="regions__links" aria-label="Browse by region">
+      <NuxtLink
+        v-for="region in REGIONS"
+        :key="region"
+        :to="`/women/region/${slugify(region)}`"
+        class="region-pill"
+      >
+        {{ region }}
+        <span class="region-pill__count">{{ regionCounts[region] ?? 0 }}</span>
+      </NuxtLink>
+    </nav>
   </section>
 </template>
 
 <script setup lang="ts">
 import { normalizeCountryName } from "~/utils/constants/countries";
+import { REGIONS } from "~/utils/constants/content";
 
 const { data: allWomen } = await useAsyncData("browse-region-women", () =>
   queryCollection("women").order("name", "ASC").all(),
@@ -37,6 +50,14 @@ const countryCounts = computed(() => {
   for (const woman of allWomen.value) {
     const name = normalizeCountryName(woman.country);
     counts[name] = (counts[name] ?? 0) + 1;
+  }
+  return counts;
+});
+
+const regionCounts = computed(() => {
+  const counts: Record<string, number> = {};
+  for (const woman of allWomen.value ?? []) {
+    counts[woman.region] = (counts[woman.region] ?? 0) + 1;
   }
   return counts;
 });
@@ -102,5 +123,42 @@ const totalCountries = computed(() => Object.keys(countryCounts.value).length);
 
 .regions__legend-swatch--max {
   background: var(--color-primary);
+}
+
+.regions__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.region-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border-radius: 9999px;
+  border: 1.5px solid var(--border-default);
+  background: var(--surface-elevated);
+  color: var(--text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.region-pill__count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.region-pill:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--text-on-primary);
+  transform: translateY(-1px);
 }
 </style>

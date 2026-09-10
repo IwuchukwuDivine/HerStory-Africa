@@ -6,7 +6,7 @@ country: "Egypt"
 region: "North Africa"
 born: 1507
 died: 1458
-era: "Pre-colonial"
+era: "Pre-Colonial"
 causes:
   - "Political power"
   - "Trade"

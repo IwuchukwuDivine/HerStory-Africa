@@ -1,6 +1,8 @@
 ---
 title: "The Women's March of 1956: When 20,000 Women Shook Pretoria"
 description: "How 20,000 South African women of all races marched to the Union Buildings in Pretoria to protest the pass laws, creating one of the most powerful moments in anti-apartheid history."
+seoTitle: "The 1956 Women's March on Pretoria Explained"
+seoDescription: "On 9 August 1956, 20,000 South African women marched on Pretoria against the pass laws. Learn what led to it and why the date became National Women's Day."
 date: 2026-03-08
 slug: the-womens-march-of-1956
 category: "History"

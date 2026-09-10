@@ -38,9 +38,15 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
-defineProps<{
+const props = defineProps<{
   error: NuxtError;
 }>();
+
+useSeoMeta({
+  title: () =>
+    props.error?.statusCode === 404 ? "Page not found" : "Something went wrong",
+  robots: "noindex, nofollow",
+});
 
 function handleClear() {
   clearError({ redirect: "/" });

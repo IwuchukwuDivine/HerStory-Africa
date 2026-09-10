@@ -1,5 +1,61 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
+
+// ── Content discovery (build-time) ──────────────────────────────────
+// Reads the Markdown collections once at config time so both the
+// prerender route list and the sitemap can be derived from the files
+// without any runtime queries.
+const contentDir = resolve(__dirname, "app/content");
+
+interface ContentEntry {
+  slug: string;
+  frontmatter: string;
+}
+
+function readContentEntries(collection: string): ContentEntry[] {
+  const dir = resolve(contentDir, collection);
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => {
+      const raw = readFileSync(resolve(dir, f), "utf8");
+      const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      return { slug: f.replace(/\.md$/, ""), frontmatter: match?.[1] ?? "" };
+    });
+}
+
+function frontmatterDate(frontmatter: string, key: string): string | undefined {
+  const match = frontmatter.match(
+    new RegExp(`^${key}:\\s*["']?(\\d{4}-\\d{2}-\\d{2})`, "m"),
+  );
+  return match?.[1];
+}
+
+const womenEntries = readContentEntries("women");
+const articleEntries = readContentEntries("articles");
+const opportunityEntries = readContentEntries("opportunities");
+
+const contentRoutes = [
+  ...womenEntries.map((e) => `/women/${e.slug}`),
+  ...articleEntries.map((e) => `/articles/${e.slug}`),
+  ...opportunityEntries.map((e) => `/opportunities/${e.slug}`),
+];
+
+const contentSitemapUrls = [
+  ...womenEntries.map((e) => ({
+    loc: `/women/${e.slug}`,
+    lastmod: frontmatterDate(e.frontmatter, "dateAdded"),
+  })),
+  ...articleEntries.map((e) => ({
+    loc: `/articles/${e.slug}`,
+    lastmod:
+      frontmatterDate(e.frontmatter, "updated") ??
+      frontmatterDate(e.frontmatter, "date"),
+  })),
+  ...opportunityEntries.map((e) => ({ loc: `/opportunities/${e.slug}` })),
+];
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -51,34 +107,73 @@ export default defineNuxtConfig({
     ],
   },
   hooks: {
-    async "nitro:config"(nitroConfig) {
+    "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) return;
-      const { resolve } = await import("node:path");
-      const { readdirSync } = await import("node:fs");
-      const contentDir = resolve(__dirname, "app/content");
 
-      const women = readdirSync(resolve(contentDir, "women"))
-        .filter((f: string) => f.endsWith(".md"))
-        .map((f: string) => `/women/${f.replace(".md", "")}`);
+      // Hub pages (/women/region|era|cause/<slug>) and the A-Z index, derived
+      // from women frontmatter. Mirrors app/utils/slugify.ts and the
+      // CAUSE_HUB_MIN_WOMEN threshold in app/utils/constants/content.ts.
+      const slugify = (value: string) =>
+        value
+          .toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/['\u2019]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+      const CAUSE_HUB_MIN_WOMEN = 3;
+      const REGIONS = [
+        "West Africa",
+        "East Africa",
+        "Southern Africa",
+        "Central Africa",
+        "North Africa",
+      ];
+      const ERAS = [
+        "Pre-Colonial",
+        "Colonial",
+        "Independence",
+        "Modern",
+        "Contemporary",
+      ];
 
-      const articles = readdirSync(resolve(contentDir, "articles"))
-        .filter((f: string) => f.endsWith(".md"))
-        .map((f: string) => `/articles/${f.replace(".md", "")}`);
+      const scalar = (fm: string, key: string) =>
+        fm.match(new RegExp(`^${key}:\\s*["']?([^"'\\n]+?)["']?\\s*$`, "m"))?.[1];
+      const causeCounts = new Map<string, number>();
+      const regionsSeen = new Set<string>();
+      const erasSeen = new Set<string>();
+      for (const { frontmatter } of womenEntries) {
+        const region = scalar(frontmatter, "region");
+        const era = scalar(frontmatter, "era");
+        if (region) regionsSeen.add(region.toLowerCase());
+        if (era) erasSeen.add(era.toLowerCase());
+        const list = frontmatter.match(/^causes:\s*\n((?:[ \t]+-[^\n]*\n?)+)/m)?.[1];
+        for (const line of list?.split("\n") ?? []) {
+          const cause = line
+            .replace(/^\s*-\s*/, "")
+            .trim()
+            .replace(/^["']|["']$/g, "");
+          if (cause) causeCounts.set(cause, (causeCounts.get(cause) ?? 0) + 1);
+        }
+      }
 
-      const { existsSync } = await import("node:fs");
-      const oppDir = resolve(contentDir, "opportunities");
-      const opportunities = existsSync(oppDir)
-        ? readdirSync(oppDir)
-            .filter((f: string) => f.endsWith(".md"))
-            .map((f: string) => `/opportunities/${f.replace(".md", "")}`)
-        : [];
+      const hubRoutes = [
+        "/women/all",
+        ...REGIONS.filter((r) => regionsSeen.has(r.toLowerCase())).map(
+          (r) => `/women/region/${slugify(r)}`,
+        ),
+        ...ERAS.filter((e) => erasSeen.has(e.toLowerCase())).map(
+          (e) => `/women/era/${slugify(e)}`,
+        ),
+        ...[...causeCounts.entries()]
+          .filter(([, n]) => n >= CAUSE_HUB_MIN_WOMEN)
+          .map(([cause]) => `/women/cause/${slugify(cause)}`),
+      ];
 
       nitroConfig.prerender = nitroConfig.prerender || {};
       nitroConfig.prerender.routes = [
         ...(nitroConfig.prerender.routes || []),
-        ...women,
-        ...articles,
-        ...opportunities,
+        ...contentRoutes,
+        ...hubRoutes,
       ];
     },
   },
@@ -188,6 +283,13 @@ export default defineNuxtConfig({
 
   // ── Image Optimisation ──────────────────────────────────────────────
   image: {
+    // Generate every image variant at build time as static files. The
+    // default on Vercel is its on-demand optimizer, which is metered and
+    // returns 402 once the Hobby quota is used up.
+    provider: "ipxStatic",
+    // Registered so components can opt SVG sources out of optimisation
+    // (see app/utils/imageProvider.ts).
+    providers: { none: {} },
     quality: 80,
     format: ["webp", "jpg"],
     screens: {
@@ -209,8 +311,11 @@ export default defineNuxtConfig({
     defaults: {
       changefreq: "weekly",
       priority: 0.7,
-      lastmod: new Date().toISOString(),
     },
+    // Per-URL lastmod from content frontmatter; merged by loc with the
+    // routes the module discovers from the prerender list.
+    urls: contentSitemapUrls,
+    exclude: ["/favorites", "/newsletter/confirmed", "/newsletter", "/suggest"],
     sitemaps: false,
   },
 
@@ -240,7 +345,7 @@ export default defineNuxtConfig({
         { property: "og:site_name", content: "HerStory Africa" },
         {
           property: "og:title",
-          content: "HerStory Africa — The women history forgot to teach you.",
+          content: "HerStory Africa: The women history forgot to teach you.",
         },
         {
           property: "og:description",
@@ -259,7 +364,7 @@ export default defineNuxtConfig({
         { name: "twitter:site", content: "@_DeeVyn" },
         {
           name: "twitter:title",
-          content: "HerStory Africa — The women history forgot to teach you.",
+          content: "HerStory Africa: The women history forgot to teach you.",
         },
         {
           name: "twitter:description",
@@ -269,6 +374,17 @@ export default defineNuxtConfig({
         {
           name: "twitter:image",
           content: "https://herstoryafrica.com.ng/og-image.png",
+        },
+      ],
+
+      // Apply the saved colour scheme before first paint so a dark-mode
+      // reload never flashes light. Mirrors @vueuse/core useDark storage.
+      script: [
+        {
+          key: "theme-init",
+          tagPosition: "head",
+          innerHTML:
+            "(function(){try{var s=localStorage.getItem('vueuse-color-scheme');if(s==='dark'||(s==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();",
         },
       ],
 

@@ -1,6 +1,8 @@
 ---
 title: "Why Men Who Support Women Are Not Weak"
 description: "Challenging the idea that supporting gender equality makes a man less of a man, and showing why male allyship has always been part of the fight for justice."
+seoTitle: "Why Men Who Support Women Are Not Weak"
+seoDescription: "Supporting gender equality does not make a man less of a man. Learn where that myth comes from and why male allies have always been part of the fight."
 date: 2026-03-08
 slug: why-men-who-support-women-are-not-weak
 category: "Why It Matters"

@@ -1,6 +1,8 @@
 ---
 title: "Who Is a Feminist and Why We All Should Be"
 description: "A simple, honest breakdown of what it means to be a feminist, why it matters for everyone, and how African women have been leading the way for generations."
+seoTitle: "Who Is a Feminist and Why We All Should Be"
+seoDescription: "A simple breakdown of what a feminist is, why feminism matters for boys and girls alike, and how African women have led the push for equality for decades."
 date: 2026-03-08
 slug: who-is-a-feminist-and-why-we-all-should-be
 category: "Concepts"

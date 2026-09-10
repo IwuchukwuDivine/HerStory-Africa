@@ -32,7 +32,7 @@ The Mau Mau uprising of the 1950s was an armed revolt against British land theft
 
 ## Her Impact Today
 
-For about seventy years she kept her vow, her matted dreadlocks becoming one of Kenya's most recognisable emblems of the independence struggle. In April 2022 they were finally cut, by Mama Ngina Kenyatta, in a ceremony Muthoni said marked Kenya's full independence. She died in 2023, aged around ninety-two, honoured at last as a national heroine and a living reminder that the fight for freedom was carried, in part, by women the history books had left out.
+For about seventy years she kept her vow, her matted dreadlocks becoming one of Kenya's most recognisable emblems of the [independence struggle](/articles/daughters-of-independence). In April 2022 they were finally cut, by Mama Ngina Kenyatta, in a ceremony Muthoni said marked Kenya's full independence. She died in 2023, aged around ninety-two, honoured at last as a national heroine and a living reminder that the fight for freedom was carried, in part, by women the history books had left out.
 
 ---
 

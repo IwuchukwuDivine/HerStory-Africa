@@ -1,6 +1,8 @@
 ---
 title: "Why Educating Girls Changes Everything"
 description: "How investing in girls' education transforms families, communities, and entire nations, with real stories from across Africa."
+seoTitle: "Why Educating Girls Changes Everything"
+seoDescription: "What the evidence shows when girls stay in school: higher earnings, healthier children, and stronger nations, with real stories from across Africa."
 date: 2026-03-08
 slug: why-educating-girls-changes-everything
 category: "Why It Matters"

@@ -21,9 +21,9 @@ summary: "Malawian independence activist and politician who was a founding leade
 
 ## Biography
 
-Rose Lomathinda Chibambo was born in 1928 in Malawi (then Nyasaland), a British protectorate in Southern Africa. She received limited formal education — as was common for African women under colonial rule — but possessed an extraordinary political instinct and organising ability.
+Rose Lomathinda Chibambo was born in 1928 in Malawi (then Nyasaland), a British protectorate in Southern Africa. She received limited formal education — as was common for African women under [colonial rule](/articles/how-colonialism-rewrote-the-rules) — but possessed an extraordinary political instinct and organising ability.
 
-She became politically active in the 1950s, joining the Nyasaland African Congress (NAC) and quickly rising through its ranks. She was one of the very few women in leadership positions within the independence movement, serving alongside figures like Hastings Kamuzu Banda, Orton Chirwa, and Henry Chipembere.
+She became politically active in the 1950s, joining the Nyasaland African Congress (NAC) and quickly rising through its ranks. She was one of the very few women in leadership positions within the [independence movement](/articles/daughters-of-independence), serving alongside figures like Hastings Kamuzu Banda, Orton Chirwa, and Henry Chipembere.
 
 ## Historical Context
 

@@ -26,7 +26,7 @@ She was not a chief or an elder in the traditional male hierarchy. She was a wom
 
 ## Historical Context
 
-By the early 1900s, British colonial authorities in Kenya were demanding labour and taxes from the Giriama and other Mijikenda peoples along the coast. Young men were being conscripted for plantation work and porterage. Traditional lands were being seized. The colonial administration attempted to relocate the Giriama away from their fertile homeland to less productive areas.
+By the early 1900s, [British colonial authorities](/articles/how-colonialism-rewrote-the-rules) in Kenya were demanding labour and taxes from the Giriama and other Mijikenda peoples along the coast. Young men were being conscripted for plantation work and porterage. Traditional lands were being seized. The colonial administration attempted to relocate the Giriama away from their fertile homeland to less productive areas.
 
 The Giriama had no standing army. They had traditions, oaths, and a woman named Mekatilili.
 

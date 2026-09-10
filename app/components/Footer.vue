@@ -23,36 +23,12 @@
 
         <div class="site-footer__col">
           <h4 class="site-footer__col-title">Browse</h4>
-          <NuxtLink
-            :to="{ path: '/women', query: { region: 'West Africa' } }"
-            class="site-footer__link"
-          >
-            West Africa
-          </NuxtLink>
-          <NuxtLink
-            :to="{ path: '/women', query: { region: 'East Africa' } }"
-            class="site-footer__link"
-          >
-            East Africa
-          </NuxtLink>
-          <NuxtLink
-            :to="{ path: '/women', query: { region: 'Southern Africa' } }"
-            class="site-footer__link"
-          >
-            Southern Africa
-          </NuxtLink>
-          <NuxtLink
-            :to="{ path: '/women', query: { region: 'Central Africa' } }"
-            class="site-footer__link"
-          >
-            Central Africa
-          </NuxtLink>
-          <NuxtLink
-            :to="{ path: '/women', query: { region: 'North Africa' } }"
-            class="site-footer__link"
-          >
-            North Africa
-          </NuxtLink>
+          <NuxtLink to="/women/region/west-africa" class="site-footer__link">West Africa</NuxtLink>
+          <NuxtLink to="/women/region/east-africa" class="site-footer__link">East Africa</NuxtLink>
+          <NuxtLink to="/women/region/southern-africa" class="site-footer__link">Southern Africa</NuxtLink>
+          <NuxtLink to="/women/region/central-africa" class="site-footer__link">Central Africa</NuxtLink>
+          <NuxtLink to="/women/region/north-africa" class="site-footer__link">North Africa</NuxtLink>
+          <NuxtLink to="/women/all" class="site-footer__link">All women A to Z</NuxtLink>
         </div>
 
         <div class="site-footer__col">

@@ -31,7 +31,7 @@ Nollywood has grown into one of the world's largest film industries, but women h
 
 ## What She Fought For
 
-Funke Akindele has fought for **women's visibility** in Nollywood and for **female-led production**. She has created roles and stories that reflect Nigerian women's lives and has spoken about the importance of ownership and representation in the industry.
+Funke Akindele has fought for **women's visibility** in Nollywood and for **female-led production**. She has created roles and stories that reflect Nigerian women's lives and has spoken about the importance of ownership and [representation in the industry](/articles/why-representation-matters).
 
 ## Major Achievements
 

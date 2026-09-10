@@ -27,7 +27,7 @@ She is the founder and director of the **Ake Arts & Book Festival**, one of Afri
 
 ## Historical Context
 
-African literature has often been published and celebrated abroad. Lola Shoneyin has helped build spaces on the continent — through Ake Festival and related initiatives — where writers and readers meet, and where difficult themes (polygamy, power, gender) are explored in African contexts.
+[African literature](/articles/writing-africa-back) has often been published and celebrated abroad. Lola Shoneyin has helped build spaces on the continent — through Ake Festival and related initiatives — where writers and readers meet, and where difficult themes (polygamy, power, gender) are explored in African contexts.
 
 ## What She Fought For
 

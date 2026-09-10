@@ -32,7 +32,7 @@ The administrator Henry Harwood Polling was particularly brutal in extracting ta
 
 ## What She Fought For
 
-In 1896–1897, Nehanda became one of the spiritual and military leaders of the **First Chimurenga**, the uprising of the Shona and Ndebele peoples against British colonial rule. She organised communities, provided spiritual authority to fighters, and is credited with directing the killing of Polling.
+In 1896–1897, Nehanda became one of the spiritual and military leaders of the **First Chimurenga**, the uprising of the Shona and Ndebele peoples against [British colonial rule](/articles/how-colonialism-rewrote-the-rules). She organised communities, provided spiritual authority to fighters, and is credited with directing the killing of Polling.
 
 She fought for the return of land, the expulsion of colonial forces, and the right of her people to govern themselves under their own law and tradition. The uprising was eventually suppressed by British forces with superior weapons.
 

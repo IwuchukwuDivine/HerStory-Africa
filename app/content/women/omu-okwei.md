@@ -34,7 +34,7 @@ Okwei's lifetime spans the British conquest and consolidation of Southern Nigeri
 
 ## What She Fought For
 
-Economic power for African women within a colonial economy stacked against them. She proved that an Igbo woman could out-trade the intermediary class, bank the profits, and convert wealth into institutional authority. As Omu she defended women's traditional political power (the Council of Mothers, the markets, the right of women to govern their own commercial world) even as colonial rule was dismantling the very idea.
+Economic power for African women within a colonial economy stacked against them. She proved that an Igbo woman could out-trade the intermediary class, bank the profits, and convert wealth into institutional authority. As Omu she defended women's traditional political power (the Council of Mothers, the markets, the right of women to govern their own commercial world) even as [colonial rule](/articles/how-colonialism-rewrote-the-rules) was dismantling the very idea.
 
 ## Major Achievements
 

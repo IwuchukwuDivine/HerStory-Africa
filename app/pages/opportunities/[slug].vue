@@ -55,25 +55,27 @@
       <ContentRenderer :value="opp" />
     </div>
   </article>
-
-  <div v-else class="opp-detail__not-found">
-    <LucideSearchX :size="48" />
-    <h2>Opportunity not found</h2>
-    <p>This opportunity may have expired or doesn't exist.</p>
-    <NuxtLink to="/opportunities" class="opp-detail__back-btn">
-      Browse all opportunities
-    </NuxtLink>
-  </div>
 </template>
 
 <script setup lang="ts">
 import { Briefcase, Coins, GraduationCap, Lightbulb } from "lucide-vue-next";
 
 const route = useRoute();
+// Strip any trailing slash so the content lookup and payload key match the
+// prerendered URL (the canonical form has no trailing slash).
+const contentPath = route.path.replace(/\/+$/, "") || "/";
 
-const { data: opp } = await useAsyncData(`opp-${route.path}`, () =>
-  queryCollection("opportunities").path(route.path).first(),
+const { data: opp } = await useAsyncData(`opp-${contentPath}`, () =>
+  queryCollection("opportunities").path(contentPath).first(),
 );
+
+if (!opp.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Opportunity not found",
+    fatal: true,
+  });
+}
 
 const hasBody = computed(() => {
   if (!opp.value) return false;
@@ -149,9 +151,9 @@ const canonicalUrl = computed(() =>
 
 useSeoMeta({
   title: () => opp.value?.title ?? "Opportunity not found",
-  description: () => opp.value?.description ?? "",
+  description: () => seoDescription(opp.value?.description ?? ""),
   ogTitle: () => `${opp.value?.title ?? ""} — HerStory Africa`,
-  ogDescription: () => opp.value?.description ?? "",
+  ogDescription: () => seoDescription(opp.value?.description ?? ""),
   ogImage: getAbsoluteUrl(),
   ogUrl: canonicalUrl,
   ogType: "website",
@@ -375,46 +377,5 @@ onMounted(() => {
 
 .opp-detail__content :deep(a:hover) {
   color: var(--color-primary-600);
-}
-
-/* ── Not found ── */
-.opp-detail__not-found {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60dvh;
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-muted);
-}
-
-.opp-detail__not-found h2 {
-  margin: 1rem 0 0.25rem;
-  color: var(--text-primary);
-}
-
-.opp-detail__not-found p {
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.opp-detail__back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  background: var(--color-primary);
-  color: var(--text-on-primary);
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.opp-detail__back-btn:hover {
-  background: var(--color-primary-600);
 }
 </style>

@@ -33,7 +33,7 @@ Nyong'o entered the industry at a moment when audiences and critics were beginni
 
 ## What She Fought For
 
-Nyong'o has consistently used her visibility to advocate for representation and against colorism. She has spoken openly about growing up and not seeing women who looked like her on screen, and about the damage that absence does to young people's sense of worth.
+Nyong'o has consistently used her visibility to advocate for [representation](/articles/why-representation-matters) and against colorism. She has spoken openly about growing up and not seeing women who looked like her on screen, and about the damage that absence does to young people's sense of worth.
 
 She has supported projects that centre African and Black stories, both in front of and behind the camera. She has also used her platform to speak about women's rights, including access to education and safety. Her work extends beyond performance: she has produced and advocated for stories that would otherwise go untold.
 

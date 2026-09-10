@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /favorites
+Disallow: /newsletter/confirmed
+Disallow: /api/
+
+Sitemap: https://herstoryafrica.com.ng/sitemap.xml

@@ -1,6 +1,8 @@
 ---
 title: "The Girl They Tried to Keep Hidden: The Story of Destiny Ayo Vaughan"
 description: "Shipped from Nigeria to Ireland as a child with the promise of a better life, Destiny was held captive for five years. She was not supposed to survive. She was certainly not supposed to speak. She did both."
+seoTitle: "Destiny Ayo Vaughan: Trafficked Child to Activist"
+seoDescription: "Destiny Ayo Vaughan was trafficked from Nigeria to Ireland as a child and held captive for five years. How she survived, spoke out, and built a refuge."
 date: 2026-03-17
 updated: 2026-09-08
 slug: the-girl-they-tried-to-keep-hidden

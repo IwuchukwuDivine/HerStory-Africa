@@ -31,7 +31,7 @@ Before Maryam Babangida, the role of First Lady in Nigeria was largely ceremonia
 
 ## What She Fought For
 
-Maryam Babangida fought for **rural women's welfare** and **economic empowerment** through Better Life for Rural Women, and for **visibility** of Nigerian culture and fashion. She advocated for women's cooperatives and access to resources.
+Maryam Babangida fought for **rural women's welfare** and **[economic empowerment](/articles/why-economic-independence-changes-everything)** through Better Life for Rural Women, and for **visibility** of Nigerian culture and fashion. She advocated for women's cooperatives and access to resources.
 
 ## Major Achievements
 

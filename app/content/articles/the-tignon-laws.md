@@ -1,6 +1,8 @@
 ---
 title: "The Tignon Laws: When a Headwrap Became Resistance"
 description: "In 1786, colonial Louisiana tried to control Black women by forcing them to cover their hair. They turned the restriction into one of history's most powerful fashion statements."
+seoTitle: "The Tignon Laws: A Headwrap Turned Resistance"
+seoDescription: "In 1786 colonial Louisiana ordered Black women to cover their hair. Learn how they turned the tignon into a statement of style, defiance, and pride."
 date: 2026-03-16
 slug: the-tignon-laws
 category: "History"
