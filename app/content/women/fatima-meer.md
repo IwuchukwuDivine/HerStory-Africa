@@ -13,7 +13,7 @@ causes:
   - "Women's rights"
   - "Social justice"
 image: "/women/placeholder.svg"
-imageCredit: "No free-use image available"
+imageCredit: "No freely licensed image available"
 featured: false
 funFact: "She wrote Nelson Mandela's first authorised biography, Higher Than Hope, later translated into some thirteen languages."
 summary: "South African sociologist and anti-apartheid activist who built solidarity between Indian and African South Africans, was banned, detained and firebombed for her defiance, and wrote Nelson Mandela's first authorised biography."

@@ -12,7 +12,7 @@ causes:
   - "Sovereignty & independence"
   - "Women's leadership"
 image: "/women/placeholder.svg"
-imageCredit: "No free-use image available"
+imageCredit: "No freely licensed image available"
 featured: false
 funFact: "She refused to cut her hair for roughly seventy years, vowing to keep her dreadlocks until she saw the true fruits of the independence she had fought for."
 summary: "The only woman to reach the rank of Field Marshal in Kenya's Mau Mau uprising, who fought British colonial rule from the forests of Mount Kenya. She spent the rest of her life demanding that her country honour the freedom fighters it chose to forget."

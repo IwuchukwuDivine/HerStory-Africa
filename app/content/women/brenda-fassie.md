@@ -13,7 +13,7 @@ causes:
   - "Women's rights"
   - "Music"
 image: "/women/placeholder.svg"
-imageCredit: ""
+imageCredit: "No freely licensed image available"
 featured: false
 funFact: "Brenda Fassie's 1983 hit 'Weekend Special' broke barriers as the first Black South African pop song to chart internationally."
 summary: "South African pop icon known as 'MaBrrr' and the 'Madonna of the Townships.' Her hit 'Weekend Special' (1983) broke barriers as the first Black South African pop song to chart internationally. She was a voice of anti-apartheid resistance and lived openly in a conservative society."
