@@ -10,6 +10,7 @@
       >
         <NuxtImg
           :src="woman.image"
+          :provider="imageProvider(woman.image)"
           :alt="`Portrait of ${woman.name}, ${woman.country}`"
           width="48"
           height="48"

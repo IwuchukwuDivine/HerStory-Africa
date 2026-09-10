@@ -34,6 +34,7 @@
               <div class="tl-item__avatar-wrap">
                 <NuxtImg
                   :src="woman.image"
+                  :provider="imageProvider(woman.image)"
                   :alt="`Portrait of ${woman.name}, ${woman.country}`"
                   width="80"
                   height="80"

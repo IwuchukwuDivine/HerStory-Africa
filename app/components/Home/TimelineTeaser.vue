@@ -21,6 +21,7 @@
           <div class="timeline__card-image">
             <NuxtImg
               :src="woman.image"
+              :provider="imageProvider(woman.image)"
               :alt="`Portrait of ${woman.name}, ${woman.country}`"
               width="80"
               height="80"

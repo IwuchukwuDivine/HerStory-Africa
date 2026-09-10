@@ -287,6 +287,9 @@ export default defineNuxtConfig({
     // default on Vercel is its on-demand optimizer, which is metered and
     // returns 402 once the Hobby quota is used up.
     provider: "ipxStatic",
+    // Registered so components can opt SVG sources out of optimisation
+    // (see app/utils/imageProvider.ts).
+    providers: { none: {} },
     quality: 80,
     format: ["webp", "jpg"],
     screens: {

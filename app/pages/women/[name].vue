@@ -10,6 +10,7 @@
         <div class="woman-profile__image-wrapper">
           <NuxtImg
             :src="woman.image"
+            :provider="imageProvider(woman.image)"
             :alt="`Portrait of ${woman.name}, ${woman.country}`"
             width="480"
             height="600"
