@@ -75,6 +75,32 @@ Legend: `[x]` done · `[~]` needs user input
 
 ---
 
+## PageSpeed pass (10 Sep 2026, mobile homepage scored 66 / 96 / 96 / 100)
+
+- [x] **LCP 6.8 s.** The LCP element was a lazy-loaded card image. The first
+      two "Newest in the Archive" cards now load eagerly with
+      `fetchpriority="high"` (`WomanCard` `priority` prop).
+- [x] **1.8 MB network payload.** Home and listing pages shipped every
+      profile's full Markdown body in `_payload.json`. Queries now `select()`
+      card fields only: home 1,072 KB → 146 KB, `/women` 964 KB → 97 KB,
+      `/timeline` similar.
+- [x] **167 KB Google Tag script, 215 ms main thread, 70 KB unused JS.**
+      `nuxt-gtag` is now `initMode: "manual"`; the script loads only after a
+      visitor grants consent (or on return visits with stored consent).
+- [x] **CSS shipped twice.** Nuxt inlined component styles and linked the
+      same files. `features.inlineStyles: false`: home HTML 86 KB → 59 KB.
+- [x] **Contrast.** "Did you know?" badge text darkened (secondary-700).
+- [x] **Security headers** (HSTS with includeSubDomains + preload,
+      X-Frame-Options, `frame-ancestors`, COOP, nosniff, Referrer-Policy,
+      Permissions-Policy) via `vercel.json`.
+- [x] **Hydration mismatch** reported on production could not be reproduced
+      in dev or in the current production build (desktop or mobile). Likely
+      from the older deploy; re-check after this one ships.
+- [ ] Not addressed: a full Content-Security-Policy with `script-src` and
+      Trusted Types (would need nonces for gtag and Vercel analytics);
+      `_ipx` WebP variants keep `.jpg`/`.png` names so Lighthouse reads them
+      as JPEG/PNG (cosmetic; browsers sniff the bytes).
+
 ## Needs the user
 
 - [~] Real, licensed images for the 19 placeholder profiles: abla-pokou,

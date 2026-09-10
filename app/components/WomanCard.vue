@@ -8,7 +8,8 @@
         width="400"
         height="500"
         format="webp"
-        loading="lazy"
+        :loading="priority ? 'eager' : 'lazy'"
+        :fetchpriority="priority ? 'high' : undefined"
         class="woman-card__image"
       />
       <span class="woman-card__era">{{ era }}</span>
@@ -66,6 +67,8 @@ const props = withDefaults(
     summary: string;
     causes: string[];
     maxCauses?: number;
+    /** Above-the-fold card: load its image eagerly with high priority (LCP). */
+    priority?: boolean;
   }>(),
   {
     maxCauses: 2,

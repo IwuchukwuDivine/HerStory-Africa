@@ -10,8 +10,9 @@
 
     <div v-if="women?.length" class="featured__grid">
       <WomanCard
-        v-for="woman in women"
+        v-for="(woman, i) in women"
         :key="woman.slug"
+        :priority="i < 2"
         :name="woman.name"
         :slug="woman.slug"
         :image="woman.image"
@@ -46,6 +47,7 @@
 <script setup lang="ts">
 const { data: women } = await useAsyncData("featured-women", () =>
   queryCollection("women")
+    .select("name", "slug", "image", "country", "region", "born", "died", "era", "summary", "causes", "dateAdded")
     .where("image", "<>", "/women/placeholder.svg")
     .where("image", "<>", "")
     .order("dateAdded", "DESC")

@@ -83,6 +83,9 @@ export default defineNuxtConfig({
 
   // ── Static Site Generation ──────────────────────────────────────────
   ssr: true,
+  // Nuxt inlines component CSS by default but still links the same files,
+  // so every page shipped its styles twice. Link only.
+  features: { inlineStyles: false },
   nitro: {
     prerender: {
       routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
@@ -92,6 +95,9 @@ export default defineNuxtConfig({
   gtag: {
     id: "G-V5FFHGH864",
     enabled: process.env.NODE_ENV === "production",
+    // The 167 KB gtag script is only fetched once a visitor grants consent
+    // (see useTag). Declined or undecided visitors never download it.
+    initMode: "manual",
     initCommands: [
       [
         "consent",

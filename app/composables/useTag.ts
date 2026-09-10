@@ -56,12 +56,13 @@ const writeStoredConsent = (choice: ConsentChoice) => {
   }
 };
 export default () => {
-  const { gtag } = useGtag();
+  const { gtag, initialize } = useGtag();
   const track = <K extends EventName>(name: K, params: EventPayloads[K]) => {
     gtag("event", name, params);
   };
 
   const grantConsent = () => {
+    initialize();
     gtag("consent", "update", grantedConsent);
     writeStoredConsent("granted");
     track("cookie_consent", { choice: "granted" });
@@ -74,8 +75,12 @@ export default () => {
   };
   const restoreStoredConsent = () => {
     const stored = readStoredConsent();
-    if (stored === "granted") gtag("consent", "update", grantedConsent);
-    else if (stored === "denied") gtag("consent", "update", deniedConsent);
+    if (stored === "granted") {
+      initialize();
+      gtag("consent", "update", grantedConsent);
+    } else if (stored === "denied") {
+      gtag("consent", "update", deniedConsent);
+    }
   };
   return {
     track,

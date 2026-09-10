@@ -69,7 +69,10 @@ const ERA_ORDER = [
 ] as const;
 
 const { data: allWomen } = await useAsyncData("timeline-all", () =>
-  queryCollection("women").order("born", "ASC").all(),
+  queryCollection("women")
+    .select("name", "slug", "image", "country", "region", "born", "died", "era", "summary", "causes", "dateAdded")
+    .order("born", "ASC")
+    .all(),
 );
 
 const totalCount = computed(() => allWomen.value?.length ?? 0);

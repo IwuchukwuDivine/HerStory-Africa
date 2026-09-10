@@ -125,7 +125,10 @@ const activeFilterCount = computed(
 const { isRead } = useApp();
 
 const { data: allWomen } = await useAsyncData("all-women", () =>
-  queryCollection("women").order("name", "ASC").all(),
+  queryCollection("women")
+    .select("name", "slug", "image", "country", "region", "born", "died", "era", "summary", "causes", "dateAdded")
+    .order("name", "ASC")
+    .all(),
 );
 
 const filteredWomen = computed(() => {

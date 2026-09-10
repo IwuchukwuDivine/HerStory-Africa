@@ -118,7 +118,7 @@ onUnmounted(() => {
   letter-spacing: 0.05em;
   border-radius: 9999px;
   background: var(--color-secondary-50);
-  color: var(--color-secondary-600);
+  color: var(--color-secondary-700);
   margin-bottom: 1.25rem;
 }
 

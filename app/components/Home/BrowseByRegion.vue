@@ -41,7 +41,7 @@ import { normalizeCountryName } from "~/utils/constants/countries";
 import { REGIONS } from "~/utils/constants/content";
 
 const { data: allWomen } = await useAsyncData("browse-region-women", () =>
-  queryCollection("women").order("name", "ASC").all(),
+  queryCollection("women").select("slug", "country", "region").all(),
 );
 
 const countryCounts = computed(() => {
