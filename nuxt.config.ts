@@ -283,6 +283,10 @@ export default defineNuxtConfig({
 
   // ── Image Optimisation ──────────────────────────────────────────────
   image: {
+    // Generate every image variant at build time as static files. The
+    // default on Vercel is its on-demand optimizer, which is metered and
+    // returns 402 once the Hobby quota is used up.
+    provider: "ipxStatic",
     quality: 80,
     format: ["webp", "jpg"],
     screens: {
