@@ -206,11 +206,10 @@ const contextType = ref<"woman" | "article" | "general">("general");
 const aiContent = ref<AiContent | null>(null);
 
 const isRelevantRoute = computed(() => {
-  const path = route.path;
-  return (
-    (path.startsWith("/women/") && path.length > "/women/".length) ||
-    (path.startsWith("/articles/") && path.length > "/articles/".length)
-  );
+  // Only individual profiles and articles have AI content. Listing and hub
+  // routes under /women/ (all, region/*, era/*, cause/*) do not.
+  const path = route.path.replace(/\/+$/, "");
+  return /^\/(women|articles)\/(?!all$)[^/]+$/.test(path);
 });
 
 let typeTimer: ReturnType<typeof setInterval> | null = null;
