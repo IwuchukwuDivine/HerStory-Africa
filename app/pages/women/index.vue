@@ -88,6 +88,11 @@
     </div>
 
     <Pagination v-model="currentPage" :total-pages="totalPages" />
+
+    <p class="women-listing__index-link">
+      Looking for someone specific?
+      <NuxtLink to="/women/all">Browse all women A to Z</NuxtLink>
+    </p>
   </div>
 </template>
 
@@ -97,7 +102,7 @@ import { REGIONS, ERAS } from "~/utils/constants/content";
 const route = useRoute();
 const router = useRouter();
 
-const PER_PAGE = 9;
+const PER_PAGE = 24;
 
 const searchQuery = ref((route.query.q as string) ?? "");
 const activeRegion = ref((route.query.region as string) ?? "");
@@ -422,5 +427,21 @@ useHead({
 .women-listing__clear-btn:hover {
   border-color: var(--ring-default);
   color: var(--color-primary);
+}
+.women-listing__index-link {
+  margin: 2rem 0 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.women-listing__index-link a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.women-listing__index-link a:hover {
+  text-decoration: underline;
 }
 </style>

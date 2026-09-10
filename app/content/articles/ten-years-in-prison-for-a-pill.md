@@ -1,6 +1,8 @@
 ---
 title: "Ten Years in Prison for the Pill That Keeps Nigerian Mothers Alive"
 description: "Nigeria's Senate is debating raising the punishment for supplying abortion drugs from 3 to 10 years. The pill at the centre of that law is the same one keeping women in villages from bleeding to death after childbirth."
+seoTitle: "Nigeria's Misoprostol Bill and Maternal Deaths"
+seoDescription: "Nigeria's Senate wants ten-year sentences for supplying abortion drugs. That pill, misoprostol, also stops mothers bleeding to death after birth."
 date: 2026-05-11
 slug: ten-years-in-prison-for-a-pill
 category: "Why It Matters"

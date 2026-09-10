@@ -1,6 +1,8 @@
 ---
 title: "Feminism Is About Equality, Not Hating Men"
 description: "Why the idea that feminism means hating men is a misunderstanding, and why the history of African women's movements matters."
+seoTitle: "Feminism Means Equality, Not Hating Men"
+seoDescription: "Why the belief that feminism is anti-men is a misunderstanding, where that impression comes from, and what the history of African women's movements shows."
 date: 2025-03-08
 slug: feminism-equality-not-anti-men
 category: "Concepts"

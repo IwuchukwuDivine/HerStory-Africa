@@ -21,7 +21,7 @@ summary: "Nigerian physician and community health advocate; niece of Funmilayo R
 
 ## Biography
 
-Yemisi Ransome-Kuti was born in 1948 into the renowned Ransome-Kuti family of Abeokuta. She is the niece of **Funmilayo Ransome-Kuti** and cousin of **Fela Kuti**. She trained as a physician and has dedicated much of her career to **community health**, **women's health**, and **development**. She was a co-founder of the **Nigerian Network of Non-Governmental Organisations** and has worked with various organisations on health, gender, and civil society issues.
+Yemisi Ransome-Kuti was born in 1948 into the renowned Ransome-Kuti family of Abeokuta. She is the niece of **[Funmilayo Ransome-Kuti](/women/funmilayo-ransome-kuti)** and cousin of **Fela Kuti**. She trained as a physician and has dedicated much of her career to **community health**, **women's health**, and **development**. She was a co-founder of the **Nigerian Network of Non-Governmental Organisations** and has worked with various organisations on health, gender, and civil society issues.
 
 She has carried forward the family's commitment to social justice and women's advancement, often working at the grassroots level and in policy advocacy. She has spoken about the legacy of her aunt and the need for continued activism for health and rights.
 

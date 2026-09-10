@@ -116,7 +116,7 @@ async function subscribe() {
   flex: 1;
   min-width: 0;
   padding: 0.75rem 1rem;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-family: var(--font-body);
   color: var(--text-primary);
   background: var(--surface-elevated);

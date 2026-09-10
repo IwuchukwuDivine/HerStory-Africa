@@ -20,7 +20,7 @@ summary: "Businesswoman and politician who in 1975 became Prime Minister of the 
 
 ## Biography
 
-Elisabeth Domitien was born in 1925 near Bangui, in what was then the French colony of Ubangi-Shari. She had little formal schooling. What she had instead was a genius for commerce. Starting with small trade in the markets, she built interests in coffee, cattle and retail until she ranked among the wealthiest self-made women in the country. Market women knew her. Farmers knew her. When she spoke in Sango, the language of the streets and the villages, people stopped to listen.
+Elisabeth Domitien was born in 1925 near Bangui, in what was then the French colony of Ubangi-Shari. She had little formal schooling. What she had instead was a genius for commerce. Starting with small trade in the markets, she built interests in coffee, cattle and retail until she ranked among the wealthiest self-made women in the country. [Market women](/articles/she-ran-the-market) knew her. Farmers knew her. When she spoke in Sango, the language of the streets and the villages, people stopped to listen.
 
 Politics found her early. From around 1950 she was active in MESAN, the independence movement founded by Barthélemy Boganda, and she stayed with the party through independence in 1960 and the coup that brought Jean-Bédel Bokassa to power in 1966. Bokassa needed someone who could speak to ordinary Central Africans with credibility he lacked, and Domitien could. By 1972 she was vice-president of the party.
 
@@ -46,7 +46,7 @@ A functioning republic rather than a throne. Domitien believed in MESAN's origin
 
 ## Her Impact Today
 
-Every list of Africa's women heads of government begins with her name. Ellen Johnson Sirleaf, Joyce Banda, Sahle-Work Zewde and Samia Suluhu Hassan all stand in a line that starts in Bangui in January 1975, with a market trader who had taught herself everything. In the Central African Republic she is remembered with a certain rueful pride: the leader who saw the catastrophe of the empire coming and said so out loud, when saying so was the most dangerous thing a person could do.
+Every list of Africa's women heads of government begins with her name. [Ellen Johnson Sirleaf](/women/ellen-johnson-sirleaf), [Joyce Banda](/women/joyce-banda), Sahle-Work Zewde and Samia Suluhu Hassan all stand in a line that starts in Bangui in January 1975, with a market trader who had taught herself everything. In the Central African Republic she is remembered with a certain rueful pride: the leader who saw the catastrophe of the empire coming and said so out loud, when saying so was the most dangerous thing a person could do.
 
 ---
 

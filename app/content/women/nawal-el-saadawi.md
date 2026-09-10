@@ -28,7 +28,7 @@ She trained as a physician at Cairo University, graduating in 1955, and went on 
 
 ## Historical Context
 
-Egypt in the 1950s–1970s was undergoing rapid modernisation under Nasser and Sadat, but the position of women, particularly regarding sexuality, bodily autonomy, and political participation, remained profoundly constrained. Religious conservatism and patriarchal norms were deeply embedded in law, medicine, and culture. FGM was widely practised and rarely discussed publicly. Women who raised these issues did so at serious professional and personal risk.
+Egypt in the 1950s–1970s was undergoing rapid modernisation under Nasser and Sadat, but the position of women, particularly regarding sexuality, bodily autonomy, and political participation, remained profoundly constrained. Religious conservatism and [patriarchal norms](/articles/what-is-patriarchy) were deeply embedded in law, medicine, and culture. FGM was widely practised and rarely discussed publicly. Women who raised these issues did so at serious professional and personal risk.
 
 Nawal El Saadawi raised them anyway.
 

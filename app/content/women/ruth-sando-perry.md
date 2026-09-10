@@ -34,7 +34,7 @@ Liberia's First Civil War (1989–1997) killed an estimated 150,000 to 200,000 p
 
 ## What She Fought For
 
-Ending the civil war; getting guns out of the hands of fighters, including children; bringing the displaced home; credible elections; and the demonstration, made in the world's full view, that women could lead national reconciliation. The path she opened, Ellen Johnson Sirleaf would walk to the presidency a decade later.
+Ending the civil war; getting guns out of the hands of fighters, including children; bringing the displaced home; credible elections; and the demonstration, made in the world's full view, that women could lead national reconciliation. The path she opened, [Ellen Johnson Sirleaf](/women/ellen-johnson-sirleaf) would walk to the presidency a decade later.
 
 ## Major Achievements
 

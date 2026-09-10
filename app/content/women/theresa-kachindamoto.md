@@ -26,7 +26,7 @@ When she returned to Dedza, she was shocked by what she found: girls as young as
 
 ## Historical Context
 
-Malawi has one of the highest rates of child marriage in the world. According to UNICEF, nearly half of Malawian girls are married before the age of 18. The practice is driven by poverty, cultural traditions, and the low value placed on girls' education. Many families see marrying off daughters young as a way to reduce financial burden or secure a bride price.
+Malawi has one of the highest rates of child marriage in the world. According to UNICEF, nearly half of Malawian girls are married before the age of 18. The practice is driven by poverty, cultural traditions, and the low value placed on [girls' education](/articles/why-educating-girls-changes-everything). Many families see marrying off daughters young as a way to reduce financial burden or secure a bride price.
 
 Despite national laws raising the minimum marriage age to 18 in 2017, enforcement has been weak, particularly in rural areas where traditional chiefs hold significant authority over community practices.
 

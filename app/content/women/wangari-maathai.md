@@ -21,7 +21,7 @@ summary: "Kenyan environmentalist and democracy activist who founded the Green B
 
 ## Biography
 
-Wangarĩ Muta Maathai was born on 1 April 1940 in Ihithe, Tetu District, Kenya. The daughter of a farmer, she grew up in the Kenyan highlands at a time when colonial rule was reshaping the land and its people.
+Wangarĩ Muta Maathai was born on 1 April 1940 in Ihithe, Tetu District, Kenya. The daughter of a farmer, she grew up in the Kenyan highlands at a time when [colonial rule](/articles/how-colonialism-rewrote-the-rules) was reshaping the land and its people.
 
 She was a beneficiary of the Kennedy Airlift, a programme that brought African students to study in the United States, earning a biology degree in Kansas and a master's degree from the University of Pittsburgh. She returned to Kenya and became the first woman in East and Central Africa to earn a PhD, awarded by the University of Nairobi in 1971.
 

@@ -1,6 +1,8 @@
 ---
 title: "The Aba Women's War: When Nigerian Women Took On the British Empire"
 description: "The story of how thousands of women in southeastern Nigeria organised one of the largest anti-colonial uprisings in African history in 1929."
+seoTitle: "The Aba Women's War of 1929 Explained"
+seoDescription: "How thousands of Igbo women in southeastern Nigeria rose against British colonial rule in 1929, what caused the uprising, and what it changed afterwards."
 date: 2026-03-08
 slug: the-aba-womens-war
 category: "History"

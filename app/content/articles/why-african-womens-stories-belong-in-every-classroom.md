@@ -1,6 +1,8 @@
 ---
 title: "Why African Women's Stories Belong in Every Classroom"
 description: "How the absence of women from African history education harms everyone, and why teaching their stories is not optional but essential."
+seoTitle: "Why African Women Belong in History Classrooms"
+seoDescription: "Most African history lessons leave women out. Learn who is missing, from Nzinga to Yaa Asantewaa, and why teaching their stories matters for every student."
 date: 2026-03-08
 slug: why-african-womens-stories-belong-in-every-classroom
 category: "Why It Matters"

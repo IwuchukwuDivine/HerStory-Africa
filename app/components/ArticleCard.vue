@@ -3,7 +3,7 @@
     <div v-if="image" class="article-card__image-wrapper">
       <NuxtImg
         :src="image"
-        :alt="title"
+        :alt='`Illustration for "${title}"`'
         width="280"
         height="158"
         format="webp"

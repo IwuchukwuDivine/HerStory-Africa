@@ -3,7 +3,7 @@
     <div class="woman-card__image-wrapper">
       <NuxtImg
         :src="image"
-        :alt="name"
+        :alt="`Portrait of ${name}, ${country}`"
         width="400"
         height="500"
         format="webp"

@@ -1,6 +1,8 @@
 ---
 title: "Beyond the Kitchen: How African Women Have Always Been Leaders, Warriors, and Builders"
 description: "Challenging the myth that African women were historically confined to domestic roles by exploring centuries of women who ruled, fought, traded, and shaped the continent."
+seoTitle: "African Women as Leaders, Warriors, and Builders"
+seoDescription: "African women have ruled kingdoms, led armies, and run trade for centuries. This piece dismantles the myth that they were ever confined to the kitchen."
 date: 2026-03-08
 slug: beyond-the-kitchen
 category: "History"

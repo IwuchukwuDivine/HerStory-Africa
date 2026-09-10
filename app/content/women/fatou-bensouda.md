@@ -20,7 +20,7 @@ summary: "Gambian lawyer who served as Chief Prosecutor of the International Cri
 
 ## Biography
 
-Fatou Bom Bensouda was born on 31 January 1961 in Banjul, Gambia. She studied law in Ghana and then in the United Kingdom, going on to build a distinguished career in international criminal law. She worked as a lawyer and senior government official in Gambia before joining the International Criminal Tribunal for Rwanda (ICTR) in the 1990s, where she prosecuted some of those responsible for the 1994 Rwandan genocide.
+Fatou Bom Bensouda was born on 31 January 1961 in Banjul, Gambia. She studied law in Ghana and then in the United Kingdom, going on to build a distinguished career in international criminal law. She worked as a lawyer and senior government official in Gambia before joining the International Criminal Tribunal for Rwanda (ICTR) in the 1990s, where she prosecuted some of those responsible for the [1994 Rwandan genocide](/articles/when-men-go-to-war-women-suffer).
 
 In 2004 she joined the International Criminal Court (ICC) as Deputy Prosecutor. In 2012 she was elected Chief Prosecutor of the ICC, the first African and the first woman to hold that position. She served two consecutive terms until 2021.
 

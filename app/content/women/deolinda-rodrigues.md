@@ -31,7 +31,7 @@ In March 1967, while attempting to cross into Angola with the squadron, Deolinda
 
 ## Historical Context
 
-Portugal was the last and most obstinate of Europe's colonial powers, insisting into the 1970s that Angola was not a colony but a province of Portugal itself. The independence war that began in 1961 was fought not by one movement but by three, and the rivalry between the MPLA and the FNLA was lethal long before it exploded into the post-independence civil war. That is what killed Deolinda: not the Portuguese army but a rival liberation movement. Her death is a window into the tragedy folded inside Angola's independence struggle, in which the fighters' cruelest enemies were sometimes each other.
+Portugal was the last and most obstinate of Europe's colonial powers, insisting into the 1970s that Angola was not a colony but a province of Portugal itself. The independence war that began in 1961 was fought not by one movement but by three, and the rivalry between the MPLA and the FNLA was lethal long before it exploded into the post-independence civil war. That is what killed Deolinda: not the Portuguese army but a rival liberation movement. Her death is a window into the tragedy folded inside [Angola's independence struggle](/articles/daughters-of-independence), in which the fighters' cruelest enemies were sometimes each other.
 
 ## What She Fought For
 

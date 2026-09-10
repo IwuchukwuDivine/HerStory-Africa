@@ -17,6 +17,8 @@ export interface Woman {
 export interface Article {
   title: string
   description: string
+  seoTitle?: string
+  seoDescription?: string
   date: string
   slug: string
   category: string

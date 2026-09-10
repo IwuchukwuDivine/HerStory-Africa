@@ -31,7 +31,7 @@ Afrobeats has become a global phenomenon, but the industry has often been male-d
 
 ## What She Fought For
 
-Tiwa Savage has fought for **women’s place in Afrobeats** and for **fair treatment** of female artists. She has used her platform to speak about gender, ambition, and representation and has supported younger women in the industry.
+Tiwa Savage has fought for **women’s place in Afrobeats** and for **fair treatment** of female artists. She has used her platform to speak about gender, ambition, and [representation](/articles/why-representation-matters) and has supported younger women in the industry.
 
 ## Major Achievements
 

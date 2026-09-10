@@ -7,19 +7,28 @@
 
     <div class="causes__pills">
       <NuxtLink
-        v-for="cause in CAUSES"
-        :key="cause"
-        :to="{ path: '/women', query: { cause } }"
+        v-for="hub in hubs"
+        :key="hub.slug"
+        :to="`/women/cause/${hub.slug}`"
         class="cause-pill"
       >
-        {{ cause }}
+        {{ hub.cause }}
       </NuxtLink>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { CAUSES } from "~/utils/constants/content";
+import { CAUSE_HUB_MIN_WOMEN } from "~/utils/constants/content";
+
+// Only causes with enough women to have their own hub page are linked.
+const { data: causeIndex } = await useAsyncData("hub-cause-index", () =>
+  queryCollection("women").select("causes").all(),
+);
+
+const hubs = computed(() =>
+  causeHubs(causeIndex.value ?? [], CAUSE_HUB_MIN_WOMEN),
+);
 </script>
 
 <style scoped>

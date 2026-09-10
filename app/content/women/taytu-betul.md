@@ -42,7 +42,7 @@ Taytu Betul fought for **Ethiopian sovereignty** and **independence from Europea
 
 ## Her Impact Today
 
-Taytu Betul is honoured in Ethiopia as a national hero. She symbolises resistance to colonialism and the role of women in defending sovereignty. Her legacy is part of the story of why Ethiopia remained independent when most of Africa was colonised.
+Taytu Betul is honoured in Ethiopia as a national hero. She symbolises resistance to [colonialism](/articles/how-colonialism-rewrote-the-rules) and the role of women in defending sovereignty. Her legacy is part of the story of why Ethiopia remained independent when most of Africa was colonised.
 
 ---
 

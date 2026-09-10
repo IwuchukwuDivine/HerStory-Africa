@@ -29,7 +29,7 @@ When the embassy assignment ended and her uncle returned to Somalia, Dirie was l
 
 ## Historical Context
 
-FGM (female genital mutilation) affects an estimated 200 million women and girls alive today across 30 countries, predominantly in Africa. It ranges in severity from partial clitoridectomy to infibulation (removal of the clitoris, labia, and sewing of the vaginal opening). It causes chronic pain, complications in childbirth, and long-term psychological trauma. It is performed on girls, often pre-pubescent, without their consent.
+FGM (female genital mutilation) affects an estimated 200 million women and girls alive today across 30 countries, predominantly in Africa. It ranges in severity from partial clitoridectomy to infibulation (removal of the clitoris, labia, and sewing of the vaginal opening). It causes chronic pain, complications in childbirth, and long-term psychological trauma. It is performed on girls, often pre-pubescent, without their [consent](/articles/what-is-consent).
 
 For decades, it was treated in the West as a cultural matter, not to be judged or interfered with. In many affected communities, it was (and remains) normalised and enforced by women on girls.
 

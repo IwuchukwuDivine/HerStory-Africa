@@ -57,7 +57,7 @@ The **repatriation of the Benin Bronzes** (including this mask) has been one of 
 
 ## Her Impact Today
 
-Queen Idia's face (rendered in ivory six centuries ago) is one of the most recognised symbols of African heritage in the world. Her story is a story of female power in pre-colonial Africa that colonialism tried to erase, both by dismantling the Benin Kingdom and by looting its art. The ongoing fight for the return of the Benin Bronzes is, in part, a fight to restore that history to its people.
+Queen Idia's face (rendered in ivory six centuries ago) is one of the most recognised symbols of African heritage in the world. Her story is a story of female power in pre-colonial Africa that [colonialism](/articles/how-colonialism-rewrote-the-rules) tried to erase, both by dismantling the Benin Kingdom and by looting its art. The ongoing fight for the return of the Benin Bronzes is, in part, a fight to restore that history to its people.
 
 ---
 

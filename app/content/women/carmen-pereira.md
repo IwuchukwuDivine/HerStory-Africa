@@ -47,7 +47,7 @@ The end of Portuguese colonialism; the principle, learned in the liberated zones
 
 ## Her Impact Today
 
-Pereira stands with Titina Silá and Teodora Inácia Gomes as proof of women's command role in Africa's liberation wars, and her 1984 precedent opened the line that runs through Sylvie Kinigi and Ruth Perry to Ellen Johnson Sirleaf and Samia Suluhu Hassan. The Musée des Civilisations noires in Dakar profiles her among Africa's great figures. Three days as head of state; a permanent change in what African women could be said to have already done.
+Pereira stands with Titina Silá and Teodora Inácia Gomes as proof of women's command role in Africa's liberation wars, and her 1984 precedent opened the line that runs through [Sylvie Kinigi](/women/sylvie-kinigi) and [Ruth Perry](/women/ruth-sando-perry) to [Ellen Johnson Sirleaf](/women/ellen-johnson-sirleaf) and Samia Suluhu Hassan. The Musée des Civilisations noires in Dakar profiles her among Africa's great figures. Three days as head of state; a permanent change in what African women could be said to have already done.
 
 ---
 

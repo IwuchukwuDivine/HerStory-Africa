@@ -31,7 +31,7 @@ Ghana’s Fourth Republic began in 1992. Nana Konadu used her platform to push f
 
 ## What She Fought For
 
-Nana Konadu fought for **women’s political and economic empowerment**, **girls’ education**, and **community development**. The DWM worked on health, microfinance, and advocacy. She has been a vocal figure in Ghanaian politics and women’s organising.
+Nana Konadu fought for **women’s political and [economic empowerment](/articles/why-economic-independence-changes-everything)**, **[girls’ education](/articles/why-educating-girls-changes-everything)**, and **community development**. The DWM worked on health, microfinance, and advocacy. She has been a vocal figure in Ghanaian politics and women’s organising.
 
 ## Major Achievements
 

@@ -23,7 +23,7 @@ summary: "Nigerian actress, director, and producer; one of Nollywood's most popu
 
 Mercy Johnson Okojie was born on 28 August 1984 in Lagos, Nigeria. She rose to fame in Nollywood with roles in films such as *Dirty Secret*, *The Maid*, and *Baby Oku in America*, and became one of the industry's most bankable and beloved actresses. She has won multiple Africa Magic Viewers' Choice Awards and other honours.
 
-She has expanded into producing and directing and has spoken about balancing career and family and about the importance of positive representation of women and mothers in Nigerian film.
+She has expanded into producing and directing and has spoken about balancing career and family and about the importance of positive [representation](/articles/why-representation-matters) of women and mothers in Nigerian film.
 
 ## Historical Context
 

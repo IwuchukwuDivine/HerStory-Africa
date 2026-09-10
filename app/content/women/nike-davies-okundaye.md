@@ -32,7 +32,7 @@ She established the Nike Art Gallery in Lagos, and a second gallery and arts cen
 
 Nike Davies-Okundaye has fought for traditional Nigerian art forms to be treated as serious art and not dismissed as craft or ethnographic curiosity. She has also fought for women and young people from poor backgrounds to have access to artistic education and a way to earn a living through their creativity.
 
-Her arts education programmes are free. She has trained over 3,000 women and children, many of them from economically vulnerable backgrounds, in weaving, batik, embroidery, painting, and other traditional crafts. The goal is always the same: give people skills, and give them economic independence.
+Her arts education programmes are free. She has trained over 3,000 women and children, many of them from economically vulnerable backgrounds, in weaving, batik, embroidery, painting, and other traditional crafts. The goal is always the same: give people skills, and give them [economic independence](/articles/why-economic-independence-changes-everything).
 
 She has also been a vocal campaigner for the preservation of Nigerian cultural heritage and has spoken out against the loss of traditional craft knowledge as younger generations move toward urban wage employment.
 

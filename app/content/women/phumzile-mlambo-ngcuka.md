@@ -27,13 +27,13 @@ In 2005, President Thabo Mbeki appointed her Deputy President of South Africa. S
 
 ## Historical Context
 
-South Africa's first democratic government in 1994 promised transformation. Women had fought alongside men in the struggle against apartheid, but their representation in leadership remained limited. Mlambo-Ngcuka's appointment as Deputy President in 2005 was a milestone. It showed that women could reach the highest levels of South African government.
+South Africa's first democratic government in 1994 promised transformation. Women had fought alongside men in the struggle against apartheid, but their [representation in leadership](/articles/why-representation-matters) remained limited. Mlambo-Ngcuka's appointment as Deputy President in 2005 was a milestone. It showed that women could reach the highest levels of South African government.
 
-When she left domestic politics, she took her experience to the global stage. As Executive Director of UN Women from 2013 to 2021, she led the United Nations' work on gender equality and women's empowerment during a critical period.
+When she left domestic politics, she took her experience to the global stage. As Executive Director of UN Women from 2013 to 2021, she led the United Nations' work on [gender equality](/articles/what-does-gender-equality-look-like) and women's empowerment during a critical period.
 
 ## What She Fought For
 
-Mlambo-Ngcuka has spent her career fighting for women's rights and gender equality. As Deputy President, she championed economic empowerment, education, and the rights of women and girls. As head of UN Women, she pushed for concrete action: equal pay, an end to violence against women, and women's full participation in political and economic life.
+Mlambo-Ngcuka has spent her career fighting for women's rights and gender equality. As Deputy President, she championed [economic empowerment](/articles/why-economic-independence-changes-everything), education, and the rights of women and girls. As head of UN Women, she pushed for concrete action: equal pay, an end to violence against women, and women's full participation in political and economic life.
 
 She launched and led the Generation Equality Forum, a global gathering that brought together governments, civil society, and the private sector to commit to gender equality. She has consistently argued that gender equality is not a side issue but a prerequisite for peace, development, and prosperity.
 

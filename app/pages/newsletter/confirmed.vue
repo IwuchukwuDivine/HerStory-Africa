@@ -35,6 +35,7 @@ useSeoMeta({
     "You're officially part of HerStory Africa. Stories of remarkable African women are on their way to your inbox.",
   ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/newsletter/confirmed"),
+  robots: "noindex, follow",
 });
 
 useHead({

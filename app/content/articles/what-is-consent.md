@@ -1,6 +1,8 @@
 ---
 title: "What Is Consent and Why It Matters"
 description: "A straightforward guide to understanding consent in everyday life, why it is a basic human right, and why every young person needs to know about it."
+seoTitle: "What Is Consent and Why It Matters for Everyone"
+seoDescription: "A straightforward guide to consent: what it means, why it must be freely given and informed, and why every young person should know it as a basic right."
 date: 2026-03-08
 slug: what-is-consent
 category: "Concepts"

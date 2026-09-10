@@ -5,7 +5,7 @@ slug: "moremi-ajasoro"
 country: "Nigeria"
 region: "West Africa"
 born: 1100
-era: "Pre-colonial"
+era: "Pre-Colonial"
 causes:
   - "Sacrifice"
   - "Community protection"

@@ -10,7 +10,7 @@
       >
         <NuxtImg
           :src="woman.image"
-          :alt="woman.name"
+          :alt="`Portrait of ${woman.name}, ${woman.country}`"
           width="48"
           height="48"
           format="webp"

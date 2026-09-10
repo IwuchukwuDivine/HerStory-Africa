@@ -1,6 +1,8 @@
 ---
 title: "She Ran the Market: How African Women Have Always Controlled Trade"
 description: "Long before modern business, African women were running trade networks, controlling markets, and building serious wealth. Here is why that history matters."
+seoTitle: "How African Women Have Always Controlled Trade"
+seoDescription: "For centuries, West African market women ran trade networks, gave credit, and built real wealth. Here is that history and why it still matters today."
 date: 2026-03-09
 slug: she-ran-the-market
 category: "History"

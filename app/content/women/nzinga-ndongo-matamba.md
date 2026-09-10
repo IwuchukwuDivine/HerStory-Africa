@@ -43,7 +43,7 @@ Nzinga fought to preserve Ndongo and Matamba's sovereignty and to limit Portugue
 
 ## Her Impact Today
 
-Nzinga is a national symbol in Angola and a global icon of African female leadership and resistance to colonialism. Statues, streets, and schools bear her name. UNESCO and others have highlighted her in programmes on women in African history. Her story continues to inspire discussions about gender, power, and resistance in African history.
+Nzinga is a national symbol in Angola and a global icon of African female leadership and resistance to [colonialism](/articles/how-colonialism-rewrote-the-rules). Statues, streets, and schools bear her name. UNESCO and others have highlighted her in programmes on women in African history. Her story continues to inspire discussions about gender, power, and resistance in African history.
 
 ---
 

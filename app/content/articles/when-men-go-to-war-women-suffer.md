@@ -1,6 +1,8 @@
 ---
 title: "When Men Go to War, Women Suffer: The Rwanda Genocide and What Was Done to Women"
 description: "In 100 days in 1994, between 250,000 and 500,000 women were raped in Rwanda. This is the story of why it happened, what the world did about it, and how Rwandan women rebuilt an entire country from the ruins."
+seoTitle: "The Rwanda Genocide and Its War on Women"
+seoDescription: "In 100 days in 1994, up to 500,000 women were raped in Rwanda. Learn why women were targeted, how the world reacted, and how survivors rebuilt a nation."
 date: 2026-06-08
 slug: when-men-go-to-war-women-suffer
 category: "History"

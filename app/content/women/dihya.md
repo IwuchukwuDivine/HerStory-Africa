@@ -6,7 +6,7 @@ country: "Algeria"
 region: "North Africa"
 born: 650
 died: 703
-era: "Pre-colonial"
+era: "Pre-Colonial"
 causes:
   - "Military leadership"
   - "Anti-colonialism"

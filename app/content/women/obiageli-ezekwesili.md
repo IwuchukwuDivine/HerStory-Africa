@@ -58,7 +58,7 @@ In 2019, she ran for President of Nigeria.
 
 ## Her Impact Today
 
-Obiageli Ezekwesili remains one of the most prominent advocates for accountability, education, and child rights in Africa. The Chibok girls were never fully returned, but the campaign she helped ignite changed the global conversation around girls' education and Boko Haram's campaign of violence. She continues to speak, write, and campaign, refusing to allow the Nigerian government or the international community to move on.
+Obiageli Ezekwesili remains one of the most prominent advocates for accountability, education, and child rights in Africa. The Chibok girls were never fully returned, but the campaign she helped ignite changed the global conversation around [girls' education](/articles/why-educating-girls-changes-everything) and Boko Haram's campaign of violence. She continues to speak, write, and campaign, refusing to allow the Nigerian government or the international community to move on.
 
 ---
 

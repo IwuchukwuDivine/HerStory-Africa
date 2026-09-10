@@ -1,6 +1,8 @@
 ---
 title: "A Conversation With My Father"
 description: "What happens when you tell your father you built a website about African women's history, and why the word 'feminism' keeps getting in the way of the actual conversation."
+seoTitle: "A Conversation With My Father About Feminism"
+seoDescription: "A daughter tells her father she built an archive of African women's history. What follows shows why the word feminism blocks the conversation that matters."
 date: 2026-03-09
 slug: a-conversation-with-my-father
 category: "Why It Matters"

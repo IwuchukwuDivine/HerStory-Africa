@@ -47,7 +47,7 @@ Reconciliation before everything, because she understood that in Burundi ethnici
 
 ## Her Impact Today
 
-Burundi has not had another woman as Prime Minister or President. Kinigi's example is studied less for what she built, since war swallowed most of it, than for how she behaved when everything fell apart: the civil servant who kept the state alive by refusing to concede that it was dead. In a decade remembered for leaders who inflamed the Great Lakes, she belongs to the small company of those who tried to hold it together, alongside her Rwandan counterpart Agathe Uwilingiyimana, who faced the same forces and did not survive them.
+Burundi has not had another woman as Prime Minister or President. Kinigi's example is studied less for what she built, since war swallowed most of it, than for how she behaved when everything fell apart: the civil servant who kept the state alive by refusing to concede that it was dead. In a decade remembered for leaders who inflamed the Great Lakes, she belongs to the small company of those who tried to hold it together, alongside her Rwandan counterpart [Agathe Uwilingiyimana](/women/agathe-uwilingiyimana), who faced the same forces and did not survive them.
 
 ---
 

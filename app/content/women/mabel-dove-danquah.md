@@ -47,7 +47,7 @@ Women's right to a public voice and to political office; an end to colonial rule
 
 ## Her Impact Today
 
-Dove Danquah is regarded as Ghana's trailblazing feminist writer, the forerunner of Efua Sutherland and Ama Ata Aidoo, and the symbolic starting point of women's parliamentary representation in Africa. The Dove Foundation for Global Change was founded in her honour, and her Shaw satire featured in the British Library's "West Africa: Word, Symbol, Song" exhibition. Every African woman parliamentarian sits in a line of succession that begins with her 1954 victory.
+Dove Danquah is regarded as Ghana's trailblazing feminist writer, the forerunner of [Efua Sutherland](/women/efua-sutherland) and [Ama Ata Aidoo](/women/ama-ata-aidoo), and the symbolic starting point of women's parliamentary representation in Africa. The Dove Foundation for Global Change was founded in her honour, and her Shaw satire featured in the British Library's "West Africa: Word, Symbol, Song" exhibition. Every African woman parliamentarian sits in a line of succession that begins with her 1954 victory.
 
 ---
 
