@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="`/articles/${slug}`" class="article-feature">
     <div class="article-feature__image">
-      <NuxtImg v-if="image" :src="image" :alt='`Illustration for "${title}"`' width="768" height="432" sizes="(min-width: 768px) 640px, 90vw" format="webp" loading="lazy" />
+      <NuxtImg v-if="image" :src="image" :alt='`Illustration for "${title}"`' width="768" height="432" format="webp" loading="lazy" />
       <div v-else class="no-photo"><LucideBookOpen :size="40" /></div>
     </div>
     <span class="article-feature__eyebrow">{{ category }}<template v-if="readingTime"> · {{ minutesLabel(readingTime) }}</template></span>

@@ -17,7 +17,22 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAppStore } from "~/store/app";
+
+// Visit bookkeeping for "Continue reading": remember when the visitor was
+// last here before stamping this visit. Runs once per session.
+const store = useAppStore();
+const previousVisitAt = useState<number>("previous-visit-at", () => 0);
+const visitRecorded = useState<boolean>("visit-recorded", () => false);
+
+onMounted(() => {
+  if (visitRecorded.value) return;
+  previousVisitAt.value = store.lastVisitAt;
+  store.touchVisit();
+  visitRecorded.value = true;
+});
+</script>
 
 <style scoped>
 .app-layout {
@@ -30,19 +45,21 @@
   flex: 1;
 }
 
+/* The children hide themselves via the reading-bar / AI flags. */
 .floating-actions {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: calc(24px + var(--bottom));
+  right: calc(24px + var(--right));
   z-index: 250;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.75rem;
+  gap: 12px;
 }
+
 @media (max-width: 640px) {
   .floating-actions {
-    right: 1rem;
+    right: calc(16px + var(--right));
   }
 }
 </style>

@@ -6,8 +6,6 @@
         :src="image"
         :alt="`Portrait of ${name}, ${country}`"
         width="640"
-        height="640"
-        sizes="(min-width: 1024px) 440px, 90vw"
         format="webp"
         :loading="priority ? 'eager' : 'lazy'"
         :fetchpriority="priority ? 'high' : undefined"

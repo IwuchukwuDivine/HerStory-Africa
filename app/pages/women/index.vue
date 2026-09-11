@@ -1,16 +1,7 @@
 <template>
   <div class="women-listing">
     <header class="women-listing__header">
-      <div class="women-listing__header-top">
-        <div>
-          <h1 class="women-listing__title">Women of HerStory Africa</h1>
-          <p class="women-listing__subtitle">
-            {{ totalCount }} women across the archive. Search, filter, and
-            explore.
-          </p>
-        </div>
-      </div>
-
+      <MuseumLabel level="h1" eyebrow="The archive" :title="`${totalCount} women`" />
       <ClientOnly>
         <ExplorationProgress :total="totalCount" />
       </ClientOnly>
@@ -21,83 +12,148 @@
         v-model="searchQuery"
         placeholder="Search by name or country…"
         class="women-listing__search"
-        @submit="currentPage = 1"
       />
 
-      <button
-        class="women-listing__filter-toggle"
-        @click="filtersOpen = !filtersOpen"
-      >
-        <LucideSlidersHorizontal :size="16" />
-        Filters
-        <span v-if="activeFilterCount" class="women-listing__filter-badge">{{
-          activeFilterCount
-        }}</span>
-        <LucideChevronDown
-          :size="16"
-          :class="{ 'women-listing__chevron--open': filtersOpen }"
+      <div class="women-listing__chips" role="group" aria-label="Filters">
+        <FilterChip
+          label="Region"
+          :value="activeRegion"
+          :open="openSheet === 'region'"
+          @open="openSheet = 'region'"
+          @clear="activeRegion = ''"
         />
-      </button>
+        <FilterChip
+          label="Era"
+          :value="activeEra"
+          :open="openSheet === 'era'"
+          @open="openSheet = 'era'"
+          @clear="activeEra = ''"
+        />
+        <FilterChip
+          label="Cause"
+          :value="activeCause"
+          :open="openSheet === 'cause'"
+          @open="openSheet = 'cause'"
+          @clear="activeCause = ''"
+        />
+        <FilterChip
+          label="Unread"
+          toggle
+          :active="unreadOnly"
+          @toggle="unreadOnly = !unreadOnly"
+        />
+      </div>
 
-      <div
-        class="women-listing__filter-panel"
-        :class="{ 'women-listing__filter-panel--open': filtersOpen }"
-      >
-        <div class="women-listing__filter-panel-inner">
-          <div class="women-listing__filters">
-            <FilterBy
-              v-model="activeRegion"
-              label="Region"
-              :options="[...REGIONS]"
-            />
-            <FilterBy v-model="activeEra" label="Era" :options="[...ERAS]" />
-          </div>
-
-          <FilterBy
-            v-model="readFilter"
-            label="Status"
-            :options="['Read', 'Unread']"
-            inline
-          />
-        </div>
+      <div class="women-listing__count-row">
+        <span class="women-listing__count" aria-live="polite">
+          {{ filteredWomen.length }} {{ filteredWomen.length === 1 ? "woman" : "women" }} · A to Z
+        </span>
+        <button
+          v-if="hasActiveFilters"
+          type="button"
+          class="women-listing__clear"
+          @click="clearFilters"
+        >
+          Clear filters
+        </button>
       </div>
     </div>
 
-    <div v-if="paginatedWomen.length" class="women-listing__grid">
-      <WomanCard
-        v-for="woman in paginatedWomen"
-        :key="woman.slug"
-        :name="woman.name"
-        :slug="woman.slug"
-        :image="woman.image"
-        :country="woman.country"
-        :born="woman.born"
-        :died="woman.died"
-        :era="woman.era"
-        :summary="woman.summary"
-        :causes="woman.causes"
-      />
+    <template v-if="filteredWomen.length">
+      <!-- Mobile: compact 2-up grid, loaded 24 at a time. -->
+      <div v-if="showCompact" class="women-listing__mobile">
+        <div class="compact-grid">
+          <WomanCardCompact
+            v-for="(woman, i) in loadedWomen"
+            :key="woman.slug"
+            :name="woman.name"
+            :slug="woman.slug"
+            :image="woman.image"
+            :country="woman.country"
+            :born="woman.born"
+            :died="woman.died"
+            :era="woman.era"
+            :focal="woman.ogFocal"
+            :priority="i < 2"
+          />
+        </div>
+
+        <div class="women-listing__more">
+          <button
+            v-if="loadedWomen.length < filteredWomen.length"
+            type="button"
+            class="pill pill--lg pill--secondary"
+            @click="pagesLoaded += 1"
+          >
+            Show {{ Math.min(PER_PAGE, filteredWomen.length - loadedWomen.length) }} more
+          </button>
+          <span class="women-listing__page-line">
+            Page {{ Math.min(pagesLoaded, totalPages) }} of {{ totalPages }} ·
+            <NuxtLink to="/women/all">Browse A to Z instead</NuxtLink>
+          </span>
+        </div>
+      </div>
+
+      <!-- Desktop: full cards, three up, numbered pagination. -->
+      <div v-if="showFull" class="women-listing__desktop">
+        <div class="women-listing__grid">
+          <WomanCard
+            v-for="woman in pagedWomen"
+            :key="woman.slug"
+            :name="woman.name"
+            :slug="woman.slug"
+            :image="woman.image"
+            :country="woman.country"
+            :born="woman.born"
+            :died="woman.died"
+            :era="woman.era"
+            :summary="woman.summary"
+            :causes="woman.causes"
+          />
+        </div>
+        <Pagination v-model="pagesLoaded" :total-pages="totalPages" />
+      </div>
+    </template>
+
+    <div v-else class="panel women-listing__empty">
+      <LucideSearchX :size="32" class="women-listing__empty-icon" />
+      <p class="women-listing__empty-text">{{ emptyMessage }}</p>
+      <Pill variant="secondary" @click="clearFilters">Clear all filters</Pill>
+      <NuxtLink to="/suggest" class="women-listing__suggest">Suggest a woman →</NuxtLink>
     </div>
 
-    <div v-else class="women-listing__empty">
-      <LucideSearchX :size="40" />
-      <p>No women match your current filters.</p>
-      <button class="women-listing__clear-btn" @click="clearFilters">
-        Clear all filters
-      </button>
-    </div>
-
-    <Pagination v-model="currentPage" :total-pages="totalPages" />
-
-    <p class="women-listing__index-link">
-      Looking for someone specific?
-      <NuxtLink to="/women/all">Browse all women A to Z</NuxtLink>
-    </p>
+    <FilterSheet
+      v-model="activeRegion"
+      :open="openSheet === 'region'"
+      title="Region"
+      :options="regionOptions"
+      :result-count="filteredWomen.length"
+      @close="openSheet = null"
+    />
+    <FilterSheet
+      v-model="activeEra"
+      :open="openSheet === 'era'"
+      title="Era"
+      :options="eraOptions"
+      :result-count="filteredWomen.length"
+      @close="openSheet = null"
+    />
+    <FilterSheet
+      v-model="activeCause"
+      :open="openSheet === 'cause'"
+      title="Cause"
+      :options="causeOptions"
+      :result-count="filteredWomen.length"
+      @close="openSheet = null"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useMediaQuery } from "@vueuse/core";
 import { REGIONS, ERAS } from "~/utils/constants/content";
+
+type Facet = "region" | "era" | "cause";
 
 const route = useRoute();
 const router = useRouter();
@@ -108,59 +164,113 @@ const searchQuery = ref((route.query.q as string) ?? "");
 const activeRegion = ref((route.query.region as string) ?? "");
 const activeEra = ref((route.query.era as string) ?? "");
 const activeCause = ref((route.query.cause as string) ?? "");
-const readFilter = ref("");
-const currentPage = ref(Number(route.query.page) || 1);
-const filtersOpen = ref(false);
-
-const activeFilterCount = computed(
-  () =>
-    [
-      activeRegion.value,
-      activeEra.value,
-      activeCause.value,
-      readFilter.value,
-    ].filter(Boolean).length,
-);
+const unreadOnly = ref(false);
+const pagesLoaded = ref(Math.max(1, Number(route.query.page) || 1));
+const openSheet = ref<Facet | null>(null);
 
 const { isRead } = useApp();
 
 const { data: allWomen } = await useAsyncData("all-women", () =>
   queryCollection("women")
-    .select("name", "slug", "image", "country", "region", "born", "died", "era", "summary", "causes", "dateAdded")
+    .select(
+      "name",
+      "slug",
+      "image",
+      "country",
+      "region",
+      "born",
+      "died",
+      "era",
+      "summary",
+      "causes",
+      "dateAdded",
+      "ogFocal",
+    )
     .order("name", "ASC")
     .all(),
 );
 
-const filteredWomen = computed(() => {
-  if (!allWomen.value) return [];
+type Woman = NonNullable<typeof allWomen.value>[number];
 
-  return allWomen.value.filter((w) => {
-    const q = searchQuery.value.toLowerCase().trim();
-    if (
-      q &&
-      !w.name.toLowerCase().includes(q) &&
-      !w.country.toLowerCase().includes(q)
-    ) {
-      return false;
-    }
-    if (activeRegion.value && w.region !== activeRegion.value) return false;
-    if (activeEra.value && w.era !== activeEra.value) return false;
-    if (activeCause.value && !w.causes.some((c) => c === activeCause.value))
-      return false;
-    if (readFilter.value === "Read" && !isRead("woman", w.slug)) return false;
-    if (readFilter.value === "Unread" && isRead("woman", w.slug)) return false;
-    return true;
-  });
-});
+/** Does the woman pass every active filter except the one being skipped? */
+function matches(w: Woman, skip?: Facet): boolean {
+  const q = searchQuery.value.toLowerCase().trim();
+  if (q && !w.name.toLowerCase().includes(q) && !w.country.toLowerCase().includes(q)) return false;
+  if (skip !== "region" && activeRegion.value && w.region !== activeRegion.value) return false;
+  if (skip !== "era" && activeEra.value && w.era !== activeEra.value) return false;
+  if (skip !== "cause" && activeCause.value && !w.causes.includes(activeCause.value)) return false;
+  if (unreadOnly.value && isRead("woman", w.slug)) return false;
+  return true;
+}
+
+const filteredWomen = computed(() => (allWomen.value ?? []).filter((w) => matches(w)));
 
 const totalCount = computed(() => allWomen.value?.length ?? 0);
-const totalPages = computed(() =>
-  Math.ceil(filteredWomen.value.length / PER_PAGE),
+const totalPages = computed(() => Math.max(1, Math.ceil(filteredWomen.value.length / PER_PAGE)));
+
+/** Mobile: everything up to the current page. */
+const loadedWomen = computed(() => filteredWomen.value.slice(0, PER_PAGE * pagesLoaded.value));
+/** Desktop: just the current page. */
+const pagedWomen = computed(() => {
+  const start = (pagesLoaded.value - 1) * PER_PAGE;
+  return filteredWomen.value.slice(start, start + PER_PAGE);
+});
+
+/* Both grids render on the server and CSS shows one; after mount the unused
+   one is dropped so its cards (and Pagination's scroll watcher) go away. */
+const isDesktop = useMediaQuery("(min-width: 768px)");
+const mounted = ref(false);
+onMounted(() => {
+  mounted.value = true;
+});
+const showCompact = computed(() => !mounted.value || !isDesktop.value);
+const showFull = computed(() => !mounted.value || isDesktop.value);
+
+/* Facet counts reflect every other active filter plus the search. */
+function countBy(skip: Facet, pick: (w: Woman) => string[]): Map<string, number> {
+  const counts = new Map<string, number>();
+  for (const w of allWomen.value ?? []) {
+    if (!matches(w, skip)) continue;
+    for (const key of pick(w)) counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  return counts;
+}
+
+const regionOptions = computed(() => {
+  const counts = countBy("region", (w) => [w.region]);
+  return REGIONS.map((r) => ({ label: r, count: counts.get(r) ?? 0 }));
+});
+
+const eraOptions = computed(() => {
+  const counts = countBy("era", (w) => [w.era]);
+  return ERAS.map((e) => ({ label: e, count: counts.get(e) ?? 0 }));
+});
+
+const causeOptions = computed(() => {
+  const counts = countBy("cause", (w) => w.causes);
+  return causeHubs(allWomen.value ?? [], 1).map((h) => ({
+    label: h.cause,
+    count: counts.get(h.cause) ?? 0,
+  }));
+});
+
+const hasActiveFilters = computed(() =>
+  Boolean(
+    searchQuery.value.trim() ||
+      activeRegion.value ||
+      activeEra.value ||
+      activeCause.value ||
+      unreadOnly.value,
+  ),
 );
 
-const paginatedWomen = computed(() => {
-  const start = (currentPage.value - 1) * PER_PAGE;
-  return filteredWomen.value.slice(start, start + PER_PAGE);
+const emptyMessage = computed(() => {
+  const q = searchQuery.value.trim();
+  const parts = [q ? `“${q}”` : "", activeEra.value, activeCause.value].filter(Boolean);
+  const region = activeRegion.value;
+  if (!parts.length && !region) return "No women match your current filters.";
+  if (!parts.length) return `No women in ${region} match your current filters.`;
+  return `No women match ${parts.join(" and ")}${region ? ` in ${region}` : ""} yet.`;
 });
 
 function syncUrl() {
@@ -169,27 +279,27 @@ function syncUrl() {
   if (activeRegion.value) query.region = activeRegion.value;
   if (activeEra.value) query.era = activeEra.value;
   if (activeCause.value) query.cause = activeCause.value;
-  if (currentPage.value > 1) query.page = String(currentPage.value);
+  if (pagesLoaded.value > 1) query.page = String(pagesLoaded.value);
   router.replace({ query });
 }
 
-watch([searchQuery, activeRegion, activeEra, activeCause, readFilter], () => {
-  currentPage.value = 1;
+watch([searchQuery, activeRegion, activeEra, activeCause, unreadOnly], () => {
+  pagesLoaded.value = 1;
   syncUrl();
 });
 
-watch(currentPage, syncUrl);
+watch(pagesLoaded, syncUrl);
 
 function clearFilters() {
   searchQuery.value = "";
   activeRegion.value = "";
   activeEra.value = "";
   activeCause.value = "";
-  readFilter.value = "";
+  unreadOnly.value = false;
 }
 
 const womenDescription =
-  "Browse the full archive of African women who shaped history — filter by region, era, or cause.";
+  "Browse the full archive of African women who shaped history. Filter by region, era, or cause.";
 
 const hasQueryFilters = computed(() =>
   Boolean(
@@ -233,223 +343,165 @@ useHead({
 
 <style scoped>
 .women-listing {
+  --gutter: 24px;
   max-width: 64rem;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3.5rem;
+  padding: 28px var(--gutter) 56px;
 }
 
 @media (min-width: 768px) {
   .women-listing {
-    padding: 2.5rem 2rem 4rem;
+    --gutter: 32px;
+    padding-top: 40px;
+    padding-bottom: 64px;
   }
 }
 
 .women-listing__header {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 2rem;
+  gap: 14px;
+  margin-bottom: 4px;
 }
 
-.women-listing__header-top {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-@media (min-width: 640px) {
-  .women-listing__header-top {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1.5rem;
-  }
-}
-
-.women-listing__title {
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.women-listing__subtitle {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin: 0.375rem 0 0;
-}
-
+/* Sticky toolbar: full-bleed ground inside the gutter. */
 .women-listing__toolbar {
+  position: sticky;
+  top: var(--navbar-height, 61px);
+  z-index: 50;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 12px;
+  margin: 0 calc(-1 * var(--gutter)) 20px;
+  padding: 16px var(--gutter) 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .women-listing__search {
   max-width: 100%;
 }
 
-.women-listing__filter-toggle {
+.women-listing__chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 2px var(--gutter);
+}
+
+.women-listing__chips::-webkit-scrollbar {
+  display: none;
+}
+
+.women-listing__count-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  border-radius: 9999px;
-  border: 1.5px solid var(--border-default);
-  background: var(--surface-elevated);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  align-self: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 24px;
 }
 
-.women-listing__filter-toggle:hover {
-  border-color: var(--ring-default);
-  color: var(--text-primary);
+.women-listing__count {
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
-.women-listing__filter-badge {
+.women-listing__clear {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-width: 1.25rem;
-  height: 1.25rem;
-  padding: 0 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: 9999px;
-  background: var(--color-primary);
-  color: var(--text-on-primary);
+  min-height: 44px;
+  margin: -10px 0;
+  padding: 0 4px;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
 }
 
-.women-listing__chevron--open {
-  transform: rotate(180deg);
+.women-listing__clear:hover {
+  text-decoration: underline;
 }
 
-.women-listing__filter-panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.25s ease;
-  margin-top: -1rem;
-}
-
-.women-listing__filter-panel-inner {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-top: 0;
-  transition: padding-top 0.25s ease;
-}
-
-.women-listing__filter-panel--open {
-  grid-template-rows: 1fr;
-  margin-top: 0;
-}
-
-.women-listing__filter-panel--open .women-listing__filter-panel-inner {
-  padding-top: 0.25rem;
+/* Mobile vs desktop grids: CSS decides first, JS prunes after mount. */
+.women-listing__desktop {
+  display: none;
 }
 
 @media (min-width: 768px) {
-  .women-listing__filter-toggle {
+  .women-listing__mobile {
     display: none;
   }
 
-  .women-listing__filter-panel {
-    grid-template-rows: 1fr;
-    margin-top: 0;
-  }
-
-  .women-listing__filter-panel-inner {
-    overflow: visible;
-    padding-top: 0;
+  .women-listing__desktop {
+    display: block;
   }
 }
 
-.women-listing__filters {
+.women-listing__more {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding-top: 0.5rem;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 0 0;
 }
 
-@media (min-width: 640px) {
-  .women-listing__filters {
-    flex-direction: row;
-    gap: 2rem;
-    padding-top: 0;
-  }
+.women-listing__page-line {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.women-listing__page-line a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.women-listing__page-line a:hover {
+  text-decoration: underline;
 }
 
 .women-listing__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .women-listing__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .women-listing__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
 .women-listing__empty {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 4rem 1rem;
+  gap: 12px;
+  padding: 32px 16px;
   text-align: center;
+}
+
+.women-listing__empty-icon {
   color: var(--text-muted);
 }
 
-.women-listing__empty p {
+.women-listing__empty-text {
   margin: 0;
-  font-size: 1rem;
-}
-
-.women-listing__clear-btn {
-  padding: 0.5rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  border-radius: 9999px;
-  border: 1.5px solid var(--border-default);
-  background: var(--surface-elevated);
+  font-size: 16px;
   color: var(--text-secondary);
-  transition: all 0.15s ease;
 }
 
-.women-listing__clear-btn:hover {
-  border-color: var(--ring-default);
-  color: var(--color-primary);
-}
-.women-listing__index-link {
-  margin: 2rem 0 0;
-  text-align: center;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-}
-
-.women-listing__index-link a {
-  color: var(--color-primary);
+.women-listing__suggest {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
   font-weight: 600;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
-.women-listing__index-link a:hover {
+.women-listing__suggest:hover {
   text-decoration: underline;
 }
 </style>

@@ -1,43 +1,54 @@
 <template>
-  <div class="favorites">
-    <header class="favorites__header">
-      <h1 class="favorites__title">Your Favorites</h1>
-      <p class="favorites__subtitle">
-        {{ totalCount }} saved across women and articles.
+  <div class="saved">
+    <header class="saved__header">
+      <MuseumLabel level="h1" eyebrow="Saved" title="Your saved stories" />
+      <p class="saved__intro">
+        The women and articles you bookmarked, kept on this device.
       </p>
     </header>
 
-    <div class="favorites__tabs">
-      <button
-        class="favorites__tab"
-        :class="{ 'favorites__tab--active': activeTab === 'women' }"
-        @click="activeTab = 'women'"
-      >
-        <LucideUsers :size="16" />
-        Women
-        <span v-if="favWomenList.length" class="favorites__badge">
-          {{ favWomenList.length }}
-        </span>
-      </button>
-      <button
-        class="favorites__tab"
-        :class="{ 'favorites__tab--active': activeTab === 'articles' }"
-        @click="activeTab = 'articles'"
-      >
-        <LucideBookOpen :size="16" />
-        Articles
-        <span v-if="favArticlesList.length" class="favorites__badge">
-          {{ favArticlesList.length }}
-        </span>
-      </button>
-    </div>
-
     <ClientOnly>
-      <template v-if="activeTab === 'women'">
-        <div v-if="favWomenList.length" class="favorites__grid">
-          <WomanCard
-            v-for="w in favWomenList"
+      <div class="saved__tabs" role="tablist" aria-label="Saved stories" @keydown="onTabKey">
+        <button
+          id="saved-tab-women"
+          type="button"
+          role="tab"
+          class="pill pill--sm saved__tab"
+          :class="activeTab === 'women' ? 'pill--primary' : 'pill--secondary'"
+          :aria-selected="activeTab === 'women' ? 'true' : 'false'"
+          aria-controls="saved-panel-women"
+          :tabindex="activeTab === 'women' ? undefined : -1"
+          @click="activeTab = 'women'"
+        >
+          Women · {{ favWomenList.length }}
+        </button>
+        <button
+          id="saved-tab-articles"
+          type="button"
+          role="tab"
+          class="pill pill--sm saved__tab"
+          :class="activeTab === 'articles' ? 'pill--primary' : 'pill--secondary'"
+          :aria-selected="activeTab === 'articles' ? 'true' : 'false'"
+          aria-controls="saved-panel-articles"
+          :tabindex="activeTab === 'articles' ? undefined : -1"
+          @click="activeTab = 'articles'"
+        >
+          Articles · {{ favArticlesList.length }}
+        </button>
+      </div>
+
+      <section
+        v-if="activeTab === 'women'"
+        id="saved-panel-women"
+        role="tabpanel"
+        aria-labelledby="saved-tab-women"
+        class="saved__panel"
+      >
+        <div v-if="favWomenList.length" class="compact-grid compact-grid--4">
+          <WomanCardCompact
+            v-for="(w, i) in favWomenList"
             :key="w.slug"
+            raw
             :name="w.name"
             :slug="w.slug"
             :image="w.image"
@@ -45,44 +56,51 @@
             :born="w.born"
             :died="w.died"
             :era="w.era"
-            :summary="w.summary"
-            :causes="w.causes"
+            :focal="w.ogFocal"
+            :priority="i < 2"
           />
         </div>
-        <div v-else class="favorites__empty">
-          <LucideHeart :size="40" />
-          <p>No favorite women yet.</p>
-          <NuxtLink to="/women" class="favorites__browse-btn">
-            Browse women
-          </NuxtLink>
+        <div v-else class="panel saved__empty">
+          <ContinentMark :size="48" class="saved__empty-mark" />
+          <p class="saved__empty-text">
+            Tap the heart on any profile and she will be kept here.
+          </p>
+          <Pill to="/women" variant="secondary">Browse the archive</Pill>
         </div>
-      </template>
+      </section>
 
-      <template v-else>
-        <div v-if="favArticlesList.length" class="favorites__list">
-          <ArticleCard
+      <section
+        v-else
+        id="saved-panel-articles"
+        role="tabpanel"
+        aria-labelledby="saved-tab-articles"
+        class="saved__panel"
+      >
+        <div v-if="favArticlesList.length" class="saved__rows">
+          <ArticleRow
             v-for="a in favArticlesList"
             :key="a.slug"
+            raw
             :title="a.title"
-            :description="a.description"
-            :date="a.date"
             :slug="a.slug"
             :category="a.category"
             :image="a.image"
+            :reading-time="a.readingTime"
+            size="lg"
           />
         </div>
-        <div v-else class="favorites__empty">
-          <LucideHeart :size="40" />
-          <p>No favorite articles yet.</p>
-          <NuxtLink to="/articles" class="favorites__browse-btn">
-            Browse articles
-          </NuxtLink>
+        <div v-else class="panel saved__empty">
+          <LucideBookOpen :size="32" class="saved__empty-icon" />
+          <p class="saved__empty-text">
+            Save an article while you read and it will wait for you here.
+          </p>
+          <Pill to="/articles" variant="secondary">Read the articles</Pill>
         </div>
-      </template>
+      </section>
 
       <template #fallback>
-        <div class="favorites__empty">
-          <p>Loading your favorites…</p>
+        <div class="panel saved__empty">
+          <p class="saved__empty-text">Loading your saved stories…</p>
         </div>
       </template>
     </ClientOnly>
@@ -90,33 +108,41 @@
 </template>
 
 <script setup lang="ts">
-const activeTab = ref<"women" | "articles">("women");
+type Tab = "women" | "articles";
+
+const activeTab = ref<Tab>("women");
 
 const { favoriteWomen, favoriteArticles } = useApp();
 
 const { data: allWomen } = await useAsyncData("fav-women", () =>
-  queryCollection("women").order("name", "ASC").all(),
+  queryCollection("women")
+    .select("name", "slug", "image", "country", "born", "died", "era", "ogFocal")
+    .order("name", "ASC")
+    .all(),
 );
 
 const { data: allArticles } = await useAsyncData("fav-articles", () =>
-  queryCollection("articles").order("date", "DESC").all(),
+  queryCollection("articles")
+    .select("title", "slug", "category", "image", "readingTime", "date")
+    .order("date", "DESC")
+    .all(),
 );
 
-const favWomenList = computed(() => {
-  if (!allWomen.value) return [];
-  return allWomen.value.filter((w) => favoriteWomen.value.includes(w.slug));
-});
-
-const favArticlesList = computed(() => {
-  if (!allArticles.value) return [];
-  return allArticles.value.filter((a) =>
-    favoriteArticles.value.includes(a.slug),
-  );
-});
-
-const totalCount = computed(
-  () => favWomenList.value.length + favArticlesList.value.length,
+const favWomenList = computed(() =>
+  (allWomen.value ?? []).filter((w) => favoriteWomen.value.includes(w.slug)),
 );
+
+const favArticlesList = computed(() =>
+  (allArticles.value ?? []).filter((a) => favoriteArticles.value.includes(a.slug)),
+);
+
+/* Left and right arrows move between the two tabs, per the tabs pattern. */
+function onTabKey(e: KeyboardEvent) {
+  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+  e.preventDefault();
+  activeTab.value = activeTab.value === "women" ? "articles" : "women";
+  nextTick(() => document.getElementById(`saved-tab-${activeTab.value}`)?.focus());
+}
 
 useSeoMeta({
   title: "Your Favorites",
@@ -140,140 +166,72 @@ useHead({
 </script>
 
 <style scoped>
-.favorites {
+.saved {
   max-width: 64rem;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3.5rem;
+  padding: 28px 24px 56px;
 }
 
 @media (min-width: 768px) {
-  .favorites {
-    padding: 2.5rem 2rem 4rem;
+  .saved {
+    padding: 40px 32px 64px;
   }
 }
 
-.favorites__header {
-  margin-bottom: 2rem;
+.saved__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.favorites__title {
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-  font-weight: 800;
-  color: var(--text-primary);
+.saved__intro {
+  max-width: 42rem;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-secondary);
   margin: 0;
 }
 
-.favorites__subtitle {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin: 0.375rem 0 0;
-}
-
-.favorites__tabs {
+.saved__tabs {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
-.favorites__tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  border-radius: 9999px;
-  border: 1.5px solid var(--border-default);
-  background: var(--surface-elevated);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* Small pill spacing at the full 44px hit height. */
+.saved__tab {
+  height: 44px;
 }
 
-.favorites__tab:hover {
-  border-color: var(--ring-default);
-  color: var(--text-primary);
+.saved__tab:focus-visible {
+  outline: 2px solid var(--ring-default);
+  outline-offset: 2px;
 }
 
-.favorites__tab--active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--text-on-primary);
-}
-
-.favorites__tab--active:hover {
-  background: var(--color-primary-600);
-  border-color: var(--color-primary-600);
-  color: var(--text-on-primary);
-}
-
-.favorites__badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  min-width: 1.25rem;
-  height: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: color-mix(in srgb, currentColor 15%, transparent);
-}
-
-.favorites__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .favorites__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .favorites__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-.favorites__list {
+.saved__rows {
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  max-width: 48rem;
 }
 
-.favorites__empty {
+.saved__empty {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 4rem 1rem;
+  gap: 12px;
+  padding: 32px 16px;
   text-align: center;
-  color: var(--text-muted);
 }
 
-.favorites__empty p {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.favorites__browse-btn {
-  padding: 0.5rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  border: 1.5px solid var(--border-default);
-  background: var(--surface-elevated);
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: all 0.15s ease;
-}
-
-.favorites__browse-btn:hover {
-  border-color: var(--ring-default);
+.saved__empty-mark,
+.saved__empty-icon {
   color: var(--color-primary);
+}
+
+.saved__empty-text {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-secondary);
 }
 </style>

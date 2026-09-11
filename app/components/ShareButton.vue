@@ -1,14 +1,19 @@
 <template>
   <button
+    type="button"
     class="share-btn"
-    :class="{ 'share-btn--copied': showCopied }"
+    :class="[
+      { 'share-btn--copied': showCopied },
+      label ? 'pill pill--secondary share-btn--pill' : 'share-btn--icon',
+    ]"
     :aria-label="showCopied ? 'Link copied' : 'Share this page'"
     @click="handleShare"
   >
     <Transition name="share-btn__icon" mode="out-in">
-      <LucideCheck v-if="showCopied" :size="size" />
-      <LucideShare2 v-else :size="size" />
+      <LucideCheck v-if="showCopied" :size="label ? 16 : size" />
+      <LucideShare2 v-else :size="label ? 16 : size" />
     </Transition>
+    <span v-if="label">{{ showCopied ? "Copied" : label }}</span>
   </button>
 </template>
 
@@ -18,8 +23,10 @@ const props = withDefaults(
     title: string;
     text?: string;
     size?: number;
+    /** With a label the button renders as a 44px secondary pill ("Share"). */
+    label?: string;
   }>(),
-  { text: "", size: 18 },
+  { text: "", size: 18, label: "" },
 );
 
 const showCopied = ref(false);
@@ -76,11 +83,12 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.share-btn {
+.share-btn--icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.375rem;
+  width: 44px;
+  height: 44px;
   border: none;
   border-radius: 50%;
   background: transparent;
@@ -91,16 +99,17 @@ onBeforeUnmount(() => {
     transform 0.2s ease;
 }
 
-.share-btn:hover {
+.share-btn--icon:hover {
   color: var(--color-primary);
 }
 
-.share-btn--copied {
-  color: var(--color-success, #16a34a);
+.share-btn--icon:active {
+  transform: scale(0.85);
 }
 
-.share-btn:active {
-  transform: scale(0.85);
+.share-btn--copied,
+.share-btn--pill.share-btn--copied {
+  color: var(--color-success, #16a34a);
 }
 
 .share-btn__icon-enter-active,

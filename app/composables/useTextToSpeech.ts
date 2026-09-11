@@ -1,11 +1,22 @@
+export type TtsStatus = "idle" | "playing" | "paused";
+
 export default function useTextToSpeech() {
   const { preferredVoiceName, playbackSpeed } = useApp();
 
-  const status = ref<"idle" | "playing" | "paused">("idle");
+  const status = ref<TtsStatus>("idle");
   const voices = ref<SpeechSynthesisVoice[]>([]);
   const progress = ref(0);
   const totalChunks = ref(0);
   const isSupported = ref(false);
+
+  // Shared mirrors so the mobile ReadingBar (a different component) can show
+  // playback state and pause/resume without owning the utterance queue.
+  const sharedStatus = useState<TtsStatus>("tts-status", () => "idle");
+  const sharedProgress = useState<number>("tts-progress", () => 0);
+  const sharedDuration = useState<number>("tts-duration", () => 0);
+  const sharedToggle = useState<(() => void) | null>("tts-toggle", () => null);
+  watch(status, (v) => (sharedStatus.value = v), { flush: "sync" });
+  watch(progress, (v) => (sharedProgress.value = v), { flush: "sync" });
 
   let chunks: string[] = [];
   let currentChunkIndex = 0;
@@ -176,6 +187,7 @@ export default function useTextToSpeech() {
       offset += chunk.length;
     }
     totalCharCount = offset;
+    sharedDuration.value = totalCharCount / (CHARS_PER_SECOND * playbackSpeed.value);
 
     currentChunkIndex = 0;
     progress.value = 0;
@@ -260,6 +272,12 @@ export default function useTextToSpeech() {
     isSupported.value = "speechSynthesis" in window;
     if (!isSupported.value) return;
 
+    // Pause/resume only (never starts a fresh read: the bar has no text).
+    sharedToggle.value = () => {
+      if (status.value === "playing") pause();
+      else if (status.value === "paused") resume();
+    };
+
     isAndroid = /android/i.test(navigator.userAgent);
 
     loadVoices();
@@ -267,6 +285,8 @@ export default function useTextToSpeech() {
   });
 
   onBeforeUnmount(() => {
+    sharedToggle.value = null;
+    sharedDuration.value = 0;
     if (!isSupported.value) return;
     stop();
     speechSynthesis.removeEventListener("voiceschanged", loadVoices);

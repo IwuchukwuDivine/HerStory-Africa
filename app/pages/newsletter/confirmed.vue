@@ -1,23 +1,15 @@
 <template>
   <div class="confirmed">
-    <div class="confirmed__icon-wrap">
-      <LucideCheckCircle :size="48" class="confirmed__icon" />
-    </div>
+    <MuseumLabel level="h1" eyebrow="Newsletter" title="You're in." />
 
-    <h1 class="confirmed__title">You're in.</h1>
-
-    <p class="confirmed__lead">
+    <p class="confirmed__intro">
       Your subscription is confirmed. From here on, the stories of remarkable
-      African women will land straight in your inbox.
+      African women land straight in your inbox, twice a month.
     </p>
 
     <div class="confirmed__actions">
-      <NuxtLink to="/women" class="confirmed__btn confirmed__btn--primary">
-        Start exploring stories
-      </NuxtLink>
-      <NuxtLink to="/" class="confirmed__btn confirmed__btn--secondary">
-        Back to home
-      </NuxtLink>
+      <Pill to="/women" variant="primary">Start reading</Pill>
+      <Pill to="/" variant="secondary">Home</Pill>
     </div>
   </div>
 </template>
@@ -30,7 +22,7 @@ useSeoMeta({
   title: "Subscription Confirmed",
   description:
     "You're officially part of HerStory Africa. Stories of remarkable African women are on their way to your inbox.",
-  ogTitle: "Subscription Confirmed — HerStory Africa",
+  ogTitle: "Subscription Confirmed | HerStory Africa",
   ogDescription:
     "You're officially part of HerStory Africa. Stories of remarkable African women are on their way to your inbox.",
   ogUrl: getAbsoluteUrl("/newsletter/confirmed"),
@@ -52,91 +44,33 @@ useHead({
 
 <style scoped>
 .confirmed {
-  max-width: 34rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 48rem;
   margin: 0 auto;
-  padding: 4rem 1.5rem 5rem;
-  text-align: center;
+  padding: 48px 24px 64px;
 }
 
 @media (min-width: 768px) {
   .confirmed {
-    padding: 6rem 2rem 7rem;
+    padding: 64px 32px 80px;
   }
 }
 
-.confirmed__icon-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-.confirmed__icon {
-  color: var(--color-forest);
-}
-
-.confirmed__title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.confirmed__lead {
-  font-size: 1.0625rem;
-  line-height: 1.7;
+.confirmed__intro {
+  max-width: 42rem;
+  font-size: 17px;
+  line-height: 1.6;
   color: var(--text-secondary);
-  margin: 1rem auto 0;
-  max-width: 28rem;
+  margin: 0;
 }
 
 .confirmed__actions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 2.5rem;
-}
-
-@media (min-width: 480px) {
-  .confirmed__actions {
-    flex-direction: row;
-    justify-content: center;
-  }
-}
-
-.confirmed__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  border-radius: 0.5rem;
-  text-decoration: none;
-  transition:
-    background 0.15s ease,
-    opacity 0.15s ease;
-}
-
-.confirmed__btn--primary {
-  color: var(--text-on-primary);
-  background: var(--color-primary);
-}
-
-.confirmed__btn--primary:hover {
-  background: var(--color-primary-600);
-}
-
-.confirmed__btn--secondary {
-  color: var(--text-secondary);
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-default);
-}
-
-.confirmed__btn--secondary:hover {
-  border-color: var(--color-primary);
-  color: var(--text-primary);
+  gap: 8px;
+  margin-top: 8px;
 }
 </style>

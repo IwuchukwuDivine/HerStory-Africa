@@ -5,6 +5,25 @@ type SettableState = {
   playbackSpeed: number;
 };
 
+/** The profile or article the reader last left unfinished ("Continue reading"). */
+export interface LastOpened {
+  type: "woman" | "article";
+  slug: string;
+  name: string;
+  image: string;
+  country: string;
+  born: number | null;
+  died: number | null;
+  /** Text of the last h2 the reader scrolled past, "" before the first. */
+  section: string;
+  /** 0..1 document scroll fraction at the last update. */
+  fraction: number;
+  /** Reading time of the piece in minutes. */
+  minutes: number;
+  /** Date.now() of the last update. */
+  at: number;
+}
+
 export const useAppStore = defineStore(
   "app",
   () => {
@@ -17,6 +36,8 @@ export const useAppStore = defineStore(
     const subscribedEmail = ref("");
     const preferredVoiceName = ref("");
     const playbackSpeed = ref(1);
+    const lastOpened = ref<LastOpened | null>(null);
+    const lastVisitAt = ref(0);
 
     const settableRefs: { [K in keyof SettableState]: Ref<SettableState[K]> } = {
       hasSeenNewsletterPrompt,
@@ -71,6 +92,18 @@ export const useAppStore = defineStore(
       return reflectionResponses.value[slug] ?? '';
     }
 
+    function setLastOpened(value: LastOpened) {
+      lastOpened.value = value;
+    }
+
+    function clearLastOpened() {
+      lastOpened.value = null;
+    }
+
+    function touchVisit() {
+      lastVisitAt.value = Date.now();
+    }
+
     const isSubscribed = computed(() => subscribedEmail.value !== "");
 
     return {
@@ -84,6 +117,8 @@ export const useAppStore = defineStore(
       isSubscribed,
       preferredVoiceName,
       playbackSpeed,
+      lastOpened,
+      lastVisitAt,
       setValue,
       toggleFavorite,
       markAsRead,
@@ -92,6 +127,9 @@ export const useAppStore = defineStore(
       setSubscribed,
       saveReflection,
       getReflection,
+      setLastOpened,
+      clearLastOpened,
+      touchVisit,
     };
   },
   {

@@ -1,13 +1,19 @@
 <template>
   <NuxtLink :to="`/women/${slug}`" class="compact" :class="{ 'compact--read': read }">
     <div class="compact__image">
+      <img
+        v-if="hasPortrait(image) && raw"
+        :src="image"
+        :alt="`Portrait of ${name}, ${country}`"
+        loading="lazy"
+        :style="focal ? { objectPosition: focal } : undefined"
+        class="compact__img"
+      >
       <NuxtImg
-        v-if="hasPortrait(image)"
+        v-else-if="hasPortrait(image)"
         :src="image"
         :alt="`Portrait of ${name}, ${country}`"
         width="320"
-        height="400"
-        sizes="(min-width: 768px) 25vw, 45vw"
         format="webp"
         :loading="priority ? 'eager' : 'lazy'"
         :fetchpriority="priority ? 'high' : undefined"
@@ -47,8 +53,10 @@ const props = withDefaults(
     /** Gold "New" style badge in place of the era chip. */
     badge?: string;
     priority?: boolean;
+    /** Client-only grids (favourites): use the original asset, since ipxStatic has no on-demand variants. */
+    raw?: boolean;
   }>(),
-  { era: "", focal: "", badge: "", priority: false },
+  { era: "", focal: "", badge: "", priority: false, raw: false },
 );
 
 const { isRead } = useApp();

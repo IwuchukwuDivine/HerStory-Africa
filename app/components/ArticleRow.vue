@@ -5,7 +5,8 @@
       <span class="article-row__title">{{ title }}</span>
     </div>
     <div v-if="image" class="article-row__thumb">
-      <NuxtImg :src="image" :alt='`Illustration for "${title}"`' :width="thumbW * 2" :height="thumbH * 2" format="webp" loading="lazy" />
+      <img v-if="raw" :src="image" :alt='`Illustration for "${title}"`' loading="lazy">
+      <NuxtImg v-else :src="image" :alt='`Illustration for "${title}"`' :width="thumbW * 2" :height="thumbH * 2" format="webp" loading="lazy" />
     </div>
     <div v-else class="article-row__thumb article-row__thumb--icon">
       <LucideBookOpen :size="20" />
@@ -28,8 +29,10 @@ const props = withDefaults(
     image?: string;
     readingTime?: number | null;
     size?: "sm" | "md" | "lg";
+    /** Client-only lists (favourites): use the original asset. */
+    raw?: boolean;
   }>(),
-  { category: "", image: "", readingTime: null, size: "md" },
+  { category: "", image: "", readingTime: null, size: "md", raw: false },
 );
 
 const thumbW = computed(() => (props.size === "lg" ? 120 : props.size === "sm" ? 64 : 72));

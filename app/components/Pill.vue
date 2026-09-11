@@ -26,6 +26,6 @@ withDefaults(
     loading?: boolean;
     disabled?: boolean;
   }>(),
-  { variant: "secondary", size: "md", type: "button" },
+  { to: undefined, variant: "secondary", size: "md", type: "button" },
 );
 </script>

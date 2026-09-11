@@ -1,130 +1,149 @@
 <template>
   <article v-if="article" class="article-page">
-    <button class="go-back" @click="goBack('/articles')">
-      <LucideArrowLeft :size="18" />
-      Back
-    </button>
+    <ReadingProgress />
 
-    <header class="article-page__header">
-      <div class="article-page__top-row">
-        <div class="article-page__top-left">
-          <time class="article-page__date" :datetime="article.date">
-            {{ formattedDate }}
-          </time>
-          <ClientOnly>
-            <span v-if="articleRead" class="article-page__read-badge">
-              <LucideCheck :size="14" />
-              Read
-            </span>
-          </ClientOnly>
-        </div>
+    <div class="article-page__inner">
+      <header class="article-page__header">
+        <NuxtLink
+          :to="{ path: '/articles', query: { category: article.category } }"
+          class="back-link"
+        >
+          <LucideArrowLeft :size="18" />
+          Articles · {{ article.category }}
+        </NuxtLink>
+
+        <MuseumLabel level="p" :eyebrow="eyebrow" />
+        <h1 class="article-page__title">{{ article.title }}</h1>
+        <p class="article-page__deck">{{ article.description }}</p>
+
         <ClientOnly>
           <div class="article-page__actions">
-            <ShareButton
-              :title="article.title"
-              :text="article.description"
-              :size="20"
+            <ListenButton
+              content-selector=".article-page__title, .article-page__deck, .article-page__content"
+              :minutes="readingTime"
             />
-            <FavoriteButton type="article" :slug="article.slug" :size="20" />
+            <FavoriteButton type="article" :slug="article.slug" label="Save" />
+            <ShareButton :title="article.title" :text="article.description" label="Share" />
           </div>
         </ClientOnly>
-      </div>
-      <h1 class="article-page__title">{{ article.title }}</h1>
-      <p class="article-page__description">{{ article.description }}</p>
-      <ClientOnly>
-        <ListenButton
-          content-selector=".article-page__title, .article-page__description, .article-page__content"
+      </header>
+
+      <figure v-if="article.image" class="article-page__hero">
+        <div class="article-page__hero-frame">
+          <NuxtImg
+            :src="article.image"
+            :alt="article.title"
+            width="1536"
+            height="960"
+            format="webp"
+            loading="eager"
+            fetchpriority="high"
+            class="article-page__hero-img"
+            :style="{ objectPosition: article.ogFocal || 'top' }"
+          />
+        </div>
+        <ImageCaption :text="article.imageCredit" />
+      </figure>
+
+      <div class="prose prose--dropcap article-page__content">
+        <ContentRenderer :value="headDoc" />
+        <InlineArchiveCard
+          v-if="inlineWoman"
+          :name="inlineWoman.name"
+          :slug="inlineWoman.slug"
+          :image="inlineWoman.image"
+          :country="inlineWoman.country"
+          :born="inlineWoman.born"
+          :died="inlineWoman.died"
+          :focal="inlineWoman.ogFocal"
         />
-      </ClientOnly>
-    </header>
+        <div v-if="bodySplit.tail.length" class="article-page__tail">
+          <ContentRenderer :value="tailDoc" />
+        </div>
+      </div>
 
-    <figure v-if="article.image" class="article-page__hero">
-      <NuxtImg
-        :src="article.image"
-        :alt="article.title"
-        width="768"
-        height="432"
-        format="webp"
-        class="article-page__hero-img"
+      <div ref="readSentinel" />
+
+      <ReflectionPrompt
+        v-if="article.reflectionPrompt"
+        :prompt="article.reflectionPrompt"
+        :slug="article.slug"
+        :article-title="article.title"
       />
-      <figcaption v-if="article.imageCredit" class="article-page__hero-credit">
-        {{ article.imageCredit }}
-      </figcaption>
-    </figure>
 
-    <div class="article-page__content">
-      <ContentRenderer :value="article" />
+      <aside v-if="storyWomen?.length" class="article-page__women" aria-label="Women in this story">
+        <MuseumLabel eyebrow="Women in this story" :title="storyTitle" />
+        <div class="article-page__rows">
+          <WomanRow
+            v-for="w in storyWomen"
+            :key="w.slug"
+            :name="w.name"
+            :slug="w.slug"
+            :image="w.image"
+            :country="w.country"
+            :born="w.born"
+            :died="w.died"
+            :focal="w.ogFocal"
+            :thumb="56"
+          />
+        </div>
+      </aside>
+
+      <SourcesBlock
+        :sources="sources"
+        :title="article.title"
+        :url="canonicalUrl"
+        :year="articleYear"
+        type="article"
+      />
+
+      <aside v-if="related?.length" class="article-page__next" aria-label="Read next">
+        <MuseumLabel level="p" eyebrow="Read next" />
+        <ArticleFeature
+          v-if="related[0]"
+          :title="related[0].title"
+          :slug="related[0].slug"
+          :category="related[0].category"
+          :image="related[0].image"
+          :description="related[0].description"
+          :reading-time="related[0].readingTime"
+        />
+        <div v-if="related.length > 1" class="article-page__rows">
+          <ArticleRow
+            v-for="a in related.slice(1, 3)"
+            :key="a.slug"
+            :title="a.title"
+            :slug="a.slug"
+            :category="a.category"
+            :image="a.image"
+            :reading-time="a.readingTime"
+            size="sm"
+          />
+        </div>
+      </aside>
+
+      <ClientOnly>
+        <section v-if="!isSubscribed" class="panel article-page__newsletter" aria-label="Newsletter">
+          <h3 class="article-page__newsletter-title">Stories like this one, twice a month.</h3>
+          <NewsletterForm placeholder="Your email address" />
+        </section>
+      </ClientOnly>
     </div>
 
-    <div ref="readSentinel" />
-
-    <aside v-if="storyWomen?.length" class="article-page__women">
-      <h2 class="article-page__women-title">Women in this story</h2>
-      <p class="article-page__women-subtitle">
-        Profiles from the archive whose lives connect to this one
-      </p>
-      <div class="article-page__women-grid">
-        <WomanCard
-          v-for="w in storyWomen"
-          :key="w.slug"
-          :name="w.name"
-          :slug="w.slug"
-          :image="w.image"
-          :country="w.country"
-          :born="w.born"
-          :died="w.died"
-          :era="w.era"
-          :summary="w.summary"
-          :causes="w.causes"
-        />
-      </div>
-    </aside>
-
-    <NewsletterCta
-      title="Stories like this one, twice a month"
-      description="One remarkable African woman, one article, straight to your inbox. No noise."
-    />
-
-    <CiteThisPage
-      :title="article.title"
-      :url="canonicalUrl"
-      :year="articleYear"
-      type="article"
-    />
-
-    <ReflectionPrompt
-      v-if="article.reflectionPrompt"
-      :prompt="article.reflectionPrompt"
-      :slug="article.slug"
-      :article-title="article.title"
-    />
-
-    <aside v-if="related?.length" class="article-page__related">
-      <h2 class="article-page__related-title">Related articles</h2>
-      <div class="article-page__related-grid">
-        <ArticleCard
-          v-for="a in related"
-          :key="a.slug"
-          :title="a.title"
-          :description="a.description"
-          :date="a.date"
-          :slug="a.slug"
-          :category="a.category"
-          :image="a.image"
-        />
-      </div>
-    </aside>
-
-    <footer class="article-page__footer">
-      <NuxtLink to="/" class="article-page__footer-link">
-        <LucideArrowLeft :size="16" />
-        Back to home
-      </NuxtLink>
-    </footer>
+    <ClientOnly>
+      <ReadingBar name="this article" :minutes="readingTime" />
+    </ClientOnly>
   </article>
 </template>
 
 <script setup lang="ts">
+import { longDate } from "~/utils/format";
+import {
+  splitAtFirstWomanLink,
+  splitSources,
+  wordCount,
+} from "~/composables/useProseSplit";
+
 const route = useRoute();
 // Strip any trailing slash so the content lookup and payload key match the
 // prerendered URL (the canonical form has no trailing slash).
@@ -144,31 +163,108 @@ if (!article.value) {
 
 const readSentinel = ref<HTMLElement | null>(null);
 
-const { isRead } = useApp();
-const articleRead = computed(() =>
-  article.value ? isRead("article", article.value.slug) : false,
+const readingTime = computed(
+  () =>
+    article.value?.readingTime ??
+    Math.max(1, Math.round(wordCount(article.value?.body?.value) / 200)),
 );
 
-if (article.value?.slug) {
-  useReadTracker("article", article.value.slug, readSentinel);
-}
+const formattedDate = computed(() => longDate(article.value?.date));
 
-const formattedDate = computed(() => {
-  if (!article.value?.date) return "";
-  const d = new Date(article.value.date);
-  return d.toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-});
+const eyebrow = computed(() =>
+  article.value
+    ? `${article.value.category} · ${formattedDate.value} · ${readingTime.value} min read`
+    : "",
+);
 
 const articleYear = computed(() => {
   if (!article.value?.date) return "";
   return new Date(article.value.date).getFullYear();
 });
 
+/* ── Body: sources split off, then split once around the first profile link ── */
+const sourcesSplit = computed(() => splitSources(article.value?.body?.value));
+const sources = computed(() => sourcesSplit.value.sources);
+const bodySplit = computed(() => splitAtFirstWomanLink(sourcesSplit.value.main));
+
+function docWith(nodes: typeof bodySplit.value.head) {
+  return {
+    ...article.value,
+    body: { ...article.value?.body, type: "minimark", value: nodes },
+  };
+}
+const headDoc = computed(() => docWith(bodySplit.value.head));
+const tailDoc = computed(() => docWith(bodySplit.value.tail));
+
+/* ── Women ── */
+const WOMAN_FIELDS = [
+  "name",
+  "slug",
+  "image",
+  "country",
+  "born",
+  "died",
+  "ogFocal",
+] as const;
+
+const { data: storyWomen } = await useAsyncData(
+  `article-women-${contentPath}`,
+  async () => {
+    const slugs = article.value?.women;
+    if (!slugs?.length) return [];
+    const women = await queryCollection("women")
+      .where("slug", "IN", slugs)
+      .select(...WOMAN_FIELDS)
+      .all();
+    return [...women].sort(
+      (a, b) => slugs.indexOf(a.slug) - slugs.indexOf(b.slug),
+    );
+  },
+  { watch: [article] },
+);
+
+// The woman first linked in the body, for the inline archive card. Usually
+// one of the story women; otherwise a targeted lookup.
+const { data: linkedWoman } = await useAsyncData(
+  `article-linked-${contentPath}`,
+  async () => {
+    const slug = bodySplit.value.slug;
+    if (!slug) return null;
+    if (storyWomen.value?.some((w) => w.slug === slug)) return null;
+    return queryCollection("women")
+      .where("slug", "=", slug)
+      .select(...WOMAN_FIELDS)
+      .first();
+  },
+  { watch: [article] },
+);
+
+const inlineWoman = computed(() => {
+  const slug = bodySplit.value.slug;
+  if (!slug) return null;
+  return storyWomen.value?.find((w) => w.slug === slug) ?? linkedWoman.value ?? null;
+});
+
+const NUMBER_WORDS = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+
+const storyTitle = computed(() => {
+  const n = storyWomen.value?.length ?? 0;
+  if (n === 1) return "One life that connects to this one";
+  const word = NUMBER_WORDS[n] ?? String(n);
+  return `${word} lives that connect to this one`;
+});
+
+/* ── Read next ── */
 const RELATED_COUNT = 3;
+const ARTICLE_FIELDS = [
+  "title",
+  "slug",
+  "category",
+  "image",
+  "description",
+  "readingTime",
+  "date",
+] as const;
 
 const { data: related } = await useAsyncData(
   `related-${contentPath}`,
@@ -178,6 +274,7 @@ const { data: related } = await useAsyncData(
       .where("category", "=", article.value.category)
       .where("slug", "<>", article.value.slug)
       .order("date", "DESC")
+      .select(...ARTICLE_FIELDS)
       .limit(RELATED_COUNT)
       .all();
     if (sameCategory.length >= RELATED_COUNT) return sameCategory;
@@ -188,6 +285,7 @@ const { data: related } = await useAsyncData(
     ]);
     const newest = await queryCollection("articles")
       .order("date", "DESC")
+      .select(...ARTICLE_FIELDS)
       .limit(RELATED_COUNT * 2)
       .all();
     const backfill = newest
@@ -198,21 +296,18 @@ const { data: related } = await useAsyncData(
   { watch: [article] },
 );
 
-const { data: storyWomen } = await useAsyncData(
-  `article-women-${contentPath}`,
-  async () => {
-    const slugs = article.value?.women;
-    if (!slugs?.length) return [];
-    const women = await queryCollection("women")
-      .where("slug", "IN", slugs)
-      .all();
-    return [...women].sort(
-      (a, b) => slugs.indexOf(a.slug) - slugs.indexOf(b.slug),
-    );
-  },
-  { watch: [article] },
-);
+/* ── Read state ── */
+const { isSubscribed } = useApp();
 
+if (article.value?.slug) {
+  useReadTracker("article", article.value.slug, readSentinel, {
+    name: article.value.title,
+    image: article.value.image ?? "",
+    minutes: readingTime.value,
+  });
+}
+
+/* ── SEO ── */
 const canonicalUrl = computed(() =>
   article.value ? getAbsoluteUrl(`/articles/${article.value.slug}`) : "",
 );
@@ -294,231 +389,111 @@ useHead(() => ({
 .article-page {
   max-width: 48rem;
   margin: 0 auto;
-  padding: 1.5rem;
+}
+
+.article-page__inner {
+  padding: 16px 24px 48px;
 }
 
 @media (min-width: 768px) {
-  .article-page {
-    padding: 2rem;
+  .article-page__inner {
+    padding: 24px 32px 64px;
   }
 }
 
+/* ── Header ── */
 .article-page__header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.article-page__top-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.article-page__title {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .article-page__title {
+    font-size: 44px;
+  }
+}
+
+.article-page__deck {
+  font-size: 20px;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 .article-page__actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem;
+  gap: 8px;
 }
 
-.article-page__top-left {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.article-page__read-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-success, #16a34a);
-}
-
-.article-page__date {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.article-page__title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0.75rem 0 0;
-  line-height: 1.2;
-}
-
-.article-page__description {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin: 1rem 0 0;
-}
-
-/* ── Hero image ── */
+/* ── Hero ── */
 .article-page__hero {
-  margin: 0 0 2.5rem;
+  margin: 28px 0 0;
 }
 
-.article-page__hero-img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 1rem;
+.article-page__hero-frame {
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  overflow: hidden;
   background: var(--surface-muted);
 }
 
-.article-page__hero-credit {
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-  margin: 0.5rem 0 0;
-  text-align: right;
-}
-
-/* ── Content body ── */
-.article-page__content :deep(h2) {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 2.5rem 0 0.75rem;
-}
-
-.article-page__content :deep(p) {
-  font-size: 1.0625rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin: 0 0 1.25rem;
-}
-
-.article-page__content :deep(strong) {
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.article-page__content :deep(em) {
-  font-style: italic;
-}
-
-.article-page__content :deep(ul) {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.article-page__content :deep(li) {
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  padding-left: 1.5rem;
-  position: relative;
-}
-
-.article-page__content :deep(li::before) {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 9999px;
-  background: var(--color-primary-300);
-}
-
-.article-page__content :deep(hr) {
-  border: none;
-  border-top: 1px solid var(--border-light);
-  margin: 2rem 0;
-}
-
-.article-page__content :deep(a) {
-  color: var(--color-primary);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.article-page__content :deep(a:hover) {
-  color: var(--color-primary-600);
-}
-
-/* ── Related articles ── */
-.article-page__related {
-  margin-top: 3.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.article-page__related-title {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 1.25rem;
-}
-
-.article-page__related-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* ── Women in this story ── */
-.article-page__women {
-  margin-top: 3rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.article-page__women-title {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 0.25rem;
-}
-
-.article-page__women-subtitle {
-  font-size: 0.9375rem;
-  color: var(--text-muted);
-  margin: 0 0 1.25rem;
-}
-
-.article-page__women-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .article-page__women-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 768px) {
+  .article-page__hero-frame {
+    aspect-ratio: 16 / 9;
   }
 }
 
-/* ── Footer ── */
-.article-page__footer {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-light);
+.article-page__hero-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.article-page__footer-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.15s ease;
+/* ── Body ── */
+.article-page__content {
+  margin-top: 36px;
 }
 
-.article-page__footer-link:hover {
-  color: var(--color-primary);
+/* ── Tail sections ── */
+.article-page__women,
+.article-page__next {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.article-page__rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-page__newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.article-page__newsletter-title {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0;
 }
 </style>

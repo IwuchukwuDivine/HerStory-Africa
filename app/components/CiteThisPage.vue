@@ -6,34 +6,23 @@
       <LucideChevronDown :size="16" class="cite-page__chevron" />
     </summary>
 
-    <div class="cite-page__body">
-      <div class="cite-page__tabs" role="tablist">
-        <button
-          v-for="style in styles"
-          :key="style.id"
-          type="button"
-          role="tab"
-          :aria-selected="active === style.id"
-          class="cite-page__tab"
-          :class="{ 'cite-page__tab--active': active === style.id }"
-          @click="active = style.id"
-        >
-          {{ style.label }}
-        </button>
+    <div class="panel cite-page__body">
+      <div v-for="style in styles" :key="style.id" class="cite-page__format">
+        <div class="cite-page__format-head">
+          <span class="eyebrow eyebrow--muted">{{ style.label }}</span>
+          <button
+            type="button"
+            class="pill pill--sm pill--secondary cite-page__copy"
+            :aria-label="copied === style.id ? `${style.label} citation copied` : `Copy ${style.label} citation`"
+            @click="copy(style.id)"
+          >
+            <LucideCheck v-if="copied === style.id" :size="16" />
+            <LucideCopy v-else :size="16" />
+            <span>{{ copied === style.id ? "Copied" : "Copy" }}</span>
+          </button>
+        </div>
+        <p class="cite-page__citation">{{ citations[style.id] }}</p>
       </div>
-
-      <p class="cite-page__citation">{{ activeCitation }}</p>
-
-      <button
-        type="button"
-        class="cite-page__copy"
-        :aria-label="copied ? 'Citation copied' : 'Copy citation'"
-        @click="copy"
-      >
-        <LucideCheck v-if="copied" :size="14" />
-        <LucideCopy v-else :size="14" />
-        <span>{{ copied ? "Copied" : "Copy" }}</span>
-      </button>
     </div>
   </details>
 </template>
@@ -56,8 +45,7 @@ const styles = [
 ] as const;
 type StyleId = (typeof styles)[number]["id"];
 
-const active = ref<StyleId>("apa");
-const copied = ref(false);
+const copied = ref<StyleId | null>(null);
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
 const accessDate = computed(() => {
@@ -89,15 +77,13 @@ const citations = computed<Record<StyleId, string>>(() => {
   };
 });
 
-const activeCitation = computed(() => citations.value[active.value]);
-
-async function copy() {
+async function copy(id: StyleId) {
   try {
-    await navigator.clipboard.writeText(activeCitation.value);
-    copied.value = true;
+    await navigator.clipboard.writeText(citations.value[id]);
+    copied.value = id;
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
-      copied.value = false;
+      copied.value = null;
     }, 2000);
   } catch {
     // clipboard unavailable
@@ -111,24 +97,22 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .cite-page {
-  margin: 2.5rem 0;
-  border: 1px solid var(--border-light);
-  border-radius: 12px;
-  background: var(--surface-muted);
-  overflow: hidden;
+  margin: 32px 0;
 }
 
+/* A quiet 44px row, no card chrome. */
 .cite-page__summary {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.25rem;
+  gap: 8px;
+  min-height: 44px;
   cursor: pointer;
+  font-size: 14px;
   font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  color: var(--color-primary);
   list-style: none;
   user-select: none;
+  border-radius: 8px;
 }
 
 .cite-page__summary::-webkit-details-marker {
@@ -136,7 +120,6 @@ onBeforeUnmount(() => {
 }
 
 .cite-page__chevron {
-  margin-left: auto;
   transition: transform 0.2s ease;
 }
 
@@ -145,74 +128,40 @@ onBeforeUnmount(() => {
 }
 
 .cite-page__body {
-  padding: 0 1.25rem 1.25rem;
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 20px;
 }
 
-.cite-page__tabs {
+.cite-page__format {
   display: flex;
-  gap: 0.25rem;
-  border-bottom: 1px solid var(--border-light);
-  padding-bottom: 0.25rem;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.cite-page__tab {
-  padding: 0.4rem 0.85rem;
-  border: none;
-  background: transparent;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-radius: 6px;
-  transition:
-    color 0.15s ease,
-    background 0.15s ease;
+.cite-page__format-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.cite-page__tab:hover {
-  color: var(--text-primary);
-}
-
-.cite-page__tab--active {
-  color: var(--color-primary);
-  background: var(--surface-elevated);
+.cite-page__copy {
+  height: 44px;
 }
 
 .cite-page__citation {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 14px;
   line-height: 1.6;
   color: var(--text-primary);
-  background: var(--surface-elevated);
-  padding: 0.85rem 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-light);
   word-break: break-word;
 }
 
-.cite-page__copy {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--border-default);
-  border-radius: 6px;
-  background: var(--surface-elevated);
-  font-size: 0.825rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
-}
-
-.cite-page__copy:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+@media (prefers-reduced-motion: reduce) {
+  .cite-page__chevron {
+    transition: none;
+  }
 }
 </style>

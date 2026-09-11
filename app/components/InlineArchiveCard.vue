@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="`/women/${slug}`" class="archive-card">
     <div class="archive-card__thumb" :class="{ 'list-row__initial': !hasPortrait(image) }">
-      <NuxtImg v-if="hasPortrait(image)" :src="image" :alt="`Portrait of ${name}`" width="104" height="104" format="webp" loading="lazy" :style="focal ? { objectPosition: focal } : undefined" />
+      <NuxtImg v-if="hasPortrait(image)" :src="image" :alt="`Portrait of ${name}`" width="104" format="webp" loading="lazy" :style="focal ? { objectPosition: focal } : undefined" />
       <template v-else>{{ initialOf(name) }}</template>
     </div>
     <div class="archive-card__body">

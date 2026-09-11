@@ -10,7 +10,6 @@
         :src="image"
         :alt="`Portrait of ${name}`"
         :width="thumb * 2"
-        :height="thumb * 2"
         format="webp"
         :loading="priority ? 'eager' : 'lazy'"
         :style="focal ? { objectPosition: focal } : undefined"
@@ -48,7 +47,7 @@ const props = withDefaults(
     priority?: boolean;
     showRead?: boolean;
   }>(),
-  { image: "", country: "", born: null, died: null, focal: "", thumb: 48, showRead: true, priority: false },
+  { image: "", country: "", born: null, died: null, focal: "", meta: undefined, thumb: 48, to: undefined, showRead: true, priority: false },
 );
 
 const { isRead } = useApp();

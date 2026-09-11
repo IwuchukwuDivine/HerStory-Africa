@@ -64,7 +64,7 @@ export function useShareCard() {
 
     if (navigator.share && navigator.canShare?.({ files: [file] })) {
       await navigator.share({
-        title: `${name} — HerStory Africa`,
+        title: `${name} | HerStory Africa`,
         text: 'Read her story on HerStory Africa — the women history forgot to teach you.',
         url: profileUrl,
         files: [file],

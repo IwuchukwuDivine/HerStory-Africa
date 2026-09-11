@@ -1,43 +1,46 @@
 <template>
-  <div class="newsletter-page">
-    <header class="newsletter-page__header">
-      <h1 class="newsletter-page__title">
-        Don't let these stories stay hidden.
-      </h1>
-      <p class="newsletter-page__lead">
+  <div class="newsletter">
+    <header class="newsletter__header">
+      <MuseumLabel
+        level="h1"
+        eyebrow="Newsletter · twice a month"
+        title="Don't let these stories stay hidden."
+      />
+      <p class="newsletter__intro">
         Every edition brings you the story of a remarkable African woman who
         shaped a continent but missed the textbooks. No spam, just history worth
         knowing.
       </p>
     </header>
 
-    <div class="newsletter-page__form-wrapper">
-      <NewsletterForm placeholder="Enter your email address" />
+    <div class="newsletter__form">
+      <NewsletterForm placeholder="Your email address" />
     </div>
 
-    <section class="newsletter-page__what">
-      <h2 class="newsletter-page__heading">What you'll get</h2>
-      <div class="newsletter-page__perks">
-        <div class="newsletter-page__perk">
-          <LucideBookOpen :size="22" class="newsletter-page__perk-icon" />
-          <h3>New stories</h3>
-          <p>
+    <section class="newsletter__perks" aria-label="What you'll get">
+      <MuseumLabel eyebrow="Every edition" title="What you'll get" />
+
+      <div class="newsletter__grid">
+        <div class="panel newsletter__perk">
+          <LucideBookOpen :size="20" class="newsletter__perk-icon" />
+          <h3 class="newsletter__perk-title">New stories</h3>
+          <p class="newsletter__perk-text">
             Profiles of queens, scientists, activists, and rebels as they're
             published.
           </p>
         </div>
-        <div class="newsletter-page__perk">
-          <LucideNewspaper :size="22" class="newsletter-page__perk-icon" />
-          <h3>Articles and essays</h3>
-          <p>
+        <div class="panel newsletter__perk">
+          <LucideNewspaper :size="20" class="newsletter__perk-icon" />
+          <h3 class="newsletter__perk-title">Articles and essays</h3>
+          <p class="newsletter__perk-text">
             Deeper dives into the movements and moments that shaped the
             continent.
           </p>
         </div>
-        <div class="newsletter-page__perk">
-          <LucideHeart :size="22" class="newsletter-page__perk-icon" />
-          <h3>No noise</h3>
-          <p>
+        <div class="panel newsletter__perk">
+          <LucideHeart :size="20" class="newsletter__perk-icon" />
+          <h3 class="newsletter__perk-title">No noise</h3>
+          <p class="newsletter__perk-text">
             No spam, no fluff, no daily emails. Just stories that matter, when
             they're ready.
           </p>
@@ -72,93 +75,86 @@ useHead({
 </script>
 
 <style scoped>
-.newsletter-page {
-  max-width: 40rem;
+.newsletter {
+  max-width: 48rem;
   margin: 0 auto;
-  padding: 3rem 1.5rem 4rem;
+  padding: 28px 24px 56px;
 }
 
 @media (min-width: 768px) {
-  .newsletter-page {
-    padding: 4rem 2rem 5rem;
+  .newsletter {
+    padding: 40px 32px 64px;
   }
 }
 
-.newsletter-page__header {
-  text-align: center;
-  margin-bottom: 2.5rem;
+.newsletter__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
-.newsletter-page__title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.newsletter-page__lead {
-  font-size: 1.0625rem;
-  line-height: 1.7;
+.newsletter__intro {
+  max-width: 42rem;
+  font-size: 17px;
+  line-height: 1.6;
   color: var(--text-secondary);
-  margin: 1rem 0 0;
+  margin: 0;
+}
+
+.newsletter__form {
   max-width: 32rem;
-  margin-inline: auto;
 }
 
-.newsletter-page__form-wrapper {
-  max-width: 28rem;
-  margin: 0 auto 3.5rem;
+.newsletter__perks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 48px;
 }
 
-.newsletter-page__what {
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border-light);
+@media (min-width: 768px) {
+  .newsletter__perks {
+    margin-top: 64px;
+  }
 }
 
-.newsletter-page__heading {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 1.25rem;
-  text-align: center;
-}
-
-.newsletter-page__perks {
+.newsletter__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 16px;
 }
 
-@media (min-width: 640px) {
-  .newsletter-page__perks {
+@media (min-width: 768px) {
+  .newsletter__grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 }
 
-.newsletter-page__perk {
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-light);
+.newsletter__perk {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.newsletter-page__perk-icon {
+.newsletter__perk-icon {
   color: var(--color-primary);
-  margin-bottom: 0.625rem;
+  margin-bottom: 4px;
 }
 
-.newsletter-page__perk h3 {
-  font-size: 0.9375rem;
+.newsletter__perk-title {
+  font-size: 16px;
   font-weight: 700;
+  line-height: 1.3;
   color: var(--text-primary);
-  margin: 0 0 0.25rem;
+  margin: 0;
 }
 
-.newsletter-page__perk p {
-  font-size: 0.875rem;
+.newsletter__perk-text {
+  font-size: 15px;
   line-height: 1.55;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin: 0;
 }
 </style>

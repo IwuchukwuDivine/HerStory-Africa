@@ -3,9 +3,14 @@
 /** "1900–1978", "1965–present", or "Unknown" when no birth year. */
 export function lifespan(born: number | null | undefined, died: number | null | undefined): string {
   if (!born && !died) return "Unknown";
-  const start = born ?? "Unknown";
-  if (died) return `${start}–${died}`;
-  return born ? `${born}–present` : String(start);
+  const start = born != null ? yearLabel(born) : "Unknown";
+  if (died) return `${start}–${yearLabel(died)}`;
+  return born ? `${start}–present` : String(start);
+}
+
+/** "-60" renders as "60 BC"; positive years are unchanged. */
+export function yearLabel(year: number): string {
+  return year < 0 ? `${Math.abs(year)} BC` : String(year);
 }
 
 /** True when the image is a real photograph rather than the grey placeholder. */

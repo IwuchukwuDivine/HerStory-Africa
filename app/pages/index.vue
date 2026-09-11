@@ -1,12 +1,14 @@
 <template>
   <div>
     <HomeHero />
+    <ClientOnly>
+      <ContinueReading />
+    </ClientOnly>
     <HomeFeaturedWomen />
-    <HomeDidYouKnow />
-    <HomeArticlesPreview />
+    <HomeArticlesPreview show-did-you-know />
     <HomeBrowseByRegion />
     <HomeBrowseByCause />
-    <HomeTimelineTeaser />
+    <HomeReadingPaths />
   </div>
 </template>
 

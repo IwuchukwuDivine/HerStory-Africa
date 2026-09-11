@@ -1,4 +1,5 @@
 import MiniSearch, { type SearchResult } from "minisearch";
+import { lifespan } from "~/utils/format";
 import type {
   ArchiveSearchResult,
   ArchiveSearchResultType,
@@ -19,6 +20,7 @@ interface DocMeta {
   slug: string;
   title: string;
   subtitle?: string;
+  image?: string;
   to: string;
   fallback: string;
 }
@@ -41,7 +43,19 @@ async function loadArchiveIndexData(): Promise<ArchiveIndexData> {
     opportunitySections,
   ] = await Promise.all([
     queryCollection("women")
-      .select("path", "name", "slug", "country", "region", "era", "summary", "causes")
+      .select(
+        "path",
+        "name",
+        "slug",
+        "image",
+        "country",
+        "region",
+        "era",
+        "born",
+        "died",
+        "summary",
+        "causes",
+      )
       .all(),
     queryCollection("articles")
       .select("path", "title", "slug", "description", "category")
@@ -69,7 +83,8 @@ async function loadArchiveIndexData(): Promise<ArchiveIndexData> {
         type: "woman",
         slug: w.slug,
         title: w.name,
-        subtitle: [w.country, w.era && `${w.era} era`].filter(Boolean).join(" · "),
+        subtitle: [w.country, lifespan(w.born, w.died)].filter(Boolean).join(" · "),
+        image: w.image,
         to: `/women/${w.slug}`,
         fallback: w.summary ?? "",
       },
@@ -255,6 +270,7 @@ export function useArchiveSearch() {
         slug: docMeta.slug,
         title: docMeta.title,
         subtitle: docMeta.subtitle,
+        image: docMeta.image,
         to: docMeta.to,
         score: group.score,
         snippet,
