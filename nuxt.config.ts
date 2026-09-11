@@ -252,6 +252,13 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
 
+  // In development there is no prerender step, and the ipxStatic provider
+  // registers no /_ipx handler, so every optimised image 404s. Use the live
+  // ipx handler locally; `nuxt generate` still resolves to ipxStatic below.
+  $development: {
+    image: { provider: "ipx" },
+  },
+
   // ── Image Optimisation ──────────────────────────────────────────────
   image: {
     // Generate every image variant at build time as static files. The
