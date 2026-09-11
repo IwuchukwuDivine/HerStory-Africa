@@ -204,6 +204,12 @@ export default defineNuxtConfig({
 
   // ── Vite ────────────────────────────────────────────────────────────
   vite: {
+    build: {
+      // One stylesheet instead of ~10. Every chunk is a render-blocking
+      // request, and on a throttled connection the round trips cost far more
+      // than the extra bytes: the whole site's CSS gzips to about 25 KB.
+      cssCodeSplit: false,
+    },
     // @ts-expect-error - type mismatch between @tailwindcss/vite and Nuxt's bundled Vite types
     plugins: [tailwindcss()],
     define: {

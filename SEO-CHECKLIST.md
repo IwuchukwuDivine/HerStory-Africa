@@ -184,6 +184,32 @@ Page weight is now 1,052 KB with CLS 0.001 and a11y 100. The remaining
 `/women?cause=` links are the intended fallback for the 275 causes with fewer
 than three women, and they canonicalise to `/women`.
 
+## Post-deploy check (11 Sep 2026)
+
+The font and contrast fixes are live and confirmed by PageSpeed:
+**accessibility 100, best practices 100, SEO 100, and CLS 0.001** (full marks
+on both CLS and blocking time). A local Lighthouse run against the same URL
+scored performance 96; PageSpeed's own run scored 77, the gap being network
+variance in first paint on their test machines.
+
+The one real item left in their report was **ten render-blocking stylesheets**
+costing an estimated 2,670 ms. Fixed with `vite.build.cssCodeSplit: false`:
+the site now ships one stylesheet (131 KB raw, 21 KB gzipped) instead of ten
+chunks, so a cold visit makes one blocking request rather than ten, and the
+file is cached for every page after that. Verified the homepage and a hub page
+render identically.
+
+Note for later: inlining the CSS (`features.inlineStyles: true`) is not the
+answer here. Nuxt keeps the `<link>` tags alongside the inline styles, so the
+page pays for both: 107 KB of HTML *and* eight blocking requests.
+
+Also trimmed a 170-character description on the new gynecology article.
+
+Remaining, and both are design decisions rather than defects: the homepage
+loads nine font files (about 377 KB) because all six weights and the italics
+are genuinely used across the page, and the profile card images are served at
+2x for high-density screens.
+
 ## Needs the user
 
 - [~] Real, licensed images for the 19 placeholder profiles: abla-pokou,
