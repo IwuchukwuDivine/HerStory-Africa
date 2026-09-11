@@ -16,6 +16,7 @@ imageCredit: "Still: Eunice Lau, from her documentary 'Through the Fire' / CC BY
 featured: false
 funFact: "When 750 armed militants seized her hospital and held her hostage, she refused to sign it over, and they were forced to hand her a written apology."
 summary: "One of Somalia's first female gynecologists turned her one-room farm clinic into a refuge for 90,000 displaced people, and faced down 750 militants who stormed it."
+hook: "She faced 750 gunmen at her hospital and made them apologise in writing."
 ---
 
 ## Biography

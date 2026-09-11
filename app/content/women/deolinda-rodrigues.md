@@ -17,6 +17,7 @@ imageCredit: "Lolatta / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "As a student in Brazil she exchanged letters with Martin Luther King Jr., who tried to help her continue her studies in the United States. She chose the war for Angola's freedom instead, and never saw thirty."
 summary: "Angolan revolutionary, poet and translator who corresponded with Martin Luther King Jr., co-founded the MPLA's women's organisation, marched with the guerrilla Camy Squadron, and was captured and executed at 29. Angola marks Women's Day on the date of her capture."
+hook: "Walked out on a US degree in 1962 because the struggle needed her more than a diploma."
 ---
 
 ## Biography

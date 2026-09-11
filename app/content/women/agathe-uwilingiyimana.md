@@ -18,6 +18,7 @@ imageCredit: "Author unknown, via BBC Gahuza / fair use (no free image known)"
 featured: false
 funFact: "For roughly fourteen hours between President Habyarimana's assassination and her own murder, the chemistry-teacher-turned-Prime-Minister was Rwanda's acting head of government: one of the shortest such tenures in modern history, and one of the bravest."
 summary: "Rwanda's first and only female Prime Minister, a chemistry teacher who abolished ethnic quotas in schools, stood against Hutu Power extremism, and was assassinated with her UN guards in the opening hours of the 1994 genocide."
+hook: "Abolished Rwanda's school ethnic quotas, then died in the genocide's opening hours."
 ---
 
 ## Biography

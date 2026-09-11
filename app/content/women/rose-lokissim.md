@@ -16,6 +16,7 @@ imageCredit: "No freely licensed image available"
 featured: false
 funFact: "The most damning proof of her courage was written by her killers: the secret police's own report, quoting her fearless last words, became evidence that helped convict the dictator Hissène Habré thirty years later."
 summary: "One of Chad's first female soldiers, who resisted the dictator Hissène Habré from inside his secret-police prisons, documenting atrocities until she was executed. Her defiance, recorded by her own torturers, later helped bring Habré to justice."
+hook: "Her killers wrote down her last words, and thirty years later they helped convict Habré."
 ---
 
 ## Biography

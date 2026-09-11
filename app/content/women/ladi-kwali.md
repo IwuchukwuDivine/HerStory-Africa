@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Ladi Kwali is the only woman whose image appears on a Nigerian banknote — she features on the reverse of the ₦20 note."
 summary: "Gbagyi master potter who carried Nigerian hand-building tradition onto the world stage. The first woman at the Abuja Pottery Training Centre, an MBE, an NNOM holder, and the only woman on a Nigerian banknote."
+hook: "Her pots went from the Emir of Abuja's household to the British Museum and the ₦20 note."
+ogFocal: "50% 10%"
 ---
 
 ## Biography

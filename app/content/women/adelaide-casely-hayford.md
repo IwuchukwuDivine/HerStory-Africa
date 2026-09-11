@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Adelaide Casely-Hayford founded a vocational school for girls in Sierra Leone at a time when girls' education was widely considered unnecessary."
 summary: "Sierra Leonean educator, Pan-Africanist and women's rights advocate who founded a vocational school for girls at a time when girls' education was considered unnecessary. She spent decades teaching African women that their culture, identity and intelligence were things to be proud of, not erased."
+hook: "A Freetown vocational school for girls in 1923, when few thought girls needed one."
+ogFocal: "50% 10%"
 ---
 
 ## Biography

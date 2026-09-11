@@ -17,6 +17,7 @@ imageCredit: "Ainakhu / Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Kemi Adeosun broke a longstanding barrier as the first female Minister of Finance in Nigeria's recent history, championing fiscal reform in one of Africa's largest economies."
 summary: "Nigerian accountant and former Minister of Finance. First female Minister of Finance in Nigeria's recent history; advocate for fiscal reform and women in finance."
+hook: "The first woman to run Nigeria's finance ministry in the Fourth Republic (2015 to 2018)."
 ---
 
 ## Biography

@@ -16,6 +16,7 @@ imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Chief Theresa Kachindamoto has personally annulled over 3,500 child marriages in her district, sending every girl back to school."
 summary: "Malawian paramount chief who has annulled over 3,500 child marriages in her district, sending girls back to school and challenging deeply entrenched traditions that rob girls of their futures."
+hook: "Twenty-seven years as a college secretary, then chief of Dedza and 3,500 annulments."
 ---
 
 ## Biography

@@ -18,6 +18,7 @@ imageCredit: "South African History Online (sahistory.org.za); rights unstated, 
 featured: false
 funFact: "On 11 November 2018 Google honoured her with a Google Doodle on what would have been her 85th birthday: a global tribute to a writer whose books her own government had once banned."
 summary: "The first Black South African woman to publish a novel inside South Africa, whose banned books about township life under apartheid opened the door for generations of Black women writers."
+hook: "A bookkeeper's novel from a Johannesburg furniture store, banned by the censors in 1979."
 ---
 
 ## Biography

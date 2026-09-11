@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Baleka Mbete made history as the first woman ever to serve as Speaker of South Africa's National Assembly."
 summary: "South African politician and poet. ANC veteran; first woman Speaker of the National Assembly; Deputy President; advocate for women's representation and the arts."
+hook: "Poet in ANC exile, then the first woman to sit as Speaker of South Africa's Assembly."
 ---
 
 ## Biography

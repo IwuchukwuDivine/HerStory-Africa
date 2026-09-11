@@ -16,6 +16,7 @@ imageCredit: "Courtesy photo"
 featured: false
 funFact: "In 1973, Felicia Ogunsheye became Nigeria's first female professor in any discipline, achieving the milestone in Library Science at the University of Ibadan."
 summary: "Nigeria's first female professor. She achieved the milestone in 1973 as a professor of Library Science at the University of Ibadan and spent her career modernizing library education and promoting women's participation in higher education."
+hook: "Nigeria's first woman professor, in 1973, and the subject was library science."
 ---
 
 ## Biography

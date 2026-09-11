@@ -17,6 +17,7 @@ imageCredit: "No freely licensed image available"
 featured: false
 funFact: "Wambui Otieno fought in the Mau Mau uprising as a teenager before becoming one of Kenya's fiercest defenders of women's property and inheritance rights."
 summary: "Kenyan freedom fighter and women's rights advocate who fought in the Mau Mau uprising as a teenager, later becoming a fierce defender of women's property and inheritance rights."
+hook: "A Mau Mau courier as a teenager, later in court for the right to bury her husband."
 ---
 
 ## Biography

@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Dulcie September served as the ANC's chief representative in France before being assassinated in Paris in 1988, becoming a symbol of apartheid's global reach."
 summary: "South African anti-apartheid activist. ANC representative in France; assassinated in Paris in 1988; symbol of the regime's reach and of international solidarity with the struggle."
+hook: "Shot outside the ANC office in Paris in 1988, a murder still without a name."
 ---
 
 ## Biography

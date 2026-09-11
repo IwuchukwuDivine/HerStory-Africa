@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Vera Chirwa co-founded the Malawi Congress Party, endured over a decade of imprisonment under the Banda regime, and later served as a UN Special Rapporteur on prisons."
 summary: "Malawian lawyer and human rights activist. Co-founded the Malawi Congress Party; imprisoned for over a decade under Banda; later UN Special Rapporteur on prisons."
+hook: "Abducted from Zambia, sentenced to death, twelve years in Banda's prisons."
 ---
 
 ## Biography

@@ -16,6 +16,7 @@ imageCredit: "Portrait, 1936, photographer unknown / Wikimedia Commons / Public 
 featured: false
 funFact: "In 2020 Tunisia put her face on the 10-dinar note, reportedly making it the world's first banknote to feature a female doctor."
 summary: "The first modern female doctor of Tunisia and North Africa, who graduated in Paris in 1936 and spent a century of life opening medicine, family planning, and freedom of choice to Tunisian women."
+hook: "The face on Tunisia's 10-dinar note, a doctor when no Tunisian woman had been one."
 ---
 
 ## Biography

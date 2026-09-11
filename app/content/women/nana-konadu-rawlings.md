@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Nana Konadu Agyeman Rawlings founded the 31st December Women's Movement and later ran for the presidency of Ghana in 2016."
 summary: "Former First Lady of Ghana (1982–2001). Founded the 31st December Women's Movement; ran for president in 2016; advocate for women's empowerment and development."
+hook: "The First Lady who built a mass women's movement, then ran for president herself in 2016."
 ---
 
 ## Biography

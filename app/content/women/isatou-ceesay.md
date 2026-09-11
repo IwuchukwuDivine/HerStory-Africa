@@ -16,6 +16,7 @@ imageCredit: "Isatou Ceesay at a waste site in The Gambia / Photo: Luke Duggleby
 featured: false
 funFact: "Known as the 'Queen of Recycling,' Isatou Ceesay built a movement in The Gambia that transforms discarded plastic waste into income-generating products for women."
 summary: "Gambian environmental activist known as the 'Queen of Recycling' who empowers women by transforming plastic waste into income-generating products."
+hook: "In Njau she taught women to turn discarded plastic into bags, purses, and an income."
 ---
 
 ## Biography

@@ -18,6 +18,7 @@ imageCredit: "ThSNbTL / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "Umoja funds itself partly as a tourist destination: visitors, including men, who may visit but never live there, pay an entry fee and buy beadwork from the village's craft cooperative, turning the very economy men once controlled into the women's independence engine."
 summary: "Samburu matriarch who founded Umoja, believed to be Africa's first all-women village: a self-governing refuge for survivors of violence that has defied threats, armed attacks and tradition for over three decades."
+hook: "Founded Umoja around 1990 with fifteen other survivors, a village where no man may live."
 ---
 
 ## Biography

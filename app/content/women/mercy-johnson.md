@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Mercy Johnson is one of Nollywood's most decorated and popular stars, winning multiple awards while also working as a director and producer advocating for family-friendly content."
 summary: "Nigerian actress, director, and producer; one of Nollywood's most popular stars. Multiple award winner; advocate for women in film and family-friendly content."
+hook: "One of Nollywood's most awarded actresses, now directing and producing her own films."
 ---
 
 ## Biography

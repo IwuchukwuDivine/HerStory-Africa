@@ -18,6 +18,7 @@ imageCredit: "The Royal Society (royalsociety.org); permission recommended, as n
 featured: false
 funFact: "As a child she herded sheep in the Lesotho highlands and attended school only on alternate days, and she credits the outdoor 'play' of shepherding with sharpening the curiosity that made her a scientist."
 summary: "Lesotho-born South African chemist, a shepherd girl who became a Fellow of the Royal Society, whose light-activated cancer therapy research aims to give Africa a gentler, cheaper alternative to chemotherapy."
+hook: "A shepherd girl on alternate school days, now a Fellow of the Royal Society."
 ---
 
 ## Biography

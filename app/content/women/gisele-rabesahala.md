@@ -18,6 +18,7 @@ imageCredit: "UNESCO 'Women in African History' / Rabesahala family archives / C
 featured: false
 funFact: "Before entering politics she seriously considered becoming a nun. Instead the would-be sister became a Marxist party leader, and she stayed single her whole life, explaining she had chosen to 'serve my country, rather than one person'."
 summary: "Madagascar's pioneering stateswoman: at 17 she joined the nationalist struggle, at 27 became the first Malagasy woman to lead a political party, and in 1977 became the country's first woman government minister."
+hook: "Defended the prisoners of 1947 when no one else in Madagascar would."
 ---
 
 ## Biography

@@ -18,6 +18,7 @@ imageCredit: "CENTURY MEDIA / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "Residents of Hoima nicknamed her the Iron Lady for her zero-tolerance stance on garbage, disorder and unplanned construction while she pushed the town into city status."
 summary: "Ugandan politician and the first woman to serve as Mayor of Hoima, who guided the oil-rich municipality through its elevation to city status and later became a State Minister while championing gender equality and clean urban environments."
+hook: "Hoima's Iron Lady, ten years as mayor and a town turned oil city in 2020."
 ---
 
 ## Biography

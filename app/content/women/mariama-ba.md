@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Mariama Bâ's novel So Long a Letter became a landmark of African women's writing, redefining how women's inner lives were portrayed in African literature."
 summary: "Senegalese novelist and feminist whose novel So Long a Letter became a landmark of African women's writing. Teacher and advocate for women's education and equality."
+hook: "A teacher and mother of nine whose first novel won the first Noma Award in 1979."
 ---
 
 ## Biography

@@ -18,6 +18,7 @@ imageCredit: "World Economic Forum / Michael Wuertenberg, swiss-image.ch / CC BY
 featured: false
 funFact: "Nelson Mandela said her music sustained him and his fellow prisoners on Robben Island, and Miriam Makeba called her 'my baby', while Hugh Masekela called her 'my mad niece'."
 summary: "South African singer crowned the 'Princess of Africa', whose anthems like 'Umqombothi' conquered the continent under apartheid and who transformed her fame into one of Africa's most powerful voices against malaria and HIV/AIDS."
+hook: "The singer of Umqombothi who now lobbies parliaments for malaria bed nets."
 ---
 
 ## Biography

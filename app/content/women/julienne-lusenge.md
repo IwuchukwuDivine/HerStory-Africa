@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Julienne Lusenge founded organisations providing legal aid, counselling, and economic support to survivors of sexual violence used as a weapon of war in the DRC."
 summary: "Congolese human rights activist who has spent decades fighting sexual violence as a weapon of war in the DRC, founding organisations that provide legal aid, counselling, and economic support to survivors."
+hook: "She founded SOFEPADI in 2000 and has testified to the UN Security Council and the ICC."
 ---
 
 ## Biography
