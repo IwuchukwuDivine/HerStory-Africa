@@ -1,9 +1,8 @@
-const FALLBACK_SITE_URL = "https://herstoryafrica.com.ng";
+const SITE_URL = (
+  process.env.NUXT_SITE_URL || "https://herstoryafrica.com.ng"
+).replace(/\/$/, "");
 
 export default (path?: string) => {
-  const siteUrl = String(
-    useRuntimeConfig().public.siteUrl || FALLBACK_SITE_URL,
-  ).replace(/\/$/, "");
-  if (!path) return `${siteUrl}/og-image.png`;
-  return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+  if (!path) return `${SITE_URL}/og-image.png`;
+  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 };

@@ -72,9 +72,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     buttondownApiKey: "",
     githubToken: "",
-    public: {
-      siteUrl,
-    },
   },
 
   modules: [
@@ -209,6 +206,9 @@ export default defineNuxtConfig({
   vite: {
     // @ts-expect-error - type mismatch between @tailwindcss/vite and Nuxt's bundled Vite types
     plugins: [tailwindcss()],
+    define: {
+      "process.env.NUXT_SITE_URL": JSON.stringify(siteUrl),
+    },
     optimizeDeps: {
       include: ["@vueuse/core"],
     },
