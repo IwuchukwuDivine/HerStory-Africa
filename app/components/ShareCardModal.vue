@@ -67,7 +67,13 @@
             </button>
           </div>
 
-          <button type="button" class="pill pill--ghost share-sheet__copy" @click="copyLink">
+          <button
+            type="button"
+            class="pill pill--ghost share-sheet__copy"
+            :aria-label="copied ? 'Link copied' : 'Copy link'"
+            aria-live="polite"
+            @click="copyLink"
+          >
             {{ copied ? 'Copied' : 'Copy link' }}
           </button>
         </div>
@@ -79,6 +85,7 @@
 <script setup lang="ts">
 import type { Woman } from '~/utils/types/content'
 import { useDark } from '@vueuse/core'
+import copyText from '~/utils/copyText'
 
 const props = defineProps<{
   open: boolean
@@ -139,17 +146,15 @@ async function handleShare() {
 
 async function copyLink() {
   const url = `${window.location.origin}/women/${slug.value}`
-  try {
-    await navigator.clipboard.writeText(url)
-    copied.value = true
-    if (copiedTimer) clearTimeout(copiedTimer)
-    copiedTimer = setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  }
-  catch {
+  if (!(await copyText(url))) {
     error.value = 'Could not copy the link'
+    return
   }
+  copied.value = true
+  if (copiedTimer) clearTimeout(copiedTimer)
+  copiedTimer = setTimeout(() => {
+    copied.value = false
+  }, 2000)
 }
 
 function onKeydown(event: KeyboardEvent) {
@@ -170,6 +175,7 @@ function unlockScroll() {
 watch(() => props.open, (isOpen) => {
   if (isOpen) {
     theme.value = isDark.value ? 'dark' : 'light'
+    copied.value = false
     lockScroll()
     nextTick(renderCard)
   }
