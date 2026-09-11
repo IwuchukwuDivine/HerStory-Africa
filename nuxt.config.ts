@@ -60,6 +60,10 @@ const contentSitemapUrls = [
   ...pathEntries.map((e) => ({ loc: `/women/path/${e.slug}` })),
 ];
 
+const siteUrl = (
+  process.env.NUXT_SITE_URL || "https://herstoryafrica.com.ng"
+).replace(/\/$/, "");
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
 
@@ -68,6 +72,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     buttondownApiKey: "",
     githubToken: "",
+    public: {
+      siteUrl,
+    },
   },
 
   modules: [
@@ -281,7 +288,8 @@ export default defineNuxtConfig({
 
   // ── Site URL (required by sitemap + SEO modules) ───────────────────
   site: {
-    url: "https://herstoryafrica.com.ng",
+    url: siteUrl,
+    name: "HerStory Africa",
   },
 
   // ── Sitemap ─────────────────────────────────────────────────────────
@@ -332,7 +340,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:image",
-          content: "https://herstoryafrica.com.ng/og-image.png",
+          content: `${siteUrl}/og-image.png`,
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
@@ -351,7 +359,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://herstoryafrica.com.ng/og-image.png",
+          content: `${siteUrl}/og-image.png`,
         },
       ],
 

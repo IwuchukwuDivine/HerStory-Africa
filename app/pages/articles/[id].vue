@@ -368,14 +368,14 @@ useHead(() => ({
             author: {
               "@type": "Organization",
               name: "HerStory Africa",
-              url: "https://herstoryafrica.com.ng",
+              url: getAbsoluteUrl("/"),
             },
             publisher: {
               "@type": "Organization",
               name: "HerStory Africa",
               logo: {
                 "@type": "ImageObject",
-                url: "https://herstoryafrica.com.ng/og-image.png",
+                url: getAbsoluteUrl("/og-image.png"),
               },
             },
           }),

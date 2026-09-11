@@ -1,6 +1,6 @@
 import { queryCollection } from "@nuxt/content/server";
 
-const SITE_URL = "https://herstoryafrica.com.ng";
+const FALLBACK_SITE_URL = "https://herstoryafrica.com.ng";
 const SITE_TITLE = "HerStory Africa";
 const SITE_DESC =
   "The women history forgot to teach you. An educational archive of African women who fought for equality, rights, and social change.";
@@ -15,15 +15,18 @@ function escapeXml(str: string): string {
 }
 
 export default defineEventHandler(async (event) => {
+  const siteUrl = String(
+    useRuntimeConfig(event).public.siteUrl || FALLBACK_SITE_URL,
+  ).replace(/\/$/, "");
   const articles = await queryCollection(event, "articles")
     .order("date", "DESC")
     .all();
 
   const items = articles
     .map((a) => {
-      const url = `${SITE_URL}/articles/${a.slug}`;
+      const url = `${siteUrl}/articles/${a.slug}`;
       const pubDate = new Date(`${a.date}T00:00:00+00:00`).toUTCString();
-      const image = a.image ? `${SITE_URL}${a.image}` : "";
+      const image = a.image ? `${siteUrl}${a.image}` : "";
       return `    <item>
       <title>${escapeXml(a.title)}</title>
       <link>${url}</link>
@@ -46,11 +49,11 @@ export default defineEventHandler(async (event) => {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${SITE_TITLE}</title>
-    <link>${SITE_URL}</link>
+    <link>${siteUrl}</link>
     <description>${SITE_DESC}</description>
     <language>en</language>
     <lastBuildDate>${lastBuild}</lastBuildDate>
-    <atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
   </channel>
 </rss>`;

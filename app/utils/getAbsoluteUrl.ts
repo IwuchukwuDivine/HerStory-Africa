@@ -1,6 +1,9 @@
-const SITE_URL = "https://herstoryafrica.com.ng";
+const FALLBACK_SITE_URL = "https://herstoryafrica.com.ng";
 
 export default (path?: string) => {
-  if (!path) return `${SITE_URL}/og-image.png`;
-  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+  const siteUrl = String(
+    useRuntimeConfig().public.siteUrl || FALLBACK_SITE_URL,
+  ).replace(/\/$/, "");
+  if (!path) return `${siteUrl}/og-image.png`;
+  return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 };
