@@ -77,7 +77,6 @@
 </template>
 
 <script setup lang="ts">
-import type { CardFormat, CardTheme } from '~/utils/drawShareCard'
 import type { Woman } from '~/utils/types/content'
 import { useDark } from '@vueuse/core'
 

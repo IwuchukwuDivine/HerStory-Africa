@@ -1,4 +1,3 @@
-import type { CardData, CardFormat, CardTheme } from '~/utils/drawShareCard'
 import { drawShareCard } from '~/utils/drawShareCard'
 
 export function useShareCard() {

@@ -81,7 +81,6 @@
 </template>
 
 <script setup lang="ts">
-import type { CardFormat, CardTheme } from '~/utils/drawReflectionCard'
 import { drawReflectionCard } from '~/utils/drawReflectionCard'
 import { useDark } from '@vueuse/core'
 
