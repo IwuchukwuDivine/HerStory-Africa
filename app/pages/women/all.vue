@@ -99,6 +99,13 @@ useSeoMeta({
   twitterDescription: description,
 });
 
+defineOgImage("Card", {
+  variant: "page",
+  pill: "The index",
+  title: "All women A to Z",
+  description,
+});
+
 useHead(() => ({
   link: [{ rel: "canonical", href: canonicalUrl }],
   script: [

@@ -23,7 +23,7 @@
           class="suggest__input"
           placeholder="e.g. Funmilayo Ransome-Kuti"
           required
-        />
+        >
       </div>
 
       <div class="suggest__field">
@@ -37,7 +37,7 @@
           type="text"
           class="suggest__input"
           placeholder="e.g. Nigeria, West Africa"
-        />
+        >
       </div>
 
       <div class="suggest__field">
@@ -66,7 +66,7 @@
             type="text"
             class="suggest__input"
             placeholder="Your name"
-          />
+          >
         </div>
 
         <div class="suggest__field">
@@ -80,7 +80,7 @@
             type="email"
             class="suggest__input"
             placeholder="In case we'd like to follow up"
-          />
+          >
         </div>
       </div>
 
@@ -177,13 +177,18 @@ useSeoMeta({
   description: suggestDescription,
   ogTitle: "Suggest a Woman",
   ogDescription: suggestDescription,
-  ogImage: getAbsoluteUrl("/suggest-og.png"),
   ogUrl: getAbsoluteUrl("/suggest"),
   ogType: "website",
   twitterCard: "summary_large_image",
   twitterTitle: "Suggest a Woman",
   twitterDescription: suggestDescription,
-  twitterImage: getAbsoluteUrl("/suggest-og.png"),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Suggest a woman",
+  title: "Know an African woman whose story should be here?",
+  description: suggestDescription,
 });
 
 useHead({

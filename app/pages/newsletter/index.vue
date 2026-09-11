@@ -55,8 +55,15 @@ useSeoMeta({
   ogTitle: "Subscribe to HerStory Africa",
   ogDescription:
     "Get stories of remarkable African women delivered to your inbox. No spam, just history worth knowing.",
-  ogImage: getAbsoluteUrl("/newsletter-og.png"),
   ogUrl: getAbsoluteUrl("/newsletter"),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Newsletter",
+  title: "Don't let these stories stay hidden.",
+  description:
+    "Every edition brings you the story of a remarkable African woman who shaped a continent but missed the textbooks. No spam, just history worth knowing.",
 });
 
 useHead({

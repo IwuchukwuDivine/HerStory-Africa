@@ -93,8 +93,15 @@ useSeoMeta({
   ogTitle: "Timeline — HerStory Africa",
   ogDescription:
     "Explore the full timeline of African women who fought for equality across the centuries.",
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/timeline"),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Timeline",
+  title: "Timeline",
+  description:
+    "A chronological timeline of African women who shaped history, from pre-colonial queens to contemporary leaders.",
 });
 
 useHead({

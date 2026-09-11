@@ -148,15 +148,20 @@ useSeoMeta({
   description: articlesDescription,
   ogTitle: articlesTitle,
   ogDescription: articlesDescription,
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl('/articles'),
   ogType: 'website',
   twitterCard: 'summary_large_image',
   twitterTitle: articlesTitle,
   twitterDescription: articlesDescription,
-  twitterImage: getAbsoluteUrl(),
   robots: () =>
     hasQueryFilters.value ? 'noindex, follow' : 'index, follow',
+})
+
+defineOgImage('Card', {
+  variant: 'page',
+  pill: 'Articles',
+  title: 'Explainers and essays',
+  description: articlesDescription,
 })
 
 useHead({

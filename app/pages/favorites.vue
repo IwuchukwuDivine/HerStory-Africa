@@ -123,9 +123,15 @@ useSeoMeta({
   description: "Your saved women and articles from HerStory Africa.",
   ogTitle: "Your Favorites",
   ogDescription: "Your saved women and articles from HerStory Africa.",
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/favorites"),
   robots: "noindex, follow",
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Favorites",
+  title: "Your saved stories",
+  description: "The women and articles you bookmarked, kept on this device.",
 });
 
 useHead({

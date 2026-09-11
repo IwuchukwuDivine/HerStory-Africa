@@ -160,13 +160,18 @@ useSeoMeta({
   description: pageDescription,
   ogTitle: "Opportunities — HerStory Africa",
   ogDescription: pageDescription,
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/opportunities"),
   ogType: "website",
   twitterCard: "summary_large_image",
   twitterTitle: "Opportunities — HerStory Africa",
   twitterDescription: pageDescription,
-  twitterImage: getAbsoluteUrl(),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Opportunities",
+  title: "Opportunities for African Women",
+  description: pageDescription,
 });
 
 useHead({

@@ -155,8 +155,15 @@ useSeoMeta({
   ogTitle: "About HerStory Africa",
   ogDescription:
     "Why HerStory Africa exists: correcting misconceptions about feminism through real history.",
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/about"),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "About",
+  title: "Why this exists",
+  description:
+    "Why HerStory Africa exists: an open-source educational archive documenting African women who fought for equality, rights, and social change.",
 });
 
 useHead({

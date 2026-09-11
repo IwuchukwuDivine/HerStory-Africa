@@ -27,7 +27,7 @@
             <span class="woman-profile__era-badge">{{ woman.era }} era</span>
             <ClientOnly>
               <div class="woman-profile__actions">
-                <ShareCardButton :woman="woman" :size="22" />
+                <ShareCardButton :woman="woman" />
                 <ShareButton
                   :title="woman.name"
                   :text="woman.summary"
@@ -211,13 +211,14 @@ useSeoMeta({
   twitterDescription: () => woman.value?.summary ?? "",
 });
 
-defineOgImage("Cover", {
-  title: () => woman.value?.name ?? "",
-  pill: () => woman.value?.era ?? "",
-  subtitle: () => womanDates.value,
-  meta: () => woman.value?.country ?? "",
-  image: () => ogImageUrl.value,
+defineOgImage("Card", {
   variant: "woman",
+  pill: () => (woman.value?.era ? `${woman.value.era} era` : ""),
+  title: () => woman.value?.name ?? "",
+  meta: () =>
+    woman.value ? `${woman.value.country} · ${womanDates.value}` : "",
+  image: () => ogImageUrl.value,
+  focal: () => woman.value?.ogFocal ?? "50% 20%",
 });
 
 useHead(() => ({

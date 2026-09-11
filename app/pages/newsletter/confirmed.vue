@@ -33,9 +33,16 @@ useSeoMeta({
   ogTitle: "Subscription Confirmed — HerStory Africa",
   ogDescription:
     "You're officially part of HerStory Africa. Stories of remarkable African women are on their way to your inbox.",
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/newsletter/confirmed"),
   robots: "noindex, follow",
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Newsletter",
+  title: "You're in.",
+  description:
+    "Stories of remarkable African women are on their way to your inbox.",
 });
 
 useHead({

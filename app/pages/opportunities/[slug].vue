@@ -154,13 +154,24 @@ useSeoMeta({
   description: () => seoDescription(opp.value?.description ?? ""),
   ogTitle: () => `${opp.value?.title ?? ""} — HerStory Africa`,
   ogDescription: () => seoDescription(opp.value?.description ?? ""),
-  ogImage: getAbsoluteUrl(),
   ogUrl: canonicalUrl,
   ogType: "website",
   twitterCard: "summary_large_image",
   twitterTitle: () => `${opp.value?.title ?? ""} — HerStory Africa`,
   twitterDescription: () => opp.value?.description ?? "",
-  twitterImage: getAbsoluteUrl(),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: () => categoryLabel.value,
+  title: () => opp.value?.title ?? "",
+  description: () => {
+    if (!opp.value) return "";
+    const deadline = opp.value.deadline
+      ? `Deadline ${formatDate(opp.value.deadline)}`
+      : "Ongoing, no fixed deadline";
+    return `${opp.value.organization} · ${deadline}`;
+  },
 });
 
 useHead(() => ({

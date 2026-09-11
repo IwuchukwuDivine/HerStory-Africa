@@ -244,13 +244,14 @@ useSeoMeta({
   twitterDescription: () => article.value?.description ?? "",
 });
 
-defineOgImage("Cover", {
-  title: () => article.value?.title ?? "",
-  subtitle: () => article.value?.description ?? "",
-  image: () => ogImageUrl.value,
-  pill: () => article.value?.category ?? "",
-  meta: () => formattedDate.value,
+defineOgImage("Card", {
   variant: "article",
+  pill: () =>
+    article.value ? `${article.value.category} · ${formattedDate.value}` : "",
+  title: () => article.value?.title ?? "",
+  description: () => article.value?.description ?? "",
+  image: () => ogImageUrl.value,
+  focal: () => article.value?.ogFocal ?? "50% 20%",
 });
 
 useHead(() => ({

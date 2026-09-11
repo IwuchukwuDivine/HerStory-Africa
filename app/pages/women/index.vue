@@ -210,15 +210,20 @@ useSeoMeta({
   description: womenDescription,
   ogTitle: womenTitle,
   ogDescription: womenDescription,
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/women"),
   ogType: "website",
   twitterCard: "summary_large_image",
   twitterTitle: womenTitle,
   twitterDescription: womenDescription,
-  twitterImage: getAbsoluteUrl(),
   robots: () =>
     hasQueryFilters.value ? "noindex, follow" : "index, follow",
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "The archive",
+  title: () => `${totalCount.value} women`,
+  description: womenDescription,
 });
 
 useHead({

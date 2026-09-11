@@ -121,6 +121,12 @@ useSeoMeta({
   twitterDescription: copy.description,
 });
 
+defineOgImage("Card", {
+  variant: "page",
+  pill: () => `${women.value.length} women`,
+  title: copy.heading,
+});
+
 useHead(() => ({
   link: [{ rel: "canonical", href: canonicalUrl }],
   script: [
