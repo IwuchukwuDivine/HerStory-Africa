@@ -17,6 +17,7 @@ imageCredit: "Joop van Bilsen / Anefo / Dutch National Archives / Wikimedia Comm
 featured: false
 funFact: "She was, at once, East Africa's first woman barrister, an international fashion model in Vogue and Harper's Bazaar, and a national foreign minister."
 summary: "Ugandan princess of Toro who became East Africa's first female barrister and one of the first Black supermodels, then served as Idi Amin's foreign minister until she defied him and had to flee for her life. She rebuilt herself as a respected ambassador."
+hook: "Barrister, Vogue model, and the foreign minister who fled Idi Amin into Kenya."
 ---
 
 ## Biography

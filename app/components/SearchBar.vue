@@ -1,5 +1,5 @@
 <template>
-  <div class="search-bar" :class="{ 'search-bar--focused': isFocused }">
+  <div class="search-bar" :class="{ 'search-bar--lg': size === 'lg' }">
     <LucideSearch class="search-bar__icon" :size="20" />
     <input
       ref="inputRef"
@@ -11,17 +11,16 @@
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
-      @focus="isFocused = true"
-      @blur="isFocused = false"
       @keydown.enter="$emit('submit')"
-    />
+    >
     <button
       v-show="modelValue"
+      type="button"
       class="search-bar__clear"
       aria-label="Clear search"
       @click="$emit('update:modelValue', '')"
     >
-      <LucideX :size="16" />
+      <LucideX :size="18" />
     </button>
   </div>
 </template>
@@ -31,9 +30,12 @@ withDefaults(
   defineProps<{
     modelValue: string;
     placeholder?: string;
+    /** 48px by default; `lg` is the 52px hero variant. */
+    size?: "md" | "lg";
   }>(),
   {
     placeholder: "Search women, causes, countries…",
+    size: "md",
   },
 );
 
@@ -42,7 +44,6 @@ defineEmits<{
   submit: [];
 }>();
 
-const isFocused = ref(false);
 const inputRef = ref<HTMLInputElement>();
 
 defineExpose({ focus: () => inputRef.value?.focus() });
@@ -53,41 +54,49 @@ defineExpose({ focus: () => inputRef.value?.focus() });
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 12px;
   width: 100%;
   max-width: 36rem;
-  padding: 0.875rem 1.25rem;
+  height: 48px;
+  padding: 0 4px 0 18px;
   background: var(--surface-elevated);
   border: 1.5px solid var(--border-default);
   border-radius: 9999px;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
-.search-bar--focused {
+.search-bar--lg {
+  height: 52px;
+}
+
+.search-bar:focus-within {
   border-color: var(--ring-default);
-  box-shadow: 0 0 0 3px rgba(181, 69, 27, 0.12);
+  outline: 2px solid var(--ring-default);
+  outline-offset: 2px;
 }
 
 .search-bar__icon {
   flex-shrink: 0;
   color: var(--text-muted);
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
 }
 
-.search-bar--focused .search-bar__icon {
+.search-bar:focus-within .search-bar__icon {
   color: var(--ring-default);
 }
 
 .search-bar__input {
   flex: 1;
   min-width: 0;
-  font-size: 1rem;
+  height: 100%;
+  font-size: 16px;
+  font-family: var(--font-body);
   color: var(--text-primary);
   background: transparent;
+  border: none;
 }
 
+/* The wrapper draws the ring for the whole control. */
 .search-bar__input:focus-visible {
   outline: none;
 }
@@ -98,21 +107,25 @@ defineExpose({ focus: () => inputRef.value?.focus() });
 
 .search-bar__clear {
   flex-shrink: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 9999px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
   color: var(--text-muted);
-  background: var(--surface-muted);
+  background: transparent;
+  cursor: pointer;
   transition:
     background 0.15s ease,
     color 0.15s ease;
 }
 
-.search-bar__clear:hover {
-  background: var(--surface-subtle);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .search-bar__clear:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 </style>

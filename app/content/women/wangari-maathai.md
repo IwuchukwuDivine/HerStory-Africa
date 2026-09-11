@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / CC BY-SA 3.0"
 featured: true
 funFact: "Planted over 51 million trees across Africa through the Green Belt Movement she founded"
 summary: "Kenyan environmentalist and democracy activist who founded the Green Belt Movement, planting over 51 million trees across Africa. The first African woman to win the Nobel Peace Prize."
+hook: "Seven trees in a backyard in 1977, fifty-one million by the time she died."
 ---
 
 ## Biography

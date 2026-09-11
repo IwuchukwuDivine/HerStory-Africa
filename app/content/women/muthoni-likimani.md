@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Muthoni Likimani documented the untold stories of women in Kenya's independence struggle through her groundbreaking book Passbook Number F.47927."
 summary: "Kenyan writer, broadcaster, and Mau Mau supporter who documented the untold stories of women in Kenya's independence struggle through her groundbreaking book 'Passbook Number F.47927'."
+hook: "Passbook Number F.47927 put the women of Mau Mau back into the record."
 ---
 
 ## Biography

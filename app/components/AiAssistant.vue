@@ -3,7 +3,7 @@
     <!-- Floating action button (only on woman / article detail pages) -->
     <Transition name="fab">
       <button
-        v-if="isRelevantRoute && !isOpen"
+        v-if="isRelevantRoute && !isOpen && !readingBarActive"
         class="ai-fab"
         aria-label="Open story assistant"
         @click="open"
@@ -12,7 +12,7 @@
       </button>
     </Transition>
 
-    <!-- Backdrop (mobile only — hidden via CSS on desktop) -->
+    <!-- Backdrop (mobile only, hidden via CSS on desktop) -->
     <Transition name="fade">
       <div
         v-if="isOpen"
@@ -30,44 +30,19 @@
         aria-label="Story assistant"
       >
         <header class="ai-panel__header">
-          <div class="ai-panel__title">
-            <LucideSparkles :size="18" />
-            <span>Story Assistant</span>
+          <div class="ai-panel__heading">
+            <span class="eyebrow ai-panel__eyebrow">{{ headerLabel }}</span>
+            <span class="tint-gold ai-panel__experimental">Experimental</span>
           </div>
           <button
-            class="ai-panel__close"
-            aria-label="Close"
+            type="button"
+            class="icon-btn ai-panel__close"
+            aria-label="Close story assistant"
             @click="close"
           >
             <LucideX :size="20" />
           </button>
         </header>
-
-        <div
-          v-if="showExperimentalBanner"
-          class="ai-banner"
-        >
-          <div class="ai-banner__icon">
-            <LucideFlaskConical :size="16" />
-          </div>
-          <p class="ai-banner__text">
-            <strong>Experimental.</strong> Quick facts are pre-written. Free-form questions are coming soon.
-          </p>
-          <button
-            class="ai-banner__dismiss"
-            aria-label="Dismiss"
-            @click="dismissBanner"
-          >
-            <LucideX :size="14" />
-          </button>
-        </div>
-
-        <div class="ai-panel__context">
-          <span class="ai-panel__context-label">Exploring</span>
-          <p class="ai-panel__context-title">
-            {{ contextTitle }}
-          </p>
-        </div>
 
         <div
           class="ai-panel__output"
@@ -116,7 +91,7 @@
             class="ai-panel__hint"
           >
             Tap a suggestion below to learn more about
-            <strong>{{ contextShort }}</strong>.
+            <strong>{{ contextTitle }}</strong>.
           </p>
         </div>
 
@@ -127,8 +102,10 @@
           <button
             v-for="chip in chips"
             :key="chip.id"
-            class="ai-chip"
-            :class="{ 'ai-chip--active': activeChip?.id === chip.id }"
+            type="button"
+            class="pill pill--sm"
+            :class="activeChip?.id === chip.id ? 'pill--primary' : 'pill--secondary'"
+            :aria-pressed="activeChip?.id === chip.id"
             @click="selectChip(chip)"
           >
             {{ chip.label }}
@@ -143,8 +120,7 @@
         </p>
 
         <footer class="ai-panel__footer">
-          <LucideMessageCircle :size="14" />
-          <span>Free-form questions coming soon</span>
+          Answers are pre-written from the sources. Free-form questions coming soon.
         </footer>
       </aside>
     </Transition>
@@ -193,13 +169,15 @@ type AiContent = {
 };
 
 const route = useRoute();
-const isOpen = ref(false);
+// Shared so the mobile ReadingBar can open the panel without owning it.
+const isOpen = useState<boolean>("ai-open", () => false);
+const readingBarActive = useState<boolean>("reading-bar-active", () => false);
+const contextTitleState = useState<string>("ai-context-title", () => "");
 const loading = ref(false);
 const activeChip = ref<Chip | null>(null);
 const typedText = ref("");
 const revealedItems = ref<string[]>([]);
 const isTyping = ref(false);
-const showExperimentalBanner = ref(true);
 
 const contextDoc = ref<WomanDoc | ArticleDoc | null>(null);
 const contextType = ref<"woman" | "article" | "general">("general");
@@ -227,14 +205,17 @@ const contextTitle = computed(() => {
   return "The HerStory Africa archive";
 });
 
-const contextShort = computed(() => {
+watch(contextTitle, (title) => (contextTitleState.value = title), {
+  immediate: true,
+});
+
+const headerLabel = computed(() => {
   if (contextType.value === "woman") {
-    return (contextDoc.value as WomanDoc | null)?.name ?? "her";
+    const name = (contextDoc.value as WomanDoc | null)?.name;
+    return name ? `Ask about ${name}` : "Story assistant";
   }
-  if (contextType.value === "article") {
-    return "this article";
-  }
-  return "African women's history";
+  if (contextType.value === "article") return "Ask about this article";
+  return "Story assistant";
 });
 
 const chips = computed<Chip[]>(() => {
@@ -318,22 +299,12 @@ function buildWomanFacts(w: WomanDoc): string[] {
   return facts;
 }
 
-async function open() {
+function open() {
   isOpen.value = true;
-  await loadContext();
 }
 
 function close() {
   isOpen.value = false;
-  resetTyping();
-  activeChip.value = null;
-}
-
-function dismissBanner() {
-  showExperimentalBanner.value = false;
-  if (typeof window !== "undefined") {
-    window.localStorage.setItem("ai-assistant-banner-dismissed", "1");
-  }
 }
 
 function resetTyping() {
@@ -449,15 +420,19 @@ function onKeydown(e: KeyboardEvent) {
 }
 
 if (import.meta.client) {
-  if (window.localStorage.getItem("ai-assistant-banner-dismissed") === "1") {
-    showExperimentalBanner.value = false;
-  }
   window.addEventListener("keydown", onKeydown);
 }
 
+// Opening (from the FAB or the reading bar) loads the context; closing resets.
 watch(isOpen, (open) => {
   if (!import.meta.client) return;
   document.documentElement.classList.toggle("ai-panel-open", open);
+  if (open) {
+    loadContext();
+  } else {
+    resetTyping();
+    activeChip.value = null;
+  }
 });
 
 watch(
@@ -564,90 +539,37 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
+  gap: 12px;
+  padding: 12px 8px 12px 20px;
   border-bottom: 1px solid var(--border-light);
 }
-.ai-panel__title {
+.ai-panel__heading {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 1.0625rem;
-  color: var(--color-primary);
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  min-width: 0;
+}
+.ai-panel__eyebrow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ai-panel__experimental {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--color-secondary-600);
 }
 .ai-panel__close {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 0.25rem;
-  border-radius: 0.375rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.ai-panel__close:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
-}
-
-.ai-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin: 0.875rem 1.25rem 0;
-  padding: 0.625rem 0.75rem;
-  background: var(--surface-muted);
-  border: 1px solid var(--color-primary-200);
-  border-radius: 0.5rem;
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-}
-.ai-banner__icon {
   flex-shrink: 0;
-  margin-top: 1px;
-  color: var(--color-primary);
-}
-.ai-banner__text {
-  flex: 1;
-  margin: 0;
-  line-height: 1.4;
-}
-.ai-banner__dismiss {
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  color: var(--color-primary);
-  cursor: pointer;
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-}
-.ai-banner__dismiss:hover {
-  background: var(--color-primary-100);
-}
-
-.ai-panel__context {
-  padding: 1rem 1.25rem 0.5rem;
-}
-.ai-panel__context-label {
-  display: block;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--text-muted);
-  margin-bottom: 0.25rem;
-}
-.ai-panel__context-title {
-  margin: 0;
-  font-family: var(--font-heading);
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.3;
 }
 
 .ai-panel__output {
@@ -662,12 +584,10 @@ onBeforeUnmount(() => {
   cursor: default;
 }
 .ai-panel__output-heading {
-  margin: 0 0 0.625rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 .ai-panel__text {
   margin: 0;
@@ -744,51 +664,26 @@ onBeforeUnmount(() => {
 .ai-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  gap: 8px;
+  padding: 12px 20px;
   border-top: 1px solid var(--border-light);
-}
-.ai-chip {
-  font-size: 0.8125rem;
-  padding: 0.4375rem 0.875rem;
-  border-radius: 9999px;
-  border: 1px solid var(--border-default);
-  background: var(--surface-muted);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-.ai-chip:hover {
-  border-color: var(--color-primary-400);
-  background: var(--color-primary-50);
-  color: var(--color-primary);
-}
-.ai-chip--active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--text-on-primary);
-}
-.ai-chip--active:hover {
-  background: var(--color-primary-600);
-  color: var(--text-on-primary);
 }
 
 .ai-empty-note {
   margin: 0;
-  padding: 1rem 1.25rem;
-  font-size: 0.875rem;
+  padding: 16px 20px;
+  font-size: 14px;
   color: var(--text-muted);
   text-align: center;
   border-top: 1px solid var(--border-light);
 }
 
 .ai-panel__footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.375rem;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.75rem;
+  padding: 12px 20px calc(12px + var(--bottom));
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  text-align: center;
   color: var(--text-muted);
   background: var(--surface-muted);
   border-top: 1px solid var(--border-light);
@@ -832,7 +727,7 @@ onBeforeUnmount(() => {
 </style>
 
 <style>
-/* Global layout hooks — applied to <html> when the AI panel is open */
+/* Global layout hooks, applied to <html> when the AI panel is open */
 
 /* Mobile: panel is a full-screen overlay, lock body scroll */
 @media (max-width: 767px) {
@@ -842,7 +737,7 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Desktop: panel is part of the layout — push page content left */
+/* Desktop: panel is part of the layout, push page content left */
 @media (min-width: 768px) {
   html.ai-panel-open body {
     padding-right: 420px;

@@ -17,6 +17,8 @@ imageCredit: "Saharauiak (Flickr) / CC BY-SA 2.0 via Wikimedia Commons"
 featured: false
 funFact: "She has been made an honorary citizen of more than 25 European municipalities, including Naples, Florence and over twenty towns in Italy's Lucca Province alone: a form of symbolic diplomatic protection organised by solidarity movements."
 summary: "The 'Sahrawi Gandhi', a nonviolent resistance leader who survived four years of secret detention and torture, and whose 32-day airport hunger strike in 2009 forced Morocco into a rare public climb-down before the eyes of the world."
+hook: "A 32-day hunger strike on a Lanzarote airport floor that made Morocco back down."
+ogFocal: "50% 45%"
 ---
 
 ## Biography

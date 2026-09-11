@@ -10,6 +10,8 @@ export interface ArchiveSearchResult {
   slug: string;
   title: string;
   subtitle?: string;
+  /** Portrait path for women results (may be the grey placeholder). */
+  image?: string;
   to: string;
   score: number;
   snippet?: SnippetPart[];

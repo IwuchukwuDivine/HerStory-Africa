@@ -16,6 +16,7 @@ imageCredit: "Bibi Titi Mohammed with Julius Nyerere / Wikimedia Commons / Publi
 featured: false
 funFact: "At the height of the independence struggle, this ngoma singer with four years of schooling was said to be as famous among ordinary Tanganyikans as Julius Nyerere himself."
 summary: "The Dar es Salaam singer who talked thousands of women into joining Tanganyika's independence movement, helped found a nation, then was erased from its story after a treason trial, until historians restored her name."
+hook: "Five thousand women enrolled in TANU in ninety days, then a 127-day treason trial."
 ---
 
 ## Biography

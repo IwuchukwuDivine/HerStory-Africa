@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Gordon Correll / CC BY-SA 2.0"
 featured: false
 funFact: "Lupita Nyong'o won the Academy Award for Best Supporting Actress for her very first feature film role in 12 Years a Slave (2013)."
 summary: "Kenyan-Mexican actress who won an Academy Award for Best Supporting Actress for 12 Years a Slave (2013) and has since used her platform to champion representation, diversity in Hollywood, and anti-colorism advocacy. She is one of the most visible African women in global cinema."
+hook: "Oscar winner for 12 Years a Slave who then wrote a children's book against colorism."
 ---
 
 ## Biography

@@ -17,6 +17,7 @@ imageCredit: "No freely licensed image available"
 featured: false
 funFact: "Victoria Mxenge continued defending political prisoners even after apartheid agents murdered her husband four years before they assassinated her in 1985."
 summary: "South African lawyer and anti-apartheid activist who defended political prisoners during the apartheid era and was assassinated by apartheid government agents in 1985. Her husband had been murdered by the same forces four years earlier. She knew the danger and continued anyway."
+hook: "She kept defending political prisoners for four years after her husband's murder."
 ---
 
 ## Biography

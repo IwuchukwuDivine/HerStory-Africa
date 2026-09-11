@@ -36,11 +36,13 @@ function frontmatterDate(frontmatter: string, key: string): string | undefined {
 const womenEntries = readContentEntries("women");
 const articleEntries = readContentEntries("articles");
 const opportunityEntries = readContentEntries("opportunities");
+const pathEntries = readContentEntries("paths");
 
 const contentRoutes = [
   ...womenEntries.map((e) => `/women/${e.slug}`),
   ...articleEntries.map((e) => `/articles/${e.slug}`),
   ...opportunityEntries.map((e) => `/opportunities/${e.slug}`),
+  ...pathEntries.map((e) => `/women/path/${e.slug}`),
 ];
 
 const contentSitemapUrls = [
@@ -55,7 +57,12 @@ const contentSitemapUrls = [
       frontmatterDate(e.frontmatter, "date"),
   })),
   ...opportunityEntries.map((e) => ({ loc: `/opportunities/${e.slug}` })),
+  ...pathEntries.map((e) => ({ loc: `/women/path/${e.slug}` })),
 ];
+
+const siteUrl = (
+  process.env.NUXT_SITE_URL || "https://herstoryafrica.com.ng"
+).replace(/\/$/, "");
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -113,6 +120,17 @@ export default defineNuxtConfig({
     ],
   },
   hooks: {
+    // Reading time for every profile and article, computed once at build
+    // from the Markdown word count (200 words per minute). Stored in the
+    // `readingTime` column declared in content.config.ts.
+    "content:file:afterParse"(ctx) {
+      if (ctx.file.extension !== ".md") return;
+      const name = ctx.collection.name;
+      if (name !== "women" && name !== "articles") return;
+      const raw = String(ctx.file.body ?? "").replace(/^---[\s\S]*?\r?\n---/, "");
+      const words = raw.split(/\s+/).filter(Boolean).length;
+      ctx.content.readingTime = Math.max(1, Math.round(words / 200));
+    },
     "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) return;
 
@@ -188,82 +206,36 @@ export default defineNuxtConfig({
   vite: {
     // @ts-expect-error - type mismatch between @tailwindcss/vite and Nuxt's bundled Vite types
     plugins: [tailwindcss()],
+    define: {
+      "process.env.NUXT_SITE_URL": JSON.stringify(siteUrl),
+    },
     optimizeDeps: {
       include: ["@vueuse/core"],
     },
   },
 
   // ── Fonts ───────────────────────────────────────────────────────────
+  // One local family, all twelve faces, served from public/fonts/ using the
+  // @nuxt/fonts slug convention (playfair-display-<weight>[-italic].ttf).
+  // `global: true` plus the weights/styles arrays are what nuxt-og-image
+  // reads to embed the same faces in Satori; per-weight entries make it fall
+  // back to Inter.
   fonts: {
     families: [
       {
         name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Regular.ttf",
-        weight: 400,
+        provider: "local",
+        weights: [400, 500, 600, 700, 800, 900],
+        styles: ["normal", "italic"],
         global: true,
       },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Italic.ttf",
-        weight: 400,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Medium.ttf",
-        weight: 500,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-MediumItalic.ttf",
-        weight: 500,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-SemiBold.ttf",
-        weight: 600,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-SemiBoldItalic.ttf",
-        weight: 600,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Bold.ttf",
-        weight: 700,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-BoldItalic.ttf",
-        weight: 700,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-ExtraBold.ttf",
-        weight: 800,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-ExtraBoldItalic.ttf",
-        weight: 800,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Black.ttf",
-        weight: 900,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-BlackItalic.ttf",
-        weight: 900,
-        style: "italic",
-      },
     ],
+  },
+
+  // ── OG images ───────────────────────────────────────────────────────
+  ogImage: {
+    // app.head advertises 1200×630; the module default is 1200×600.
+    defaults: { width: 1200, height: 630 },
   },
 
   // ── Nuxt Content ────────────────────────────────────────────────────
@@ -285,6 +257,13 @@ export default defineNuxtConfig({
   // ── TypeScript ──────────────────────────────────────────────────────
   typescript: {
     typeCheck: true,
+  },
+
+  // In development there is no prerender step, and the ipxStatic provider
+  // registers no /_ipx handler, so every optimised image 404s. Use the live
+  // ipx handler locally; `nuxt generate` still resolves to ipxStatic below.
+  $development: {
+    image: { provider: "ipx" },
   },
 
   // ── Image Optimisation ──────────────────────────────────────────────
@@ -309,7 +288,8 @@ export default defineNuxtConfig({
 
   // ── Site URL (required by sitemap + SEO modules) ───────────────────
   site: {
-    url: "https://herstoryafrica.com.ng",
+    url: siteUrl,
+    name: "HerStory Africa",
   },
 
   // ── Sitemap ─────────────────────────────────────────────────────────
@@ -360,7 +340,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:image",
-          content: "https://herstoryafrica.com.ng/og-image.png",
+          content: `${siteUrl}/og-image.png`,
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
@@ -379,7 +359,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://herstoryafrica.com.ng/og-image.png",
+          content: `${siteUrl}/og-image.png`,
         },
       ],
 

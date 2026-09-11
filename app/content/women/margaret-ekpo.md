@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Margaret Ekpo mobilised thousands of women in Eastern Nigeria to break into a political system that was deliberately designed to exclude them."
 summary: "Nigerian women's rights activist and pioneer politician who mobilised thousands of women in Eastern Nigeria during the independence era, breaking into a political system designed to exclude them."
+hook: "She made the NCNC women's wing a mass movement and won an Eastern House seat in 1961."
 ---
 
 ## Biography

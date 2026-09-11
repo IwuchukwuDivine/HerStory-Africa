@@ -1,87 +1,126 @@
 <template>
   <div class="az">
-    <nav class="az__crumbs" aria-label="Breadcrumb">
-      <NuxtLink to="/women" class="az__crumb">Women</NuxtLink>
-      <span class="az__crumb-sep" aria-hidden="true">/</span>
-      <span class="az__crumb">A to Z</span>
-    </nav>
+    <NuxtLink to="/women" class="back-link">
+      <LucideArrowLeft :size="18" />
+      Women
+    </NuxtLink>
 
-    <header class="az__header">
-      <h1 class="az__title">All Women A to Z</h1>
-      <p class="az__intro">
-        Every one of the {{ total }} women in the HerStory Africa archive, listed
-        by first name. Looking for something more specific? You can
-        <NuxtLink to="/women" class="az__link">search and filter the archive</NuxtLink>
-        or browse by
-        <NuxtLink to="/women/region/west-africa" class="az__link">region</NuxtLink>,
-        <NuxtLink to="/women/era/colonial" class="az__link">era</NuxtLink>, or
-        <NuxtLink to="/women/cause/womens-rights" class="az__link">cause</NuxtLink>.
-      </p>
-    </header>
-
-    <nav class="az__jump" aria-label="Jump to letter">
-      <a
-        v-for="group in groups"
-        :key="group.letter"
-        :href="`#letter-${group.letter}`"
-        class="az__jump-link"
-      >
-        {{ group.letter }}
-      </a>
-    </nav>
+    <MuseumLabel
+      level="h1"
+      :eyebrow="`The index · ${total} women`"
+      title="A to Z"
+      class="az__header"
+    />
 
     <section
       v-for="group in groups"
       :id="`letter-${group.letter}`"
       :key="group.letter"
       class="az__group"
+      :data-letter="group.letter"
     >
-      <h2 class="az__letter">{{ group.letter }}</h2>
-      <ul class="az__list">
-        <li v-for="w in group.women" :key="w.slug" class="az__item">
-          <NuxtLink :to="`/women/${w.slug}`" class="az__name">{{ w.name }}</NuxtLink>
-          <span class="az__meta">{{ w.country }}</span>
-        </li>
-      </ul>
+      <h2 class="az__letter-head">
+        <span class="az__letter">{{ group.letter }}</span>
+        <span class="az__letter-count">{{ group.women.length }} {{ group.women.length === 1 ? "woman" : "women" }}</span>
+      </h2>
+      <div class="az__rows">
+        <WomanRow
+          v-for="w in group.women"
+          :key="w.slug"
+          :name="w.name"
+          :slug="w.slug"
+          :image="w.image"
+          :country="w.country"
+          :born="w.born"
+          :died="w.died"
+          :focal="w.ogFocal"
+          :thumb="40"
+          :priority="w.index < 2"
+        />
+      </div>
     </section>
+
+    <LetterRail :letters="letters" :active="activeLetter" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { hubTitle } from "~/utils/constants/hubs";
+import { initialOf } from "~/utils/format";
 
 const { data } = await useAsyncData("women-a-to-z", () =>
   queryCollection("women")
-    .select("name", "slug", "country")
+    .select("name", "slug", "country", "image", "born", "died", "ogFocal")
     .order("name", "ASC")
     .all(),
 );
 
 const total = computed(() => data.value?.length ?? 0);
 
-function initial(name: string): string {
-  const first = name
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .charAt(0)
-    .toUpperCase();
-  return /[A-Z]/.test(first) ? first : "#";
-}
+type Row = NonNullable<typeof data.value>[number] & { index: number };
 
 const groups = computed(() => {
-  const byLetter = new Map<string, { name: string; slug: string; country: string }[]>();
-  for (const w of data.value ?? []) {
-    const letter = initial(w.name);
+  const byLetter = new Map<string, Row[]>();
+  (data.value ?? []).forEach((w, index) => {
+    const letter = initialOf(w.name);
     if (!byLetter.has(letter)) byLetter.set(letter, []);
-    byLetter.get(letter)!.push(w);
-  }
+    byLetter.get(letter)!.push({ ...w, index });
+  });
   return [...byLetter.entries()]
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([letter, women]) => ({ letter, women }));
 });
 
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+const letters = computed(() => {
+  const present = new Set(groups.value.map((g) => g.letter));
+  return ALPHABET.map((letter) => ({ letter, present: present.has(letter) }));
+});
+
+/* Track the group sitting under the navbar so the rail can highlight it. */
+const activeLetter = ref(groups.value[0]?.letter ?? "");
+let observer: IntersectionObserver | null = null;
+
+function observeGroups() {
+  observer?.disconnect();
+  if (typeof IntersectionObserver === "undefined") return;
+  const navHeight =
+    parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--navbar-height")) || 61;
+  const line = Math.max(1, window.innerHeight - navHeight - 2);
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const letter = (entry.target as HTMLElement).dataset.letter;
+          if (letter) activeLetter.value = letter;
+        }
+      }
+    },
+    { rootMargin: `-${navHeight + 1}px 0px -${line}px 0px`, threshold: 0 },
+  );
+  document.querySelectorAll<HTMLElement>(".az__group").forEach((el) => observer!.observe(el));
+}
+
+let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+function onResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(observeGroups, 150);
+}
+
+onMounted(() => {
+  observeGroups();
+  window.addEventListener("resize", onResize);
+});
+
+onBeforeUnmount(() => {
+  observer?.disconnect();
+  clearTimeout(resizeTimer);
+  window.removeEventListener("resize", onResize);
+});
+
 const canonicalUrl = getAbsoluteUrl("/women/all");
-const title = hubTitle("All Women A to Z");
+const title = hubTitle("All women A to Z");
 const description =
   "An alphabetical index of every African woman profiled on HerStory Africa: queens, activists, scientists, writers, and leaders from across the continent.";
 
@@ -90,13 +129,20 @@ useHead({ titleTemplate: "%s" });
 useSeoMeta({
   title,
   description,
-  ogTitle: "All Women A to Z",
+  ogTitle: "All women A to Z",
   ogDescription: description,
   ogUrl: canonicalUrl,
   ogType: "website",
   twitterCard: "summary_large_image",
-  twitterTitle: "All Women A to Z",
+  twitterTitle: "All women A to Z",
   twitterDescription: description,
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "The index",
+  title: "All women A to Z",
+  description,
 });
 
 useHead(() => ({
@@ -107,7 +153,7 @@ useHead(() => ({
       innerHTML: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: "All Women A to Z",
+        name: "All women A to Z",
         description,
         url: canonicalUrl,
         isPartOf: {
@@ -135,150 +181,73 @@ useHead(() => ({
 .az {
   max-width: 64rem;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3.5rem;
+  /* Room on the right for the fixed letter rail. */
+  padding: 24px 56px 56px 24px;
 }
 
 @media (min-width: 768px) {
   .az {
-    padding: 2.5rem 2rem 4rem;
+    padding: 40px 32px 64px;
   }
-}
-
-.az__crumbs {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  margin-bottom: 1.25rem;
-}
-
-.az__crumb {
-  color: inherit;
-  text-decoration: none;
-}
-
-a.az__crumb:hover {
-  color: var(--color-primary);
 }
 
 .az__header {
-  max-width: 44rem;
-  margin-bottom: 1.75rem;
-}
-
-.az__title {
-  font-size: clamp(1.625rem, 3.5vw, 2.375rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: var(--text-primary);
-  margin: 0 0 0.75rem;
-}
-
-.az__intro {
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.az__link {
-  color: var(--color-primary);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.az__link:hover {
-  text-decoration: underline;
-}
-
-.az__jump {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  margin-bottom: 2rem;
-}
-
-.az__jump-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2rem;
-  height: 2rem;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  border-radius: 0.375rem;
-  color: var(--text-secondary);
-  background: var(--surface-subtle);
-  text-decoration: none;
-  transition: all 0.15s ease;
-}
-
-.az__jump-link:hover {
-  background: var(--color-primary);
-  color: var(--text-on-primary);
+  margin: 12px 0 16px;
 }
 
 .az__group {
-  padding: 1.25rem 0;
-  border-top: 1px solid var(--border-light);
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1rem;
-  scroll-margin-top: 5rem;
+  scroll-margin-top: var(--navbar-height, 61px);
+}
+
+.az__letter-head {
+  position: sticky;
+  top: var(--navbar-height, 61px);
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  padding: 8px 0 6px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.az__group + .az__group {
+  margin-top: 14px;
 }
 
 .az__letter {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
   line-height: 1;
+  color: var(--color-secondary-600);
 }
 
-.az__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.375rem 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .az__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 900px) {
-  .az__list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.az__item {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
-.az__name {
-  color: var(--text-primary);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.az__name:hover {
-  color: var(--color-primary);
-  text-decoration: underline;
-}
-
-.az__meta {
-  font-size: 0.75rem;
+.az__letter-count {
+  font-size: 13px;
+  font-weight: 400;
   color: var(--text-muted);
-  white-space: nowrap;
+}
+
+.az__rows {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The first row sits under the ruled header, so it needs no rule of its own. */
+.az__rows > :first-child {
+  border-top: none;
+}
+
+@media (min-width: 768px) {
+  .az__rows {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 32px;
+  }
+
+  .az__rows > :nth-child(2) {
+    border-top: none;
+  }
 }
 </style>

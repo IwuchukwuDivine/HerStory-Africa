@@ -17,6 +17,7 @@ imageCredit: "Destiny Ayo Vaughan / Women in STEM Summit / Business Post"
 featured: false
 funFact: "Denied any schooling for her first five years in Ireland, she went on to earn two university degrees on scholarship, then won a third scholarship for a second master's."
 summary: "Founder of Mind the Gap Ireland and a survivor of child trafficking. Brought from Nigeria at five and held captive in Ireland for five years, she came through the foster care system, earned her degrees on scholarship, and became a TEDx speaker and United Nations delegate. She turned her own silence into a place where hundreds of others can speak."
+hook: "Hidden in an Irish house for five years, she built a place where survivors are heard."
 sameAs:
   - "https://www.mindthegapireland.org/destiny-1"
   - "https://londonspeakerbureau.com/speaker-profile/destiny-vaughan/"

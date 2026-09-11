@@ -28,11 +28,11 @@
             >
             <button
               type="button"
-              class="search-modal__close"
+              class="icon-btn search-modal__close"
               aria-label="Close search"
               @click="close"
             >
-              <span class="search-modal__close-kbd">Esc</span>
+              <span class="search-modal__close-kbd" aria-hidden="true">Esc</span>
               <LucideX :size="20" class="search-modal__close-icon" />
             </button>
           </div>
@@ -42,24 +42,34 @@
             :style="resultsStyle"
             @touchstart.passive="dismissKeyboard"
           >
-            <div v-if="!query.trim()" class="search-modal__empty">
-              Start typing to search across the archive.
+            <div v-if="!query.trim()" class="search-modal__start">
+              <p class="search-modal__empty">
+                Start typing to search across the archive
+              </p>
+              <nav class="search-modal__regions" aria-label="Browse by region">
+                <NuxtLink
+                  v-for="region in REGIONS"
+                  :key="region"
+                  :to="`/women/region/${slugify(region)}`"
+                  class="pill pill--sm pill--secondary"
+                  @click="close"
+                >
+                  {{ region }}
+                </NuxtLink>
+              </nav>
             </div>
 
-            <div v-else-if="failed" class="search-modal__empty">
+            <p v-else-if="failed" class="search-modal__empty">
               Search is unavailable right now. Please try again later.
-            </div>
+            </p>
 
-            <div v-else-if="!ready" class="search-modal__empty">
+            <p v-else-if="!ready" class="search-modal__empty">
               Preparing the archive…
-            </div>
+            </p>
 
-            <div
-              v-else-if="flatResults.length === 0"
-              class="search-modal__empty"
-            >
+            <p v-else-if="flatResults.length === 0" class="search-modal__empty">
               No matches for "{{ query }}".
-            </div>
+            </p>
 
             <template v-else>
               <section
@@ -81,7 +91,15 @@
                   @mouseenter="activeIndex = item.index"
                   @click="close"
                 >
-                  <component :is="iconFor(item.type)" :size="16" />
+                  <div
+                    v-if="item.type === 'woman' && hasPortrait(item.image)"
+                    class="search-modal__thumb"
+                  >
+                    <img :src="item.image" alt="" width="80" height="80" loading="lazy">
+                  </div>
+                  <span v-else class="search-modal__tile">
+                    <component :is="iconFor(item.type)" :size="18" />
+                  </span>
                   <div class="search-modal__item-text">
                     <div class="search-modal__item-title">{{ item.title }}</div>
                     <div
@@ -92,15 +110,12 @@
                     </div>
                     <div v-if="item.snippet" class="search-modal__item-snippet">
                       <template v-for="(part, i) in item.snippet" :key="i">
-                        <span
-                          v-if="part.match"
-                          class="search-modal__item-snippet-match"
-                          >{{ part.text }}</span
-                        >
+                        <mark v-if="part.match" class="search-modal__mark">{{ part.text }}</mark>
                         <template v-else>{{ part.text }}</template>
                       </template>
                     </div>
                   </div>
+                  <LucideArrowRight :size="16" class="search-modal__item-arrow" />
                 </NuxtLink>
               </section>
             </template>
@@ -122,6 +137,7 @@ import type {
   ArchiveSearchResult,
   ArchiveSearchResultType,
 } from "~/utils/types/search";
+import { REGIONS } from "~/utils/constants/content";
 
 const props = defineProps<{ open: boolean }>();
 const emit = defineEmits<{ close: [] }>();
@@ -228,7 +244,7 @@ const keyboardInset = ref(0);
 
 const resultsStyle = computed(() =>
   keyboardInset.value > 0
-    ? { paddingBottom: `calc(0.5rem + ${keyboardInset.value}px)` }
+    ? { paddingBottom: `calc(8px + ${keyboardInset.value}px)` }
     : undefined,
 );
 
@@ -308,19 +324,20 @@ onBeforeUnmount(() => {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: var(--overlay-default, rgba(28, 15, 7, 0.55));
+  background: var(--overlay-default);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: clamp(2rem, 10vh, 6rem) 1rem 1rem;
+  padding: clamp(2rem, 10vh, 6rem) 16px 16px;
 }
 
 .search-overlay-enter-active,
 .search-overlay-leave-active {
   transition: opacity 0.18s ease;
 }
+
 .search-overlay-enter-from,
 .search-overlay-leave-to {
   opacity: 0;
@@ -331,18 +348,20 @@ onBeforeUnmount(() => {
   max-height: 80vh;
   background: var(--surface-elevated);
   border: 1px solid var(--border-light);
-  border-radius: 14px;
-  box-shadow: 0 24px 64px rgba(28, 15, 7, 0.25);
+  border-radius: 16px;
+  box-shadow: var(--shadow-elevated);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
+/* Input row: a 56px band with the close button flush right. */
 .search-modal__input-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1rem;
+  gap: 12px;
+  height: 56px;
+  padding: 0 6px 0 16px;
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -351,11 +370,17 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
 }
 
+.search-modal__input-row:focus-within .search-modal__input-icon {
+  color: var(--ring-default);
+}
+
 .search-modal__input {
   flex: 1;
+  min-width: 0;
+  height: 100%;
   border: none;
   background: transparent;
-  font-size: 1rem;
+  font-size: 17px;
   color: var(--text-primary);
   outline: none;
 }
@@ -364,37 +389,18 @@ onBeforeUnmount(() => {
   color: var(--text-muted);
 }
 
+.search-modal__close {
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.search-modal__close-kbd,
 .search-modal__footer kbd {
   display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.4rem;
-  font-size: 0.7rem;
+  padding: 2px 6px;
+  font-size: 12px;
   font-family: inherit;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--surface-muted);
-  border: 1px solid var(--border-default);
-  border-radius: 4px;
-}
-
-.search-modal__close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  padding: 0.125rem 0.4rem;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.search-modal__close-kbd {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.125rem 0.4rem;
-  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-muted);
   background: var(--surface-muted);
@@ -406,13 +412,6 @@ onBeforeUnmount(() => {
   display: none;
 }
 
-@media (hover: hover) {
-  .search-modal__close:hover {
-    color: var(--text-primary);
-    background: var(--surface-muted);
-  }
-}
-
 .search-modal__results {
   flex: 1;
   /* Without min-height: 0, Safari sizes this flex child to its content and
@@ -421,35 +420,56 @@ onBeforeUnmount(() => {
   overflow-y: auto;
   overscroll-behavior: contain;
   touch-action: pan-y;
-  padding: 0.5rem;
+  padding: 12px 8px 8px;
+}
+
+.search-modal__start {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 12px 12px;
 }
 
 .search-modal__empty {
-  padding: 2rem 1rem;
+  margin: 0;
+  padding: 24px 12px;
   text-align: center;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
-.search-modal__group {
-  margin-bottom: 0.5rem;
+.search-modal__start .search-modal__empty {
+  padding: 0;
+}
+
+.search-modal__regions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.search-modal__group + .search-modal__group {
+  margin-top: 8px;
 }
 
 .search-modal__group-title {
-  padding: 0.5rem 0.75rem 0.25rem;
-  font-size: 0.7rem;
+  padding: 4px 12px 8px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
 }
 
 .search-modal__item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 0.75rem;
-  border-radius: 8px;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 12px;
+  border-radius: 10px;
   color: var(--text-primary);
   text-decoration: none;
   cursor: pointer;
@@ -459,23 +479,49 @@ onBeforeUnmount(() => {
   background: var(--surface-muted);
 }
 
+.search-modal__thumb,
+.search-modal__tile {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-muted);
+}
+
+.search-modal__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.search-modal__tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
 .search-modal__item-text {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 2px;
   min-width: 0;
 }
 
 .search-modal__item-title {
-  font-weight: 600;
-  font-size: 0.9375rem;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .search-modal__item-subtitle {
-  font-size: 0.8rem;
+  font-size: 13px;
   color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -483,7 +529,8 @@ onBeforeUnmount(() => {
 }
 
 .search-modal__item-snippet {
-  font-size: 0.8rem;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--text-muted);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -492,24 +539,51 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 
-.search-modal__item-snippet-match {
-  color: var(--text-primary);
+.search-modal__mark {
+  background: transparent;
+  color: var(--color-primary);
   font-weight: 600;
+}
+
+.search-modal__item-arrow {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.search-modal__item--active .search-modal__item-arrow {
+  opacity: 1;
 }
 
 .search-modal__footer {
   display: flex;
-  gap: 1rem;
-  padding: 0.625rem 1rem;
+  gap: 16px;
+  padding: 10px 16px;
   border-top: 1px solid var(--border-light);
-  font-size: 0.75rem;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
 .search-modal__footer span {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 6px;
+}
+
+/* No keyboard, no hints. */
+@media (hover: none) {
+  .search-modal__footer {
+    display: none;
+  }
+
+  .search-modal__close-kbd {
+    display: none;
+  }
+
+  .search-modal__close-icon {
+    display: block;
+  }
 }
 
 @media (max-width: 640px) {
@@ -517,8 +591,9 @@ onBeforeUnmount(() => {
     padding: 0;
     overscroll-behavior: contain;
   }
+
   .search-modal {
-    /* A stable 100% of the fixed overlay — never resized by the keyboard,
+    /* A stable 100% of the fixed overlay, never resized by the keyboard,
        so the flex layout and scroll geometry can never break. The keyboard
        is compensated with bottom padding on the results list instead. */
     width: 100%;
@@ -527,25 +602,30 @@ onBeforeUnmount(() => {
     border-radius: 0;
     border: none;
   }
+
   .search-modal__input-row {
-    padding-top: calc(env(safe-area-inset-top, 0px) + 0.875rem);
+    height: auto;
+    min-height: 56px;
+    padding-top: env(safe-area-inset-top, 0px);
   }
-  .search-modal__close {
-    width: 2.25rem;
-    height: 2.25rem;
-    padding: 0;
+
+  .search-modal__input {
+    height: 56px;
   }
+
   .search-modal__close-kbd {
     display: none;
   }
+
   .search-modal__close-icon {
     display: block;
   }
+
   .search-modal__results {
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
   }
-  /* Desktop keyboard hints are meaningless on touch devices. */
-  .search-modal__footer {
+
+  .search-modal__item-arrow {
     display: none;
   }
 }

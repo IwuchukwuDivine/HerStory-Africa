@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Nana Asma'u built one of the earliest known systems of women's education in West Africa, training female teachers to carry learning into rural communities across the Sokoto Caliphate."
 summary: "Scholar, poet, and educator in the Sokoto Caliphate who built one of the earliest known systems of women's education in West Africa, training female teachers who carried learning into rural communities."
+hook: "Her jajis walked the caliphate carrying her poems to women who could not come to Sokoto."
 ---
 
 ## Biography

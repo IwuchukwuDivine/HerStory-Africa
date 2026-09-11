@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Tiwa Savage became the first Nigerian woman ever to win an MTV Europe Music Award."
 summary: "Nigerian singer-songwriter and actress; one of the leading women in Afrobeats. First Nigerian woman to win MTV EMA; advocate for women in music and entertainment."
+hook: "First Nigerian woman to take home an MTV Europe Music Award, in 2018."
+ogFocal: "50% 10%"
 ---
 
 ## Biography

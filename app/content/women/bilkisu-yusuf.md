@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Bilkisu Yusuf shattered gender barriers in Nigerian media by becoming the first woman to edit a major Nigerian newspaper, while also championing press freedom and women's rights."
 summary: "Nigerian journalist and editor; first female editor of a major Nigerian newspaper. Advocate for press freedom, women's rights, and peace; died in the 2015 Hajj stampede."
+hook: "Edited the New Nigerian when no woman had run a major Nigerian paper."
 ---
 
 ## Biography

@@ -1,38 +1,38 @@
 <template>
-  <div class="error-page">
-    <div class="error-page__content">
-      <span class="error-page__code">{{ error?.statusCode ?? 500 }}</span>
-      <h1 class="error-page__title">
-        {{
-          error?.statusCode === 404 ? "Page not found" : "Something went wrong"
-        }}
-      </h1>
-      <p class="error-page__message">
-        {{
-          error?.statusCode === 404
-            ? "The page you are looking for does not exist or has been moved."
-            : "An unexpected error occurred. Please try again."
-        }}
-      </p>
-      <div class="error-page__actions">
-        <button
-          class="error-page__btn error-page__btn--primary"
-          @click="handleClear"
-        >
-          <LucideHome :size="16" />
-          Go home
-        </button>
-        <button
-          v-if="error?.statusCode !== 404"
-          class="error-page__btn error-page__btn--secondary"
-          @click="handleClear"
-        >
-          <LucideRefreshCw :size="16" />
-          Try again
-        </button>
+  <NuxtLayout>
+    <div class="error-page">
+      <div class="error-page__content">
+        <div class="label">
+          <span class="rule" />
+          <span class="eyebrow eyebrow--muted">Error {{ statusCode }}</span>
+        </div>
+        <h1 class="error-page__title">
+          {{ isNotFound ? "This page is not in the archive." : "Something went wrong." }}
+        </h1>
+        <p class="error-page__message">
+          {{
+            isNotFound
+              ? "The address may have changed, or the story you are after may be filed under a different name. Search the archive to find it."
+              : "An unexpected error occurred. Try again, or head back to the front page."
+          }}
+        </p>
+        <div class="error-page__actions">
+          <Pill variant="primary" @click="openSearch">
+            <template #icon>
+              <LucideSearch :size="16" />
+            </template>
+            Search the archive
+          </Pill>
+          <Pill variant="secondary" @click="goHome">
+            <template #icon>
+              <LucideHome :size="16" />
+            </template>
+            Go home
+          </Pill>
+        </div>
       </div>
     </div>
-  </div>
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
@@ -42,13 +42,22 @@ const props = defineProps<{
   error: NuxtError;
 }>();
 
+const statusCode = computed(() => props.error?.statusCode ?? 500);
+const isNotFound = computed(() => statusCode.value === 404);
+
+const searchOpen = useSearchOpen();
+
 useSeoMeta({
-  title: () =>
-    props.error?.statusCode === 404 ? "Page not found" : "Something went wrong",
+  title: () => (isNotFound.value ? "Page not found" : "Something went wrong"),
   robots: "noindex, nofollow",
 });
 
-function handleClear() {
+// The global search lives in the navbar, inside the default layout.
+function openSearch() {
+  searchOpen.value = true;
+}
+
+function goHome() {
   clearError({ redirect: "/" });
 }
 </script>
@@ -58,91 +67,46 @@ function handleClear() {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100dvh;
-  padding: 2rem;
+  min-height: 60dvh;
+  padding: 64px 24px;
   background: var(--surface);
 }
 
 .error-page__content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 28rem;
-  gap: 0.75rem;
-}
-
-.error-page__code {
-  font-size: clamp(4rem, 12vw, 7rem);
-  font-weight: 900;
-  line-height: 1;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-secondary)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  align-items: flex-start;
+  max-width: 34rem;
+  gap: 16px;
 }
 
 .error-page__title {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  font-weight: 800;
-  color: var(--text-primary);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
   margin: 0;
 }
 
 .error-page__message {
-  font-size: 1rem;
+  font-size: 17px;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin: 0;
 }
 
 .error-page__actions {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
 }
 
-.error-page__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  border-radius: 9999px;
-  border: none;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.error-page__btn:hover {
-  transform: translateY(-1px);
-}
-
-.error-page__btn--primary {
-  background: var(--color-primary);
-  color: var(--text-on-primary);
-  box-shadow: var(--shadow-soft);
-}
-
-.error-page__btn--primary:hover {
-  box-shadow: var(--shadow-glow);
-}
-
-.error-page__btn--secondary {
-  background: var(--surface-elevated);
-  color: var(--text-secondary);
-  border: 1.5px solid var(--border-default);
-}
-
-.error-page__btn--secondary:hover {
-  border-color: var(--ring-default);
-  color: var(--color-primary);
+@media (min-width: 768px) {
+  .error-page__title {
+    font-size: 44px;
+    letter-spacing: -1px;
+  }
 }
 </style>

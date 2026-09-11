@@ -81,7 +81,6 @@
 </template>
 
 <script setup lang="ts">
-import type { CardFormat, CardTheme } from '~/utils/drawReflectionCard'
 import { drawReflectionCard } from '~/utils/drawReflectionCard'
 import { useDark } from '@vueuse/core'
 
@@ -142,7 +141,7 @@ async function handleShare() {
   if (navigator.share && navigator.canShare?.({ files: [file] })) {
     try {
       await navigator.share({
-        title: `${props.articleTitle} — HerStory Africa`,
+        title: `${props.articleTitle} · HerStory Africa`,
         text: `"${props.response}"\n\nInspired by: ${props.articleTitle}`,
         url: articleUrl,
         files: [file],

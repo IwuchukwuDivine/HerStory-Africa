@@ -16,6 +16,7 @@ imageCredit: "Photo: Office of the Prime Minister of Ethiopia, 2018 (cropped) / 
 featured: false
 funFact: "Ethiopia had no word for sexual harassment, so Meaza and her colleagues invented one in Amharic: wesibawi tinkosa."
 summary: "The lawyer who defended a 14-year-old girl for killing her abductor, helped outlaw marriage by abduction, and became the first woman to lead Ethiopia's Supreme Court."
+hook: "Amharic had no word for sexual harassment, so her lawyers' association coined one."
 ---
 
 ## Biography

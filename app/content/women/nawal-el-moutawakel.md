@@ -16,6 +16,7 @@ imageCredit: "Photo: Citizen59, 2016 / CC BY 3.0 via Wikimedia Commons"
 featured: false
 funFact: "After her 1984 victory, King Hassan II declared that every baby girl born in Morocco that day would be named Nawal."
 summary: "The Moroccan hurdler who won the first ever women's 400m hurdles at the 1984 Olympics, becoming the first Moroccan, Arab, African, and Muslim woman to take Olympic gold, then rose to the top of world sport as an IOC Vice President."
+hook: "Every girl born in Morocco on 8 August 1984 was named after her by royal decree."
 ---
 
 ## Biography

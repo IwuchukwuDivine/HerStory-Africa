@@ -11,6 +11,10 @@ export interface Woman {
   imageCredit: string
   featured: boolean
   summary: string
+  hook?: string
+  ogFocal?: string
+  readingTime?: number
+  dateAdded?: string
   path?: string
 }
 
@@ -26,5 +30,23 @@ export interface Article {
   updated?: string
   featured?: boolean
   women?: string[]
+  ogFocal?: string
+  readingTime?: number
+  path?: string
+}
+
+export interface ReadingPathStep {
+  slug: string
+  why: string
+}
+
+export interface ReadingPath {
+  title: string
+  slug: string
+  kicker: string
+  description: string
+  cover: string
+  steps: ReadingPathStep[]
+  further?: string[]
   path?: string
 }

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar">
+  <nav ref="navRef" class="navbar">
     <div class="navbar__inner">
       <NuxtLink to="/" class="navbar__logo" aria-label="HerStory Africa home">
         <Logo size="2.25rem" />
@@ -16,7 +16,8 @@
         </NuxtLink>
 
         <button
-          class="navbar__theme-btn"
+          type="button"
+          class="icon-btn navbar__btn navbar__btn--first"
           aria-label="Search"
           @click="searchOpen = true"
         >
@@ -24,7 +25,8 @@
         </button>
 
         <button
-          class="navbar__theme-btn"
+          type="button"
+          class="icon-btn navbar__btn"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleDark()"
         >
@@ -35,24 +37,27 @@
 
       <div class="navbar__mobile-actions">
         <button
-          class="navbar__theme-btn"
+          type="button"
+          class="icon-btn navbar__btn"
           aria-label="Search"
           @click="searchOpen = true"
         >
-          <LucideSearch :size="18" />
+          <LucideSearch :size="20" />
         </button>
 
         <button
-          class="navbar__theme-btn"
+          type="button"
+          class="icon-btn navbar__btn"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleDark()"
         >
-          <LucideSun v-if="mounted && isDark" :size="18" />
-          <LucideMoon v-else :size="18" />
+          <LucideSun v-if="mounted && isDark" :size="20" />
+          <LucideMoon v-else :size="20" />
         </button>
 
         <button
-          class="navbar__hamburger"
+          type="button"
+          class="icon-btn navbar__btn"
           aria-label="Open menu"
           @click="drawerOpen = true"
         >
@@ -77,7 +82,8 @@
         <div class="drawer__header">
           <Logo size="2rem" />
           <button
-            class="drawer__close"
+            type="button"
+            class="icon-btn drawer__close"
             aria-label="Close menu"
             @click="drawerOpen = false"
           >
@@ -119,6 +125,7 @@ const mounted = useMounted();
 
 const drawerOpen = ref(false);
 const searchOpen = useSearchOpen();
+const navRef = ref<HTMLElement | null>(null);
 
 const route = useRoute();
 watch(
@@ -136,11 +143,34 @@ function onKeydown(e: KeyboardEvent) {
   }
 }
 
+// Publish the rendered nav height as --navbar-height on :root so sticky
+// toolbars (reading toolbar, filter rows) can sit directly under it.
+let resizeObserver: ResizeObserver | null = null;
+
+function publishNavHeight() {
+  const el = navRef.value;
+  if (!el) return;
+  document.documentElement.style.setProperty(
+    "--navbar-height",
+    `${Math.round(el.getBoundingClientRect().height)}px`,
+  );
+}
+
 onMounted(() => {
   window.addEventListener("keydown", onKeydown);
+  publishNavHeight();
+  if ("ResizeObserver" in window && navRef.value) {
+    resizeObserver = new ResizeObserver(publishNavHeight);
+    resizeObserver.observe(navRef.value);
+  } else {
+    window.addEventListener("resize", publishNavHeight);
+  }
 });
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", onKeydown);
+  window.removeEventListener("resize", publishNavHeight);
+  resizeObserver?.disconnect();
+  resizeObserver = null;
 });
 
 const navLinks = [
@@ -183,12 +213,19 @@ const navLinks = [
   justify-content: space-between;
   max-width: 64rem;
   margin: 0 auto;
-  padding: calc(env(safe-area-inset-top, 0px) + 0.75rem) 1.5rem 0.75rem;
+  padding: calc(var(--top) + 8px) 12px 8px 24px;
+}
+
+@media (min-width: 768px) {
+  .navbar__inner {
+    padding: calc(var(--top) + 10px) 32px 10px;
+  }
 }
 
 .navbar__logo {
   display: flex;
   align-items: center;
+  min-height: 44px;
   text-decoration: none;
 }
 
@@ -196,7 +233,7 @@ const navLinks = [
 .navbar__desktop {
   display: none;
   align-items: center;
-  gap: 0.25rem;
+  gap: 4px;
 }
 
 @media (min-width: 768px) {
@@ -206,12 +243,15 @@ const navLinks = [
 }
 
 .navbar__link {
-  padding: 0.5rem 1rem;
-  font-size: 0.9375rem;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   transition:
     color 0.15s ease,
     background 0.15s ease;
@@ -228,61 +268,23 @@ const navLinks = [
   color: var(--color-primary);
 }
 
-.navbar__theme-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 0.5rem;
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  transition:
-    color 0.15s ease,
-    background 0.15s ease;
-  margin-left: 0.25rem;
+.navbar__btn {
+  flex-shrink: 0;
 }
 
-@media (hover: hover) {
-  .navbar__theme-btn:hover {
-    color: var(--color-secondary);
-    background: var(--surface-muted);
-  }
+.navbar__btn--first {
+  margin-left: 8px;
 }
 
 /* ── Mobile actions ── */
 .navbar__mobile-actions {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
 }
 
 @media (min-width: 768px) {
   .navbar__mobile-actions {
     display: none;
-  }
-}
-
-.navbar__hamburger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 0.5rem;
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  transition:
-    color 0.15s ease,
-    background 0.15s ease;
-}
-
-@media (hover: hover) {
-  .navbar__hamburger:hover {
-    background: var(--surface-muted);
-    color: var(--text-primary);
   }
 }
 
@@ -306,6 +308,7 @@ const navLinks = [
 
 /* ── Drawer panel ── */
 .drawer {
+  --shadow-drawer: -8px 0 32px rgba(28, 15, 7, 0.15);
   position: fixed;
   top: 0;
   right: 0;
@@ -315,7 +318,7 @@ const navLinks = [
   display: flex;
   flex-direction: column;
   background: var(--surface-elevated);
-  box-shadow: -8px 0 32px rgba(28, 15, 7, 0.15);
+  box-shadow: var(--shadow-drawer);
 }
 
 .drawer-panel-enter-active,
@@ -332,50 +335,33 @@ const navLinks = [
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: calc(env(safe-area-inset-top, 0px) + 1rem) 1.25rem 1rem;
+  padding: calc(var(--top) + 12px) 12px 12px 20px;
   border-bottom: 1px solid var(--border-light);
 }
 
 .drawer__close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 0.5rem;
-  border: none;
-  background: transparent;
   color: var(--text-muted);
-  transition:
-    color 0.15s ease,
-    background 0.15s ease;
-}
-
-@media (hover: hover) {
-  .drawer__close:hover {
-    background: var(--surface-muted);
-    color: var(--text-primary);
-  }
 }
 
 .drawer__links {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1rem 0.75rem;
-  gap: 0.25rem;
+  padding: 12px;
+  gap: 2px;
 }
 
 .drawer__link {
   display: flex;
   align-items: center;
-  gap: 0.875rem;
-  padding: 0.875rem 1rem;
-  font-size: 1rem;
+  gap: 14px;
+  min-height: 48px;
+  padding: 0 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: 0.75rem;
+  border-radius: 12px;
   transition:
     color 0.15s ease,
     background 0.15s ease;
@@ -389,17 +375,17 @@ const navLinks = [
 }
 
 .drawer__link.router-link-active {
-  background: var(--color-primary-50);
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--surface));
   color: var(--color-primary);
 }
 
 .drawer__footer {
-  padding: 1.25rem;
+  padding: 20px calc(20px + var(--right)) calc(20px + var(--bottom)) 20px;
   border-top: 1px solid var(--border-light);
 }
 
 .drawer__tagline {
-  font-size: 0.8125rem;
+  font-size: 13px;
   font-style: italic;
   color: var(--text-muted);
   margin: 0;

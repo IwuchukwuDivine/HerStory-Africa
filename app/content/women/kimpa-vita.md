@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Kimpa Vita was burned at the stake at just 22 years old for leading a religious movement to reunify the Kingdom of Kongo."
 summary: "Kongolese prophet who led a religious and political movement to reunify the Kingdom of Kongo, claiming to be possessed by Saint Anthony. Burned at the stake at 22."
+hook: "At 20 she said she was Saint Anthony; at 22 the Kongo's factions burned her for it."
 ---
 
 ## Biography

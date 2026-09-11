@@ -1,6 +1,6 @@
 <template>
-  <div class="africa-map" ref="mapContainer">
-    <div class="africa-map__svg-wrap" ref="svgWrap">
+  <div ref="mapContainer" class="africa-map">
+    <div ref="svgWrap" class="africa-map__svg-wrap">
       <svg
         ref="svgEl"
         xmlns="http://www.w3.org/2000/svg"
@@ -306,7 +306,7 @@ function onMapBackgroundTap() {
 }
 
 .africa-map__tooltip-hint {
-  font-size: 0.6875rem;
+  font-size: 12px;
   color: var(--color-primary);
   font-weight: 600;
   margin-top: 0.125rem;

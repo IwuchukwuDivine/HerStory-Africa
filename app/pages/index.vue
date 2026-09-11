@@ -1,12 +1,14 @@
 <template>
   <div>
     <HomeHero />
+    <ClientOnly>
+      <ContinueReading />
+    </ClientOnly>
     <HomeFeaturedWomen />
-    <HomeDidYouKnow />
-    <HomeArticlesPreview />
+    <HomeArticlesPreview show-did-you-know />
     <HomeBrowseByRegion />
     <HomeBrowseByCause />
-    <HomeTimelineTeaser />
+    <HomeReadingPaths />
   </div>
 </template>
 
@@ -19,13 +21,20 @@ useSeoMeta({
   description: siteDescription,
   ogTitle: "HerStory Africa: The women history forgot to teach you",
   ogDescription: siteDescription,
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/"),
   ogType: "website",
   twitterCard: "summary_large_image",
   twitterTitle: "HerStory Africa: The women history forgot to teach you",
   twitterDescription: siteDescription,
-  twitterImage: getAbsoluteUrl(),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  isHome: true,
+  title: "The women history forgot to teach you.",
+  description:
+    "An archive of African women who fought for equality, rights, and change.",
+  tagline: "An educational archive. Free, no paywall.",
 });
 
 useHead({

@@ -1,150 +1,232 @@
 <template>
   <div class="opportunities">
     <header class="opportunities__header">
-      <h1 class="opportunities__title">Opportunities for African Women</h1>
-      <p class="opportunities__subtitle">
-        Scholarships, grants, fellowships, and jobs to grow, lead, and make
-        impact.
+      <MuseumLabel
+        level="h1"
+        :eyebrow="`Opportunities · ${openCount} open`"
+        title="Scholarships, jobs, grants and fellowships"
+      />
+      <p class="opportunities__intro">
+        Open calls for African women to study, lead and build. Every listing
+        links straight to the source, and expired ones are removed each week.
       </p>
     </header>
 
     <div class="opportunities__toolbar">
       <SearchBar
         v-model="searchQuery"
-        placeholder="Search by title or organization…"
+        placeholder="Search by title or organisation…"
         class="opportunities__search"
-        @submit="currentPage = 1"
       />
 
-      <div class="opportunities__categories">
+      <div class="opportunities__chips" role="group" aria-label="Filters">
+        <FilterChip
+          label="Category"
+          :value="categoryLabel"
+          :open="sheetOpen"
+          @open="sheetOpen = true"
+          @clear="activeCategory = ''"
+        />
+      </div>
+
+      <div class="opportunities__count-row">
+        <span class="opportunities__count" aria-live="polite">
+          {{ filteredOpportunities.length }}
+          {{ filteredOpportunities.length === 1 ? "opportunity" : "opportunities" }}
+          · Featured first
+        </span>
         <button
-          v-for="cat in categories"
-          :key="cat.value"
-          class="opportunities__cat-pill"
-          :class="{
-            'opportunities__cat-pill--active': activeCategory === cat.value,
-          }"
-          @click="activeCategory = cat.value"
+          v-if="hasActiveFilters"
+          type="button"
+          class="opportunities__clear"
+          @click="clearFilters"
         >
-          {{ cat.label }}
+          Clear filters
         </button>
       </div>
     </div>
 
-    <div v-if="filteredOpportunities.length" class="opportunities__grid">
-      <OpportunityCard
-        v-for="opp in paginatedOpportunities"
-        :key="opp.slug"
-        :title="opp.title"
-        :slug="opp.slug"
-        :category="opp.category"
-        :organization="opp.organization"
-        :description="opp.description"
-        :deadline="opp.deadline"
-        :link="opp.link"
-        :featured="opp.featured"
-      />
+    <template v-if="filteredOpportunities.length">
+      <div class="opportunities__grid">
+        <OpportunityCard
+          v-for="opp in visibleOpportunities"
+          :key="opp.slug"
+          :title="opp.title"
+          :slug="opp.slug"
+          :category="opp.category"
+          :organization="opp.organization"
+          :description="opp.description"
+          :deadline="opp.deadline"
+          :link="opp.link"
+          :featured="opp.featured"
+        />
+      </div>
+
+      <div v-if="showMore" class="opportunities__more">
+        <button
+          v-if="visibleOpportunities.length < filteredOpportunities.length"
+          type="button"
+          class="pill pill--lg pill--secondary"
+          @click="pagesLoaded += 1"
+        >
+          Show {{ Math.min(PER_PAGE, filteredOpportunities.length - visibleOpportunities.length) }} more
+        </button>
+        <span class="opportunities__page-line">
+          Page {{ Math.min(pagesLoaded, totalPages) }} of {{ totalPages }}
+        </span>
+      </div>
+
+      <div v-if="showPagination" class="opportunities__pagination">
+        <Pagination v-model="pagesLoaded" :total-pages="totalPages" />
+      </div>
+    </template>
+
+    <div v-else class="panel opportunities__empty">
+      <LucideSearchX :size="32" class="opportunities__empty-icon" />
+      <p class="opportunities__empty-text">{{ emptyMessage }}</p>
+      <Pill variant="secondary" @click="clearFilters">Clear filters</Pill>
     </div>
 
-    <div v-else class="opportunities__empty">
-      <LucideSearchX :size="40" />
-      <p>No opportunities match your current filters.</p>
-      <button class="opportunities__clear-btn" @click="clearFilters">
-        Clear filters
-      </button>
-    </div>
-
-    <Pagination v-model="currentPage" :total-pages="totalPages" />
+    <FilterSheet
+      v-model="sheetCategory"
+      :open="sheetOpen"
+      title="Category"
+      :options="categoryOptions"
+      :result-count="filteredOpportunities.length"
+      noun="opportunities"
+      @close="sheetOpen = false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useMediaQuery } from "@vueuse/core";
+
+type Category = "scholarship" | "job" | "grant" | "fellowship";
+
+const CATEGORIES: { value: Category; label: string }[] = [
+  { value: "scholarship", label: "Scholarships" },
+  { value: "job", label: "Jobs" },
+  { value: "grant", label: "Grants" },
+  { value: "fellowship", label: "Fellowships" },
+];
+
 const route = useRoute();
 const router = useRouter();
 
 const PER_PAGE = 9;
 
-const categories = [
-  { value: "", label: "All" },
-  { value: "scholarship", label: "Scholarships" },
-  { value: "job", label: "Jobs" },
-  { value: "grant", label: "Grants" },
-  { value: "fellowship", label: "Fellowships" },
-] as const;
-
 const initialCategory = (route.query.category as string) ?? "";
-const activeCategory = ref(
-  categories.some((c) => c.value === initialCategory) ? initialCategory : "",
+const activeCategory = ref<Category | "">(
+  CATEGORIES.some((c) => c.value === initialCategory) ? (initialCategory as Category) : "",
 );
-
 const searchQuery = ref((route.query.q as string) ?? "");
-const currentPage = ref(Number(route.query.page) || 1);
+const pagesLoaded = ref(Math.max(1, Number(route.query.page) || 1));
+const sheetOpen = ref(false);
 
 const { data: allOpportunities } = await useAsyncData("opportunities", () =>
   queryCollection("opportunities").all(),
 );
 
+type Opportunity = NonNullable<typeof allOpportunities.value>[number];
+
+/** Listings whose deadline has not passed (ongoing ones have no deadline). */
 const activeOpportunities = computed(() => {
-  if (!allOpportunities.value) return [];
   const now = Date.now();
-  return allOpportunities.value.filter((opp) => {
-    if (!opp.deadline) return true;
-    return new Date(opp.deadline).getTime() >= now;
-  });
+  return (allOpportunities.value ?? []).filter(
+    (opp) => !opp.deadline || new Date(opp.deadline).getTime() >= now,
+  );
 });
 
-const filteredOpportunities = computed(() => {
-  let list = activeOpportunities.value;
+const openCount = computed(() => activeOpportunities.value.length);
 
-  if (activeCategory.value) {
-    list = list.filter((opp) => opp.category === activeCategory.value);
-  }
-
+function matches(opp: Opportunity, skipCategory = false): boolean {
   const q = searchQuery.value.toLowerCase().trim();
-  if (q) {
-    list = list.filter(
-      (opp) =>
-        opp.title.toLowerCase().includes(q) ||
-        opp.organization.toLowerCase().includes(q),
-    );
-  }
+  if (q && !opp.title.toLowerCase().includes(q) && !opp.organization.toLowerCase().includes(q)) return false;
+  if (!skipCategory && activeCategory.value && opp.category !== activeCategory.value) return false;
+  return true;
+}
 
-  return list.sort((a, b) => {
-    if (a.featured !== b.featured) return a.featured ? -1 : 1;
-    if (!a.deadline) return 1;
-    if (!b.deadline) return -1;
-    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
-  });
-});
-
-const totalPages = computed(() =>
-  Math.ceil(filteredOpportunities.value.length / PER_PAGE),
+/** Featured first, then soonest deadline; ongoing listings close the list. */
+const filteredOpportunities = computed(() =>
+  activeOpportunities.value
+    .filter((opp) => matches(opp))
+    .sort((a, b) => {
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
+      if (!a.deadline) return 1;
+      if (!b.deadline) return -1;
+      return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+    }),
 );
 
-const paginatedOpportunities = computed(() => {
-  const start = (currentPage.value - 1) * PER_PAGE;
-  return filteredOpportunities.value.slice(start, start + PER_PAGE);
+const totalPages = computed(() => Math.max(1, Math.ceil(filteredOpportunities.value.length / PER_PAGE)));
+
+/* One list; mobile accumulates pages, desktop shows the current page. Before
+   mount both behave the same for page 1, so hydration matches. */
+const isDesktop = useMediaQuery("(min-width: 768px)");
+const mounted = ref(false);
+onMounted(() => {
+  mounted.value = true;
+});
+const paged = computed(() => mounted.value && isDesktop.value);
+const showMore = computed(() => !mounted.value || !isDesktop.value);
+const showPagination = computed(() => !mounted.value || isDesktop.value);
+
+const visibleOpportunities = computed(() => {
+  if (paged.value) {
+    const start = (pagesLoaded.value - 1) * PER_PAGE;
+    return filteredOpportunities.value.slice(start, start + PER_PAGE);
+  }
+  return filteredOpportunities.value.slice(0, PER_PAGE * pagesLoaded.value);
+});
+
+/* The chip and sheet speak in labels; the URL and the filter speak in values. */
+const categoryLabel = computed(
+  () => CATEGORIES.find((c) => c.value === activeCategory.value)?.label ?? "",
+);
+
+const sheetCategory = computed({
+  get: () => categoryLabel.value,
+  set: (label: string) => {
+    activeCategory.value = CATEGORIES.find((c) => c.label === label)?.value ?? "";
+  },
+});
+
+const categoryOptions = computed(() => {
+  const counts = new Map<Category, number>();
+  for (const opp of activeOpportunities.value) {
+    if (!matches(opp, true)) continue;
+    counts.set(opp.category, (counts.get(opp.category) ?? 0) + 1);
+  }
+  return CATEGORIES.map((c) => ({ label: c.label, count: counts.get(c.value) ?? 0 }));
+});
+
+const hasActiveFilters = computed(() => Boolean(searchQuery.value.trim() || activeCategory.value));
+
+const emptyMessage = computed(() => {
+  const q = searchQuery.value.trim();
+  const parts = [q ? `“${q}”` : "", categoryLabel.value].filter(Boolean);
+  if (!parts.length) return "No opportunities are open right now. New ones are added every week.";
+  return `No opportunities match ${parts.join(" in ")} yet.`;
 });
 
 function syncUrl() {
   const query: Record<string, string> = {};
   if (searchQuery.value) query.q = searchQuery.value;
   if (activeCategory.value) query.category = activeCategory.value;
-  if (currentPage.value > 1) query.page = String(currentPage.value);
+  if (pagesLoaded.value > 1) query.page = String(pagesLoaded.value);
   router.replace({ query });
 }
 
 watch([searchQuery, activeCategory], () => {
-  currentPage.value = 1;
+  pagesLoaded.value = 1;
   syncUrl();
 });
 
-watch(currentPage, syncUrl);
+watch(pagesLoaded, syncUrl);
 
 watch(totalPages, (tp) => {
-  if (currentPage.value > tp) {
-    currentPage.value = Math.max(1, tp);
-  }
+  if (pagesLoaded.value > tp) pagesLoaded.value = Math.max(1, tp);
 });
 
 function clearFilters() {
@@ -158,15 +240,20 @@ const pageDescription =
 useSeoMeta({
   title: "Opportunities",
   description: pageDescription,
-  ogTitle: "Opportunities — HerStory Africa",
+  ogTitle: "Opportunities | HerStory Africa",
   ogDescription: pageDescription,
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/opportunities"),
   ogType: "website",
   twitterCard: "summary_large_image",
-  twitterTitle: "Opportunities — HerStory Africa",
+  twitterTitle: "Opportunities | HerStory Africa",
   twitterDescription: pageDescription,
-  twitterImage: getAbsoluteUrl(),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Opportunities",
+  title: "Opportunities for African Women",
+  description: pageDescription,
 });
 
 useHead({
@@ -176,86 +263,102 @@ useHead({
 
 <style scoped>
 .opportunities {
+  --gutter: 24px;
   max-width: 64rem;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3.5rem;
+  padding: 28px var(--gutter) 56px;
 }
 
 @media (min-width: 768px) {
   .opportunities {
-    padding: 2.5rem 2rem 4rem;
+    --gutter: 32px;
+    padding-top: 40px;
+    padding-bottom: 64px;
   }
 }
 
 .opportunities__header {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 4px;
 }
 
-.opportunities__title {
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-  font-weight: 800;
-  color: var(--text-primary);
+.opportunities__intro {
+  max-width: 42rem;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-secondary);
   margin: 0;
 }
 
-.opportunities__subtitle {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin: 0.375rem 0 0;
-  max-width: 40rem;
-}
-
-.opportunities__count {
-  display: inline-block;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
+/* Sticky toolbar: full-bleed ground inside the gutter. */
 .opportunities__toolbar {
+  position: sticky;
+  top: var(--navbar-height, 61px);
+  z-index: 50;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 12px;
+  margin: 0 calc(-1 * var(--gutter)) 20px;
+  padding: 16px var(--gutter) 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .opportunities__search {
   max-width: 100%;
 }
 
-.opportunities__categories {
+.opportunities__chips {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 2px var(--gutter);
 }
 
-.opportunities__cat-pill {
-  padding: 0.4375rem 1rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
+.opportunities__chips::-webkit-scrollbar {
+  display: none;
+}
+
+.opportunities__count-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 24px;
+}
+
+.opportunities__count {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.opportunities__clear {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: -10px 0;
+  padding: 0 4px;
+  border: none;
+  background: none;
   font-family: var(--font-body);
-  border-radius: 9999px;
-  border: 1.5px solid var(--border-default);
-  background: var(--surface-elevated);
-  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
-.opportunities__cat-pill:hover {
-  border-color: var(--ring-default);
-  color: var(--text-primary);
-}
-
-.opportunities__cat-pill--active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--text-on-primary);
+.opportunities__clear:hover {
+  text-decoration: underline;
 }
 
 .opportunities__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 20px;
 }
 
 @media (min-width: 640px) {
@@ -264,9 +367,42 @@ useHead({
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 768px) {
+  .opportunities__grid {
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
   .opportunities__grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.opportunities__more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 0 0;
+}
+
+.opportunities__page-line {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.opportunities__pagination {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .opportunities__more {
+    display: none;
+  }
+
+  .opportunities__pagination {
+    display: block;
   }
 }
 
@@ -274,32 +410,18 @@ useHead({
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 4rem 1rem;
+  gap: 12px;
+  padding: 32px 16px;
   text-align: center;
+}
+
+.opportunities__empty-icon {
   color: var(--text-muted);
 }
 
-.opportunities__empty p {
+.opportunities__empty-text {
   margin: 0;
-  font-size: 1rem;
-}
-
-.opportunities__clear-btn {
-  padding: 0.5rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  border-radius: 9999px;
-  border: 1.5px solid var(--border-default);
-  background: var(--surface-elevated);
+  font-size: 16px;
   color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.opportunities__clear-btn:hover {
-  border-color: var(--ring-default);
-  color: var(--color-primary);
 }
 </style>

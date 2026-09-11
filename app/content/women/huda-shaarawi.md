@@ -16,6 +16,7 @@ image: "/women/huda-shaarawi.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 summary: "Pioneer Egyptian feminist and nationalist who founded the Egyptian Feminist Union. Famously removed her veil in public in 1923 and led the Arab women's rights movement."
+hook: "She stepped off a train in Cairo in 1923 and took off her veil in public."
 ---
 
 ## Biography

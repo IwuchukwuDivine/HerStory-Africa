@@ -17,6 +17,7 @@ imageCredit: "No freely licensed portrait exists (pre-photographic era)"
 featured: false
 funFact: "The name of an entire people, the Baoulé, is traditionally said to come from Pokou's cry of grief at the river, 'Ba ouli', meaning 'the child is dead'."
 summary: "Ashanti princess who led a breakaway people west across the Comoé River during an 18th-century succession war and founded the Baoulé, today one of Côte d'Ivoire's largest nations. Her legend of a mother's terrible sacrifice at the river is one of West Africa's most retold origin stories."
+hook: "A queen who crossed the Comoé and named a people with her cry of grief."
 ---
 
 ## Biography

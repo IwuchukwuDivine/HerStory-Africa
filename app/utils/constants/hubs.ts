@@ -13,7 +13,7 @@ export interface HubCopy {
 
 export const REGION_HUBS: Record<Region, HubCopy> = {
   "West Africa": {
-    heading: "West African Women Who Shaped History",
+    heading: "West African women who shaped history",
     label: "West Africa",
     intro:
       "From the market queens of the Niger Delta to the women who marched on colonial offices in Aba and Lagos, West Africa has never been short of women who refused to stay quiet. Some ruled kingdoms, some ran trade networks that stretched across borders, and some wrote the books that a generation of girls grew up on. These are their stories.",
@@ -21,7 +21,7 @@ export const REGION_HUBS: Record<Region, HubCopy> = {
       "Queens, market leaders, activists, and writers from Nigeria, Ghana, Senegal, Liberia, and across West Africa. Every profile in the HerStory Africa archive.",
   },
   "East Africa": {
-    heading: "East African Women Who Shaped History",
+    heading: "East African women who shaped history",
     label: "East Africa",
     intro:
       "Empresses in Ethiopia, freedom fighters in Kenya's forests, presidents in Tanzania, and a Nobel laureate who planted millions of trees. East Africa's women have led armies, built institutions, and changed the law from the inside. Meet the women from Ethiopia, Kenya, Uganda, Tanzania, Rwanda, Somalia, and beyond.",
@@ -29,7 +29,7 @@ export const REGION_HUBS: Record<Region, HubCopy> = {
       "Empresses, freedom fighters, presidents, and scientists from Ethiopia, Kenya, Uganda, Tanzania, Rwanda, and across East Africa, all in one place.",
   },
   "Southern Africa": {
-    heading: "Southern African Women Who Shaped History",
+    heading: "Southern African women who shaped history",
     label: "Southern Africa",
     intro:
       "Twenty thousand women marched on Pretoria in 1956 and told the apartheid government that when you strike a woman, you strike a rock. Southern Africa's women fought pass laws, led liberation movements, and then took seats in the parliaments they helped create. Their stories run from Zimbabwe's spirit mediums to South Africa's courtrooms.",
@@ -37,7 +37,7 @@ export const REGION_HUBS: Record<Region, HubCopy> = {
       "Anti-apartheid leaders, spirit mediums, judges, and heads of state from South Africa, Zimbabwe, Malawi, Mozambique, and across Southern Africa.",
   },
   "Central Africa": {
-    heading: "Central African Women Who Shaped History",
+    heading: "Central African women who shaped history",
     label: "Central Africa",
     intro:
       "The first woman to serve as a prime minister anywhere in Africa did so in the Central African Republic in 1975. Central Africa's women have negotiated peace, led independence movements, and documented wartime abuses when nobody else would. Their names deserve to be better known.",
@@ -45,7 +45,7 @@ export const REGION_HUBS: Record<Region, HubCopy> = {
       "Prime ministers, peace negotiators, and independence leaders from the DRC, Cameroon, Congo, the Central African Republic, and across Central Africa.",
   },
   "North Africa": {
-    heading: "North African Women Who Shaped History",
+    heading: "North African women who shaped history",
     label: "North Africa",
     intro:
       "A pharaoh who ruled Egypt for two decades, a Berber queen who held back an invading army, and a doctor who wrote the book on women's bodies that her government tried to ban. North Africa's women have been rulers, rebels, and writers for three thousand years. Start here to meet them.",
@@ -56,7 +56,7 @@ export const REGION_HUBS: Record<Region, HubCopy> = {
 
 export const ERA_HUBS: Record<Era, HubCopy> = {
   "Pre-Colonial": {
-    heading: "Women of Pre-Colonial Africa",
+    heading: "Women of pre-colonial Africa",
     label: "Pre-Colonial",
     intro:
       "Before European powers drew their lines on the map, African women ruled kingdoms, commanded armies, and controlled trade routes. Queens, warriors, and spiritual leaders whose authority nobody questioned. These profiles reach back to ancient Egypt, medieval Angola, and the Yoruba and Ashanti kingdoms.",
@@ -64,7 +64,7 @@ export const ERA_HUBS: Record<Era, HubCopy> = {
       "Queens, warriors, and spiritual leaders who ruled African kingdoms before colonial rule, from ancient Egypt to medieval Angola and the Yoruba kingdoms.",
   },
   "Colonial": {
-    heading: "Women of the Colonial Era",
+    heading: "Women of the colonial era",
     label: "Colonial",
     intro:
       "Colonial rule stripped many African women of the political and economic standing they had held for generations. They did not accept it. The women in this era organised tax revolts, led armed resistance, founded schools, and wrote the first newspapers that told the truth about occupation.",
@@ -72,7 +72,7 @@ export const ERA_HUBS: Record<Era, HubCopy> = {
       "African women who resisted colonial rule: tax revolt leaders, armed fighters, school founders, and the first journalists to report on occupation.",
   },
   "Independence": {
-    heading: "Women of Africa's Independence Era",
+    heading: "Women of Africa's independence era",
     label: "Independence",
     intro:
       "As one African country after another won its freedom from the late 1950s onward, women were on the front lines of every movement. They organised rallies, smuggled messages, and sat at negotiating tables. Then many of them watched the new governments forget their contribution. These are the women who made independence possible.",
@@ -80,7 +80,7 @@ export const ERA_HUBS: Record<Era, HubCopy> = {
       "The women who organised, marched, and negotiated Africa's independence movements from the 1950s onward, and what they built when the flags went up.",
   },
   "Modern": {
-    heading: "Women of Modern Africa",
+    heading: "Women of modern Africa",
     label: "Modern",
     intro:
       "The decades after independence brought military coups, structural adjustment, and the long fight against apartheid. The women of this era became judges, finance ministers, novelists, and heads of state. They built the institutions that a new generation now takes for granted.",
@@ -88,7 +88,7 @@ export const ERA_HUBS: Record<Era, HubCopy> = {
       "Judges, finance ministers, novelists, and heads of state who shaped Africa in the decades after independence and through the fight against apartheid.",
   },
   "Contemporary": {
-    heading: "Contemporary African Women Making History",
+    heading: "Contemporary African women making history",
     label: "Contemporary",
     intro:
       "History is still being written. The women in this collection are shaping Africa right now, in parliaments, courtrooms, laboratories, film studios, and on the world stage. Their stories are not finished, which makes them all the more worth following.",
@@ -130,40 +130,65 @@ export function causeIntro(cause: string, count: number): string {
   return `${count} women in the archive worked for ${label}. They came from different countries and different centuries, but each of them saw a wrong that others accepted and set out to change it. Read their stories to see how the same cause looked from very different lives.`;
 }
 
-/** Causes whose heading reads better as "African Women in X" than "fought for X". */
+/** Causes whose heading reads better as "African women in X" than "fought for X". */
 const CAUSE_IN_HEADINGS: Record<string, string> = {
-  "Arts & culture": "African Women in Arts and Culture",
-  Nollywood: "African Women in Nollywood",
-  Film: "African Women in Film",
-  Music: "African Women in Music",
-  Literature: "African Women in Literature",
-  Science: "African Women in Science",
-  "Women in science": "African Women in Science",
-  "Women in academia": "African Women in Academia",
-  "Women in STEM": "African Women in STEM",
-  Leadership: "African Women Who Led",
-  "Military leadership": "African Women Who Led Armies",
-  "Political leadership": "African Women Who Led Nations",
-  "Spiritual leadership": "African Women Who Led in Faith",
-  "Religious leadership": "African Women Who Led in Faith",
-  "Women's leadership": "African Women Who Led the Way",
-  "Women's political leadership": "African Women Who Fought for Women in Power",
+  "Arts & culture": "African women in arts and culture",
+  Nollywood: "African women in Nollywood",
+  Film: "African women in film",
+  Music: "African women in music",
+  Literature: "African women in literature",
+  Science: "African women in science",
+  "Women in science": "African women in science",
+  "Women in academia": "African women in academia",
+  "Women in STEM": "African women in STEM",
+  Leadership: "African women who led",
+  "Military leadership": "African women who led armies",
+  "Political leadership": "African women who led nations",
+  "Spiritual leadership": "African women who led in faith",
+  "Religious leadership": "African women who led in faith",
+  "Women's leadership": "African women who led the way",
+  "Women's political leadership": "African women who fought for women in power",
   "Women's political participation":
-    "African Women Who Fought for Women in Politics",
+    "African women who fought for women in politics",
   "Women's economic empowerment":
-    "African Women Who Fought for Economic Empowerment",
-  Representation: "African Women Who Fought for Representation",
-  Governance: "African Women Who Shaped Governance",
-  "Public health": "African Women Who Built Public Health",
-  Healthcare: "African Women Who Built Healthcare",
-  "Diplomacy & military strategy": "African Women in Diplomacy and War",
-  "Cultural preservation": "African Women Who Preserved Culture",
-  "Cultural identity": "African Women Who Defended Cultural Identity",
-  "Cultural diplomacy": "African Women in Cultural Diplomacy",
+    "African women who fought for economic empowerment",
+  Representation: "African women who fought for representation",
+  Governance: "African women who shaped governance",
+  "Public health": "African women who built public health",
+  Healthcare: "African women who built healthcare",
+  "Diplomacy & military strategy": "African women in diplomacy and war",
+  "Cultural preservation": "African women who preserved culture",
+  "Cultural identity": "African women who defended cultural identity",
+  "Cultural diplomacy": "African women in cultural diplomacy",
 };
 
-export function causeHeading(cause: string, titleCased: string): string {
-  return CAUSE_IN_HEADINGS[cause] ?? `African Women Who Fought for ${titleCased}`;
+/**
+ * Causes that open with a proper noun keep their capital letter when they
+ * fall mid-sentence in a heading ("fought for Pan-Africanism").
+ */
+const PROPER_NOUN_CAUSES = new Set([
+  "Nollywood",
+  "Pan-Africanism",
+  "Northern Nigeria women's rights",
+]);
+
+/** The raw cause as it should read mid-sentence: "women's rights", "STEM", "Nollywood". */
+function causeInSentence(cause: string): string {
+  const firstWord = cause.split(/\s/)[0] ?? "";
+  const isAcronym = firstWord.length > 1 && firstWord === firstWord.toUpperCase();
+  if (PROPER_NOUN_CAUSES.has(cause) || isAcronym) return cause;
+  return cause.charAt(0).toLowerCase() + cause.slice(1);
+}
+
+/**
+ * Sentence-case hub heading for a cause. The second argument is kept so
+ * existing call sites that pass a title-cased label still compile; the
+ * heading itself is built from the raw cause.
+ */
+export function causeHeading(cause: string, _titleCased?: string): string {
+  return (
+    CAUSE_IN_HEADINGS[cause] ?? `African women who fought for ${causeInSentence(cause)}`
+  );
 }
 
 export const SITE_NAME = "HerStory Africa";
@@ -184,3 +209,42 @@ export function hubTitle(base: string): string {
     "",
   );
 }
+
+/**
+ * Editorial picks shown at the top of each region and era hub. Exactly three
+ * slugs per key: the first is the large feature card, the next two are the
+ * small cards beside it. Every slug must be a profile in that region or era
+ * with a real portrait (not placeholder.svg). Editors may change these freely;
+ * nothing else depends on the choice.
+ */
+export const HUB_FEATURED: {
+  region: Record<Region, string[]>;
+  era: Record<Era, string[]>;
+} = {
+  region: {
+    "West Africa": [
+      "funmilayo-ransome-kuti",
+      "yaa-asantewaa",
+      "ngozi-okonjo-iweala",
+    ],
+    "East Africa": ["wangari-maathai", "taytu-betul", "vanessa-nakate"],
+    "Southern Africa": [
+      "winnie-madikizela-mandela",
+      "charlotte-maxeke",
+      "graca-machel",
+    ],
+    "Central Africa": ["nzinga-ndongo-matamba", "kimpa-vita", "andree-blouin"],
+    "North Africa": ["hatshepsut", "nawal-el-saadawi", "huda-shaarawi"],
+  },
+  era: {
+    "Pre-Colonial": ["amina-of-zazzau", "queen-idia", "dihya"],
+    Colonial: ["lilian-ngoyi", "yaa-asantewaa", "huda-shaarawi"],
+    Independence: ["djamila-bouhired", "mariama-ba", "flora-nwapa"],
+    Modern: ["ellen-johnson-sirleaf", "wangari-maathai", "dora-akunyili"],
+    Contemporary: [
+      "chimamanda-ngozi-adichie",
+      "joyce-banda",
+      "amina-j-mohammed",
+    ],
+  },
+};

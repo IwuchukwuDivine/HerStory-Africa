@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Olive Schreiner wrote The Story of an African Farm in 1883 — one of the first great feminist novels in English — over a century before second-wave feminism."
 summary: "South African novelist and political activist who wrote The Story of an African Farm in 1883, one of the first great feminist novels in English. She spent her life fighting for women's rights, opposing racism and the Boer War, and insisting that the world she lived in was unjust. Over a century before second-wave feminism, she was already asking the same questions."
+hook: "Published under a man's name in 1883, her African farm novel asked what women were for."
+ogFocal: "50% 10%"
 ---
 
 ## Biography
