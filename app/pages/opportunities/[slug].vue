@@ -38,9 +38,7 @@
           Apply now
           <LucideExternalLink :size="16" />
         </Pill>
-        <ClientOnly>
-          <ShareButton :title="opp.title" :text="opp.description" label="Share" />
-        </ClientOnly>
+        <ShareButton :title="opp.title" :text="opp.description" label="Share" />
       </div>
     </header>
 

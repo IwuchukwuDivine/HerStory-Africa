@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isSupported" class="listen">
+  <div v-if="available" class="listen">
     <button
       v-if="status === 'idle'"
       type="button"
@@ -129,6 +129,19 @@ const {
 const sharedDuration = useState<number>("tts-duration", () => 0);
 
 const playing = computed(() => status.value === "playing");
+
+/*
+ * speechSynthesis only exists in the browser, so isSupported is false during
+ * prerender. Treat the button as available until the component has mounted:
+ * the server then renders the idle pill in place and the row does not pop in
+ * after hydration. Every current browser supports speech synthesis, so the
+ * pill disappearing after mount is the rare case, not the common one.
+ */
+const mounted = ref(false);
+onMounted(() => {
+  mounted.value = true;
+});
+const available = computed(() => !mounted.value || isSupported.value);
 const voicePickerOpen = ref(false);
 const voiceSelect = ref<HTMLSelectElement | null>(null);
 

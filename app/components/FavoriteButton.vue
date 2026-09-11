@@ -31,7 +31,19 @@ const props = withDefaults(
 const { toggleFavorite, isFavorite } = useApp();
 const { track } = useTag();
 
-const active = computed(() => isFavorite(props.type, props.slug));
+/*
+ * Favourites live in localStorage, which the server cannot see. Render the
+ * unsaved state first so the prerendered HTML and the first client render
+ * agree, then show the real state once mounted. This lets the button render
+ * on the server instead of hiding behind <ClientOnly>.
+ */
+const mounted = ref(false);
+onMounted(() => {
+  mounted.value = true;
+});
+const active = computed(
+  () => mounted.value && isFavorite(props.type, props.slug),
+);
 
 function toggle() {
   const action = active.value ? "remove" : "add";

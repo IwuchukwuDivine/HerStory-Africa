@@ -16,16 +16,14 @@
         <h1 class="article-page__title">{{ article.title }}</h1>
         <p class="article-page__deck">{{ article.description }}</p>
 
-        <ClientOnly>
-          <div class="article-page__actions">
-            <ListenButton
-              content-selector=".article-page__title, .article-page__deck, .article-page__content"
-              :minutes="readingTime"
-            />
-            <FavoriteButton type="article" :slug="article.slug" label="Save" />
-            <ShareButton :title="article.title" :text="article.description" label="Share" />
-          </div>
-        </ClientOnly>
+        <div class="article-page__actions">
+          <ListenButton
+            content-selector=".article-page__title, .article-page__deck, .article-page__content"
+            :minutes="readingTime"
+          />
+          <FavoriteButton type="article" :slug="article.slug" label="Save" />
+          <ShareButton :title="article.title" :text="article.description" label="Share" />
+        </div>
       </header>
 
       <figure v-if="article.image" class="article-page__hero">

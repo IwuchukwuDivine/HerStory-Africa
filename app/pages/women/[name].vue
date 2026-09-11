@@ -45,6 +45,8 @@
             <p v-if="woman.hook" class="woman-profile__hook">{{ woman.hook }}</p>
             <p class="woman-profile__summary">{{ woman.summary }}</p>
 
+            <!-- Reading-path context comes from ?path= and read state from
+                 localStorage, so these two stay client-only. -->
             <ClientOnly>
               <p v-if="pathContext" class="woman-profile__why">
                 <strong class="woman-profile__why-label">Why she is next.</strong>
@@ -54,15 +56,15 @@
                 <LucideCheck :size="12" />
                 Read
               </span>
-              <div class="woman-profile__actions">
-                <ListenButton
-                  content-selector=".woman-profile__name, .woman-profile__hook, .woman-profile__summary, .woman-profile__content"
-                  :minutes="readingTime"
-                />
-                <FavoriteButton type="woman" :slug="woman.slug" label="Save" />
-                <ShareCardButton :woman="woman" />
-              </div>
             </ClientOnly>
+            <div class="woman-profile__actions">
+              <ListenButton
+                content-selector=".woman-profile__name, .woman-profile__hook, .woman-profile__summary, .woman-profile__content"
+                :minutes="readingTime"
+              />
+              <FavoriteButton type="woman" :slug="woman.slug" label="Save" />
+              <ShareCardButton :woman="woman" />
+            </div>
 
             <div v-if="woman.causes.length" class="woman-profile__causes">
               <span class="eyebrow eyebrow--muted">She fought for</span>
