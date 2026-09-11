@@ -219,6 +219,8 @@ defineOgImage("Card", {
     woman.value ? `${woman.value.country} · ${womanDates.value}` : "",
   image: () => ogImageUrl.value,
   focal: () => woman.value?.ogFocal ?? "50% 20%",
+  // Women carry the meta line only; stop the module filling this from the page description.
+  description: "",
 });
 
 useHead(() => ({

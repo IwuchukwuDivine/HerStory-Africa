@@ -54,7 +54,15 @@
             {{ word.text }}
           </div>
         </div>
-        <div v-else :style="titleStyle">{{ title }}</div>
+        <!-- The fontWeight binding must reference `props` so nuxt-og-image's
+             template scan marks the weights as dynamic and keeps every
+             registered face (800, 900 and the italics) instead of 400 only. -->
+        <div
+          v-else
+          :style="{ ...titleStyle, fontWeight: props.variant === 'woman' ? 900 : 800 }"
+        >
+          {{ title }}
+        </div>
 
         <div v-if="meta" :style="metaStyle">{{ meta }}</div>
         <div v-if="clampedDescription" :style="descriptionStyle">
@@ -145,6 +153,7 @@ const pillText = computed(() => {
 
 /* Satori has no text-overflow: cut at the last space before 137 chars. */
 const clampedDescription = computed(() => {
+  if (props.variant === "woman") return "";
   const text = (props.description || "").trim();
   if (text.length <= 140) return text;
   const cut = text.slice(0, 137);
@@ -288,7 +297,6 @@ const titleStyle = computed(() => ({
 const homeTitle = {
   display: "flex",
   flexWrap: "wrap" as const,
-  gap: "0px 18px",
   maxWidth: "820px",
   fontSize: "78px",
   fontWeight: 800,
@@ -299,10 +307,12 @@ const homeTitle = {
 
 const homeWord = {
   display: "flex",
+  marginRight: "18px",
 };
 
 const homeAccent = {
   display: "flex",
+  marginRight: "18px",
   fontStyle: "italic" as const,
   color: GOLD_LIGHT,
 };
