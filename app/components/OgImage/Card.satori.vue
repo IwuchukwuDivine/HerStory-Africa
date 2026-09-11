@@ -196,7 +196,7 @@ const root = {
   position: "relative" as const,
   overflow: "hidden",
   backgroundColor: "#120a04",
-  fontFamily: "Playfair Display",
+  fontFamily: "Playfair Display OG",
 };
 
 const fullBleed = {

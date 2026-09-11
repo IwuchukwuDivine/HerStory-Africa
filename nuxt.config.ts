@@ -221,8 +221,11 @@ export default defineNuxtConfig({
   },
 
   // ── Fonts ───────────────────────────────────────────────────────────
-  // One local family, all twelve faces, served from public/fonts/ using the
-  // @nuxt/fonts slug convention (playfair-display-<weight>[-italic].ttf).
+  // One local family, all twelve faces, served from public/fonts/v1/ as
+  // WOFF2 using the @nuxt/fonts slug convention
+  // (playfair-display-<weight>[-italic].woff2). The folder is versioned
+  // because vercel.json caches /fonts/ for a year: if a font file ever
+  // changes, move the set to /fonts/v2/ so returning browsers fetch it.
   // `global: true` plus the weights/styles arrays are what nuxt-og-image
   // reads to embed the same faces in Satori; per-weight entries make it fall
   // back to Inter.
@@ -238,6 +241,18 @@ export default defineNuxtConfig({
         // reflow when Playfair swaps in. Without it the hero and the first
         // section jump, which is most of the page's CLS.
         fallbacks: ["Georgia", "Times New Roman", "serif"],
+      },
+      {
+        // Share-card font. Satori cannot read WOFF2, and nuxt-og-image takes
+        // the first source of a face, which for the family above is the
+        // WOFF2. This separate family points only at TTF copies in
+        // public/fonts/og/. The site never uses it, so browsers never
+        // download these files; only the OG renderer does, at build time.
+        name: "Playfair Display OG",
+        provider: "local",
+        weights: [400, 500, 600, 700, 800, 900],
+        styles: ["normal", "italic"],
+        global: true,
       },
     ],
   },
