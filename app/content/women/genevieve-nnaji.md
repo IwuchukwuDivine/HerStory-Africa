@@ -8,7 +8,7 @@ born: 1979
 era: "Contemporary"
 causes:
   - "Film"
-  - "Arts and culture"
+  - "Arts & culture"
   - "African storytelling"
   - "Women's visibility"
 image: "/women/genevieve-nnaji.png"

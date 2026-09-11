@@ -13,10 +13,39 @@
    • Crimson   (Red)         → alerts, bold moments, resistance
 ═══════════════════════════════════════════════════════════════════════ */
 
+/* ─── Fallback font metrics ───
+   Playfair Display loads with font-display: swap, so text first paints in the
+   fallback and then reflows when the web font arrives. These faces stretch
+   Georgia and Times New Roman to occupy exactly the same space as Playfair,
+   so the swap is invisible and the page keeps a CLS of 0. Numbers are derived
+   by measuring both typefaces: size-adjust is Playfair's rendered glyph width
+   over the fallback's, and the overrides are Playfair's own ascent and descent
+   divided by that ratio. Georgia is already almost exactly Playfair's width,
+   so the work here is vertical: Playfair sits taller in the line box, and
+   without the overrides every line grows when it swaps in. Regenerate if the
+   typeface changes. */
+@font-face {
+  font-family: "Playfair Fallback";
+  src: local("Georgia");
+  size-adjust: 100.0538%;
+  ascent-override: 108.1419%;
+  descent-override: 25.0865%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Fallback";
+  src: local("Times New Roman");
+  size-adjust: 109.8141%;
+  ascent-override: 98.5302%;
+  descent-override: 22.8568%;
+  line-gap-override: 0%;
+}
+
 /* ─── Light Mode · Semantic Tokens ─── */
 :root {
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-body: "Playfair Display", Georgia, serif;
+  --font-heading: "Playfair Display", "Playfair Fallback", Georgia, serif;
+  --font-body: "Playfair Display", "Playfair Fallback", Georgia, serif;
 
   --right: env(safe-area-inset-right, 0px);
   --top: env(safe-area-inset-top, 0px);
@@ -47,6 +76,10 @@
 
 /* ─── Dark Mode · Semantic Tokens ─── */
 .dark {
+  /* On dark surfaces the ramp inverts: the deep golds disappear, so text gold
+     moves up to a light tint (7.5:1 or better on every dark surface). */
+  --text-gold: var(--color-secondary-400);
+
   --surface: #120a04;
   --surface-elevated: #1e1108;
   --surface-muted: #2a1a0e;
@@ -94,6 +127,12 @@
   --color-secondary-900: #4f3208;
   --color-secondary-950: #301d04;
   --color-secondary: #c8941a;
+
+  /* Gold used as TEXT. The mid-ramp golds are chosen for fills and only reach
+     about 4:1 on a light surface, under the 4.5:1 minimum for body-size text,
+     so eyebrows, kickers and meta lines use this instead. Redefined in dark
+     mode below. */
+  --text-gold: var(--color-secondary-700);
 
   /* ── Forest · Green (growth, nature — Wangari Maathai) ── */
   --color-forest-50: #edf7f0;
@@ -485,7 +524,7 @@ summary:focus-visible {
 }
 
 .eyebrow--gold {
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 
 /* Rule + eyebrow stacked, 8px apart. */

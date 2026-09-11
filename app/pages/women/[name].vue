@@ -476,7 +476,7 @@ useHead(() => ({
 .woman-profile__why-label {
   font-style: normal;
   font-weight: 700;
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 
 .woman-profile__read {

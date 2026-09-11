@@ -8,7 +8,7 @@ born: 1939
 died: 2017
 era: "Modern"
 causes:
-  - "Peace and reconciliation"
+  - "Peace & reconciliation"
   - "Disarmament"
   - "Women's political participation"
   - "Democratic elections"

@@ -228,6 +228,10 @@ export default defineNuxtConfig({
         weights: [400, 500, 600, 700, 800, 900],
         styles: ["normal", "italic"],
         global: true,
+        // Emits a metric-matched @font-face for the fallback so text does not
+        // reflow when Playfair swaps in. Without it the hero and the first
+        // section jump, which is most of the page's CLS.
+        fallbacks: ["Georgia", "Times New Roman", "serif"],
       },
     ],
   },

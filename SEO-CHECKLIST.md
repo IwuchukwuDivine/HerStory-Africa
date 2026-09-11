@@ -150,6 +150,40 @@ profile frontmatter would retire the thin pages and concentrate the ranking
 signal. Listing pages (`/women`, `/articles`, `/timeline`, `/about`,
 `/opportunities`) also still carry no JSON-LD.
 
+## Performance sweep (11 Sep 2026)
+
+Live mobile scores after the redesign were 92 / 94 / 100 / 100 with a CLS of
+0.136 and a 1,462 KB page. Three regressions, all fixed:
+
+- [x] **CLS 0.136 → 0.001.** The redesign moved the fonts to raw TTF in
+      `public/fonts` and they load with `font-display: swap`, so every heading
+      and card grew when Playfair replaced the fallback. Added two
+      metric-matched `@font-face` rules (`--font-heading`/`--font-body` now
+      list `"Playfair Fallback"` before Georgia). The numbers come from
+      measuring both typefaces in a browser rather than the OS/2 table, which
+      was wrong by 16%: Georgia already matches Playfair's width almost
+      exactly, and the shift was entirely vertical.
+- [x] **Fonts 1.6 MB → 378 KB on the homepage.** They shipped as uncompressed
+      TTF. Converted all twelve to WOFF2 (2,179 KB → 743 KB) and subset them
+      to the Latin blocks the archive actually uses (743 KB → 494 KB). All 132
+      characters used across content and UI verified present; the naira sign
+      was already missing from the typeface before subsetting.
+- [x] **Accessibility 94 → 100.** `--color-secondary-600` was used as text in
+      ten places and only reaches 3.99:1 on a light surface (and 4.20:1 on the
+      muted dark one). Added a theme-aware `--text-gold` token: secondary-700
+      in light, secondary-400 in dark, both comfortably past 4.5:1. Footer
+      column headings moved from `h4` to `h2` so the heading order never skips.
+- [x] **Two hub pages lost their inbound links.** Three profiles spelled their
+      causes "Arts and culture" and "Peace and reconciliation" while the hubs
+      were built from the "&" spelling, so those tags fell back to a
+      `/women?cause=` query URL. Normalised; every cause that has a hub now
+      links to it.
+- [x] One article description was 162 characters. Trimmed to 138.
+
+Page weight is now 1,052 KB with CLS 0.001 and a11y 100. The remaining
+`/women?cause=` links are the intended fallback for the 275 causes with fewer
+than three women, and they canonicalise to `/women`.
+
 ## Needs the user
 
 - [~] Real, licensed images for the 19 placeholder profiles: abla-pokou,

@@ -11,7 +11,7 @@ causes:
   - "Girls' education"
   - "Merit over ethnicity"
   - "Women in science"
-  - "Peace and reconciliation"
+  - "Peace & reconciliation"
   - "Protection of civilians"
 image: "/women/agathe-uwilingiyimana.jpg"
 imageCredit: "Author unknown, via BBC Gahuza / fair use (no free image known)"

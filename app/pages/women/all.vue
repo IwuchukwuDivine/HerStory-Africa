@@ -220,7 +220,7 @@ useHead(() => ({
   font-size: 22px;
   font-weight: 900;
   line-height: 1;
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 
 .az__letter-count {

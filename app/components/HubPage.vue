@@ -351,7 +351,7 @@ const otherRows = computed(() => {
   padding: 20px 0 4px;
   font-size: 14px;
   font-weight: 800;
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 
 .hub__divider--first {

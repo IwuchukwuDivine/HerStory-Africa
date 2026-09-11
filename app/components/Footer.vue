@@ -12,7 +12,7 @@
 
       <div class="site-footer__nav">
         <div class="site-footer__col">
-          <h4 class="site-footer__col-title">Explore</h4>
+          <h2 class="site-footer__col-title">Explore</h2>
           <NuxtLink to="/women" class="site-footer__link">All women</NuxtLink>
           <NuxtLink to="/timeline" class="site-footer__link">Timeline</NuxtLink>
           <NuxtLink to="/articles" class="site-footer__link">Articles</NuxtLink>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="site-footer__col">
-          <h4 class="site-footer__col-title">Browse</h4>
+          <h2 class="site-footer__col-title">Browse</h2>
           <NuxtLink to="/women/region/west-africa" class="site-footer__link">West Africa</NuxtLink>
           <NuxtLink to="/women/region/east-africa" class="site-footer__link">East Africa</NuxtLink>
           <NuxtLink to="/women/region/southern-africa" class="site-footer__link">Southern Africa</NuxtLink>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="site-footer__col">
-          <h4 class="site-footer__col-title">Contact</h4>
+          <h2 class="site-footer__col-title">Contact</h2>
           <a
             href="mailto:hello.herstoryafrica@gmail.com"
             class="site-footer__link site-footer__link--contact"
@@ -44,7 +44,7 @@
       </div>
 
       <div class="site-footer__newsletter">
-        <h4 class="site-footer__col-title">Stay in the loop</h4>
+        <h2 class="site-footer__col-title">Stay in the loop</h2>
         <p class="site-footer__newsletter-desc">
           New stories of remarkable African women, straight to your inbox.
         </p>

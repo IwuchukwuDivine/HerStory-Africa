@@ -244,7 +244,7 @@ onMounted(() => {
 }
 
 .opp__meta-item--featured {
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 
 .opp__deck {

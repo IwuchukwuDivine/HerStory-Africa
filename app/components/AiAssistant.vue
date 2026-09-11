@@ -565,7 +565,7 @@ onBeforeUnmount(() => {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1.2;
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 .ai-panel__close {
   flex-shrink: 0;

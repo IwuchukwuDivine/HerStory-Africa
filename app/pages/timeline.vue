@@ -193,7 +193,7 @@ useHead({
   font-size: 14px;
   font-weight: 800;
   line-height: 1;
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }

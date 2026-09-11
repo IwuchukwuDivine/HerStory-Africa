@@ -49,7 +49,7 @@ function leave() {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
   white-space: nowrap;
 }
 

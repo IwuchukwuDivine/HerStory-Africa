@@ -181,7 +181,7 @@ const deadlineClass = computed(() => {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   line-height: 1.2;
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 
 .opp-card__title {
@@ -239,7 +239,7 @@ const deadlineClass = computed(() => {
 }
 
 .opp-card__deadline--soon {
-  color: var(--color-secondary-600);
+  color: var(--text-gold);
 }
 
 .opp-card__deadline--urgent {
