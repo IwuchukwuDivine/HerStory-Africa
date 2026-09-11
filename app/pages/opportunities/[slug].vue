@@ -86,15 +86,27 @@ const categoryLabel = computed(
   () => CATEGORY_LABELS[opp.value?.category as Category] ?? "",
 );
 
+/*
+ * "Days left" depends on the current time, so the prerendered value would be
+ * stale and would not match the first client render. Show the fixed closing
+ * date on the server and switch to the countdown once mounted.
+ */
+const now = ref<number | null>(null);
+onMounted(() => {
+  now.value = Date.now();
+});
+
 const daysLeft = computed(() => {
-  if (!opp.value?.deadline) return null;
-  const diff = new Date(opp.value.deadline).getTime() - Date.now();
+  if (!opp.value?.deadline || now.value === null) return null;
+  const diff = new Date(opp.value.deadline).getTime() - now.value;
   return Math.ceil(diff / (1000 * 60 * 60 * 24));
 });
 
 const deadlineLabel = computed(() => {
   if (!opp.value?.deadline) return "Ongoing";
-  const days = daysLeft.value!;
+  if (daysLeft.value === null)
+    return `Closes ${formatDate(opp.value.deadline)}`;
+  const days = daysLeft.value;
   if (days < 0) return "Expired";
   if (days === 0) return "Last day";
   if (days === 1) return "1 day left";
@@ -104,13 +116,15 @@ const deadlineLabel = computed(() => {
 /* Forest for ongoing, crimson under a week, otherwise muted. */
 const deadlineClass = computed(() => {
   if (!opp.value?.deadline) return "opp__meta-item--ongoing";
-  const days = daysLeft.value!;
+  if (daysLeft.value === null) return "";
+  const days = daysLeft.value;
   if (days >= 0 && days <= 7) return "opp__meta-item--urgent";
   return "";
 });
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
+    timeZone: "UTC",
     year: "numeric",
     month: "long",
     day: "numeric",

@@ -130,11 +130,22 @@ const { data: allOpportunities } = await useAsyncData("opportunities", () =>
 
 type Opportunity = NonNullable<typeof allOpportunities.value>[number];
 
-/** Listings whose deadline has not passed (ongoing ones have no deadline). */
+/*
+ * Listings whose deadline has not passed (ongoing ones have no deadline).
+ * The filter depends on the current time, so it only applies after mount:
+ * otherwise the prerendered list and the first client render disagree.
+ */
+const now = ref<number | null>(null);
+onMounted(() => {
+  now.value = Date.now();
+});
+
 const activeOpportunities = computed(() => {
-  const now = Date.now();
-  return (allOpportunities.value ?? []).filter(
-    (opp) => !opp.deadline || new Date(opp.deadline).getTime() >= now,
+  const all = allOpportunities.value ?? [];
+  if (now.value === null) return all;
+  const current = now.value;
+  return all.filter(
+    (opp) => !opp.deadline || new Date(opp.deadline).getTime() >= current,
   );
 });
 

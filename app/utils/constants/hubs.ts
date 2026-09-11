@@ -137,7 +137,7 @@ const CAUSE_IN_HEADINGS: Record<string, string> = {
   Film: "African women in film",
   Music: "African women in music",
   Literature: "African women in literature",
-  Science: "African women in science",
+  Science: "African women in the sciences",
   "Women in science": "African women in science",
   "Women in academia": "African women in academia",
   "Women in STEM": "African women in STEM",
@@ -145,7 +145,7 @@ const CAUSE_IN_HEADINGS: Record<string, string> = {
   "Military leadership": "African women who led armies",
   "Political leadership": "African women who led nations",
   "Spiritual leadership": "African women who led in faith",
-  "Religious leadership": "African women who led in faith",
+  "Religious leadership": "African women who led congregations",
   "Women's leadership": "African women who led the way",
   "Women's political leadership": "African women who fought for women in power",
   "Women's political participation":
@@ -161,6 +161,19 @@ const CAUSE_IN_HEADINGS: Record<string, string> = {
   "Cultural identity": "African women who defended cultural identity",
   "Cultural diplomacy": "African women in cultural diplomacy",
 };
+
+// Two causes sharing a heading would give their hub pages identical titles,
+// which reads as duplicate content. Fail the build instead.
+const headingsSeen = new Map<string, string>();
+for (const [cause, heading] of Object.entries(CAUSE_IN_HEADINGS)) {
+  const clash = headingsSeen.get(heading);
+  if (clash) {
+    throw new Error(
+      `Duplicate hub heading "${heading}" for causes "${clash}" and "${cause}". Headings must be unique.`,
+    );
+  }
+  headingsSeen.set(heading, cause);
+}
 
 /**
  * Causes that open with a proper noun keep their capital letter when they

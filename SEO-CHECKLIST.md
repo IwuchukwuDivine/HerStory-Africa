@@ -101,6 +101,55 @@ Legend: `[x]` done · `[~]` needs user input
       `_ipx` WebP variants keep `.jpg`/`.png` names so Lighthouse reads them
       as JPEG/PNG (cosmetic; browsers sniff the bytes).
 
+## Post-redesign sweep (11 Sep 2026)
+
+Re-audited every item after the 320-file redesign (reading paths, new OG
+cards, museum-label components, shared format helpers).
+
+**Held up, no action needed:** soft 404s on all six dynamic routes;
+`robots.txt`; sitemap (310 URLs, 20 distinct `lastmod`, utility pages
+excluded, the 4 new reading-path pages picked up by `crawlLinks`); every
+page has one `<h1>`, a canonical, a title ≤ 60 and a description ≤ 160,
+all unique; `noindex` on `/favorites` and `/newsletter/confirmed`;
+24 crawlable profile links on `/women` and 197 on `/women/all`; zero
+`/women?region=` style links anywhere in the built HTML; 246 in-body
+content links, none broken; alt text on every meaningful image (the
+72px face stacks in `ReadingPathCard` use empty alt, which is correct for
+decorative thumbnails); Person and Article JSON-LD intact, with hub and
+path pages gaining `CollectionPage` + `ItemList`; `ipxStatic` images,
+manual-init gtag, `inlineStyles: false`, and the `vercel.json` security
+headers all still in place.
+
+**Two things were broken, both now fixed:**
+
+- [x] **Timezone regression.** The redesign consolidated date formatting into
+      `longDate()` in `app/utils/format.ts` and dropped `timeZone: "UTC"`.
+      Content dates are date-only strings that parse as UTC midnight, so
+      every visitor west of UTC saw the previous day and Vue logged
+      "Hydration completed but contains mismatches". The opportunity
+      countdowns and the expiry filter also went back to reading `Date.now()`
+      during render. Re-pinned to UTC in `format.ts`, the article citation
+      year, and `opportunities/[slug].vue`; countdowns and the expiry filter
+      are client-only again in `OpportunityCard.vue`,
+      `opportunities/[slug].vue` and `opportunities/index.vue`.
+      Verified clean on four page types under `TZ=America/Los_Angeles`.
+- [x] **Duplicate hub titles** (pre-existing, missed in the first review).
+      `Spiritual leadership` and `Religious leadership` both rendered
+      "African women who led in faith"; `Science` and `Women in science` both
+      rendered "African women in science". Headings made distinct, and
+      `hubs.ts` now throws at build time if two causes ever share a heading.
+
+**Open recommendation, needs a content decision:** the cause taxonomy splits
+several topics across competing thin hubs. Anti-colonial activism (14),
+Anti-colonial resistance (9) and Anti-colonialism (4) are three pages for one
+subject; Anti-apartheid resistance (8), Anti-apartheid activism (7) and
+Anti-apartheid (4) likewise; also Healthcare (3) / Healthcare rights (3) /
+Public health (6), and Literature (6) / Scholarship & literature (4).
+24 of the 58 cause hubs have fewer than 5 women. Merging the synonyms in
+profile frontmatter would retire the thin pages and concentrate the ranking
+signal. Listing pages (`/women`, `/articles`, `/timeline`, `/about`,
+`/opportunities`) also still carry no JSON-LD.
+
 ## Needs the user
 
 - [~] Real, licensed images for the 19 placeholder profiles: abla-pokou,

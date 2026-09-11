@@ -179,7 +179,7 @@ const eyebrow = computed(() =>
 
 const articleYear = computed(() => {
   if (!article.value?.date) return "";
-  return new Date(article.value.date).getFullYear();
+  return new Date(article.value.date).getUTCFullYear();
 });
 
 /* ── Body: sources split off, then split once around the first profile link ── */

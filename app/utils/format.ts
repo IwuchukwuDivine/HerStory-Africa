@@ -36,10 +36,20 @@ export function firstName(name: string): string {
   return parts[0] ?? name;
 }
 
-/** "17 March 2026" */
+/**
+ * "17 March 2026". Content dates are date-only strings, which parse as UTC
+ * midnight, so format in UTC: without this a visitor west of UTC renders the
+ * previous day and Vue reports a hydration mismatch against the prerendered
+ * HTML.
+ */
 export function longDate(iso: string | undefined): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  return new Date(iso).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 /** "8 min" from a reading time in minutes. */

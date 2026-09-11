@@ -73,15 +73,32 @@ const categoryLabel = computed(() => categoryMap[props.category].label);
 const categoryColor = computed(() => categoryMap[props.category].color);
 const categoryIcon = computed(() => categoryMap[props.category].icon);
 
+/* Time-dependent, so it is computed only after mount; the server renders the
+   fixed closing date instead. See app/utils/format.ts for the same reasoning. */
+const now = ref<number | null>(null);
+onMounted(() => {
+  now.value = Date.now();
+});
+
+function closingDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 const daysLeft = computed(() => {
-  if (!props.deadline) return null;
-  const diff = new Date(props.deadline).getTime() - Date.now();
+  if (!props.deadline || now.value === null) return null;
+  const diff = new Date(props.deadline).getTime() - now.value;
   return Math.ceil(diff / (1000 * 60 * 60 * 24));
 });
 
 const deadlineLabel = computed(() => {
   if (!props.deadline) return "Ongoing";
-  const days = daysLeft.value!;
+  if (daysLeft.value === null) return `Closes ${closingDate(props.deadline)}`;
+  const days = daysLeft.value;
   if (days < 0) return "Expired";
   if (days === 0) return "Last day";
   if (days === 1) return "1 day left";
@@ -90,7 +107,8 @@ const deadlineLabel = computed(() => {
 
 const deadlineClass = computed(() => {
   if (!props.deadline) return "opp-card__deadline--ongoing";
-  const days = daysLeft.value!;
+  if (daysLeft.value === null) return "";
+  const days = daysLeft.value;
   if (days < 0) return "opp-card__deadline--expired";
   if (days <= 7) return "opp-card__deadline--urgent";
   if (days <= 30) return "opp-card__deadline--soon";
