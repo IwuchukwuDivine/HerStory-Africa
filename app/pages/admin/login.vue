@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "admin" });
+definePageMeta({ layout: "admin-auth" });
 
 const passphrase = ref("");
 const loading = ref(false);
@@ -166,7 +166,7 @@ useHead({ title: "Admin" });
 
 .admin-login__input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-50);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring-default) 20%, transparent);
 }
 
 .admin-login__error {

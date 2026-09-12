@@ -34,6 +34,12 @@ export default defineContentConfig({
         ogFocal: z.string().optional(),
         /** Minutes, set at build by the content:file:afterParse hook in nuxt.config.ts. */
         readingTime: z.number().optional(),
+        /** Body word count, set at build. Content-health signal for /admin/health. */
+        wordCount: z.number().optional(),
+        /** Citations on the trailing `*Sources: …*` line, set at build. */
+        sourceCount: z.number().optional(),
+        /** False when the profile is still on the shared placeholder. Set at build. */
+        hasPortrait: z.boolean().optional(),
       }),
     }),
     articles: defineCollection({

@@ -1,3 +1,6 @@
+// Closes a suggestion for a woman who is already in the archive, pointing the
+// submitter at the profile she already has. Same shape as accept.post.ts, but
+// it sends the "already in the archive" email instead of the acceptance one.
 export default defineEventHandler(async (event) => {
   await requireAdmin(event);
 
@@ -16,7 +19,10 @@ export default defineEventHandler(async (event) => {
   }>(event);
 
   if (!body.profileUrl?.trim()) {
-    throw createError({ statusCode: 400, statusMessage: "Profile URL is required." });
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Profile URL is required.",
+    });
   }
   if (!body.womanName?.trim()) {
     throw createError({ statusCode: 400, statusMessage: "Woman name is required." });
@@ -25,7 +31,7 @@ export default defineEventHandler(async (event) => {
   // Email only when a contact address was actually provided.
   let emailed = false;
   if (body.submitterEmail?.trim()) {
-    await sendAcceptanceEmail({
+    await sendExistsEmail({
       to: body.submitterEmail.trim(),
       name: body.submitterName,
       woman: body.womanName.trim(),

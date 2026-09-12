@@ -136,6 +136,11 @@ export default defineNuxtConfig({
     // Reading time for every profile and article, computed once at build
     // from the Markdown word count (200 words per minute). Stored in the
     // `readingTime` column declared in content.config.ts.
+    //
+    // Profiles also carry three content-health signals for the admin console
+    // (/api/admin/health). They are derived from the body and the filesystem,
+    // neither of which queryCollection can see at request time, so they have
+    // to be frozen here at build.
     "content:file:afterParse"(ctx) {
       if (ctx.file.extension !== ".md") return;
       const name = ctx.collection.name;
@@ -143,6 +148,31 @@ export default defineNuxtConfig({
       const raw = String(ctx.file.body ?? "").replace(/^---[\s\S]*?\r?\n---/, "");
       const words = raw.split(/\s+/).filter(Boolean).length;
       ctx.content.readingTime = Math.max(1, Math.round(words / 200));
+
+      if (name !== "women") return;
+
+      ctx.content.wordCount = words;
+
+      // Every profile ends with a `*Sources: A, B, C*` line. Citations are
+      // comma-separated, but commas also appear inside a single citation
+      // ("Wikipedia (Queen Pokou), Encyclopedia.com"), so parenthesised
+      // commas are masked before the split.
+      const sourceLine = raw.match(/^\*Sources:\s*([\s\S]*?)\*\s*$/m)?.[1];
+      ctx.content.sourceCount = sourceLine
+        ? sourceLine
+            .replace(/\([^)]*\)/g, "")
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean).length
+        : 0;
+
+      // A profile without a real portrait falls back to the shared
+      // placeholder, which is the signal the health view reports on.
+      const image = String(ctx.content.image ?? "");
+      ctx.content.hasPortrait =
+        !!image &&
+        !image.endsWith("/placeholder.svg") &&
+        existsSync(resolve(__dirname, "public", image.replace(/^\//, "")));
     },
     "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) return;
@@ -332,7 +362,16 @@ export default defineNuxtConfig({
 
   // ── Sitemap ─────────────────────────────────────────────────────────
   sitemap: {
-    exclude: ["/admin", "/admin/**"],
+    // One list: a second `exclude` key silently overrode the first, which is
+    // how /admin ended up back in the sitemap after it was added.
+    exclude: [
+      "/admin",
+      "/admin/**",
+      "/favorites",
+      "/newsletter/confirmed",
+      "/newsletter",
+      "/suggest",
+    ],
     defaults: {
       changefreq: "weekly",
       priority: 0.7,
@@ -340,7 +379,6 @@ export default defineNuxtConfig({
     // Per-URL lastmod from content frontmatter; merged by loc with the
     // routes the module discovers from the prerender list.
     urls: contentSitemapUrls,
-    exclude: ["/favorites", "/newsletter/confirmed", "/newsletter", "/suggest"],
     sitemaps: false,
   },
 
