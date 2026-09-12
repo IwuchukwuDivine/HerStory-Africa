@@ -23,6 +23,7 @@
             :key="col.key"
             class="a-table__td"
             :class="col.align === 'end' && 'a-table__cell--end'"
+            :data-label="col.label"
             role="cell"
           >
             <slot :name="`cell-${col.key}`" :row="row">{{ cell(row, col.key) }}</slot>
@@ -117,5 +118,61 @@ const gridStyle = computed(() => ({
 
 .a-table__cell--end {
   text-align: end;
+}
+
+/* Below the tablet breakpoint a 544px-wide grid can only be read by swiping,
+   which on a phone just looks like clipped columns. Each row becomes a card
+   instead: the first cell is its title, the rest are labelled pairs. This
+   mirrors the row-based mobile lists the public site uses. */
+@media (max-width: 767px) {
+  .a-table__scroll {
+    overflow-x: visible;
+  }
+
+  .a-table__grid {
+    display: block;
+    min-width: 0;
+  }
+
+  .a-table__head {
+    display: none;
+  }
+
+  .a-table__row {
+    display: block;
+    padding: 0.75rem 1rem;
+  }
+
+  .a-table__td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.1875rem 0;
+    text-align: start;
+  }
+
+  /* The identifying column reads as the card's heading. */
+  .a-table__td:first-child {
+    display: block;
+    padding: 0 0 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .a-table__td:first-child::before {
+    display: none;
+  }
+
+  .a-table__td::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
 }
 </style>

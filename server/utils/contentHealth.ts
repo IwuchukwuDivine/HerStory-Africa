@@ -1,16 +1,9 @@
-import { queryCollection } from "@nuxt/content/server";
-import type { H3Event } from "h3";
+import snapshot from "herstory-content-snapshot";
 import type {
   AdminHealth,
   AdminHealthFlag,
   AdminHealthRow,
 } from "~/utils/types/admin";
-
-/** Under this many words a profile is a stub rather than a biography. */
-const STUB_WORDS = 150;
-/** Under this it reads as thin but usable. The `shortBio` total counts both
-    bands, so the stat tile and the Bio column always agree. */
-const SHORT_WORDS = 400;
 
 function sourcesFlag(count: number): [AdminHealthFlag, string] {
   if (count === 0) return ["bad", "None"];
@@ -18,37 +11,34 @@ function sourcesFlag(count: number): [AdminHealthFlag, string] {
   return ["ok", "Cited"];
 }
 
-function bioFlag(words: number): [AdminHealthFlag, string] {
-  if (words < STUB_WORDS) return ["bad", "Stub"];
-  if (words < SHORT_WORDS) return ["warn", "Short"];
+function bioFlag(words: number, stub: number, short: number): [AdminHealthFlag, string] {
+  if (words < stub) return ["bad", "Stub"];
+  if (words < short) return ["warn", "Short"];
   return ["ok", "Full"];
 }
 
 /**
- * Content health for every published profile, from the three signals frozen
- * at build by the content:file:afterParse hook in nuxt.config.ts.
+ * Content health for every published profile, read from the build-time
+ * snapshot in nuxt.config.ts. No database: `queryCollection` is unavailable
+ * inside the deployed function, and the archive only changes on deploy.
  *
  * Only profiles that need work are returned as rows — that is what the view
  * is for — while the totals cover the whole archive.
  */
-export async function contentHealth(event: H3Event): Promise<AdminHealth> {
-  const women = await queryCollection(event, "women")
-    .select("slug", "name", "region", "wordCount", "sourceCount", "hasPortrait")
-    .all();
-
+export function contentHealth(): AdminHealth {
   const rows: AdminHealthRow[] = [];
   let noPortrait = 0;
   let singleSource = 0;
   let shortBio = 0;
 
-  for (const w of women) {
-    const words = w.wordCount ?? 0;
-    const [sources, sourceLabel] = sourcesFlag(w.sourceCount ?? 0);
-    const [bio, bioLabel] = bioFlag(words);
+  for (const w of snapshot.women) {
+    const [sources, sourceLabel] = sourcesFlag(w.sourceCount);
+    const [bio, bioLabel] = bioFlag(w.wordCount, w.stubWords, w.shortWords);
     const portrait: AdminHealthFlag = w.hasPortrait ? "ok" : "bad";
 
     if (portrait === "bad") noPortrait++;
     if (sources !== "ok") singleSource++;
+    // Counts both thin bands, so the stat tile and the Bio column agree.
     if (bio !== "ok") shortBio++;
 
     if (portrait === "ok" && sources === "ok" && bio === "ok") continue;
@@ -62,7 +52,7 @@ export async function contentHealth(event: H3Event): Promise<AdminHealth> {
       sourceLabel,
       bio,
       bioLabel,
-      wordCount: words,
+      wordCount: w.wordCount,
     });
   }
 
@@ -80,7 +70,7 @@ export async function contentHealth(event: H3Event): Promise<AdminHealth> {
       noPortrait,
       singleSource,
       shortBio,
-      profiles: women.length,
+      profiles: snapshot.women.length,
     },
     rows,
   };

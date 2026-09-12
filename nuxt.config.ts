@@ -2,6 +2,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
+import { parse as parseYaml } from "yaml";
 
 // ── Content discovery (build-time) ──────────────────────────────────
 // Reads the Markdown collections once at config time so both the
@@ -12,6 +13,7 @@ const contentDir = resolve(__dirname, "app/content");
 interface ContentEntry {
   slug: string;
   frontmatter: string;
+  body: string;
 }
 
 function readContentEntries(collection: string): ContentEntry[] {
@@ -22,8 +24,22 @@ function readContentEntries(collection: string): ContentEntry[] {
     .map((f) => {
       const raw = readFileSync(resolve(dir, f), "utf8");
       const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-      return { slug: f.replace(/\.md$/, ""), frontmatter: match?.[1] ?? "" };
+      return {
+        slug: f.replace(/\.md$/, ""),
+        frontmatter: match?.[1] ?? "",
+        body: raw.replace(/^---[\s\S]*?\r?\n---/, ""),
+      };
     });
+}
+
+/** Frontmatter as an object. YAML, not regex — titles carry colons and quotes. */
+function frontmatterOf(entry: ContentEntry): Record<string, unknown> {
+  try {
+    const parsed = parseYaml(entry.frontmatter);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
 }
 
 function frontmatterDate(frontmatter: string, key: string): string | undefined {
@@ -59,6 +75,81 @@ const contentSitemapUrls = [
   ...opportunityEntries.map((e) => ({ loc: `/opportunities/${e.slug}` })),
   ...pathEntries.map((e) => ({ loc: `/women/path/${e.slug}` })),
 ];
+
+// ── Admin content snapshot (build-time) ─────────────────────────────
+// The admin console reports on the archive: profile counts, missing
+// portraits, uncited profiles, opportunity deadlines. It used to ask
+// `queryCollection` for this at request time, which works when prerendering
+// but 500s inside the deployed function — Nuxt Content's server-side
+// database is not available there.
+//
+// The content is Markdown in this repo, so it only changes on deploy. That
+// makes a build-time snapshot both correct and cheaper than a database: it
+// is frozen into the bundle below as `#content-snapshot`.
+
+/** Under this many words a profile is a stub rather than a biography. */
+const STUB_WORDS = 150;
+/** Under this it reads as thin but usable. */
+const SHORT_WORDS = 400;
+
+const str = (v: unknown) => (typeof v === "string" ? v : "");
+
+function countWords(body: string) {
+  return body.split(/\s+/).filter(Boolean).length;
+}
+
+/**
+ * Citations on the trailing `*Sources: A, B, C*` line. Commas also appear
+ * inside a single citation ("Wikipedia (Queen Pokou), Encyclopedia.com"), so
+ * parenthesised commas are masked before the split.
+ */
+function countSources(body: string) {
+  const line = body.match(/^\*Sources:\s*([\s\S]*?)\*\s*$/m)?.[1];
+  if (!line) return 0;
+  return line
+    .replace(/\([^)]*\)/g, "")
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean).length;
+}
+
+const contentSnapshot = {
+  women: womenEntries.map((entry) => {
+    const fm = frontmatterOf(entry);
+    const image = str(fm.image);
+    const words = countWords(entry.body);
+    return {
+      slug: entry.slug,
+      name: str(fm.name) || entry.slug,
+      region: str(fm.region),
+      dateAdded: str(fm.dateAdded),
+      wordCount: words,
+      sourceCount: countSources(entry.body),
+      // A profile without a real portrait falls back to the shared
+      // placeholder, which is the signal the health view reports on.
+      hasPortrait:
+        !!image &&
+        !image.endsWith("/placeholder.svg") &&
+        existsSync(resolve(__dirname, "public", image.replace(/^\//, ""))),
+      stubWords: STUB_WORDS,
+      shortWords: SHORT_WORDS,
+    };
+  }),
+  articles: articleEntries.map((entry) => ({
+    slug: entry.slug,
+    date: str(frontmatterOf(entry).date),
+  })),
+  opportunities: opportunityEntries.map((entry) => {
+    const fm = frontmatterOf(entry);
+    return {
+      slug: entry.slug,
+      title: str(fm.title) || entry.slug,
+      organization: str(fm.organization),
+      category: str(fm.category),
+      deadline: str(fm.deadline) || null,
+    };
+  }),
+};
 
 const siteUrl = (
   process.env.NUXT_SITE_URL || "https://herstoryafrica.com.ng"
@@ -99,6 +190,12 @@ export default defineNuxtConfig({
   // so every page shipped its styles twice. Link only.
   features: { inlineStyles: false },
   nitro: {
+    // Frozen into the server bundle so the admin endpoints need no database
+    // at request time. See the snapshot comment above.
+    virtual: {
+      "herstory-content-snapshot": () =>
+        `export default ${JSON.stringify(contentSnapshot)}`,
+    },
     prerender: {
       routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
       crawlLinks: true,
@@ -136,11 +233,6 @@ export default defineNuxtConfig({
     // Reading time for every profile and article, computed once at build
     // from the Markdown word count (200 words per minute). Stored in the
     // `readingTime` column declared in content.config.ts.
-    //
-    // Profiles also carry three content-health signals for the admin console
-    // (/api/admin/health). They are derived from the body and the filesystem,
-    // neither of which queryCollection can see at request time, so they have
-    // to be frozen here at build.
     "content:file:afterParse"(ctx) {
       if (ctx.file.extension !== ".md") return;
       const name = ctx.collection.name;
@@ -148,31 +240,6 @@ export default defineNuxtConfig({
       const raw = String(ctx.file.body ?? "").replace(/^---[\s\S]*?\r?\n---/, "");
       const words = raw.split(/\s+/).filter(Boolean).length;
       ctx.content.readingTime = Math.max(1, Math.round(words / 200));
-
-      if (name !== "women") return;
-
-      ctx.content.wordCount = words;
-
-      // Every profile ends with a `*Sources: A, B, C*` line. Citations are
-      // comma-separated, but commas also appear inside a single citation
-      // ("Wikipedia (Queen Pokou), Encyclopedia.com"), so parenthesised
-      // commas are masked before the split.
-      const sourceLine = raw.match(/^\*Sources:\s*([\s\S]*?)\*\s*$/m)?.[1];
-      ctx.content.sourceCount = sourceLine
-        ? sourceLine
-            .replace(/\([^)]*\)/g, "")
-            .split(",")
-            .map((s) => s.trim())
-            .filter(Boolean).length
-        : 0;
-
-      // A profile without a real portrait falls back to the shared
-      // placeholder, which is the signal the health view reports on.
-      const image = String(ctx.content.image ?? "");
-      ctx.content.hasPortrait =
-        !!image &&
-        !image.endsWith("/placeholder.svg") &&
-        existsSync(resolve(__dirname, "public", image.replace(/^\//, "")));
     },
     "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) return;
