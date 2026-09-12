@@ -16,11 +16,12 @@ imageCredit: "Photo: ActuaLitté / CC BY-SA 2.0 via Wikimedia Commons"
 featured: false
 funFact: "She keeps a notebook with the names of her murdered family. 'I write down their names,' she says. 'I have nothing left of my family but that paper grave.'"
 summary: "Rwandan writer who lost 37 members of her family, including her mother, in the 1994 genocide, and turned memory into literature, winning France's Renaudot Prize for Our Lady of the Nile."
+hook: "A paper grave for the thirty-seven relatives she could not bury."
 ---
 
 ## Biography
 
-She keeps a notebook. In it are the names of the dead: her mother Stefania, her pregnant sister Jeanne, thirty-seven members of her family in all, murdered in the Rwandan genocide of 1994 while she was far away in France, unable to save them. "I write down their names," Scholastique Mukasonga has said. "I have nothing left of my family but that paper grave."
+She keeps a notebook. In it are the names of the dead: her mother Stefania, her pregnant sister Jeanne, thirty-seven members of her family in all, murdered in the [Rwandan genocide of 1994](/articles/when-men-go-to-war-women-suffer) while she was far away in France, unable to save them. "I write down their names," Scholastique Mukasonga has said. "I have nothing left of my family but that paper grave."
 
 She was born in 1956 in Gikongoro province, in the hills of southwest Rwanda. She was four when the trucks came. In 1960, her Tutsi family was deported with thousands of others to Nyamata, in the arid scrubland of the Bugesera, a place of dust, hunger and repeated massacres. She grew up a refugee inside her own country. Her mother Stefania held the family together, teaching her daughters the old stories while they weeded the sorghum, guarding a whole culture in exile.
 

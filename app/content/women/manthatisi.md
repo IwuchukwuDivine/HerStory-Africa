@@ -12,10 +12,11 @@ causes:
   - "Women's leadership"
   - "Sovereignty & independence"
 image: "/women/placeholder.svg"
-imageCredit: "No free-use portrait available (pre-photographic era)"
+imageCredit: "No freely licensed portrait exists (pre-photographic era)"
 featured: false
 funFact: "The South African Navy named a submarine SAS Manthatisi after her, a fitting echo of a commander famous for making a small force look like an unstoppable army."
 summary: "Warrior queen and regent of the Batlokwa who led tens of thousands through the upheaval of the Difaqane, becoming the most feared military leader in the southern African interior. Legend turned her into a one-eyed giant; history records a shrewd ruler who once bluffed an entire army into retreat."
+hook: "She lined up the women and a few men waving hoes, and an army retreated."
 ---
 
 ## Biography

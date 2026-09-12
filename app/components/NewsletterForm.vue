@@ -1,27 +1,29 @@
 <template>
-  <form v-if="!success" class="newsletter-form" @submit.prevent="subscribe">
+  <form v-if="!success" class="newsletter-form" novalidate @submit.prevent="subscribe">
     <div class="newsletter-form__field">
       <input
         v-model="email"
         type="email"
         :placeholder="placeholder"
         aria-label="Your email address"
+        autocomplete="email"
         required
         class="newsletter-form__input"
         :class="{ 'newsletter-form__input--invalid': showValidationError }"
         :disabled="loading"
+        :aria-invalid="showValidationError ? 'true' : undefined"
         @blur="touched = true"
-      />
+      >
       <button
         type="submit"
         class="newsletter-form__btn"
+        :class="{ 'newsletter-form__btn--loading': loading }"
         :disabled="loading || !isValidEmail"
       >
-        <LucideLoader2
-          v-if="loading"
-          :size="16"
-          class="newsletter-form__spinner"
-        />
+        <template v-if="loading">
+          <LucideLoaderCircle :size="16" class="newsletter-form__spinner" />
+          Subscribing…
+        </template>
         <template v-else>Subscribe</template>
       </button>
     </div>
@@ -34,8 +36,7 @@
   </form>
 
   <div v-else class="newsletter-form__success" aria-live="polite">
-    <LucideCheck v-if="alreadySubscribed" :size="20" class="newsletter-form__check" />
-    <LucideMail v-else :size="20" class="newsletter-form__check" />
+    <LucideCheck :size="16" class="newsletter-form__check" />
     <p>{{ successMessage }}</p>
   </div>
 </template>
@@ -72,11 +73,15 @@ const showValidationError = computed(
 
 const successMessage = computed(() =>
   alreadySubscribed.value
-    ? "You're already part of the family!"
+    ? "You're already part of the family."
     : "Check your email to confirm your subscription.",
 );
 
 async function subscribe() {
+  if (!isValidEmail.value) {
+    touched.value = true;
+    return;
+  }
   error.value = "";
   loading.value = true;
 
@@ -108,20 +113,21 @@ async function subscribe() {
 <style scoped>
 .newsletter-form__field {
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
   width: 100%;
 }
 
 .newsletter-form__input {
   flex: 1;
   min-width: 0;
-  padding: 0.75rem 1rem;
-  font-size: 0.9375rem;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 15px;
   font-family: var(--font-body);
   color: var(--text-primary);
   background: var(--surface-elevated);
-  border: 1px solid var(--border-default);
-  border-radius: 0.5rem;
+  border: 1.5px solid var(--border-default);
+  border-radius: 8px;
   transition: border-color 0.15s ease;
 }
 
@@ -130,27 +136,37 @@ async function subscribe() {
 }
 
 .newsletter-form__input:focus {
-  border-color: var(--color-primary);
+  border-color: var(--ring-default);
+  outline: 2px solid var(--ring-default);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
-.newsletter-form__input--invalid {
-  border-color: var(--color-crimson);
+.newsletter-form__input:disabled {
+  color: var(--text-muted);
+}
+
+.newsletter-form__input--invalid,
+.newsletter-form__input--invalid:focus {
+  border-color: #e03232;
 }
 
 .newsletter-form__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.375rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9375rem;
+  gap: 8px;
+  height: 48px;
+  padding: 0 18px;
+  font-size: 15px;
   font-weight: 600;
   font-family: var(--font-body);
   white-space: nowrap;
   color: var(--text-on-primary);
   background: var(--color-primary);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
   transition:
     background 0.15s ease,
     opacity 0.15s ease;
@@ -165,29 +181,38 @@ async function subscribe() {
   cursor: not-allowed;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.newsletter-form__btn--loading:disabled {
+  opacity: 0.7;
+  cursor: progress;
 }
 
 .newsletter-form__spinner {
   animation: spin 0.8s linear infinite;
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .newsletter-form__error {
-  font-size: 0.8125rem;
-  color: var(--color-crimson);
-  margin: 0.5rem 0 0;
+  font-size: 13px;
+  color: #e03232;
+  margin: 6px 0 0;
 }
 
 .newsletter-form__success {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9375rem;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: color-mix(in srgb, #2d8a52 12%, var(--surface));
+  color: #2d8a52;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--color-forest);
 }
 
 .newsletter-form__success p {

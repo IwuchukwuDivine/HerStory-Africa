@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / CC BY-SA 3.0"
 featured: true
 funFact: "Kept the anti-apartheid movement alive inside South Africa during Nelson Mandela's 27-year imprisonment"
 summary: "South African anti-apartheid activist who kept resistance alive inside the country while Nelson Mandela was imprisoned for 27 years. Known as the 'Mother of the Nation.'"
+hook: "Banished to Brandfort, she turned the house into a clinic and a crèche."
 ---
 
 ## Biography

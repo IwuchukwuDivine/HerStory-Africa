@@ -1,11 +1,17 @@
 ---
 title: "The Aba Women's War: When Nigerian Women Took On the British Empire"
 description: "The story of how thousands of women in southeastern Nigeria organised one of the largest anti-colonial uprisings in African history in 1929."
+seoTitle: "The Aba Women's War of 1929 Explained"
+seoDescription: "How thousands of Igbo women in southeastern Nigeria rose against British colonial rule in 1929, what caused the uprising, and what it changed afterwards."
 date: 2026-03-08
 slug: the-aba-womens-war
 category: "History"
 image: "/articles/the-aba-womens-war.jpg"
 imageCredit: "Women of southeastern Nigeria, c. 1929 / Public Domain"
+women:
+  - nwanyeruwa
+  - margaret-ekpo
+  - funmilayo-ransome-kuti
 ---
 
 In November 1929, thousands of women in southeastern Nigeria rose up against the British colonial government. They did not use weapons. They used their voices, their bodies, and their collective power. What followed was one of the largest and most significant women-led revolts in modern African history. The British called it the "Aba Women's Riots." The women who lived it called it Ogu Umunwaanyi, meaning "the Women's War."
@@ -18,7 +24,7 @@ The British had introduced a system of indirect rule, which meant they governed 
 
 In 1928, the colonial government conducted a census of men and their property. When the same kind of counting started happening with women in late 1929, rumours spread quickly: the government was going to start taxing women too. For women who were already struggling under colonial exploitation, this was the breaking point.
 
-The trigger came on November 23, 1929, when a Warrant Chief named Mark Emeruwa sent a man named Okugo to count the women and their property in the town of Oloko, near Aba. A woman named Nwanyeruwa was at home making palm oil when Okugo arrived and told her to count her goats, sheep, and people. She was furious. She confronted him, asking: "Was your mother counted?"
+The trigger came in late November 1929, in the town of Oloko, near Aba. A widow named [Nwanyeruwa](/women/nwanyeruwa) was in her compound making palm oil when Mark Emeruwa, an agent of Warrant Chief Okugo, told her to count her goats, sheep, and people. She refused. She asked him whether his own widowed mother had been counted.
 
 That confrontation lit the match.
 

@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: true
 funFact: "Cut counterfeit drugs in Nigeria from 70% to under 20% and survived multiple assassination attempts"
 summary: "NAFDAC Director-General who cut counterfeit drugs in Nigeria from roughly 70% to under 20%. Survived assassination attempts; later Minister of Information."
+hook: "A counterfeit insulin shot killed her sister in 1988, and the fake-drug trade paid for it."
 ---
 
 ## Biography

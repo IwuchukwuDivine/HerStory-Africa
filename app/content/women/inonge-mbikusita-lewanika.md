@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Inonge Mbikusita-Lewanika served as Zambia's Ambassador to both the United States and Ethiopia while championing multiparty democracy."
 summary: "Zambian politician and diplomat. MP and minister; Ambassador to the US and to Ethiopia; advocate for women's rights and multiparty democracy in Zambia."
+hook: "From Zambia's cabinet to its embassies in Washington and Addis Ababa."
 ---
 
 ## Biography
@@ -27,11 +28,11 @@ She was **Zambia’s Ambassador to the United States** and later **Ambassador to
 
 ## Historical Context
 
-Zambia gained independence in 1964. After decades of one-party rule, the move to multiparty politics in the 1990s opened space for figures like Mbikusita-Lewanika to combine ministerial and diplomatic roles with advocacy for gender equality and governance.
+Zambia gained independence in 1964. After decades of one-party rule, the move to multiparty politics in the 1990s opened space for figures like Mbikusita-Lewanika to combine ministerial and diplomatic roles with advocacy for [gender equality](/articles/what-does-gender-equality-look-like) and governance.
 
 ## What She Fought For
 
-Inonge Mbikusita-Lewanika has fought for **women’s representation** in politics and public life, for **democratic governance**, and for **development** that includes women and rural communities. She has represented Zambia internationally and has worked with regional and global bodies on gender and governance.
+Inonge Mbikusita-Lewanika has fought for **[women’s representation](/articles/why-representation-matters)** in politics and public life, for **democratic governance**, and for **development** that includes women and rural communities. She has represented Zambia internationally and has worked with regional and global bodies on gender and governance.
 
 ## Major Achievements
 

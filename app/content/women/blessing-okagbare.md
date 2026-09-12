@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Blessing Okagbare is one of Africa's most decorated track and field athletes, with medals at both the Olympics and World Championships."
 summary: "Nigerian sprinter and long jumper; Olympic and World Championships medallist. One of Africa's most decorated track and field athletes; advocate for clean sport."
+hook: "Olympic long jump bronze at 19, then a Commonwealth sprint double in Glasgow in 2014."
 ---
 
 ## Biography

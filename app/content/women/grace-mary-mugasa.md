@@ -18,6 +18,7 @@ imageCredit: "CENTURY MEDIA / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "Residents of Hoima nicknamed her the Iron Lady for her zero-tolerance stance on garbage, disorder and unplanned construction while she pushed the town into city status."
 summary: "Ugandan politician and the first woman to serve as Mayor of Hoima, who guided the oil-rich municipality through its elevation to city status and later became a State Minister while championing gender equality and clean urban environments."
+hook: "Hoima's Iron Lady, ten years as mayor and a town turned oil city in 2020."
 ---
 
 ## Biography
@@ -26,7 +27,7 @@ Grace Mary Mugasa was born on 28 December 1968 in Munteme, Hoima District, in we
 
 In 2001 she entered elective politics as Woman Councillor for the Northern Ward of Hoima Town Council. She served ten years, chairing the Water Board and handling social services. When the town was upgraded to municipality status in 2010, she contested the mayoral seat against experienced male rivals and won, becoming Hoima’s first female mayor in 2011. Voters returned her in 2016. During her decade in office she earned the nickname “Hoima’s Iron Lady” for her firm insistence on orderly urban growth, clean streets and planned construction. She oversaw the rehabilitation of municipal headquarters and major road works under the World Bank-supported USMID programme. In July 2020 she guided Hoima through its formal elevation to city status, the only oil city in Uganda at the time.
 
-Beyond Uganda she co-founded the Global Parliament of Mayors in 2016 and later served as Second Vice-Chair of its Daily Board. In June 2021 President Yoweri Museveni appointed her State Minister for Public Service. She continues to speak on women’s economic empowerment, mentoring female leaders and the need for both women and men to advance together.
+Beyond Uganda she co-founded the Global Parliament of Mayors in 2016 and later served as Second Vice-Chair of its Daily Board. In June 2021 President Yoweri Museveni appointed her State Minister for Public Service. She continues to speak on [women’s economic empowerment](/articles/why-economic-independence-changes-everything), mentoring female leaders and the need for both women and men to advance together.
 
 ## Historical Context
 

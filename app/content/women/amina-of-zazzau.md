@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Queen Amina statue, Lagos / Public Domain"
 featured: true
 funFact: "Built fortified earthwork walls across West Africa still visible today — known as 'Amina's Walls'"
 summary: "16th-century warrior queen of Zazzau (modern Zaria, Kaduna State, Nigeria). Led 34 years of military campaigns, expanded the Hausa kingdom's territory to its largest ever extent, and built the defensive earthwork walls still called 'Amina's walls' today. The most celebrated female military leader in West African history."
+hook: "Thirty-four years of campaigns and walls that still carry her name."
 ---
 
 ## Biography

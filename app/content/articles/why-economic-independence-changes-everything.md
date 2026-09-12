@@ -1,6 +1,8 @@
 ---
 title: "Why Economic Independence Changes a Woman's Life"
 description: "How having your own money transforms a woman's choices, safety, and future, and why financial empowerment is at the heart of gender equality."
+seoTitle: "Why Economic Independence Changes a Woman's Life"
+seoDescription: "How earning and controlling her own money changes a woman's choices, safety, and future, and why financial power sits at the heart of gender equality."
 date: 2026-03-08
 slug: why-economic-independence-changes-everything
 category: "Why It Matters"

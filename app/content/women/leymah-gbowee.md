@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
 funFact: "Organized a women's sex strike that helped end Liberia's devastating second civil war"
 summary: "Liberian peace activist who organised women across religious lines to end the Second Liberian Civil War through non-violent protest, including a sex strike that made international headlines."
+hook: "In 2003 her women locked Liberia's peace negotiators in until they signed."
 ---
 
 ## Biography
@@ -39,7 +40,7 @@ When negotiations between Taylor's government and rebel factions stalled in Ghan
 
 They did not walk out. The deal was signed.
 
-Her activism helped pave the way for a free election in 2005, which Ellen Johnson Sirleaf won, making her Africa's first female head of state.
+Her activism helped pave the way for a free election in 2005, which [Ellen Johnson Sirleaf](/women/ellen-johnson-sirleaf) won, making her Africa's first female head of state.
 
 ## Major Achievements
 

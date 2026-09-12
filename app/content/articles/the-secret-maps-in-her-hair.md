@@ -1,6 +1,8 @@
 ---
 title: "The Secret Maps in Her Hair: How African Braids Carried Messages, Maps, and Freedom"
 description: "Before there were letters or phones, African women were sending messages through braided patterns in their hair. Some of those patterns even mapped the way to freedom."
+seoTitle: "How African Braids Carried Messages and Maps"
+seoDescription: "For thousands of years African women used braids to signal identity, status, and rank. Under slavery, some patterns even mapped escape routes to freedom."
 date: 2026-03-26
 slug: the-secret-maps-in-her-hair
 category: "History"

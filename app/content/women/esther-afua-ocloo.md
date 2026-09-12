@@ -16,6 +16,7 @@ image: "/women/esther-afua-ocloo.jpg"
 featured: false
 funFact: "Esther Afua Ocloo co-founded Women's World Banking, pioneering microfinance to ensure poor women across the globe had access to credit."
 summary: "Ghanaian entrepreneur and pioneer of microfinance who co-founded Women's World Banking, dedicating her life to ensuring poor women had access to credit and economic opportunity."
+hook: "From a ten-shilling loan for marmalade to the first chair of Women's World Banking."
 ---
 
 ## Biography

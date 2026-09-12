@@ -17,11 +17,12 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Hafsat Abiola founded the Kudirat Initiative for Democracy (KIND), naming it after her mother who was assassinated for her pro-democracy activism."
 summary: "Human rights and democracy activist who founded the Kudirat Initiative for Democracy (KIND) in honour of her mother. Advocates for women's political leadership and civil society."
+hook: "She lost both parents to the June 12 struggle and founded KIND in her mother's name."
 ---
 
 ## Biography
 
-Hafsat Olaronke Abiola-Costello was born on 21 August 1974 in Lagos, Nigeria, the eighth child of Moshood (MKO) Abiola and Kudirat Abiola. She was educated at Queens College Lagos, Phillips Academy Andover, and Harvard College, where she studied development economics. She later earned an M.Sc. in International Development from Tsinghua University in Beijing.
+Hafsat Olaronke Abiola-Costello was born on 21 August 1974 in Lagos, Nigeria, the eighth child of Moshood (MKO) Abiola and [Kudirat Abiola](/women/kudirat-abiola). She was educated at Queens College Lagos, Phillips Academy Andover, and Harvard College, where she studied development economics. She later earned an M.Sc. in International Development from Tsinghua University in Beijing.
 
 Her parents’ struggle defined her youth: her father won the 12 June 1993 presidential election but was imprisoned when the result was annulled; her mother, Kudirat Abiola, led the campaign for his release and for democracy until she was assassinated in 1996.
 

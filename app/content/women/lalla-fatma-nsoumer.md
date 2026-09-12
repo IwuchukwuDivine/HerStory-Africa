@@ -16,6 +16,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Lalla Fatma N'Soumer commanded Kabyle forces against the French colonial invasion in the 1850s, becoming one of North Africa's most celebrated anti-colonial warriors."
 summary: "Algerian resistance leader who commanded Kabyle forces against the French colonial invasion in the 1850s, becoming one of North Africa's most celebrated anti-colonial warriors."
+hook: "She refused marriage, then commanded Kabyle fighters against the French at Icheriden."
 ---
 
 ## Biography

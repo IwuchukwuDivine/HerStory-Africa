@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: true
 funFact: "Kudirat Abiola was assassinated in Lagos in 1996 for leading the campaign to restore Nigeria's annulled 1993 presidential election."
 summary: "Pro-democracy activist who led the campaign for her husband's release and for the restoration of the annulled 1993 election. Assassinated in Lagos in 1996."
+hook: "Shot dead in Lagos in 1996 for demanding the June 12 mandate be honoured."
 ---
 
 ## Biography
@@ -38,7 +39,7 @@ Kudirat Abiola fought for **the recognition of the June 12 mandate**, for **her 
 - Led national and international campaign for the restoration of the 1993 election and release of MKO Abiola
 - Key figure in the pro-democracy movement under military rule
 - Remembered as a martyr for democracy; her assassination drew global condemnation
-- Daughter Hafsat Abiola founded the **Kudirat Initiative for Democracy (KIND)** in her memory
+- Daughter [Hafsat Abiola](/women/hafsat-abiola) founded the **Kudirat Initiative for Democracy (KIND)** in her memory
 
 ## Her Impact Today
 

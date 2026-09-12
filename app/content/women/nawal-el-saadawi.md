@@ -18,6 +18,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Nawal El Saadawi authored over 50 books translated into more than 30 languages, earning her the title 'the Simone de Beauvoir of the Arab world.'"
 summary: "Egyptian feminist writer, psychiatrist, and activist who spent five decades fighting patriarchy, religious conservatism, and female genital mutilation at great personal cost: losing her job, being imprisoned, and living under death threats. Author of over 50 books translated into more than 30 languages. Called 'the Simone de Beauvoir of the Arab world.'"
+hook: "One 1972 book on women and sex cost her a ministry job, and she wrote fifty more."
 ---
 
 ## Biography
@@ -28,7 +29,7 @@ She trained as a physician at Cairo University, graduating in 1955, and went on 
 
 ## Historical Context
 
-Egypt in the 1950s–1970s was undergoing rapid modernisation under Nasser and Sadat, but the position of women, particularly regarding sexuality, bodily autonomy, and political participation, remained profoundly constrained. Religious conservatism and patriarchal norms were deeply embedded in law, medicine, and culture. FGM was widely practised and rarely discussed publicly. Women who raised these issues did so at serious professional and personal risk.
+Egypt in the 1950s–1970s was undergoing rapid modernisation under Nasser and Sadat, but the position of women, particularly regarding sexuality, bodily autonomy, and political participation, remained profoundly constrained. Religious conservatism and [patriarchal norms](/articles/what-is-patriarchy) were deeply embedded in law, medicine, and culture. FGM was widely practised and rarely discussed publicly. Women who raised these issues did so at serious professional and personal risk.
 
 Nawal El Saadawi raised them anyway.
 

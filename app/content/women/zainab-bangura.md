@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Zainab Bangura served as the UN Special Representative on Sexual Violence in Conflict after holding both the Health and Foreign Affairs portfolios in Sierra Leone."
 summary: "Sierra Leonean politician and UN official. Former Minister of Health and Foreign Affairs; UN Special Representative on Sexual Violence in Conflict; advocate for women and peace."
+hook: "The UN's envoy on rape as a weapon of war, from a country that had lived it."
 ---
 
 ## Biography

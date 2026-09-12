@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Tiwa Savage became the first Nigerian woman ever to win an MTV Europe Music Award."
 summary: "Nigerian singer-songwriter and actress; one of the leading women in Afrobeats. First Nigerian woman to win MTV EMA; advocate for women in music and entertainment."
+hook: "First Nigerian woman to take home an MTV Europe Music Award, in 2018."
+ogFocal: "50% 10%"
 ---
 
 ## Biography
@@ -31,7 +33,7 @@ Afrobeats has become a global phenomenon, but the industry has often been male-d
 
 ## What She Fought For
 
-Tiwa Savage has fought for **women’s place in Afrobeats** and for **fair treatment** of female artists. She has used her platform to speak about gender, ambition, and representation and has supported younger women in the industry.
+Tiwa Savage has fought for **women’s place in Afrobeats** and for **fair treatment** of female artists. She has used her platform to speak about gender, ambition, and [representation](/articles/why-representation-matters) and has supported younger women in the industry.
 
 ## Major Achievements
 

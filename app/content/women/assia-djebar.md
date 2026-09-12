@@ -12,11 +12,12 @@ causes:
   - "Women's rights"
   - "Freedom of expression"
   - "Cultural identity"
-image: "/women/placeholder.svg"
-imageCredit: ""
+image: "/women/assia-djebar.jpg"
+imageCredit: "Michel-georges bernard, c.1992 / Wikimedia Commons / CC BY-SA 3.0"
 featured: false
 funFact: "Assia Djebar was both the first Algerian woman admitted to the prestigious École Normale Supérieure in Paris and one of the rare authors elected to the Académie Française in 2005."
 summary: "Algerian novelist and filmmaker born Fatima-Zohra Imalayen in Cherchell. The first Algerian woman admitted to the Ecole Normale Superieure in Paris, she wrote about Algerian women's silenced histories, war, colonialism, and identity. Elected to the Academie Francaise in 2005."
+hook: "Wrote in the coloniser's French to record the Algerian women it never wanted heard."
 ---
 
 ## Biography

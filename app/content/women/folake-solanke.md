@@ -12,11 +12,13 @@ causes:
   - "Women's rights"
   - "Education"
   - "Representation"
-image: "/women/placeholder.svg"
-imageCredit: "Image needed"
+image: "/women/folake-solanke.jpg"
+imageCredit: "Southern Nigerian Defender, 26 August 1958 / Wikimedia Commons / Public domain (Nigeria)"
 featured: false
 funFact: "Folake Solanke earned the distinction of being the very first woman to be conferred the title of Senior Advocate of Nigeria (SAN), the country's highest rank for legal practitioners."
 summary: "Nigerian lawyer; first female Senior Advocate of Nigeria (SAN). Pioneer for women in the legal profession; advocate for education and women's advancement."
+hook: "In 1981 she became the first woman ever named a Senior Advocate of Nigeria."
+ogFocal: "50% 10%"
 ---
 
 ## Biography

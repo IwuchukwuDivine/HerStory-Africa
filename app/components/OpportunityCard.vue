@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="`/opportunities/${slug}`"
-    class="opp-card"
+    class="card opp-card"
     :class="{ 'opp-card--featured': featured }"
   >
     <div class="opp-card__top">
@@ -9,7 +9,7 @@
         <component :is="categoryIcon" :size="14" />
         {{ categoryLabel }}
       </span>
-      <span v-if="featured" class="opp-card__featured-badge">
+      <span v-if="featured" class="tint-gold opp-card__featured-badge">
         <LucideStar :size="12" />
         Featured
       </span>
@@ -58,7 +58,7 @@ const categoryMap = {
   },
   job: {
     label: "Job / Internship",
-    color: "var(--color-secondary)",
+    color: "var(--color-secondary-600)",
     icon: Briefcase,
   },
   grant: { label: "Grant", color: "var(--color-primary)", icon: Coins },
@@ -73,24 +73,42 @@ const categoryLabel = computed(() => categoryMap[props.category].label);
 const categoryColor = computed(() => categoryMap[props.category].color);
 const categoryIcon = computed(() => categoryMap[props.category].icon);
 
+/* Time-dependent, so it is computed only after mount; the server renders the
+   fixed closing date instead. See app/utils/format.ts for the same reasoning. */
+const now = ref<number | null>(null);
+onMounted(() => {
+  now.value = Date.now();
+});
+
+function closingDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 const daysLeft = computed(() => {
-  if (!props.deadline) return null;
-  const diff = new Date(props.deadline).getTime() - Date.now();
+  if (!props.deadline || now.value === null) return null;
+  const diff = new Date(props.deadline).getTime() - now.value;
   return Math.ceil(diff / (1000 * 60 * 60 * 24));
 });
 
 const deadlineLabel = computed(() => {
   if (!props.deadline) return "Ongoing";
-  const days = daysLeft.value!;
+  if (daysLeft.value === null) return `Closes ${closingDate(props.deadline)}`;
+  const days = daysLeft.value;
   if (days < 0) return "Expired";
-  if (days === 0) return "Last day!";
+  if (days === 0) return "Last day";
   if (days === 1) return "1 day left";
   return `${days} days left`;
 });
 
 const deadlineClass = computed(() => {
   if (!props.deadline) return "opp-card__deadline--ongoing";
-  const days = daysLeft.value!;
+  if (daysLeft.value === null) return "";
+  const days = daysLeft.value;
   if (days < 0) return "opp-card__deadline--expired";
   if (days <= 7) return "opp-card__deadline--urgent";
   if (days <= 30) return "opp-card__deadline--soon";
@@ -102,70 +120,72 @@ const deadlineClass = computed(() => {
 .opp-card {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 16px;
   background: var(--surface-elevated);
-  border: 1.5px solid var(--border-light);
+  box-shadow: var(--shadow-card);
   text-decoration: none;
   color: inherit;
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.opp-card:hover {
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-soft);
+@media (hover: hover) {
+  .opp-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+  }
 }
 
+.opp-card:active {
+  transform: scale(0.98);
+}
+
+/* Featured cards sit on the gold tint, which flips with the theme. */
 .opp-card--featured {
-  border-color: var(--color-secondary);
-  background: linear-gradient(
-    135deg,
-    var(--surface-elevated) 80%,
-    color-mix(in srgb, var(--color-secondary) 6%, transparent)
-  );
-}
-
-.opp-card--featured:hover {
-  border-color: var(--color-secondary);
+  background: color-mix(in srgb, var(--color-secondary) 18%, var(--surface));
 }
 
 .opp-card__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .opp-card__category {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
   font-weight: 600;
-  border-radius: 9999px;
-  background: color-mix(in srgb, var(--cat) 10%, transparent);
-  color: var(--cat);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  line-height: 1.2;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--cat) 14%, var(--surface));
+  color: var(--cat);
 }
 
 .opp-card__featured-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.6875rem;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--color-secondary);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: var(--text-gold);
 }
 
 .opp-card__title {
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
@@ -175,19 +195,20 @@ const deadlineClass = computed(() => {
 .opp-card__org {
   display: flex;
   align-items: center;
-  gap: 0.375rem;
-  font-size: 0.8125rem;
+  gap: 6px;
+  font-size: 13px;
   color: var(--text-muted);
-  margin: -0.25rem 0 0;
+  margin: -4px 0 0;
 }
 
 .opp-card__desc {
-  font-size: 0.9375rem;
+  font-size: 15px;
   line-height: 1.55;
   color: var(--text-secondary);
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -196,16 +217,16 @@ const deadlineClass = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 12px;
   margin-top: auto;
-  padding-top: 0.5rem;
+  padding-top: 8px;
 }
 
 .opp-card__deadline {
   display: flex;
   align-items: center;
-  gap: 0.375rem;
-  font-size: 0.8125rem;
+  gap: 6px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -218,7 +239,7 @@ const deadlineClass = computed(() => {
 }
 
 .opp-card__deadline--soon {
-  color: var(--color-secondary);
+  color: var(--text-gold);
 }
 
 .opp-card__deadline--urgent {
@@ -231,14 +252,24 @@ const deadlineClass = computed(() => {
 }
 
 .opp-card__arrow {
+  display: flex;
   color: var(--text-muted);
   transition:
     transform 0.2s ease,
     color 0.2s ease;
 }
 
-.opp-card:hover .opp-card__arrow {
-  transform: translateX(3px);
-  color: var(--color-primary);
+@media (hover: hover) {
+  .opp-card:hover .opp-card__arrow {
+    transform: translateX(3px);
+    color: var(--color-primary);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opp-card,
+  .opp-card__arrow {
+    transition: none;
+  }
 }
 </style>

@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / World Economic Forum / CC BY-SA 2.0"
 featured: true
 funFact: "Obiageli Ezekwesili co-launched the #BringBackOurGirls campaign in 2014, turning the Chibok kidnappings into a global movement that changed how the world talks about violence against girls."
 summary: "Nigerian economist, public servant, and global advocate for education and accountability. Co-founder of Transparency International Nigeria, Vice President of the World Bank for Africa, and Nigeria's Federal Minister of Education. Co-launched the #BringBackOurGirls campaign in 2014 after the Chibok kidnappings, a global movement that changed how the world talks about violence against girls."
+hook: "When 276 girls were taken from Chibok, she marched in Abuja and the world followed."
 ---
 
 ## Biography
@@ -58,7 +59,7 @@ In 2019, she ran for President of Nigeria.
 
 ## Her Impact Today
 
-Obiageli Ezekwesili remains one of the most prominent advocates for accountability, education, and child rights in Africa. The Chibok girls were never fully returned, but the campaign she helped ignite changed the global conversation around girls' education and Boko Haram's campaign of violence. She continues to speak, write, and campaign, refusing to allow the Nigerian government or the international community to move on.
+Obiageli Ezekwesili remains one of the most prominent advocates for accountability, education, and child rights in Africa. The Chibok girls were never fully returned, but the campaign she helped ignite changed the global conversation around [girls' education](/articles/why-educating-girls-changes-everything) and Boko Haram's campaign of violence. She continues to speak, write, and campaign, refusing to allow the Nigerian government or the international community to move on.
 
 ---
 

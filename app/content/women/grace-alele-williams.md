@@ -17,11 +17,12 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Grace Alele-Williams became the first woman to serve as Vice-Chancellor of any Nigerian university, shattering a barrier that had been exclusively held by men."
 summary: "Nigerian mathematician and the first woman to become a Vice-Chancellor of a Nigerian university. She spent her life fighting for girls to study mathematics and science at a time when most people believed those subjects were not for women."
+hook: "In 1985 she became the first woman to run a Nigerian university, at Benin."
 ---
 
 ## Biography
 
-Grace Alele-Williams was born on 16 September 1932 in Warri, Delta State, Nigeria. She grew up at a time when very few girls in Nigeria had the opportunity to pursue education beyond primary school, let alone go to university. She was determined to break that pattern.
+Grace Alele-Williams was born on 16 September 1932 in Warri, Delta State, Nigeria. She grew up at a time when very few [girls in Nigeria had the opportunity to pursue education](/articles/why-educating-girls-changes-everything) beyond primary school, let alone go to university. She was determined to break that pattern.
 
 She studied mathematics at the University of Ibadan, then went to the University of Vermont in the United States for further studies, and later earned her PhD in mathematics education from the University of Chicago in 1963. She was one of the very few Nigerian women to hold a doctorate at that time.
 

@@ -1,6 +1,8 @@
 ---
 title: "The Dahomey Amazons: Africa's All-Female Army"
 description: "The story of the Mino, a feared all-female military regiment in the Kingdom of Dahomey that challenged European armies and rewrote what women in combat could look like."
+seoTitle: "The Dahomey Amazons: Africa's All-Female Army"
+seoDescription: "The story of the Mino, Dahomey's all-female regiment: how they began, how brutally they trained, and how they fought European armies for nearly 200 years."
 date: 2026-03-08
 slug: the-dahomey-amazons
 category: "History"

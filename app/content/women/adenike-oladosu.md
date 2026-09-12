@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Elevate Festival / CC BY 2.0"
 featured: false
 funFact: "Adenike Oladosu became the first African woman to lead a Fridays for Future climate strike, focusing global attention on the Lake Chad crisis affecting 40 million people."
 summary: "Nigerian climate activist and the first African woman to lead a Fridays for Future climate strike. Campaigns tirelessly for the drying Lake Chad basin, a slow-moving environmental disaster affecting 40 million people across four countries. Named one of the most influential climate voices of her generation."
+hook: "Africa's first Fridays for Future strike, held in Ilorin in 2019 for a dying lake."
 ---
 
 ## Biography

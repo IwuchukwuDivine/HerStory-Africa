@@ -18,6 +18,8 @@ imageCredit: "Frank Schwichtenberg / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "Her breakthrough album Moussolou sold more than 200,000 legal copies in West Africa alone and was so ubiquitous in Bamako that people joked you could not escape it."
 summary: "Malian Wassoulou singer known as the Songbird of Wassoulou who has used her voice since the late 1980s to challenge forced marriage, polygamy and the silencing of women, while building an international career that includes a Grammy and a sample on Beyoncé’s Lion King project."
+hook: "A 1989 cassette about polygamy and forced marriage that nobody in Bamako could escape."
+ogFocal: "50% 10%"
 ---
 
 ## Biography
@@ -36,7 +38,7 @@ She arrived on the international stage at a moment when “world music” was be
 
 ## What She Fought For
 
-Oumou has said she sings to avenge the wrongs inflicted on her mother. Her songs name the things women were not supposed to name: the pain of sharing a husband, the loss of childhood to early marriage, the quiet dignity of mothers who raise children alone. She has also spoken against female genital mutilation and for the economic independence of women.
+Oumou has said she sings to avenge the wrongs inflicted on her mother. Her songs name the things women were not supposed to name: the pain of sharing a husband, the loss of childhood to early marriage, the quiet dignity of mothers who raise children alone. She has also spoken against female genital mutilation and for the [economic independence](/articles/why-economic-independence-changes-everything) of women.
 
 She never claimed to be inventing feminism. She simply refused to stay silent in a musical form that people already loved and trusted. That refusal, repeated across albums and decades, made her one of the most important feminist voices in modern West African music.
 

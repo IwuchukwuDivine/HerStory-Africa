@@ -16,17 +16,18 @@ imageCredit: "Photo: HankBate123 / CC BY-SA 4.0 via Wikimedia Commons"
 featured: false
 funFact: "As a schoolgirl she invented a nonsense word, batonga, to shut down bullies. It meant roughly 'get off my back, I can be whoever I want to be', and she later named her girls' education foundation after it."
 summary: "Beninese singer who refused to perform propaganda for a dictatorship, fled to Paris in 1983, and became a five-time Grammy winner, UNICEF ambassador, and the first Black African artist honored with a star on the Hollywood Walk of Fame."
+hook: "Walked out on Benin's regime in 1983 rather than sing for it, and won five Grammys."
 ---
 
 ## Biography
 
 In 1983, one of the most promising young singers in Benin walked away from her own fame. The country's Marxist regime expected musicians to sing for the government. Angélique Kidjo would not. Musicians, she later recalled, were forced to "praise the government and the ideology of power," and, in her words, "which I refused to do." So she left for Paris, a national radio star starting over with almost nothing.
 
-Music had raised her. Born on 14 July 1960 in the coastal town of Ouidah, to a Fon father who loved music and a Yoruba mother who ran a theatre troupe, she was on stage by the age of six. As a teenager her cover of a Miriam Makeba song played on national radio, and Benin learned her name.
+Music had raised her. Born on 14 July 1960 in the coastal town of Ouidah, to a Fon father who loved music and a Yoruba mother who ran a theatre troupe, she was on stage by the age of six. As a teenager her cover of a [Miriam Makeba](/women/miriam-makeba) song played on national radio, and Benin learned her name.
 
 Paris was hard and electric. She briefly considered studying law, then chose music, training at a jazz school where she met the French composer Jean Hébrail, whom she married in 1987. She sang backup, then fronted the European Afro-jazz band Pili Pili. In 1991, Island Records founder Chris Blackwell, the man who had signed Bob Marley, signed her. Her album Logozo turned her into an international star, singing in Fon, Yoruba, French and English, fusing Beninese rhythms with funk, jazz and pop.
 
-Four decades later she has released more than a dozen albums, reimagined Talking Heads and Celia Cruz, sung at the Tokyo Olympics opening ceremony, and won five Grammy Awards. She has been called Africa's premier diva. She prefers to talk about girls' education.
+Four decades later she has released more than a dozen albums, reimagined Talking Heads and Celia Cruz, sung at the Tokyo Olympics opening ceremony, and won five Grammy Awards. She has been called Africa's premier diva. She prefers to talk about [girls' education](/articles/why-educating-girls-changes-everything).
 
 ## Historical Context
 

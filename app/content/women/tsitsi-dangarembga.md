@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Tsitsi Dangarembga's debut novel Nervous Conditions was the first novel in English published by a Black Zimbabwean woman."
 summary: "Zimbabwean novelist and filmmaker whose debut, Nervous Conditions, became the first novel in English by a Black Zimbabwean woman. Arrested in 2020 for protesting government corruption."
+hook: "A Booker shortlist and an arrest in Harare, both in 2020."
 ---
 
 ## Biography
@@ -33,7 +34,7 @@ Dangarembga wrote through all of it.
 
 ## What She Fought For
 
-*Nervous Conditions* (1988) opened a conversation about gender, education, and colonialism that had been largely absent from Zimbabwean literature. It was followed by *The Book of Not* (2006) and *This Mournable Body* (2018), which was shortlisted for the Booker Prize.
+*Nervous Conditions* (1988) opened a conversation about gender, education, and [colonialism](/articles/how-colonialism-rewrote-the-rules) that had been largely absent from Zimbabwean literature. It was followed by *The Book of Not* (2006) and *This Mournable Body* (2018), which was shortlisted for the Booker Prize.
 
 Beyond writing, Dangarembga founded the **International Images Film Festival for Women (IIFF)** in Harare, the first and longest-running women's film festival in Africa. She also established **Women Filmmakers of Zimbabwe** to support women in the industry.
 

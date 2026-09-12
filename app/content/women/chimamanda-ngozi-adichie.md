@@ -17,13 +17,14 @@ imageCredit: "Wikimedia Commons / Lvklock / CC BY-SA 4.0"
 featured: true
 funFact: "Her TED Talk 'The Danger of a Single Story' has been viewed over 30 million times"
 summary: "Award-winning Nigerian novelist and feminist icon. Author of Purple Hibiscus, Half of a Yellow Sun, Americanah, and the viral TED talk 'We Should All Be Feminists', which reached hundreds of millions of listeners after Beyoncé sampled it. One of the most influential voices on feminism, race, and African identity in the world today."
+hook: "Sweden handed her feminist essay to every 16-year-old in the country."
 ---
 
 ## Biography
 
 Grace Chimamanda Ngozi Adichie was born on 15 September 1977 in Enugu, Nigeria, and grew up in the university town of Nsukka, in Enugu State, where her father was a professor of statistics and her mother the first female registrar at the University of Nigeria. She grew up in the house previously occupied by Chinua Achebe, a detail she has described as formative, a silent inheritance.
 
-She began writing early, producing her first stories as a child, stories that mirrored the British books she was reading: stories with English characters, snow at Christmas, blue eyes. It was only when she discovered African literature (Achebe, Ngugi, Flora Nwapa) that she understood she could tell stories that looked like her own life.
+She began writing early, producing her first stories as a child, stories that mirrored the British books she was reading: stories with English characters, snow at Christmas, blue eyes. It was only when she discovered African literature (Achebe, Ngugi, [Flora Nwapa](/women/flora-nwapa)) that she understood she could tell stories that looked like her own life.
 
 Adichie studied medicine and pharmacy at the University of Nigeria, Nsukka, for a year and a half before moving to the United States at age 19 to study communications and political science at Drexel University in Philadelphia. She later transferred to Eastern Connecticut State University, graduating summa cum laude. She went on to complete a master's in creative writing at Johns Hopkins University and a master's in African studies at Yale.
 
@@ -33,7 +34,7 @@ Adichie emerged as a writer at a moment when global publishing was dominated by 
 
 ## What She Fought For
 
-Adichie has been a consistent, fearless voice for gender equality and African self-representation. Her 2012 TED talk *We Should All Be Feminists* dismantled the mythology around the word "feminist" and spoke directly to both African and global audiences. It was later published as a book and sampled by Beyoncé in *Flawless* (2013), introducing Adichie's thinking to hundreds of millions of listeners worldwide.
+Adichie has been a consistent, fearless voice for [gender equality](/articles/what-does-gender-equality-look-like) and African self-representation. Her 2012 TED talk *We Should All Be Feminists* dismantled the mythology around the word "feminist" and spoke directly to both African and global audiences. It was later published as a book and sampled by Beyoncé in *Flawless* (2013), introducing Adichie's thinking to hundreds of millions of listeners worldwide.
 
 In 2014, the Swedish government distributed her essay to every 16-year-old in the country. In 2016, Dior printed "We Should All Be Feminists" on a T-shirt that sold worldwide.
 

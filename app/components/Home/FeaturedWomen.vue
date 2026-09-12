@@ -1,17 +1,14 @@
 <template>
-  <section class="section featured">
-    <div class="section__header">
-      <h2 class="section__title">Newest in the Archive</h2>
-      <NuxtLink to="/women" class="section__cta">
-        View all
-        <LucideArrowRight :size="16" />
-      </NuxtLink>
-    </div>
+  <section class="section section--wide featured">
+    <MuseumLabel eyebrow="Newest in the archive" :title="title" class="featured__label">
+      <NuxtLink to="/women" class="section__cta">View all →</NuxtLink>
+    </MuseumLabel>
 
-    <div v-if="women?.length" class="featured__grid">
-      <WomanCard
-        v-for="woman in women"
+    <div v-if="women?.length" class="compact-grid compact-grid--4">
+      <WomanCardCompact
+        v-for="(woman, i) in women"
         :key="woman.slug"
+        :priority="i < 2"
         :name="woman.name"
         :slug="woman.slug"
         :image="woman.image"
@@ -19,25 +16,15 @@
         :born="woman.born"
         :died="woman.died"
         :era="woman.era"
-        :summary="woman.summary"
-        :causes="woman.causes"
+        :focal="woman.ogFocal"
+        :badge="isNew(woman.dateAdded) ? 'New' : ''"
       />
     </div>
-    <div v-else class="featured__grid">
-      <div v-for="n in 6" :key="n" class="skeleton-card">
-        <div class="skeleton" style="aspect-ratio: 4/5" />
-        <div
-          style="
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-          "
-        >
-          <div class="skeleton" style="height: 1.25rem; width: 70%" />
-          <div class="skeleton" style="height: 0.875rem; width: 50%" />
-          <div class="skeleton" style="height: 2.5rem; width: 100%" />
-        </div>
+    <div v-else class="compact-grid compact-grid--4" aria-hidden="true">
+      <div v-for="n in 4" :key="n" class="featured__skeleton">
+        <div class="skeleton featured__skeleton-image" />
+        <div class="skeleton featured__skeleton-name" />
+        <div class="skeleton featured__skeleton-meta" />
       </div>
     </div>
   </section>
@@ -46,38 +33,55 @@
 <script setup lang="ts">
 const { data: women } = await useAsyncData("featured-women", () =>
   queryCollection("women")
+    .select("name", "slug", "image", "country", "born", "died", "era", "dateAdded", "ogFocal")
     .where("image", "<>", "/women/placeholder.svg")
     .where("image", "<>", "")
     .order("dateAdded", "DESC")
-    .limit(5)
+    .limit(4)
     .all(),
 );
+
+/* Set by the default layout after mount; 0 on a first visit. */
+const { previousVisitAt } = useReadingSession();
+
+const title = computed(() =>
+  previousVisitAt.value > 0 ? "Added since your last visit" : "Added this month",
+);
+
+function isNew(dateAdded: string) {
+  return previousVisitAt.value > 0 && new Date(dateAdded).getTime() > previousVisitAt.value;
+}
 </script>
 
 <style scoped>
-.featured__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .featured__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.featured__label {
+  margin-bottom: 20px;
 }
 
 @media (min-width: 768px) {
-  .featured__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  .featured__label {
+    margin-bottom: 24px;
   }
 }
 
-.skeleton-card {
-  border-radius: 1rem;
-  overflow: hidden;
-  background: var(--surface-elevated);
-  box-shadow: var(--shadow-card);
+.featured__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.featured__skeleton-image {
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+}
+
+.featured__skeleton-name {
+  height: 16px;
+  width: 70%;
+}
+
+.featured__skeleton-meta {
+  height: 13px;
+  width: 50%;
 }
 </style>

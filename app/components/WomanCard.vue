@@ -1,35 +1,32 @@
 <template>
-  <NuxtLink :to="`/women/${slug}`" class="woman-card">
+  <NuxtLink :to="`/women/${slug}`" class="card woman-card">
     <div class="woman-card__image-wrapper">
       <NuxtImg
+        v-if="hasPortrait(image)"
         :src="image"
-        :alt="name"
+        :provider="imageProvider(image)"
+        :alt="`Portrait of ${name}, ${country}`"
         width="400"
         height="500"
         format="webp"
-        loading="lazy"
+        :loading="priority ? 'eager' : 'lazy'"
+        :fetchpriority="priority ? 'high' : undefined"
         class="woman-card__image"
       />
-      <span class="woman-card__era">{{ era }}</span>
+      <div v-else class="no-photo">
+        <ContinentMark :size="72" />
+      </div>
+      <span class="image-chip">{{ era }}</span>
       <ClientOnly>
-        <FavoriteButton
-          type="woman"
-          :slug="slug"
-          :size="16"
-          class="woman-card__fav"
-        />
+        <div class="woman-card__fav">
+          <FavoriteButton type="woman" :slug="slug" :size="16" />
+        </div>
       </ClientOnly>
     </div>
 
     <div class="woman-card__body">
       <h3 class="woman-card__name">{{ name }}</h3>
-      <p class="woman-card__meta">
-        <LucideMapPin :size="14" />
-        {{ country }}
-        <span class="woman-card__dates"
-          >· {{ born ?? "Unknown" }}{{ died ? `–${died}` : born ? "–present" : "" }}</span
-        >
-      </p>
+      <p class="woman-card__meta">{{ country }} · {{ lifespan(born, died) }}</p>
       <ClientOnly>
         <span v-if="read" class="woman-card__read-badge">
           <LucideCheck :size="12" />
@@ -37,22 +34,12 @@
         </span>
       </ClientOnly>
       <p class="woman-card__summary">{{ summary }}</p>
-      <div class="woman-card__causes">
-        <span v-for="cause in displayCauses" :key="cause" class="cause-tag">
-          {{ cause }}
-        </span>
-        <span
-          v-if="causes.length > maxCauses"
-          class="cause-tag cause-tag--more"
-        >
-          +{{ causes.length - maxCauses }}
-        </span>
-      </div>
     </div>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
+import { hasPortrait } from "~/utils/format";
 const props = withDefaults(
   defineProps<{
     name: string;
@@ -64,24 +51,25 @@ const props = withDefaults(
     era: string;
     summary: string;
     causes: string[];
+    /** Kept for existing callers; cause chips no longer render on cards. */
     maxCauses?: number;
+    /** Above-the-fold card: load its image eagerly with high priority (LCP). */
+    priority?: boolean;
   }>(),
   {
     maxCauses: 2,
   },
 );
 
-const displayCauses = computed(() => props.causes.slice(0, props.maxCauses));
-
 const { isRead } = useApp();
-const read = computed(() => isRead('woman', props.slug));
+const read = computed(() => isRead("woman", props.slug));
 </script>
 
 <style scoped>
 .woman-card {
   display: flex;
   flex-direction: column;
-  border-radius: 1rem;
+  border-radius: 16px;
   overflow: hidden;
   background: var(--surface-elevated);
   box-shadow: var(--shadow-card);
@@ -92,9 +80,23 @@ const read = computed(() => isRead('woman', props.slug));
   color: inherit;
 }
 
-.woman-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-elevated);
+@media (hover: hover) {
+  .woman-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .woman-card:hover .woman-card__image {
+    transform: scale(1.05);
+  }
+
+  .woman-card:hover .woman-card__name {
+    color: var(--color-primary);
+  }
+}
+
+.woman-card:active {
+  transform: scale(0.98);
 }
 
 .woman-card__image-wrapper {
@@ -111,102 +113,78 @@ const read = computed(() => isRead('woman', props.slug));
   transition: transform 0.4s ease;
 }
 
-.woman-card:hover .woman-card__image {
-  transform: scale(1.05);
-}
-
-.woman-card__era {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  background: var(--overlay-default);
-  color: #fff;
-  backdrop-filter: blur(6px);
-}
-
+/* 44px hit box top-right; the visible disc inside is 34px. */
 .woman-card__fav {
   position: absolute;
-  top: 0.625rem;
-  left: 0.625rem;
-  background: var(--overlay-default);
+  top: 6px;
+  right: 6px;
+}
+
+.woman-card__fav :deep(.favorite-btn) {
+  position: relative;
+  isolation: isolate;
   color: #fff;
-  backdrop-filter: blur(6px);
+}
+
+.woman-card__fav :deep(.favorite-btn)::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  z-index: -1;
   border-radius: 50%;
-  padding: 0.4375rem;
+  background: rgba(28, 15, 7, 0.55);
+  backdrop-filter: blur(6px);
 }
 
 .woman-card__body {
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
-  padding: 1rem 1.125rem 1.25rem;
+  gap: 4px;
+  padding: 16px 18px 20px;
 }
 
 .woman-card__name {
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.25;
   color: var(--text-primary);
   margin: 0;
-  line-height: 1.3;
+  transition: color 0.15s ease;
 }
 
 .woman-card__meta {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.8125rem;
+  font-size: 13px;
+  line-height: 1.4;
   color: var(--text-muted);
   margin: 0;
-}
-
-.woman-card__dates {
-  color: var(--text-muted);
 }
 
 .woman-card__read-badge {
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
-  gap: 0.2rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: var(--color-success, #16a34a);
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #16a34a;
 }
 
 .woman-card__summary {
-  font-size: 0.875rem;
+  font-size: 14px;
   line-height: 1.55;
   color: var(--text-secondary);
-  margin: 0.25rem 0 0;
+  margin: 4px 0 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.woman-card__causes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.375rem;
-  margin-top: 0.5rem;
-}
-
-.cause-tag {
-  padding: 0.1875rem 0.625rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  background: var(--surface-subtle);
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-
-.cause-tag--more {
-  background: var(--surface-muted);
-  color: var(--text-muted);
+@media (prefers-reduced-motion: reduce) {
+  .woman-card,
+  .woman-card__image {
+    transition: none;
+  }
 }
 </style>

@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Aoua Keita was a trained midwife who became the first woman ever elected to Mali's National Assembly."
 summary: "Malian midwife, politician, and activist who became the first woman elected to Mali's National Assembly. Campaigned for women's suffrage, healthcare, and independence from France."
+hook: "Delivered babies in rural clinics for years, then won a seat in Mali's assembly in 1959."
 ---
 
 ## Biography
@@ -27,11 +28,11 @@ She spent years working in rural health clinics across Mali, delivering babies a
 
 ## Historical Context
 
-French Sudan was one of the most neglected territories in French West Africa. Women had no vote, no representation, and almost no access to formal education. The independence movement of the 1950s was led almost entirely by men. Aoua Keita walked into that movement and demanded a seat.
+French Sudan was one of the most neglected territories in French West Africa. Women had no vote, no representation, and almost no access to formal education. The [independence movement of the 1950s](/articles/daughters-of-independence) was led almost entirely by men. Aoua Keita walked into that movement and demanded a seat.
 
 ## What She Fought For
 
-Keita joined the **Union Soudanaise-RDA** (US-RDA), the dominant pro-independence party, and organised women's participation across the country. She campaigned for **women's suffrage**, which was granted in 1956. She pushed for women's healthcare, girls' education, and the end of colonial rule.
+Keita joined the **Union Soudanaise-RDA** (US-RDA), the dominant pro-independence party, and organised women's participation across the country. She campaigned for **women's suffrage**, which was granted in 1956. She pushed for women's healthcare, [girls' education](/articles/why-educating-girls-changes-everything), and the end of colonial rule.
 
 In 1959, she was **elected to Mali's National Assembly**, becoming the first woman to hold that position. She used her platform to advocate for women's legal rights and healthcare access.
 

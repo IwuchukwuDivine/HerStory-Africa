@@ -1,6 +1,8 @@
 ---
 title: "To the Mothers Who Gave Us Everything"
 description: "A Mothering Sunday reflection on the African women who carried movements, raised revolutions, and wrote the truth, all while raising children who would inherit their courage."
+seoTitle: "To the African Mothers Who Carried Movements"
+seoDescription: "A Mothering Sunday tribute to African women like Albertina Sisulu who raised children while carrying movements, and to mothers no archive will ever name."
 date: 2026-03-15
 slug: to-the-mothers-who-gave-us-everything
 category: "Why It Matters"

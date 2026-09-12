@@ -1,11 +1,15 @@
 <template>
   <div class="suggest">
     <header class="suggest__header">
-      <h1 class="suggest__title">Suggest a Woman</h1>
-      <p class="suggest__lead">
-        We can't tell every story alone. If you know an African woman whose story
-        deserves to be here, someone who fought, built, led, created, or changed
-        something, tell us about her. The best suggestions come with a reason.
+      <MuseumLabel
+        level="h1"
+        eyebrow="Suggest a woman"
+        title="Know an African woman whose story should be here?"
+      />
+      <p class="suggest__intro">
+        We can't tell every story alone. If you know an African woman who
+        fought, built, led, created, or changed something, tell us about her.
+        The best suggestions come with a reason.
       </p>
     </header>
 
@@ -15,21 +19,21 @@
       @submit.prevent="submit"
     >
       <div class="suggest__field">
-        <label for="name" class="suggest__label">Her name *</label>
+        <label for="name" class="suggest__label">Her name</label>
         <input
           id="name"
           v-model="form.name"
           type="text"
           class="suggest__input"
           placeholder="e.g. Funmilayo Ransome-Kuti"
+          autocomplete="off"
           required
-        />
+        >
       </div>
 
       <div class="suggest__field">
         <label for="country" class="suggest__label">
-          Country or region
-          <span class="suggest__optional">optional</span>
+          Country or region <span class="suggest__optional">· optional</span>
         </label>
         <input
           id="country"
@@ -37,19 +41,18 @@
           type="text"
           class="suggest__input"
           placeholder="e.g. Nigeria, West Africa"
-        />
+          autocomplete="off"
+        >
       </div>
 
       <div class="suggest__field">
-        <label for="reason" class="suggest__label">
-          Why should we feature her? *
-        </label>
+        <label for="reason" class="suggest__label">Why should we feature her?</label>
         <textarea
           id="reason"
           v-model="form.reason"
-          class="suggest__textarea"
+          class="suggest__input suggest__textarea"
           placeholder="What did she do? Why does her story matter?"
-          rows="5"
+          rows="6"
           required
         />
       </div>
@@ -57,8 +60,7 @@
       <div class="suggest__row">
         <div class="suggest__field">
           <label for="submitterName" class="suggest__label">
-            Your name
-            <span class="suggest__optional">optional</span>
+            Your name <span class="suggest__optional">· optional</span>
           </label>
           <input
             id="submitterName"
@@ -66,13 +68,13 @@
             type="text"
             class="suggest__input"
             placeholder="Your name"
-          />
+            autocomplete="name"
+          >
         </div>
 
         <div class="suggest__field">
           <label for="submitterEmail" class="suggest__label">
-            Your email
-            <span class="suggest__optional">optional</span>
+            Your email <span class="suggest__optional">· optional</span>
           </label>
           <input
             id="submitterEmail"
@@ -80,40 +82,43 @@
             type="email"
             class="suggest__input"
             placeholder="In case we'd like to follow up"
-          />
+            autocomplete="email"
+          >
         </div>
       </div>
 
-      <p v-if="errorMessage" class="suggest__error">
+      <p v-if="errorMessage" class="suggest__error" role="alert">
         <LucideAlertCircle :size="16" />
         {{ errorMessage }}
       </p>
 
-      <button
+      <Pill
         type="submit"
+        variant="primary"
+        size="lg"
+        :loading="status === 'submitting'"
         class="suggest__submit"
-        :disabled="status === 'submitting'"
       >
-        <LucideLoader2
-          v-if="status === 'submitting'"
-          :size="18"
-          class="suggest__spinner"
-        />
-        <LucideSend v-else :size="18" />
-        {{ status === "submitting" ? "Sending..." : "Submit suggestion" }}
-      </button>
+        <template #icon>
+          <LucideSend :size="16" />
+        </template>
+        {{ status === "submitting" ? "Sending" : "Send suggestion" }}
+      </Pill>
     </form>
 
-    <div v-else class="suggest__success">
-      <LucideCheckCircle2 :size="48" class="suggest__success-icon" />
-      <h2 class="suggest__success-title">Thank you</h2>
-      <p class="suggest__success-text">
-        Your suggestion has been received. We read every single one and will
-        research her story. If she's a good fit, she'll appear in the archive.
+    <div v-else class="panel suggest__success" aria-live="polite">
+      <p class="tint-success suggest__success-row">
+        <LucideCheck :size="16" />
+        Thank you. We read every suggestion.
       </p>
-      <button class="suggest__another" @click="reset">
-        Suggest another woman
-      </button>
+      <p class="suggest__success-text">
+        If her story fits the archive, we will research it, source it, and add
+        her. That can take a few weeks.
+      </p>
+      <div class="suggest__success-actions">
+        <Pill to="/women" variant="secondary">Browse the archive</Pill>
+        <Pill variant="ghost" @click="reset">Suggest another woman</Pill>
+      </div>
     </div>
   </div>
 </template>
@@ -177,13 +182,18 @@ useSeoMeta({
   description: suggestDescription,
   ogTitle: "Suggest a Woman",
   ogDescription: suggestDescription,
-  ogImage: getAbsoluteUrl("/suggest-og.png"),
   ogUrl: getAbsoluteUrl("/suggest"),
   ogType: "website",
   twitterCard: "summary_large_image",
   twitterTitle: "Suggest a Woman",
   twitterDescription: suggestDescription,
-  twitterImage: getAbsoluteUrl("/suggest-og.png"),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Suggest a woman",
+  title: "Know an African woman whose story should be here?",
+  description: suggestDescription,
 });
 
 useHead({
@@ -193,208 +203,152 @@ useHead({
 
 <style scoped>
 .suggest {
-  max-width: 40rem;
+  max-width: 48rem;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 28px 24px 64px;
 }
 
 @media (min-width: 768px) {
   .suggest {
-    padding: 3rem 2rem 5rem;
+    padding: 40px 32px 64px;
   }
 }
 
 .suggest__header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
 }
 
-.suggest__title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.suggest__lead {
-  font-size: 1.0625rem;
-  line-height: 1.75;
+.suggest__intro {
+  max-width: 42rem;
+  font-size: 17px;
+  line-height: 1.6;
   color: var(--text-secondary);
-  margin: 1rem 0 0;
+  margin: 0;
 }
 
 /* ── Form ── */
 .suggest__form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 24px;
+  max-width: 40rem;
 }
 
 .suggest__field {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
-  flex: 1;
+  gap: 8px;
 }
 
 .suggest__label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .suggest__optional {
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
-.suggest__input,
-.suggest__textarea {
-  padding: 0.75rem 1rem;
-  font-size: 0.9375rem;
+.suggest__input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  font-size: 16px;
+  font-family: var(--font-body);
   line-height: 1.5;
   color: var(--text-primary);
   background: var(--surface-elevated);
-  border: 1.5px solid var(--border-light);
-  border-radius: 0.75rem;
-  outline: none;
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  border: 1.5px solid var(--border-default);
+  border-radius: 8px;
+  transition: border-color 0.15s ease;
 }
 
-.suggest__input::placeholder,
-.suggest__textarea::placeholder {
+.suggest__input::placeholder {
   color: var(--text-muted);
 }
 
-.suggest__input:focus,
-.suggest__textarea:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-50);
+.suggest__input:focus {
+  border-color: var(--ring-default);
+  outline: 2px solid var(--ring-default);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
 .suggest__textarea {
+  height: auto;
+  min-height: 160px;
+  padding: 12px 14px;
   resize: vertical;
-  min-height: 7rem;
 }
 
 .suggest__row {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 24px;
 }
 
 @media (min-width: 480px) {
   .suggest__row {
     flex-direction: row;
-    gap: 1rem;
+    gap: 16px;
   }
 }
 
-/* ── Error ── */
 .suggest__error {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-error, #dc2626);
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-crimson);
   margin: 0;
 }
 
-/* ── Submit button ── */
 .suggest__submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   align-self: flex-start;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 9999px;
-  background: var(--color-primary);
-  color: var(--text-on-primary);
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    transform 0.15s ease,
-    opacity 0.15s ease;
 }
 
-.suggest__submit:hover:not(:disabled) {
-  background: var(--color-primary-600);
-  transform: translateY(-1px);
-}
-
-.suggest__submit:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.suggest__spinner {
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ── Success state ── */
+/* ── Success ── */
 .suggest__success {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  max-width: 40rem;
+}
+
+.suggest__success-row {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-  padding: 2rem 0;
-}
-
-.suggest__success-icon {
-  color: var(--color-success, #16a34a);
-  margin-bottom: 1rem;
-}
-
-.suggest__success-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 0.5rem;
+  gap: 8px;
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .suggest__success-text {
-  font-size: 1.0625rem;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--text-secondary);
-  margin: 0 0 1.5rem;
-  max-width: 28rem;
+  margin: 0;
 }
 
-.suggest__another {
-  padding: 0.625rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border: 1.5px solid var(--border-light);
-  border-radius: 9999px;
-  background: transparent;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition:
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.suggest__another:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+.suggest__success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 </style>

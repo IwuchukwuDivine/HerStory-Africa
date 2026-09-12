@@ -1,6 +1,8 @@
 ---
 title: "Raising Children at the Crossroads: How Gender, Culture, and Power Meet in African Homes"
 description: "The lessons that shape girls into future wives and boys into men who expect service do not come from one place. They are built at the intersection of gender, culture, class, religion, and history. Understanding that crossroads is how we raise people instead of roles."
+seoTitle: "Gender, Culture, and Power in African Homes"
+seoDescription: "How everyday lessons in African homes teach girls to serve and boys to expect it, and how intersectionality helps parents raise people instead of roles."
 date: 2026-08-13
 slug: raising-children-at-the-crossroads
 category: "Concepts"

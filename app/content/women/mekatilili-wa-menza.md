@@ -11,11 +11,13 @@ causes:
   - "Anti-colonial activism"
   - "Sovereignty & independence"
   - "Cultural preservation"
-image: "/women/placeholder.svg"
-imageCredit: "No free image available"
+image: "/women/mekatilili-wa-menza.jpg"
+imageCredit: "Statue at the Mekatilili wa Menza Cultural Festival, Malindi / Mmaua1 / Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Mekatilili wa Menza used traditional oaths and dance to mobilise the Giriama people into mass resistance against British colonial rule in coastal Kenya."
 summary: "Giriama leader who organised mass resistance against British colonial rule in coastal Kenya, using traditional oaths and dance to unite her people against forced labour and land seizure."
+hook: "In 1913 she turned kifudu dances into rallies and the Giriama into a rising."
+ogFocal: "50% 10%"
 ---
 
 ## Biography
@@ -26,7 +28,7 @@ She was not a chief or an elder in the traditional male hierarchy. She was a wom
 
 ## Historical Context
 
-By the early 1900s, British colonial authorities in Kenya were demanding labour and taxes from the Giriama and other Mijikenda peoples along the coast. Young men were being conscripted for plantation work and porterage. Traditional lands were being seized. The colonial administration attempted to relocate the Giriama away from their fertile homeland to less productive areas.
+By the early 1900s, [British colonial authorities](/articles/how-colonialism-rewrote-the-rules) in Kenya were demanding labour and taxes from the Giriama and other Mijikenda peoples along the coast. Young men were being conscripted for plantation work and porterage. Traditional lands were being seized. The colonial administration attempted to relocate the Giriama away from their fertile homeland to less productive areas.
 
 The Giriama had no standing army. They had traditions, oaths, and a woman named Mekatilili.
 

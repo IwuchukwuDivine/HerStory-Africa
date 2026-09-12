@@ -16,6 +16,7 @@ imageCredit: "Portrait, 1936, photographer unknown / Wikimedia Commons / Public 
 featured: false
 funFact: "In 2020 Tunisia put her face on the 10-dinar note, reportedly making it the world's first banknote to feature a female doctor."
 summary: "The first modern female doctor of Tunisia and North Africa, who graduated in Paris in 1936 and spent a century of life opening medicine, family planning, and freedom of choice to Tunisian women."
+hook: "The face on Tunisia's 10-dinar note, a doctor when no Tunisian woman had been one."
 ---
 
 ## Biography
@@ -30,7 +31,7 @@ From 1955 she directed the maternity ward at the Charles Nicolle Hospital in Tun
 
 ## Historical Context
 
-Tawhida grew up in a Tunisia ruled as a French protectorate, where power, hospitals, and universities belonged to the colonizers, and where most Tunisian girls were expected to marry early and stay home. Girls' education was a battlefield of its own: her school on the Rue de Russie was a rare experiment, and each diploma a Muslim girl earned was a small revolution. For a Tunisian woman to stand in a Paris lecture hall dissecting anatomy in 1930 was almost unimaginable.
+Tawhida grew up in a Tunisia ruled as a French protectorate, where power, hospitals, and universities belonged to the colonizers, and where most Tunisian girls were expected to marry early and stay home. [Girls' education](/articles/why-educating-girls-changes-everything) was a battlefield of its own: her school on the Rue de Russie was a rare experiment, and each diploma a Muslim girl earned was a small revolution. For a Tunisian woman to stand in a Paris lecture hall dissecting anatomy in 1930 was almost unimaginable.
 
 She returned with her medical degree into a society on the eve of great change. Her own uncle, Tahar Ben Ammar, would later lead the negotiations for Tunisia's independence, ratified in 1956. Independent Tunisia became a regional pioneer in women's rights, and medicine was one of the front lines. The question of whether a woman could decide when and whether to have children was, in mid-century North Africa, radical. Tawhida had spent decades quietly preparing the answer.
 
@@ -38,7 +39,7 @@ She returned with her medical degree into a society on the eve of great change. 
 
 Everything in Tawhida Ben Cheikh's career flows from one conviction: a woman's body and future belong to her. As a young doctor shut out of the colonial public hospitals, she did not wait for permission. She opened her clinic to women who could pay nothing, and in the pages of Leila she argued for the education and emancipation of Muslim women at a time when such arguments could scandalize.
 
-Her greatest battle was for family planning. Long before it was accepted, she championed access to contraception, and later to safe, legal abortion, believing that no woman should die or be broken by pregnancies she did not choose. When independent Tunisia began building modern health services, she was ready: at Charles Nicolle Hospital she set up the country's first family planning service and trained the midwives who would carry it into villages and back streets. Tunisia went on to become one of the most progressive countries in Africa and the Arab world on reproductive health, and her fingerprints are on that achievement.
+Her greatest battle was for family planning. Long before it was accepted, she championed access to contraception, and later to [safe, legal abortion](/articles/ten-years-in-prison-for-a-pill), believing that no woman should die or be broken by pregnancies she did not choose. When independent Tunisia began building modern health services, she was ready: at Charles Nicolle Hospital she set up the country's first family planning service and trained the midwives who would carry it into villages and back streets. Tunisia went on to become one of the most progressive countries in Africa and the Arab world on reproductive health, and her fingerprints are on that achievement.
 
 The scene that best captures her is the one that started it all: a widowed mother in colonial Tunis, listening to a French scientist explain that her daughter could become a doctor if only she were allowed to try. So much hung on that conversation. Tawhida spent the rest of her hundred years making sure the next girl would not need such a miracle.
 

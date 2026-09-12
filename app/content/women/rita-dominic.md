@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Rita Dominic co-founded The Audrey Silva Company to champion quality filmmaking and women's leadership in Nollywood."
 summary: "Nigerian actress and producer; multiple award winner in Nollywood. Co-founder of The Audrey Silva Company; advocate for quality film and women's leadership in the industry."
+hook: "The Meeting, 76, and a production company built to raise Nollywood's standards."
 ---
 
 ## Biography

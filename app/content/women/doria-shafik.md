@@ -16,6 +16,7 @@ imageCredit: "Portrait of Doria Shafik, Al-Ahram Weekly / Wikimedia Commons / Pu
 featured: false
 funFact: "She led 1,500 women into Egypt's all-male parliament and shut it down for more than four hours."
 summary: "The Egyptian philosopher and publisher who stormed parliament with 1,500 women and starved herself until Egypt promised women the vote, then was erased from history for defying Nasser."
+hook: "Fifteen hundred women, four hours, and an all-male parliament brought to a halt."
 ---
 
 ## Biography
@@ -30,7 +31,7 @@ Then the state turned on her. In 1957 she went on hunger strike again, this time
 
 ## Historical Context
 
-Shafik came of age in an Egypt under British occupation, where nationalism and feminism grew up together. Women had marched in the 1919 revolution, and pioneers like Huda Shaarawi had founded the Egyptian Feminist Union, but by mid-century Egyptian women still could not vote, and parliament remained entirely male. The feminist establishment was aristocratic; Shafik, a scholarship girl from Tanta, aimed her movement at teachers, clerks, and working women instead.
+Shafik came of age in an Egypt under British occupation, where nationalism and feminism grew up together. Women had marched in the 1919 revolution, and pioneers like [Huda Shaarawi](/women/huda-shaarawi) had founded the Egyptian Feminist Union, but by mid-century Egyptian women still could not vote, and parliament remained entirely male. The feminist establishment was aristocratic; Shafik, a scholarship girl from Tanta, aimed her movement at teachers, clerks, and working women instead.
 
 The early 1950s were electric and unstable. Riots against the British, the burning of Cairo, and finally the Free Officers' coup of 1952 swept away the monarchy. For a moment, everything seemed possible, and Shafik pressed the new republic to write women into its constitution, even forming a paramilitary unit of women during the 1951 anti-British unrest.
 

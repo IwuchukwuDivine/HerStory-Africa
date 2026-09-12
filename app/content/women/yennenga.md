@@ -16,6 +16,7 @@ imageCredit: "Illustration by Brenda Gael McSwee for UNESCO / Wikimedia Commons 
 featured: true
 funFact: "Africa's biggest film prize, the Étalon de Yennenga awarded at FESPACO in Ouagadougou, is named after her, and Burkina Faso's national football team is nicknamed Les Étalons, the Stallions, in her honour."
 summary: "Legendary warrior princess remembered as the mother of the Mossi people of Burkina Faso. A horsewoman and soldier who refused the life mapped out for her, she rode into the wilderness and into the founding story of a nation."
+hook: "She let a whole wheat field rot to show her father what he was doing to her life."
 ---
 
 ## Biography

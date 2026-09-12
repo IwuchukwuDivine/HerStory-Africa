@@ -1,6 +1,8 @@
 ---
 title: "The Daughters of Independence: Women Who Fought for a Free Africa"
 description: "Behind every African independence movement were women who organised, sacrificed, and fought, then were largely written out of the story. It is time to write them back in."
+seoTitle: "The Women Who Fought for African Independence"
+seoDescription: "Meet the women who organised, went to prison, and led protests during Africa's independence movements, from Ransome-Kuti and Margaret Ekpo to Gambo Sawaba."
 date: 2026-03-09
 slug: daughters-of-independence
 category: "History"

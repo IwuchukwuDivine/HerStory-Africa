@@ -1,96 +1,106 @@
 <template>
-  <div class="tl-page">
-    <header class="tl-page__header">
-      <h1 class="tl-page__title">Timeline</h1>
-      <p class="tl-page__subtitle">
-        {{ totalCount }} women across the centuries, from pre-colonial queens to
-        contemporary leaders.
+  <div class="timeline">
+    <header class="timeline__header">
+      <MuseumLabel
+        level="h1"
+        :eyebrow="`Across the centuries · ${totalCount} women`"
+        title="Timeline"
+      />
+      <p class="timeline__intro">
+        Every woman in the archive in the order she was born, from the queens
+        who ruled before colonial borders were drawn to the leaders shaping the
+        continent today.
       </p>
     </header>
 
-    <div v-if="groupedEras.length" class="tl-page__body">
-      <section v-for="era in groupedEras" :key="era.label" class="tl-era">
-        <div class="tl-era__badge" :style="{ '--era-color': era.color }">
-          <span class="tl-era__label">{{ era.label }}</span>
-          <span class="tl-era__count">
-            {{ era.women.length }}
-            {{ era.women.length === 1 ? "profile" : "profiles" }}
-          </span>
-        </div>
+    <div v-if="groupedEras.length" class="timeline__body">
+      <section v-for="era in groupedEras" :key="era.label" class="timeline__era">
+        <MuseumLabel
+          :eyebrow="`${era.eyebrow} · ${era.women.length} ${era.women.length === 1 ? 'woman' : 'women'}`"
+          :title="era.heading"
+          :subtitle="era.description"
+        />
 
-        <div class="tl-era__track">
-          <div
-            v-for="(woman, index) in era.women"
-            :key="woman.slug"
-            class="tl-item"
-          >
-            <div class="tl-item__marker" :style="{ '--era-color': era.color }">
-              <span class="tl-item__year">{{ woman.born ?? "?" }}</span>
-              <span class="tl-item__dot" />
-              <span v-if="index < era.women.length - 1" class="tl-item__line" />
+        <ol class="timeline__track">
+          <li v-for="woman in era.women" :key="woman.slug" class="timeline__entry">
+            <div class="timeline__marker" aria-hidden="true">
+              <span class="timeline__year">{{ yearLabel(woman.born) }}</span>
+              <span class="timeline__dot" />
             </div>
-
-            <NuxtLink :to="`/women/${woman.slug}`" class="tl-item__card">
-              <div class="tl-item__avatar-wrap">
-                <NuxtImg
-                  :src="woman.image"
-                  :alt="woman.name"
-                  width="80"
-                  height="80"
-                  format="webp"
-                  loading="lazy"
-                  class="tl-item__avatar"
-                />
-              </div>
-              <div class="tl-item__body">
-                <h3 class="tl-item__name">{{ woman.name }}</h3>
-                <p class="tl-item__meta">
-                  {{ woman.country }} · {{ woman.era }}
-                </p>
-                <p class="tl-item__summary">{{ woman.summary }}</p>
-              </div>
-              <LucideChevronRight :size="16" class="tl-item__chevron" />
-            </NuxtLink>
-          </div>
-        </div>
+            <WomanRow
+              :name="woman.name"
+              :slug="woman.slug"
+              :image="woman.image"
+              :country="woman.country"
+              :born="woman.born"
+              :died="woman.died"
+              :focal="woman.ogFocal"
+              :meta="`${woman.country} · ${lifespan(woman.born, woman.died)}`"
+              :thumb="48"
+              :priority="woman.index < 2"
+              class="timeline__row"
+            />
+          </li>
+        </ol>
       </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const ERA_ORDER = [
-  { label: "Pre-Colonial", color: "var(--color-secondary)" },
-  { label: "Colonial", color: "var(--color-crimson)" },
-  { label: "Independence", color: "var(--color-forest)" },
-  { label: "Modern", color: "var(--color-primary)" },
-  { label: "Contemporary", color: "var(--color-forest)" },
-] as const;
+import { ERAS } from "~/utils/constants/content";
+import { ERA_HUBS } from "~/utils/constants/hubs";
+import { lifespan } from "~/utils/format";
 
 const { data: allWomen } = await useAsyncData("timeline-all", () =>
-  queryCollection("women").order("born", "ASC").all(),
+  queryCollection("women")
+    .select("name", "slug", "image", "country", "born", "died", "era", "ogFocal")
+    .order("born", "ASC")
+    .all(),
 );
 
 const totalCount = computed(() => allWomen.value?.length ?? 0);
 
-const groupedEras = computed(() => {
-  if (!allWomen.value) return [];
+type Woman = NonNullable<typeof allWomen.value>[number] & { index: number };
 
-  return ERA_ORDER.map((era) => ({
-    ...era,
-    women: allWomen.value!.filter((w) => w.era === era.label),
-  })).filter((era) => era.women.length > 0);
+/** "Pre-Colonial" -> "Pre-colonial" for the eyebrow; the hub heading is already sentence case. */
+function eraEyebrow(era: string): string {
+  return era.charAt(0) + era.slice(1).toLowerCase();
+}
+
+/** Chronological groups in era order; each carries the hub copy for its label. */
+const groupedEras = computed(() => {
+  const women = (allWomen.value ?? []).map((w, index): Woman => ({ ...w, index }));
+  return ERAS.map((era) => ({
+    label: era,
+    eyebrow: eraEyebrow(era),
+    heading: ERA_HUBS[era].heading,
+    description: ERA_HUBS[era].description,
+    women: women.filter((w) => w.era === era),
+  })).filter((group) => group.women.length > 0);
 });
+
+/** "60 BC" for negative years, otherwise the year as written. */
+function yearLabel(born: number): string {
+  return born < 0 ? `${Math.abs(born)} BC` : String(born);
+}
 
 useSeoMeta({
   title: "Timeline",
   description:
     "A chronological timeline of African women who shaped history, from pre-colonial queens to contemporary leaders.",
-  ogTitle: "Timeline — HerStory Africa",
+  ogTitle: "Timeline | HerStory Africa",
   ogDescription:
     "Explore the full timeline of African women who fought for equality across the centuries.",
-  ogImage: getAbsoluteUrl(),
   ogUrl: getAbsoluteUrl("/timeline"),
+});
+
+defineOgImage("Card", {
+  variant: "page",
+  pill: "Timeline",
+  title: "Timeline",
+  description:
+    "A chronological timeline of African women who shaped history, from pre-colonial queens to contemporary leaders.",
 });
 
 useHead({
@@ -99,187 +109,107 @@ useHead({
 </script>
 
 <style scoped>
-.tl-page {
-  max-width: 52rem;
+.timeline {
+  max-width: 48rem;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3.5rem;
+  padding: 28px 24px 56px;
 }
 
 @media (min-width: 768px) {
-  .tl-page {
-    padding: 2.5rem 2rem 4rem;
+  .timeline {
+    padding: 40px 32px 64px;
   }
 }
 
-.tl-page__header {
-  margin-bottom: 2.5rem;
-}
-
-.tl-page__title {
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.tl-page__subtitle {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin: 0.375rem 0 0;
-}
-
-/* ── Era section ── */
-.tl-era {
-  margin-bottom: 2.5rem;
-}
-
-.tl-era:last-child {
-  margin-bottom: 0;
-}
-
-.tl-era__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 1.25rem;
-  border-radius: 9999px;
-  background: color-mix(in srgb, var(--era-color) 10%, transparent);
-  border: 1.5px solid color-mix(in srgb, var(--era-color) 25%, transparent);
-  margin-bottom: 1.5rem;
-}
-
-.tl-era__label {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--era-color);
-}
-
-.tl-era__count {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-/* ── Timeline track ── */
-.tl-era__track {
+.timeline__header {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
 }
 
-.tl-item {
-  display: flex;
-  gap: 1.25rem;
-}
-
-.tl-item__marker {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  width: 3.5rem;
-}
-
-.tl-item__year {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--era-color);
-  font-variant-numeric: tabular-nums;
-}
-
-.tl-item__dot {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 9999px;
-  background: var(--era-color);
-  border: 2.5px solid var(--surface);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--era-color) 30%, transparent);
-  margin: 0.375rem 0;
-  flex-shrink: 0;
-}
-
-.tl-item__line {
-  flex: 1;
-  width: 2px;
-  background: var(--border-default);
-  min-height: 1rem;
-}
-
-/* ── Timeline card ── */
-.tl-item__card {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  padding: 1rem 1.125rem;
-  border-radius: 0.875rem;
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-light);
-  text-decoration: none;
-  color: inherit;
-  margin-bottom: 0.75rem;
-  flex: 1;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.tl-item__card:hover {
-  border-color: var(--border-default);
-  box-shadow: var(--shadow-soft);
-}
-
-.tl-item__avatar-wrap {
-  flex-shrink: 0;
-}
-
-.tl-item__avatar {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 9999px;
-  object-fit: cover;
-  background: var(--surface-muted);
-}
-
-.tl-item__body {
-  flex: 1;
-  min-width: 0;
-}
-
-.tl-item__name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 0.125rem;
-  line-height: 1.3;
-}
-
-.tl-item__meta {
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  margin: 0 0 0.375rem;
-}
-
-.tl-item__summary {
-  font-size: 0.8125rem;
-  line-height: 1.5;
+.timeline__intro {
+  max-width: 42rem;
+  font-size: 17px;
+  line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
-.tl-item__chevron {
+.timeline__era + .timeline__era {
+  margin-top: 48px;
+}
+
+@media (min-width: 768px) {
+  .timeline__era + .timeline__era {
+    margin-top: 64px;
+  }
+}
+
+.timeline__track {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+.timeline__entry {
+  display: flex;
+  gap: 12px;
+}
+
+/* Year and dot sit on the row's centre line (64px row, 10px dot). The vertical
+   rule is drawn behind the dot and runs the full height of the entry. */
+.timeline__marker {
+  position: relative;
   flex-shrink: 0;
-  color: var(--text-muted);
-  margin-top: 0.25rem;
-  transition:
-    transform 0.15s ease,
-    color 0.15s ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 72px;
+  padding-top: 25px;
 }
 
-.tl-item__card:hover .tl-item__chevron {
-  transform: translateX(2px);
-  color: var(--color-primary);
+.timeline__marker::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 4.25px;
+  width: 1.5px;
+  background: var(--border-light);
+}
+
+.timeline__entry:first-child .timeline__marker::before {
+  top: 27px;
+}
+
+.timeline__entry:last-child .timeline__marker::before {
+  bottom: auto;
+  height: 37px;
+}
+
+.timeline__year {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-gold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.timeline__dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.timeline__row {
+  flex: 1;
+  min-width: 0;
 }
 </style>

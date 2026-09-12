@@ -62,6 +62,14 @@ function loadDir(dir, type) {
     });
 }
 
+// Site style forbids em dashes in prose. Timeline entries keep "YEAR — event".
+function noEmDash(text) {
+  return String(text || "")
+    .replace(/\s*—\s*/g, ", ")
+    .replace(/,\s*,/g, ",")
+    .trim();
+}
+
 function hashOf(text) {
   return createHash("sha256").update(text).digest("hex").slice(0, 16);
 }
@@ -95,7 +103,7 @@ async function callHaiku(systemPrompt, userPrompt) {
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 600,
+      max_tokens: 1024,
       system: systemPrompt,
       messages: [{ role: "user", content: userPrompt }],
     }),
@@ -107,6 +115,9 @@ async function callHaiku(systemPrompt, userPrompt) {
   const data = await res.json();
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Empty response from Anthropic");
+  if (data.stop_reason === "max_tokens") {
+    throw new Error("Response truncated at max_tokens");
+  }
   return text;
 }
 
@@ -171,11 +182,13 @@ async function callJsonHaiku(systemPrompt, userPrompt, maxRetries = 2) {
   let lastError;
   let prompt = systemPrompt;
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    const text = await callHaiku(prompt, userPrompt);
+    let text = "";
     try {
+      text = await callHaiku(prompt, userPrompt);
       return extractJson(text);
     } catch (err) {
       lastError = err;
+      lastError.raw = text;
       // Strengthen the prompt for the retry.
       prompt =
         systemPrompt +
@@ -211,8 +224,8 @@ async function generateForWoman(w) {
 
   const parsed = await callJsonHaiku(system, context);
   return {
-    summary: String(parsed.summary || "").trim(),
-    whyShematters: String(parsed.whyShematters || "").trim(),
+    summary: noEmDash(parsed.summary),
+    whyShematters: noEmDash(parsed.whyShematters),
     timeline: Array.isArray(parsed.timeline)
       ? parsed.timeline.map((t) => String(t).trim()).filter(Boolean)
       : [],
@@ -223,7 +236,7 @@ async function generateForArticle(a) {
   const system = [
     "You write short, factual content for HerStory Africa, an archive of African women's history.",
     "Voice: warm, direct, grounded. Never preachy or generic. No em dashes.",
-    "Use only ideas from the supplied article body. Do not invent.",
+    "Use only ideas from the supplied article body. Do not invent facts, and do not infer ages, dates, or numbers that the article does not state.",
     "",
     "Return strict JSON with two fields:",
     '- "summary": 3-4 sentences synthesizing the full article (distinct from the short blurb).',
@@ -241,9 +254,9 @@ async function generateForArticle(a) {
 
   const parsed = await callJsonHaiku(system, context);
   return {
-    summary: String(parsed.summary || "").trim(),
+    summary: noEmDash(parsed.summary),
     keyTakeaways: Array.isArray(parsed.keyTakeaways)
-      ? parsed.keyTakeaways.map((t) => String(t).trim()).filter(Boolean)
+      ? parsed.keyTakeaways.map((t) => noEmDash(t)).filter(Boolean)
       : [],
   };
 }
@@ -285,6 +298,7 @@ async function main() {
     } catch (err) {
       failed++;
       console.log(`FAILED (${err.message})`);
+      if (err.raw) console.log(`    raw: ${err.raw.slice(0, 300).replace(/\n/g, " ")}`);
     }
   }
 
@@ -305,6 +319,26 @@ async function main() {
     } catch (err) {
       failed++;
       console.log(`FAILED (${err.message})`);
+      if (err.raw) console.log(`    raw: ${err.raw.slice(0, 300).replace(/\n/g, " ")}`);
+    }
+  }
+
+  // Drop entries whose source file no longer exists.
+  const womenSlugs = new Set(women.map((w) => w.slug));
+  const articleSlugs = new Set(articles.map((a) => a.slug));
+  let pruned = 0;
+  for (const slug of Object.keys(output.women)) {
+    if (!womenSlugs.has(slug)) {
+      delete output.women[slug];
+      delete log.hashes[`woman:${slug}`];
+      pruned++;
+    }
+  }
+  for (const slug of Object.keys(output.articles)) {
+    if (!articleSlugs.has(slug)) {
+      delete output.articles[slug];
+      delete log.hashes[`article:${slug}`];
+      pruned++;
     }
   }
 
@@ -312,7 +346,7 @@ async function main() {
   writeFileSync(LOG_PATH, JSON.stringify(log, null, 2) + "\n");
 
   console.log(
-    `\nDone. Generated: ${generated}, skipped: ${skipped}, failed: ${failed}`,
+    `\nDone. Generated: ${generated}, skipped: ${skipped}, failed: ${failed}, pruned: ${pruned}`,
   );
   console.log(`Wrote: ${OUT_PATH}`);
   if (failed > 0) process.exit(1);

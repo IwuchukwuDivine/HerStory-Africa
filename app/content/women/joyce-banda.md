@@ -16,6 +16,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Joyce Banda rose from humble beginnings to become not only Malawi's first female president but only the second woman to serve as head of state in all of African history."
 summary: "Malawian politician who became the first female president of Malawi and only the second female head of state in African history. She rose from humble beginnings to lead a country through a genuine economic crisis, and never stopped fighting for women and girls."
+hook: "In two years as Malawi's president she restored donor aid and banned child marriage."
 ---
 
 ## Biography
@@ -30,7 +31,7 @@ When President Mutharika died suddenly of a heart attack in April 2012, Joyce Ba
 
 Banda inherited a country in economic crisis. Malawi had been cut off from donor funding due to concerns about governance under her predecessor. She responded with bold economic reforms: devaluing the Malawian kwacha, liberalising the foreign exchange market, and restoring relationships with international partners. Within months, fuel shortages eased and aid resumed.
 
-She also made women and girls a priority. She banned child marriage for under-18s, a significant step in a country where child marriage was widespread. She championed girls' education and spoke openly about the connection between women's rights and economic development.
+She also made women and girls a priority. She banned [child marriage](/articles/raising-children-at-the-crossroads) for under-18s, a significant step in a country where child marriage was widespread. She championed [girls' education](/articles/why-educating-girls-changes-everything) and spoke openly about the connection between women's rights and economic development.
 
 She ran for re-election in 2014 but lost amid allegations of corruption related to the Cashgate scandal, in which government officials stole large amounts of public money. She denied wrongdoing and the case was contested, but it damaged her reputation and she went into exile. She returned to Malawi in 2017 and remained active in politics.
 

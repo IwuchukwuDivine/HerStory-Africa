@@ -1,6 +1,8 @@
 ---
 title: "They Didn't Call It Feminism Either"
 description: "Most of the women who built the freedoms African women have today never used the word. That doesn't make what they did any less feminist."
+seoTitle: "African Women Who Never Called It Feminism"
+seoDescription: "Yaa Asantewaa, Funmilayo Ransome-Kuti, and Nana Asmau never used the word feminism. Here is why their work still counts, and what that means for the label."
 date: 2026-03-10
 slug: they-didnt-call-it-feminism-either
 category: "History"

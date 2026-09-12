@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Co-led the Ethiopian army to victory at the Battle of Adwa, defeating Italian colonizers in 1896"
 summary: "Empress of Ethiopia (1889–1913) who co-ruled with Menelik II. Key figure in the Battle of Adwa and in resisting Italian colonisation; founded Addis Ababa."
+hook: "She pushed Menelik to fight at Adwa and picked the site of Addis Ababa."
+ogFocal: "50% 10%"
 ---
 
 ## Biography
@@ -42,7 +44,7 @@ Taytu Betul fought for **Ethiopian sovereignty** and **independence from Europea
 
 ## Her Impact Today
 
-Taytu Betul is honoured in Ethiopia as a national hero. She symbolises resistance to colonialism and the role of women in defending sovereignty. Her legacy is part of the story of why Ethiopia remained independent when most of Africa was colonised.
+Taytu Betul is honoured in Ethiopia as a national hero. She symbolises resistance to [colonialism](/articles/how-colonialism-rewrote-the-rules) and the role of women in defending sovereignty. Her legacy is part of the story of why Ethiopia remained independent when most of Africa was colonised.
 
 ---
 

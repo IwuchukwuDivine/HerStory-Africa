@@ -13,14 +13,16 @@ causes:
   - "Political rights"
   - "Human rights"
 image: "/women/placeholder.svg"
+imageCredit: "No freely licensed image available"
 featured: false
 funFact: "Wambui Otieno fought in the Mau Mau uprising as a teenager before becoming one of Kenya's fiercest defenders of women's property and inheritance rights."
 summary: "Kenyan freedom fighter and women's rights advocate who fought in the Mau Mau uprising as a teenager, later becoming a fierce defender of women's property and inheritance rights."
+hook: "A Mau Mau courier as a teenager, later in court for the right to bury her husband."
 ---
 
 ## Biography
 
-Virginia Wambui Waiyaki was born on 5 March 1936 in Kabete, near Nairobi, Kenya. She came from a politically prominent Kikuyu family — her grandfather, Waiyaki wa Hinga, was a chief who resisted British colonialism in the 1890s. Political resistance was, quite literally, in her blood.
+Virginia Wambui Waiyaki was born on 5 March 1936 in Kabete, near Nairobi, Kenya. She came from a politically prominent Kikuyu family — her grandfather, Waiyaki wa Hinga, was a chief who resisted [British colonialism](/articles/how-colonialism-rewrote-the-rules) in the 1890s. Political resistance was, quite literally, in her blood.
 
 As a teenager in the early 1950s, she joined the Mau Mau movement, Kenya's armed uprising against British colonial rule. She served as a courier and intelligence gatherer, carrying messages and supplies between Mau Mau fighters and their urban networks, risking arrest and execution.
 
@@ -48,7 +50,7 @@ Although she lost the case, it galvanised a national conversation about women's 
 
 ## Her Impact Today
 
-Wambui Otieno died on 30 August 2011. She is remembered as a woman who never stopped fighting — from the forests of the Mau Mau uprising to the courtrooms of independent Kenya. The burial case she endured remains a landmark in East African legal history, and her insistence on women's rights to property and inheritance helped shift the conversation that led to Kenya's 2010 constitution, which guarantees gender equality in property rights.
+Wambui Otieno died on 30 August 2011. She is remembered as a woman who never stopped fighting — from the forests of the Mau Mau uprising to the courtrooms of independent Kenya. The burial case she endured remains a landmark in East African legal history, and her insistence on women's rights to property and inheritance helped shift the conversation that led to Kenya's 2010 constitution, which guarantees [gender equality](/articles/what-does-gender-equality-look-like) in property rights.
 
 ---
 

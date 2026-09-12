@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
 funFact: "Became Africa's first elected female head of state at age 67"
 summary: "Harvard-trained economist who became Africa's first elected female head of state, serving as President of Liberia from 2006 to 2018 and rebuilding a country shattered by 14 years of civil war."
+hook: "Inherited a capital without electricity and a $4.9 billion debt, and cleared both."
 ---
 
 ## Biography
@@ -39,7 +40,7 @@ Sirleaf had been imprisoned and exiled for opposing military rule in Liberia. Sh
 
 She inherited a country with no electricity in the capital, unpayable foreign debt, and 15,000 former child soldiers who needed reintegration. She negotiated debt relief, restored power to Monrovia, rebuilt the civil service, and established the Truth and Reconciliation Commission.
 
-Her collaboration with Leymah Gbowee during the peace process, women on both ends of the transition, is one of the defining stories of African women's leadership in the 21st century.
+Her collaboration with [Leymah Gbowee](/women/leymah-gbowee) during the peace process, women on both ends of the transition, is one of the defining stories of African women's leadership in the 21st century.
 
 ## Major Achievements
 

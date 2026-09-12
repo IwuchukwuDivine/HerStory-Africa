@@ -16,6 +16,7 @@ imageCredit: "Edna Adan Ismail during a UN Envoy visit to Hargeisa, 2020 / Unite
 featured: false
 funFact: "To build her hospital, she sold her Mercedes, her jewelry, and her household belongings, and poured in her entire UN pension."
 summary: "Somaliland's first qualified nurse-midwife sold everything she owned to build a maternity hospital on a former garbage dump, where she has overseen the safe delivery of more than 30,000 babies and trained thousands of midwives."
+hook: "A retired UN official, a garbage dump in Hargeisa, and 30,000 babies delivered safely."
 ---
 
 ## Biography

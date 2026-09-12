@@ -16,13 +16,14 @@ image: "/women/huda-shaarawi.jpg"
 imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 summary: "Pioneer Egyptian feminist and nationalist who founded the Egyptian Feminist Union. Famously removed her veil in public in 1923 and led the Arab women's rights movement."
+hook: "She stepped off a train in Cairo in 1923 and took off her veil in public."
 ---
 
 ## Biography
 
 Huda Shaarawi (also Hoda Shaarawi) was born on 23 June 1879 in Minya, Egypt, into an wealthy family. She received an education at home and was married at thirteen to her cousin, though she later negotiated a more equal marriage. She learned Arabic, Turkish, and French and became involved in philanthropy and then in nationalist and women’s activism.
 
-In 1923 she co-founded the **Egyptian Feminist Union** (EFU) and became its first president. The same year, returning from a women’s conference in Rome, she and other delegates **removed their veils** at the Cairo railway station, a symbolic act that made her a global symbol of Arab women’s emancipation.
+In 1923 she co-founded the **Egyptian Feminist Union** (EFU) and became its first president. The same year, returning from a women’s conference in Rome, she and other delegates **[removed their veils](/articles/the-revolution-is-uncomfortable)** at the Cairo railway station, a symbolic act that made her a global symbol of Arab women’s emancipation.
 
 ## Historical Context
 
@@ -42,7 +43,7 @@ Huda Shaarawi fought for **women’s education**, **legal rights**, **and politi
 
 ## Her Impact Today
 
-Huda Shaarawi died on 12 December 1947. She is remembered as the mother of Egyptian and Arab feminism. Her legacy lives on in the continuing struggle for women’s rights and equality in Egypt and the region.
+Huda Shaarawi died on 12 December 1947. She is remembered as the mother of Egyptian and Arab [feminism](/articles/they-didnt-call-it-feminism-either). Her legacy lives on in the continuing struggle for women’s rights and equality in Egypt and the region.
 
 ---
 

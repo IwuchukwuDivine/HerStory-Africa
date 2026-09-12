@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Luisa Diogo became Mozambique's first female Prime Minister and led the country's post-war economic recovery and debt relief efforts."
 summary: "Mozambique's first female Prime Minister (2004–2010). Economist who led post-war economic policy and debt relief; one of Africa's most prominent female heads of government."
+hook: "A Tete-born economist who ran Mozambique's government for six years after the civil war."
 ---
 
 ## Biography
@@ -31,7 +32,7 @@ Mozambique emerged from a long civil war in 1992. Diogo’s tenure focused on st
 
 ## What She Fought For
 
-Luisa Diogo worked for **economic development**, **transparent governance**, and **women’s representation** in leadership. She promoted pro-poor policies and represented Mozambique at international forums including the World Economic Forum.
+Luisa Diogo worked for **economic development**, **transparent governance**, and **[women’s representation](/articles/why-representation-matters)** in leadership. She promoted pro-poor policies and represented Mozambique at international forums including the World Economic Forum.
 
 ## Major Achievements
 

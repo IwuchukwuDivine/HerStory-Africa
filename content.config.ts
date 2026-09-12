@@ -28,6 +28,12 @@ export default defineContentConfig({
         funFact: z.string().optional(),
         dateAdded: z.string(),
         sameAs: z.array(z.string()).optional(),
+        /** One-sentence italic line under the name on the profile. */
+        hook: z.string().optional(),
+        /** CSS object-position for the portrait crop, e.g. "50% 10%". Defaults to "50% 20%". */
+        ogFocal: z.string().optional(),
+        /** Minutes, set at build by the content:file:afterParse hook in nuxt.config.ts. */
+        readingTime: z.number().optional(),
       }),
     }),
     articles: defineCollection({
@@ -40,12 +46,45 @@ export default defineContentConfig({
       schema: z.object({
         title: z.string(),
         description: z.string(),
+        seoTitle: z.string().optional(),
+        seoDescription: z.string().optional(),
         date: z.string(),
         slug: z.string(),
         category: z.string(),
         image: z.string().optional(),
         imageCredit: z.string().optional(),
         reflectionPrompt: z.string().optional(),
+        updated: z.string().optional(),
+        featured: z.boolean().optional(),
+        women: z.array(z.string()).optional(),
+        ogFocal: z.string().optional(),
+        readingTime: z.number().optional(),
+      }),
+    }),
+    paths: defineCollection({
+      type: 'page',
+      source: {
+        include: 'paths/*.md',
+        cwd: contentDir,
+        prefix: '/women/path',
+      },
+      schema: z.object({
+        title: z.string(),
+        slug: z.string(),
+        /** "Start here", "One event", "One era", "One cause", "One region". */
+        kicker: z.string(),
+        description: z.string(),
+        /** Slug of the woman whose portrait fronts the card. */
+        cover: z.string(),
+        steps: z.array(
+          z.object({
+            slug: z.string(),
+            /** One sentence, under 120 characters, naming the link to the previous step. */
+            why: z.string(),
+          }),
+        ),
+        /** Article slugs for the "Go deeper" panel. */
+        further: z.array(z.string()).optional(),
       }),
     }),
     opportunities: defineCollection({

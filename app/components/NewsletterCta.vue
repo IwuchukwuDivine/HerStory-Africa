@@ -1,11 +1,8 @@
 <template>
-  <aside v-if="!isSubscribed" class="newsletter-cta">
-    <div class="newsletter-cta__accent" />
-    <div class="newsletter-cta__body">
-      <h3 class="newsletter-cta__title">{{ title }}</h3>
-      <p class="newsletter-cta__desc">{{ description }}</p>
-      <NewsletterForm placeholder="Your email address" />
-    </div>
+  <aside v-if="!isSubscribed" class="panel newsletter-cta">
+    <h3 class="newsletter-cta__title">{{ title }}</h3>
+    <p class="newsletter-cta__desc">{{ description }}</p>
+    <NewsletterForm placeholder="Your email address" />
   </aside>
 </template>
 
@@ -27,33 +24,24 @@ const { isSubscribed } = useApp();
 
 <style scoped>
 .newsletter-cta {
-  margin-top: 3rem;
-  border: 1px solid var(--border-light);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background: var(--surface-muted);
-}
-
-.newsletter-cta__accent {
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-}
-
-.newsletter-cta__body {
-  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 40px;
 }
 
 .newsletter-cta__title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
   color: var(--text-primary);
-  margin: 0 0 0.375rem;
+  margin: 0;
 }
 
 .newsletter-cta__desc {
-  font-size: 0.9375rem;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--text-secondary);
-  margin: 0 0 1.25rem;
+  margin: 0;
 }
 </style>

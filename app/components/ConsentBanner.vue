@@ -1,14 +1,20 @@
 <template>
   <Transition name="consent">
-    <div v-if="visible && !searchOpen" class="consent-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <div
+      v-if="visible && !searchOpen"
+      class="consent-banner"
+      role="dialog"
+      aria-live="polite"
+      aria-label="Cookie consent"
+    >
       <p class="consent-banner__text">
         We use cookies to understand how stories are read and shared. Your choice is saved on this device.
       </p>
       <div class="consent-banner__actions">
-        <button class="consent-banner__btn consent-banner__btn--ghost" @click="onDecline">
+        <button type="button" class="pill pill--secondary consent-banner__btn" @click="onDecline">
           Decline
         </button>
-        <button class="consent-banner__btn consent-banner__btn--primary" @click="onAccept">
+        <button type="button" class="pill consent-banner__btn consent-banner__btn--accept" @click="onAccept">
           Accept
         </button>
       </div>
@@ -20,6 +26,10 @@
 const visible = ref(false);
 const searchOpen = useSearchOpen();
 const tag = useTag();
+
+// Other prompts (the newsletter card) wait until the banner has been answered.
+const consentVisible = useState<boolean>("consent-visible", () => false);
+watch(visible, (v) => (consentVisible.value = v), { immediate: true });
 
 onMounted(() => {
   const stored = tag.readStoredConsent();
@@ -44,70 +54,56 @@ const onDecline = () => {
 <style scoped>
 .consent-banner {
   position: fixed;
-  left: 1rem;
-  right: 1rem;
-  bottom: 1rem;
+  left: 16px;
+  right: 16px;
+  bottom: calc(16px + var(--bottom));
   z-index: 10000;
   display: flex;
   align-items: center;
-  gap: 1rem;
   flex-wrap: wrap;
+  gap: 12px 16px;
   max-width: 44rem;
   margin: 0 auto;
-  padding: 0.875rem 1.125rem;
+  padding: 16px;
   background: var(--surface-elevated);
   border: 1px solid var(--border-default);
-  border-radius: 0.75rem;
+  border-radius: 12px;
   box-shadow: var(--shadow-elevated);
 }
 
 .consent-banner__text {
-  flex: 1;
-  min-width: 14rem;
+  flex: 1 1 18rem;
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--text-secondary);
 }
 
+/* Both choices carry the same weight: two outlined 44px pills, equal width. */
 .consent-banner__actions {
-  display: inline-flex;
-  gap: 0.5rem;
-  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  flex: 1 1 14rem;
 }
 
 .consent-banner__btn {
-  padding: 0.5rem 1rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  border-radius: 9999px;
-  border: 1.5px solid transparent;
-  cursor: pointer;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease;
+  flex: 1;
 }
 
-.consent-banner__btn--ghost {
-  background: transparent;
-  color: var(--text-secondary);
-  border-color: var(--border-default);
+.consent-banner__btn--accept {
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary);
+  background: var(--surface-elevated);
 }
 
-.consent-banner__btn--ghost:hover {
-  color: var(--text-primary);
-  border-color: var(--ring-default);
+@media (hover: hover) {
+  .consent-banner__btn--accept:hover {
+    background: color-mix(in srgb, var(--color-primary) 14%, var(--surface));
+  }
 }
 
-.consent-banner__btn--primary {
-  background: var(--color-primary);
-  color: var(--text-on-primary);
-}
-
-.consent-banner__btn--primary:hover {
-  background: var(--color-primary-600);
+.consent-banner__btn--accept:active {
+  transform: scale(0.97);
 }
 
 .consent-enter-active,
@@ -120,6 +116,13 @@ const onDecline = () => {
 .consent-enter-from,
 .consent-leave-to {
   opacity: 0;
-  transform: translateY(0.5rem);
+  transform: translateY(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent-enter-from,
+  .consent-leave-to {
+    transform: none;
+  }
 }
 </style>

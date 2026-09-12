@@ -17,13 +17,14 @@ imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Rose Chibambo was a founding leader of the Malawi Congress Party who mobilised women across the country in the fight against British colonial rule."
 summary: "Malawian independence activist and politician who was a founding leader of the Malawi Congress Party, mobilising women across the country in the fight against British colonial rule."
+hook: "Detained without trial in 1959, then exiled by the president she helped bring to power."
 ---
 
 ## Biography
 
-Rose Lomathinda Chibambo was born in 1928 in Malawi (then Nyasaland), a British protectorate in Southern Africa. She received limited formal education — as was common for African women under colonial rule — but possessed an extraordinary political instinct and organising ability.
+Rose Lomathinda Chibambo was born in 1928 in Malawi (then Nyasaland), a British protectorate in Southern Africa. She received limited formal education — as was common for African women under [colonial rule](/articles/how-colonialism-rewrote-the-rules) — but possessed an extraordinary political instinct and organising ability.
 
-She became politically active in the 1950s, joining the Nyasaland African Congress (NAC) and quickly rising through its ranks. She was one of the very few women in leadership positions within the independence movement, serving alongside figures like Hastings Kamuzu Banda, Orton Chirwa, and Henry Chipembere.
+She became politically active in the 1950s, joining the Nyasaland African Congress (NAC) and quickly rising through its ranks. She was one of the very few women in leadership positions within the [independence movement](/articles/daughters-of-independence), serving alongside figures like Hastings Kamuzu Banda, Orton Chirwa, and Henry Chipembere.
 
 ## Historical Context
 

@@ -17,6 +17,8 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Funke Akindele's hit series 'Jenifa's Diary' made her one of Nollywood's biggest and most bankable stars."
 summary: "Nigerian actress, producer, and screenwriter; one of Nollywood's biggest stars. Known for 'Jenifa's Diary'; advocate for women in film and business."
+hook: "Wrote, produced and starred in Jenifa's Diary, then owned the box office with Omo Ghetto."
+ogFocal: "50% 10%"
 ---
 
 ## Biography
@@ -31,7 +33,7 @@ Nollywood has grown into one of the world's largest film industries, but women h
 
 ## What She Fought For
 
-Funke Akindele has fought for **women's visibility** in Nollywood and for **female-led production**. She has created roles and stories that reflect Nigerian women's lives and has spoken about the importance of ownership and representation in the industry.
+Funke Akindele has fought for **women's visibility** in Nollywood and for **female-led production**. She has created roles and stories that reflect Nigerian women's lives and has spoken about the importance of ownership and [representation in the industry](/articles/why-representation-matters).
 
 ## Major Achievements
 

@@ -1,89 +1,86 @@
 ---
 title: "What Are Gender Roles and Who Decides Them?"
-description: "A clear look at where gender roles come from, how they shape everyday life, and why understanding them gives you the freedom to question what you have been told."
+description: "Where the unwritten rules about men and women come from, why they feel like nature, and how to tell a tradition from a cage."
+seoTitle: "What Are Gender Roles and Who Decides Them"
+seoDescription: "Gender roles are taught, not born. A clear look at who writes the rules in African homes, schools, and public life, and how to tell a tradition from a cage."
 date: 2026-03-08
+updated: 2026-09-12
 slug: what-are-gender-roles
 category: "Concepts"
 image: "/articles/what-are-gender-roles.jpg"
 imageCredit: "Queen Mother of Ghana / Wikimedia Commons / CC BY 2.0"
+reflectionPrompt: "Think of a chore, a school subject, or a feeling that is treated as belonging to one gender in your house. What would happen, in detail, if the other gender claimed it?"
+women:
+  - gambo-sawaba
+  - ngozi-okonjo-iweala
 ---
 
-From the moment a baby is born, the world starts assigning it a script. If it is a boy: be strong, be tough, be the provider. If it is a girl: be gentle, be helpful, be the caretaker. Before a child can even speak, the expectations are already in place. These expectations are what we call gender roles.
+When the food is ready, the girls stand up. Nobody announces this. Plates appear in front of the men first. The boys stay seated unless someone shouts for water. A visitor compliments the mother on how well her daughters have been trained. The daughters have been in school all day. Training, here, means they already know which chair is not theirs.
 
-But where do they come from? Who wrote these scripts? And do we have to follow them?
+In the same compound, a boy falls and starts to cry. An adult laughs. "Are you a woman?" The boy swallows it. His sister is told not to laugh too loud, not to answer back, not to sit with her legs apart. Nobody writes these instructions down. They arrive with the rice.
 
-## What gender roles actually are
+These instructions have a name. Gender roles. They are the behaviours a society treats as normal for girls and boys, women and men: what you are supposed to like, what work is yours, which feelings you may show, and who you are supposed to become. They start before a child can argue back. If [patriarchy](/articles/what-is-patriarchy) is the larger system that ranks men above women, gender roles are the daily script that makes the ranking feel like common sense.
 
-Gender roles are the behaviours, activities, and expectations that a society considers appropriate for men and women. They tell us what boys and girls are "supposed to" like, how they are "supposed to" behave, and what jobs, interests, and emotions are "acceptable" for each.
+## They are not laws of nature
 
-Some examples you probably recognise:
+People talk about gender roles as if they were weather. As if girls arrived already knowing how to serve, and boys already knowing how to decide. Bodies differ. Average strength differs. Pregnancy is not a social invention. The leap from those facts to "therefore she cooks and he leads" is the invention.
 
-Girls should like pink. Boys should like blue. Girls should be nurturing. Boys should be competitive. Women should cook and raise children. Men should earn money and lead. Women should be soft-spoken. Men should be assertive.
+Watch a house for a week and you can see the teaching. A girl who is "too sharp-mouthed" is told to be nicer. A boy who reaches for a knife in the kitchen is waved away, sometimes kindly, as if the work would shrink him. A girl is praised for being pretty. A boy is praised for being brave. After enough years of this, the lessons stop feeling like lessons. They feel like personality.
 
-These are not natural laws. They are social inventions. They vary across cultures, across time periods, and across families. What is considered "manly" in one part of the world might be completely normal for women in another. That alone should tell us that gender roles are made up by societies, not wired into our biology.
+That is why the same role looks so different from one place to another. In one family, a woman who trades in the market is ordinary. In another, a woman who wants her own stall is called stubborn. What counts as "manly" in Lagos may be women's work in Accra, or was women's work a century ago in the same town. If the rules were wired into the body, they would not travel this badly.
 
-## Nature versus nurture
+In many precolonial African societies they did not look the way people now call traditional. Igbo women had their own political assemblies. Ashanti lineage ran through the mother, and a Queen Mother could name a king. Market women across West Africa ran the trade that fed cities. [Colonial rule later handed land titles, schools, and public office to men](/articles/how-colonialism-rewrote-the-rules), and many of those new arrangements got remembered as culture. The script is old. It is not as old, or as African, as it pretends.
 
-There is a common argument that gender roles are biological. That men are naturally aggressive and women are naturally caring. That these differences are hardwired and cannot be changed.
+## Who writes it
 
-Biology does play a role in some differences between males and females. Hormones affect body development, and there are average differences in physical strength. But the leap from "there are some biological differences" to "therefore women should stay home and men should lead" is enormous and not supported by science.
+No single person sits down and invents gender roles. The script is copied, a little at a time, by people who often believe they are only doing what is proper.
 
-The vast majority of gender-role differences are learned. Children are taught, directly and indirectly, how to behave based on their gender. A boy who cries is told to stop. A girl who is assertive is told to be nicer. Over time, these lessons become so deeply absorbed that they feel natural, even though they are not.
+**Family** is usually first. Parents buy the gifts, assign the chores, and decide whose education can wait. They do not need a lecture to do it. "Go and help your mother" is a sentence. So is "leave your brother, he is reading." One child learns that labour is hers. The other learns that his time is more expensive.
 
-Researchers have studied communities around the world and found that where gender roles are more flexible, women achieve more in public life and men report better emotional wellbeing. The roles were never fixed. They were always a choice, even when they did not feel like one.
+**Culture and tradition** give those sentences a longer history. Some of the expectations are old and local. Some arrived with colonial courts, missionary schools, and new property laws, then stayed long enough to feel ancestral. When someone says "that is how we do it," it is worth asking since when, and for whose benefit.
 
-## Who decides?
+**Religion** carries particular weight because it is taught as moral truth, not as preference. A teaching about husbands and wives can close a conversation before it starts. Faith can hold a family together. Using it to freeze a seating plan, as if God assigned the chairs, is how a social habit becomes untouchable.
 
-Gender roles are not handed down by one authority. They come from many places at once.
+**School** continues the sorting. Which subjects are treated as if they belong to boys. Who is named class captain. Which girl is called "too much" for speaking as often as the boys. Teachers do not have to mean harm for the sorting to work.
 
-**Family.** Parents are usually the first to teach gender roles, often without realising it. Buying dolls for girls and trucks for boys. Asking girls to help in the kitchen and boys to carry heavy things. Praising girls for being pretty and boys for being brave. These small choices add up.
+**Media** keeps showing you the finished product. Nollywood knows the suffering mother, the proud career woman who must be humbled, the man whose tears would spoil the scene. Music, adverts, and timelines repeat the casting until you recognise the types before you recognise yourself.
 
-**Culture and tradition.** Every culture has expectations about how men and women should behave. Some of these expectations have deep roots. Others are more recent than people think. In many African societies, certain gender norms that are called "tradition" were actually introduced or reinforced by colonialism.
+**Friends** enforce what adults started. A boy who cries is mocked. A girl who competes is called proud. The punishment is social, which is why it works. Most people would rather fit than become the story told about them.
 
-**Religion.** Many religious traditions include teachings about the roles of men and women. These teachings carry significant weight because they are presented as moral or divine truths rather than social preferences.
+## When a role becomes a rule
 
-**Media.** Films, music, advertising, and social media all reinforce gender roles constantly. Think about how women are portrayed in music videos versus how men are portrayed. Think about which characters get to be the heroes in films and which ones are the love interests or the victims.
+Some people like the work that matches the script. A woman who loves cooking is not confused. A man who wants to provide for his family is not a villain. The trouble starts when liking something is no longer the point. When the role stops being a choice and becomes a test you can fail.
 
-**Schools.** Even in classrooms, gender roles are reinforced. Which subjects are considered "for boys" and which are "for girls"? Who gets called on more? Who gets encouraged toward leadership?
+For girls and women, the test is often smallness. Ambition looks unseemly if it shows. Value gets attached to beauty, to obedience, or to how well a girl cares for everyone else. A girl who wants to lead, to build, or simply to sit down after cooking is told she is forgetting herself.
 
-**Peer pressure.** Young people police each other's behaviour constantly. A boy who expresses emotion might be mocked by his friends. A girl who is competitive might be called aggressive. These social consequences keep people inside the roles they have been assigned.
+For boys and men, the test is hardness. Crying becomes a problem, then asking for help, then any tenderness other people can see. A boy who wants to cook, to dance, to study art, or to talk about fear is told to be a man, as if manhood were the opposite of being human. That training follows men into adulthood. It is one reason so many of them suffer in silence, and why the people who love them sometimes cannot reach them.
 
-## How gender roles limit everyone
+Houses pay for this. So do countries. When half the people in a community are trained to stay small, the community does not get their ideas, their public labour, or their leadership. The loss gets called culture. It is waste.
 
-The problem with rigid gender roles is not that they exist. Some people genuinely enjoy activities that align with traditional roles, and that is fine. The problem is when roles become rules. When people are punished, mocked, or excluded for stepping outside of them.
+## What the rule looks like when it is enforced
 
-**Gender roles limit girls and women** by telling them their ambitions should be smaller, their voices should be quieter, and their value is tied to their appearance, their obedience, or their ability to care for others. Girls who want to lead, compete, build, or simply take up space are often pushed back into line.
+It does not always arrive as a speech about gender. It arrives as a girl taken out of school to help at home, or to marry, while her brother keeps his uniform. [Gambo Sawaba](/women/gambo-sawaba) spent her life naming that arrangement in northern Nigeria. She was arrested more than 17 times. Authorities banned her from Zaria. She went back anyway, insisting that girls belonged in classrooms, not only in kitchens, and that women should vote.
 
-**Gender roles limit boys and men** by telling them they cannot be vulnerable, cannot ask for help, and cannot show tenderness. Boys who want to express emotion, pursue creative interests, or simply be gentle are often shamed into suppressing those parts of themselves. This suppression contributes to higher rates of depression, substance abuse, and suicide among men in many parts of the world.
+It arrives as widowhood rites a man never faces. A woman loses her husband and, in some places, loses her home, her property, and her standing in the same week. The community calls it custom. The custom has a gender.
 
-**Gender roles limit entire societies** by wasting potential. When half the population is told to stay small, the whole community loses out on the ideas, leadership, and innovation that those people could have contributed.
+It arrives as a woman in a job men have held for years being treated as if the job itself had changed. [Ngozi Okonjo-Iweala](/women/ngozi-okonjo-iweala) has spoken about the scrutiny and hostility she met as Nigeria's Finance Minister, attention her male predecessors did not attract in the same way. The qualifications were not the problem. The picture of who is allowed to hold the file was.
 
-## What does this look like in Africa?
+The dining table, the school gate, and the ministry are different rooms. The script is the same.
 
-Across the continent, gender roles show up in specific and often deeply personal ways.
+## You can keep a tradition without obeying a cage
 
-In many communities, girls are pulled out of school to help at home or to marry, while boys are given priority for education. [Gambo Sawaba](/women/gambo-sawaba) fought against this exact pattern in northern Nigeria, demanding that girls have the same access to learning as boys.
+Understanding gender roles is not a demand that every family throw out its cooking pots, or that men and women pretend to be identical. It is a demand that we tell the difference between a choice and a rule.
 
-In some cultures, widows are subjected to rituals and restrictions that widowers never face. A woman who loses her husband may lose her home, her property, and her standing in the community overnight.
+If a woman wants to take care of her home, that is hers. If a man wants to be the one who earns, that is his. What is not a choice is the engineer sent back to the kitchen because of her body, or the man in pain who is told to be a man. What is not a choice is the child who is never asked, because the house already decided.
 
-In workplaces across Africa, women in leadership positions face criticism that men in the same roles never encounter. [Ngozi Okonjo-Iweala](/women/ngozi-okonjo-iweala) has spoken publicly about being subjected to scrutiny and hostility as Nigeria's Finance Minister that her male predecessors did not experience.
-
-These are not isolated incidents. They are patterns produced by gender roles that have been absorbed so deeply that people often do not recognise them for what they are.
-
-## Questioning does not mean rejecting everything
-
-Understanding gender roles is not about throwing out every tradition or pretending that men and women are identical. It is about recognising the difference between a choice and a rule.
-
-If a woman loves cooking and wants to take care of her home, that is her choice and it is valid. If a man wants to be the primary earner for his family, that is his choice too. The issue arises when these are not choices but obligations. When a woman who wants to be an engineer is told she belongs in the kitchen. When a man who is struggling emotionally is told to "be a man."
-
-The goal is freedom. Freedom to choose who you are, what you do, and how you live without being punished for not fitting a script that someone else wrote.
+The goal is not a new script written by someone else. It is enough room to live without being punished for stepping off a line you did not draw.
 
 ## What to take away
 
-- Gender roles are socially constructed expectations about how men and women should behave. They are learned, not hardwired.
-- They come from family, culture, religion, media, education, and peer pressure. No single source is responsible.
-- Rigid gender roles limit girls by shrinking their ambitions, and they limit boys by suppressing their emotions.
-- Many gender norms in Africa were shaped or intensified by colonialism and are newer than people realise.
-- Questioning gender roles is not about rejecting tradition. It is about choosing freely rather than following a script that was never yours.
+- Gender roles are taught expectations about how men and women should behave. They feel natural because they start early, not because they are hardwired.
+- Family, culture, religion, school, media, and friends all copy the script. No single source is in charge.
+- The harm is not that some people enjoy traditional work. The harm is when a role becomes a rule you can be mocked, excluded, or punished for leaving.
+- Many arrangements defended as African tradition were [hardened or introduced under colonial rule](/articles/how-colonialism-rewrote-the-rules). Age is not the same thing as origin.
+- Questioning the script is not the same as rejecting your people. It is how you tell a choice from an order.
 
-You did not write the rules. But you get to decide whether you follow them.
+You did not write the rules. You still get to decide whether they get the last word.

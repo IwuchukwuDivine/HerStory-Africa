@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Maryam Babangida fundamentally redefined the role of Nigeria's First Lady by founding the Better Life for Rural Women programme, the first initiative of its kind focused on rural women's welfare."
 summary: "First Lady of Nigeria (1985–1993); founder of Better Life for Rural Women. Redefined the role of First Lady in Nigeria; advocate for rural women's welfare and economic empowerment."
+hook: "Better Life for Rural Women made Nigeria's First Lady more than a ceremonial title."
 ---
 
 ## Biography
@@ -31,7 +32,7 @@ Before Maryam Babangida, the role of First Lady in Nigeria was largely ceremonia
 
 ## What She Fought For
 
-Maryam Babangida fought for **rural women's welfare** and **economic empowerment** through Better Life for Rural Women, and for **visibility** of Nigerian culture and fashion. She advocated for women's cooperatives and access to resources.
+Maryam Babangida fought for **rural women's welfare** and **[economic empowerment](/articles/why-economic-independence-changes-everything)** through Better Life for Rural Women, and for **visibility** of Nigerian culture and fashion. She advocated for women's cooperatives and access to resources.
 
 ## Major Achievements
 

@@ -253,7 +253,7 @@ Same process — add a Markdown file to `app/content/articles/` and open a PR.
 
 ## Image Licensing
 
-All images used in this project are sourced from Wikimedia Commons under Creative Commons or public domain licenses. Image credits are noted in each profile's frontmatter.
+All images used in this project are sourced from Wikimedia Commons under Creative Commons or public domain licenses. Image credits are noted in each profile's frontmatter. Where no freely licensed image of a woman exists, the profile shows a placeholder and the credit line says so; we do not use fair-use or unlicensed photographs.
 
 If you find a licensing issue, please open an issue immediately.
 

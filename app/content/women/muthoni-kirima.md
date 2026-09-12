@@ -12,10 +12,11 @@ causes:
   - "Sovereignty & independence"
   - "Women's leadership"
 image: "/women/placeholder.svg"
-imageCredit: "No free-use image available"
+imageCredit: "No freely licensed image available"
 featured: false
 funFact: "She refused to cut her hair for roughly seventy years, vowing to keep her dreadlocks until she saw the true fruits of the independence she had fought for."
 summary: "The only woman to reach the rank of Field Marshal in Kenya's Mau Mau uprising, who fought British colonial rule from the forests of Mount Kenya. She spent the rest of her life demanding that her country honour the freedom fighters it chose to forget."
+hook: "Mau Mau's only woman Field Marshal, who left her hair uncut for seventy years."
 ---
 
 ## Biography
@@ -32,7 +33,7 @@ The Mau Mau uprising of the 1950s was an armed revolt against British land theft
 
 ## Her Impact Today
 
-For about seventy years she kept her vow, her matted dreadlocks becoming one of Kenya's most recognisable emblems of the independence struggle. In April 2022 they were finally cut, by Mama Ngina Kenyatta, in a ceremony Muthoni said marked Kenya's full independence. She died in 2023, aged around ninety-two, honoured at last as a national heroine and a living reminder that the fight for freedom was carried, in part, by women the history books had left out.
+For about seventy years she kept her vow, her matted dreadlocks becoming one of Kenya's most recognisable emblems of the [independence struggle](/articles/daughters-of-independence). In April 2022 they were finally cut, by Mama Ngina Kenyatta, in a ceremony Muthoni said marked Kenya's full independence. She died in 2023, aged around ninety-two, honoured at last as a national heroine and a living reminder that the fight for freedom was carried, in part, by women the history books had left out.
 
 ---
 

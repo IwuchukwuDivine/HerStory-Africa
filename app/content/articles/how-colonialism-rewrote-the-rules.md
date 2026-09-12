@@ -1,6 +1,8 @@
 ---
 title: "How Colonialism Rewrote the Rules for African Women"
 description: "A look at how European colonisation disrupted the power, autonomy, and rights that African women held in their own societies, and how the effects still linger today."
+seoTitle: "How Colonialism Changed African Women's Power"
+seoDescription: "Before European rule, African women held land, ran markets, and governed. Learn how colonialism stripped that authority away and why it lingers today."
 date: 2026-03-08
 slug: how-colonialism-rewrote-the-rules
 category: "History"

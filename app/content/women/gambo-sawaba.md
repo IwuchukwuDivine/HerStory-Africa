@@ -17,13 +17,14 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: false
 funFact: "Gambo Sawaba was arrested over 17 times for fighting for women's right to vote in Northern Nigeria."
 summary: "Nigerian activist who fought for women's right to vote in Northern Nigeria at enormous personal cost, arrested over 17 times and imprisoned repeatedly for defying the political establishment."
+hook: "Arrested more than 17 times, banned from Zaria, and back on the streets every time."
 ---
 
 ## Biography
 
 Hajaratu Gambo, known to history as **Gambo Sawaba**, was born on 15 February 1933 in Lavun, Niger State, Nigeria. Her name, Gambo, came from Hausa naming custom: any child born after twins carries it. Sawaba, meaning *freedom* in Hausa, was a name she earned.
 
-Her formal education ended at primary school level, but her political education began early. She became the women's wing leader of the **Northern Element Progressive Union (NEPU)**, the radical opposition party founded by Aminu Kano that challenged the conservative Northern People's Congress and its alliance with the British colonial administration.
+Her formal education ended at primary school level, but her political education began early. She became the women's wing leader of the **Northern Element Progressive Union (NEPU)**, the radical opposition party founded by Aminu Kano that challenged the conservative Northern People's Congress and its alliance with the [British colonial administration](/articles/how-colonialism-rewrote-the-rules).
 
 ## Historical Context
 

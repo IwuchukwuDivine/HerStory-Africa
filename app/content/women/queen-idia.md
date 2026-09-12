@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Memorial bust, Ethnological Museum Berlin / CC
 featured: true
 funFact: "Her iconic ivory mask became the symbol of FESTAC '77 and one of Africa's most recognized artworks"
 summary: "Powerful 15th/16th-century Queen Mother of the Benin Kingdom (modern Nigeria). The first woman to hold the title of Iyoba (created for her by her son, Oba Esigie) in recognition of her military and political role in securing his throne. Her face lives on in the iconic Benin ivory mask, now at the British Museum, and at the centre of a decades-long repatriation debate."
+hook: "Her face, carved in ivory five centuries ago, still sits in the British Museum."
 ---
 
 ## Biography
@@ -57,7 +58,7 @@ The **repatriation of the Benin Bronzes** (including this mask) has been one of 
 
 ## Her Impact Today
 
-Queen Idia's face (rendered in ivory six centuries ago) is one of the most recognised symbols of African heritage in the world. Her story is a story of female power in pre-colonial Africa that colonialism tried to erase, both by dismantling the Benin Kingdom and by looting its art. The ongoing fight for the return of the Benin Bronzes is, in part, a fight to restore that history to its people.
+Queen Idia's face (rendered in ivory six centuries ago) is one of the most recognised symbols of African heritage in the world. Her story is a story of female power in pre-colonial Africa that [colonialism](/articles/how-colonialism-rewrote-the-rules) tried to erase, both by dismantling the Benin Kingdom and by looting its art. The ongoing fight for the return of the Benin Bronzes is, in part, a fight to restore that history to its people.
 
 ---
 

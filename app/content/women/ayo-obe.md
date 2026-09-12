@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "Ayo Obe served as President of the Civil Liberties Organisation, becoming one of Nigeria's most prominent voices for democracy, rule of law, and civil liberties."
 summary: "Nigerian lawyer and human rights activist; former President of the Civil Liberties Organisation. Advocate for rule of law, democracy, and civil liberties; prominent voice in Nigerian civil society."
+hook: "A lawyer who ran the Civil Liberties Organisation and monitored Nigeria's elections."
 ---
 
 ## Biography

@@ -1,12 +1,17 @@
 <template>
   <button
+    type="button"
     class="favorite-btn"
-    :class="{ 'favorite-btn--active': active }"
-    :style="active ? { color: '#e53e3e' } : undefined"
-    :aria-label="active ? 'Remove from favorites' : 'Add to favorites'"
+    :class="[
+      label ? 'pill pill--secondary favorite-btn--label' : 'favorite-btn--icon',
+      { 'favorite-btn--active': active },
+    ]"
+    :aria-label="label ? undefined : active ? 'Remove from favourites' : 'Add to favourites'"
+    :aria-pressed="active"
     @click.prevent.stop="toggle"
   >
-    <LucideHeart :size="size" :fill="active ? 'currentColor' : 'none'" />
+    <LucideHeart :size="label ? 16 : size" :fill="active ? 'currentColor' : 'none'" />
+    <span v-if="label">{{ active ? "Saved" : label }}</span>
   </button>
 </template>
 
@@ -15,15 +20,30 @@ const props = withDefaults(
   defineProps<{
     type: "article" | "woman";
     slug: string;
+    /** Glyph size in icon-only mode; the hit box is always 44px. */
     size?: number;
+    /** Renders a labelled secondary pill ("Save" / "Saved") instead of the bare heart. */
+    label?: string;
   }>(),
-  { size: 18 },
+  { size: 18, label: undefined },
 );
 
 const { toggleFavorite, isFavorite } = useApp();
 const { track } = useTag();
 
-const active = computed(() => isFavorite(props.type, props.slug));
+/*
+ * Favourites live in localStorage, which the server cannot see. Render the
+ * unsaved state first so the prerendered HTML and the first client render
+ * agree, then show the real state once mounted. This lets the button render
+ * on the server instead of hiding behind <ClientOnly>.
+ */
+const mounted = ref(false);
+onMounted(() => {
+  mounted.value = true;
+});
+const active = computed(
+  () => mounted.value && isFavorite(props.type, props.slug),
+);
 
 function toggle() {
   const action = active.value ? "remove" : "add";
@@ -37,30 +57,52 @@ function toggle() {
 </script>
 
 <style scoped>
-.favorite-btn {
+.favorite-btn--icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.375rem;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border: none;
   border-radius: 50%;
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
   transition:
-    color 0.2s ease,
-    transform 0.2s ease;
+    color 0.15s ease,
+    transform 0.25s ease;
 }
 
-.favorite-btn:hover {
+@media (hover: hover) {
+  .favorite-btn--icon:hover {
+    color: #e53e3e;
+  }
+}
+
+.favorite-btn--icon:active {
+  transform: scale(0.9);
+}
+
+.favorite-btn--icon.favorite-btn--active {
   color: #e53e3e;
 }
 
-.favorite-btn--active {
+.favorite-btn--label.favorite-btn--active {
+  border-color: #e53e3e;
   color: #e53e3e;
 }
 
-.favorite-btn:active {
-  transform: scale(0.85);
+@media (hover: hover) {
+  .favorite-btn--label.favorite-btn--active:hover {
+    border-color: #e53e3e;
+    color: #e53e3e;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .favorite-btn--icon {
+    transition: none;
+  }
 }
 </style>

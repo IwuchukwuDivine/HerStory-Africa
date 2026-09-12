@@ -16,6 +16,7 @@ imageCredit: "Wikimedia Commons / CC BY-SA 4.0"
 featured: false
 funFact: "Asmaa Mahfouz was just 25 years old when her four-minute video blog post helped spark the Egyptian Revolution that toppled President Hosni Mubarak."
 summary: "Egyptian activist whose video blog posts in January 2011 called on Egyptians to protest in Tahrir Square and helped spark the Egyptian Revolution that toppled President Hosni Mubarak. She was 25 years old. Her four-minute video is considered one of the most significant acts of citizen activism in the history of the Arab world."
+hook: "A four-minute video posted at 25 that helped fill Tahrir Square on 25 January 2011."
 ---
 
 ## Biography

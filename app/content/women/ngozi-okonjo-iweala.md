@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / CC BY-SA 2.0"
 featured: true
 funFact: "First woman and first African to serve as Director-General of the World Trade Organization"
 summary: "Nigerian-American economist who became the first woman and first African Director-General of the WTO. Former Nigerian Finance Minister and World Bank Managing Director."
+hook: "Twice Nigeria's finance minister, then the first woman and first African to run the WTO."
 ---
 
 ## Biography
@@ -31,7 +32,7 @@ Nigeria's economy has been shaped by oil, debt, and governance challenges. Okonj
 
 ## What She Fought For
 
-Ngozi Okonjo-Iweala has worked for **sound economic policy**, **debt sustainability**, **transparency**, and **anti-corruption** in Nigeria and internationally. She has advocated for **women's economic empowerment** and for **African representation** in global institutions. At the WTO she has emphasised development, sustainability, and reform so that trade benefits more people.
+Ngozi Okonjo-Iweala has worked for **sound economic policy**, **debt sustainability**, **transparency**, and **anti-corruption** in Nigeria and internationally. She has advocated for **[women's economic empowerment](/articles/why-economic-independence-changes-everything)** and for **African representation** in global institutions. At the WTO she has emphasised development, sustainability, and reform so that trade benefits more people.
 
 ## Major Achievements
 

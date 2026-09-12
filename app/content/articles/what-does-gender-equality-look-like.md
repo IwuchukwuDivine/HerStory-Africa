@@ -1,6 +1,8 @@
 ---
 title: "What Does Gender Equality Actually Look Like?"
 description: "Moving beyond the buzzword to paint a real picture of what a gender-equal world looks like in practice, from homes to classrooms to governments."
+seoTitle: "What Gender Equality Looks Like in Practice"
+seoDescription: "Gender equality is more than a buzzword. This guide describes what it looks like in homes, classrooms, workplaces, and governments, and what it is not."
 date: 2026-03-08
 slug: what-does-gender-equality-look-like
 category: "Concepts"

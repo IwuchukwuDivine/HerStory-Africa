@@ -1,5 +1,68 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
+
+// ── Content discovery (build-time) ──────────────────────────────────
+// Reads the Markdown collections once at config time so both the
+// prerender route list and the sitemap can be derived from the files
+// without any runtime queries.
+const contentDir = resolve(__dirname, "app/content");
+
+interface ContentEntry {
+  slug: string;
+  frontmatter: string;
+}
+
+function readContentEntries(collection: string): ContentEntry[] {
+  const dir = resolve(contentDir, collection);
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => {
+      const raw = readFileSync(resolve(dir, f), "utf8");
+      const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      return { slug: f.replace(/\.md$/, ""), frontmatter: match?.[1] ?? "" };
+    });
+}
+
+function frontmatterDate(frontmatter: string, key: string): string | undefined {
+  const match = frontmatter.match(
+    new RegExp(`^${key}:\\s*["']?(\\d{4}-\\d{2}-\\d{2})`, "m"),
+  );
+  return match?.[1];
+}
+
+const womenEntries = readContentEntries("women");
+const articleEntries = readContentEntries("articles");
+const opportunityEntries = readContentEntries("opportunities");
+const pathEntries = readContentEntries("paths");
+
+const contentRoutes = [
+  ...womenEntries.map((e) => `/women/${e.slug}`),
+  ...articleEntries.map((e) => `/articles/${e.slug}`),
+  ...opportunityEntries.map((e) => `/opportunities/${e.slug}`),
+  ...pathEntries.map((e) => `/women/path/${e.slug}`),
+];
+
+const contentSitemapUrls = [
+  ...womenEntries.map((e) => ({
+    loc: `/women/${e.slug}`,
+    lastmod: frontmatterDate(e.frontmatter, "dateAdded"),
+  })),
+  ...articleEntries.map((e) => ({
+    loc: `/articles/${e.slug}`,
+    lastmod:
+      frontmatterDate(e.frontmatter, "updated") ??
+      frontmatterDate(e.frontmatter, "date"),
+  })),
+  ...opportunityEntries.map((e) => ({ loc: `/opportunities/${e.slug}` })),
+  ...pathEntries.map((e) => ({ loc: `/women/path/${e.slug}` })),
+];
+
+const siteUrl = (
+  process.env.NUXT_SITE_URL || "https://herstoryafrica.com.ng"
+).replace(/\/$/, "");
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -32,6 +95,9 @@ export default defineNuxtConfig({
 
   // ── Static Site Generation ──────────────────────────────────────────
   ssr: true,
+  // Nuxt inlines component CSS by default but still links the same files,
+  // so every page shipped its styles twice. Link only.
+  features: { inlineStyles: false },
   nitro: {
     prerender: {
       routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
@@ -49,6 +115,9 @@ export default defineNuxtConfig({
   gtag: {
     id: "G-V5FFHGH864",
     enabled: process.env.NODE_ENV === "production",
+    // The 167 KB gtag script is only fetched once a visitor grants consent
+    // (see useTag). Declined or undecided visitors never download it.
+    initMode: "manual",
     initCommands: [
       [
         "consent",
@@ -64,118 +133,147 @@ export default defineNuxtConfig({
     ],
   },
   hooks: {
-    async "nitro:config"(nitroConfig) {
+    // Reading time for every profile and article, computed once at build
+    // from the Markdown word count (200 words per minute). Stored in the
+    // `readingTime` column declared in content.config.ts.
+    "content:file:afterParse"(ctx) {
+      if (ctx.file.extension !== ".md") return;
+      const name = ctx.collection.name;
+      if (name !== "women" && name !== "articles") return;
+      const raw = String(ctx.file.body ?? "").replace(/^---[\s\S]*?\r?\n---/, "");
+      const words = raw.split(/\s+/).filter(Boolean).length;
+      ctx.content.readingTime = Math.max(1, Math.round(words / 200));
+    },
+    "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) return;
-      const { resolve } = await import("node:path");
-      const { readdirSync } = await import("node:fs");
-      const contentDir = resolve(__dirname, "app/content");
 
-      const women = readdirSync(resolve(contentDir, "women"))
-        .filter((f: string) => f.endsWith(".md"))
-        .map((f: string) => `/women/${f.replace(".md", "")}`);
+      // Hub pages (/women/region|era|cause/<slug>) and the A-Z index, derived
+      // from women frontmatter. Mirrors app/utils/slugify.ts and the
+      // CAUSE_HUB_MIN_WOMEN threshold in app/utils/constants/content.ts.
+      const slugify = (value: string) =>
+        value
+          .toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/['\u2019]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+      const CAUSE_HUB_MIN_WOMEN = 3;
+      const REGIONS = [
+        "West Africa",
+        "East Africa",
+        "Southern Africa",
+        "Central Africa",
+        "North Africa",
+      ];
+      const ERAS = [
+        "Pre-Colonial",
+        "Colonial",
+        "Independence",
+        "Modern",
+        "Contemporary",
+      ];
 
-      const articles = readdirSync(resolve(contentDir, "articles"))
-        .filter((f: string) => f.endsWith(".md"))
-        .map((f: string) => `/articles/${f.replace(".md", "")}`);
+      const scalar = (fm: string, key: string) =>
+        fm.match(new RegExp(`^${key}:\\s*["']?([^"'\\n]+?)["']?\\s*$`, "m"))?.[1];
+      const causeCounts = new Map<string, number>();
+      const regionsSeen = new Set<string>();
+      const erasSeen = new Set<string>();
+      for (const { frontmatter } of womenEntries) {
+        const region = scalar(frontmatter, "region");
+        const era = scalar(frontmatter, "era");
+        if (region) regionsSeen.add(region.toLowerCase());
+        if (era) erasSeen.add(era.toLowerCase());
+        const list = frontmatter.match(/^causes:\s*\n((?:[ \t]+-[^\n]*\n?)+)/m)?.[1];
+        for (const line of list?.split("\n") ?? []) {
+          const cause = line
+            .replace(/^\s*-\s*/, "")
+            .trim()
+            .replace(/^["']|["']$/g, "");
+          if (cause) causeCounts.set(cause, (causeCounts.get(cause) ?? 0) + 1);
+        }
+      }
 
-      const { existsSync } = await import("node:fs");
-      const oppDir = resolve(contentDir, "opportunities");
-      const opportunities = existsSync(oppDir)
-        ? readdirSync(oppDir)
-            .filter((f: string) => f.endsWith(".md"))
-            .map((f: string) => `/opportunities/${f.replace(".md", "")}`)
-        : [];
+      const hubRoutes = [
+        "/women/all",
+        ...REGIONS.filter((r) => regionsSeen.has(r.toLowerCase())).map(
+          (r) => `/women/region/${slugify(r)}`,
+        ),
+        ...ERAS.filter((e) => erasSeen.has(e.toLowerCase())).map(
+          (e) => `/women/era/${slugify(e)}`,
+        ),
+        ...[...causeCounts.entries()]
+          .filter(([, n]) => n >= CAUSE_HUB_MIN_WOMEN)
+          .map(([cause]) => `/women/cause/${slugify(cause)}`),
+      ];
 
       nitroConfig.prerender = nitroConfig.prerender || {};
       nitroConfig.prerender.routes = [
         ...(nitroConfig.prerender.routes || []),
-        ...women,
-        ...articles,
-        ...opportunities,
+        ...contentRoutes,
+        ...hubRoutes,
       ];
     },
   },
 
   // ── Vite ────────────────────────────────────────────────────────────
   vite: {
+    build: {
+      // One stylesheet instead of ~10. Every chunk is a render-blocking
+      // request, and on a throttled connection the round trips cost far more
+      // than the extra bytes: the whole site's CSS gzips to about 25 KB.
+      cssCodeSplit: false,
+    },
     // @ts-expect-error - type mismatch between @tailwindcss/vite and Nuxt's bundled Vite types
     plugins: [tailwindcss()],
+    define: {
+      "process.env.NUXT_SITE_URL": JSON.stringify(siteUrl),
+    },
     optimizeDeps: {
       include: ["@vueuse/core"],
     },
   },
 
   // ── Fonts ───────────────────────────────────────────────────────────
+  // One local family, all twelve faces, served from public/fonts/v1/ as
+  // WOFF2 using the @nuxt/fonts slug convention
+  // (playfair-display-<weight>[-italic].woff2). The folder is versioned
+  // because vercel.json caches /fonts/ for a year: if a font file ever
+  // changes, move the set to /fonts/v2/ so returning browsers fetch it.
+  // `global: true` plus the weights/styles arrays are what nuxt-og-image
+  // reads to embed the same faces in Satori; per-weight entries make it fall
+  // back to Inter.
   fonts: {
     families: [
       {
         name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Regular.ttf",
-        weight: 400,
+        provider: "local",
+        weights: [400, 500, 600, 700, 800, 900],
+        styles: ["normal", "italic"],
+        global: true,
+        // Emits a metric-matched @font-face for the fallback so text does not
+        // reflow when Playfair swaps in. Without it the hero and the first
+        // section jump, which is most of the page's CLS.
+        fallbacks: ["Georgia", "Times New Roman", "serif"],
+      },
+      {
+        // Share-card font. Satori cannot read WOFF2, and nuxt-og-image takes
+        // the first source of a face, which for the family above is the
+        // WOFF2. This separate family points only at TTF copies in
+        // public/fonts/og/. The site never uses it, so browsers never
+        // download these files; only the OG renderer does, at build time.
+        name: "Playfair Display OG",
+        provider: "local",
+        weights: [400, 500, 600, 700, 800, 900],
+        styles: ["normal", "italic"],
         global: true,
       },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Italic.ttf",
-        weight: 400,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Medium.ttf",
-        weight: 500,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-MediumItalic.ttf",
-        weight: 500,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-SemiBold.ttf",
-        weight: 600,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-SemiBoldItalic.ttf",
-        weight: 600,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Bold.ttf",
-        weight: 700,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-BoldItalic.ttf",
-        weight: 700,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-ExtraBold.ttf",
-        weight: 800,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-ExtraBoldItalic.ttf",
-        weight: 800,
-        style: "italic",
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-Black.ttf",
-        weight: 900,
-      },
-      {
-        name: "Playfair Display",
-        src: "~/assets/fonts/PlayfairDisplay-BlackItalic.ttf",
-        weight: 900,
-        style: "italic",
-      },
     ],
+  },
+
+  // ── OG images ───────────────────────────────────────────────────────
+  ogImage: {
+    // app.head advertises 1200×630; the module default is 1200×600.
+    defaults: { width: 1200, height: 630 },
   },
 
   // ── Nuxt Content ────────────────────────────────────────────────────
@@ -199,8 +297,22 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
 
+  // In development there is no prerender step, and the ipxStatic provider
+  // registers no /_ipx handler, so every optimised image 404s. Use the live
+  // ipx handler locally; `nuxt generate` still resolves to ipxStatic below.
+  $development: {
+    image: { provider: "ipx" },
+  },
+
   // ── Image Optimisation ──────────────────────────────────────────────
   image: {
+    // Generate every image variant at build time as static files. The
+    // default on Vercel is its on-demand optimizer, which is metered and
+    // returns 402 once the Hobby quota is used up.
+    provider: "ipxStatic",
+    // Registered so components can opt SVG sources out of optimisation
+    // (see app/utils/imageProvider.ts).
+    providers: { none: {} },
     quality: 80,
     format: ["webp", "jpg"],
     screens: {
@@ -214,7 +326,8 @@ export default defineNuxtConfig({
 
   // ── Site URL (required by sitemap + SEO modules) ───────────────────
   site: {
-    url: "https://herstoryafrica.com.ng",
+    url: siteUrl,
+    name: "HerStory Africa",
   },
 
   // ── Sitemap ─────────────────────────────────────────────────────────
@@ -223,8 +336,11 @@ export default defineNuxtConfig({
     defaults: {
       changefreq: "weekly",
       priority: 0.7,
-      lastmod: new Date().toISOString(),
     },
+    // Per-URL lastmod from content frontmatter; merged by loc with the
+    // routes the module discovers from the prerender list.
+    urls: contentSitemapUrls,
+    exclude: ["/favorites", "/newsletter/confirmed", "/newsletter", "/suggest"],
     sitemaps: false,
   },
 
@@ -254,7 +370,7 @@ export default defineNuxtConfig({
         { property: "og:site_name", content: "HerStory Africa" },
         {
           property: "og:title",
-          content: "HerStory Africa — The women history forgot to teach you.",
+          content: "HerStory Africa: The women history forgot to teach you.",
         },
         {
           property: "og:description",
@@ -263,7 +379,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:image",
-          content: "https://herstoryafrica.com.ng/og-image.png",
+          content: `${siteUrl}/og-image.png`,
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
@@ -273,7 +389,7 @@ export default defineNuxtConfig({
         { name: "twitter:site", content: "@_DeeVyn" },
         {
           name: "twitter:title",
-          content: "HerStory Africa — The women history forgot to teach you.",
+          content: "HerStory Africa: The women history forgot to teach you.",
         },
         {
           name: "twitter:description",
@@ -282,7 +398,18 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://herstoryafrica.com.ng/og-image.png",
+          content: `${siteUrl}/og-image.png`,
+        },
+      ],
+
+      // Apply the saved colour scheme before first paint so a dark-mode
+      // reload never flashes light. Mirrors @vueuse/core useDark storage.
+      script: [
+        {
+          key: "theme-init",
+          tagPosition: "head",
+          innerHTML:
+            "(function(){try{var s=localStorage.getItem('vueuse-color-scheme');if(s==='dark'||(s==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();",
         },
       ],
 

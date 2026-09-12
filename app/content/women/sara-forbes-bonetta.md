@@ -17,11 +17,12 @@ imageCredit: "Wikimedia Commons / Camille Silvy / National Portrait Gallery / Pu
 featured: false
 funFact: "Born Aina in Yorubaland, Sara Forbes Bonetta was given as a 'gift' to Queen Victoria by King Ghezo of Dahomey and became a remarkable figure in Victorian England."
 summary: "Born Aina in Yorubaland around 1843, she was orphaned in the Dahomey slave raids, then given to Queen Victoria as a gift by King Ghezo of Dahomey. She became a remarkable figure in Victorian England, educated and cultured, yet always defined by her origins. Her life illuminates the complexity of African identity under colonialism."
+hook: "Orphaned by Dahomey, presented to Queen Victoria as a gift, photographed by Camille Silvy."
 ---
 
 ## Biography
 
-Sara Forbes Bonetta was born around 1843 in Yorubaland, in what is now southwestern Nigeria. Her birth name was Aina. When she was about five years old, her family was caught up in the slave raids of the Kingdom of Dahomey. Her parents were killed; she was taken to the court of King Ghezo.
+Sara Forbes Bonetta was born around 1843 in Yorubaland, in what is now southwestern Nigeria. Her birth name was Aina. When she was about five years old, her family was caught up in the slave raids of the [Kingdom of Dahomey](/articles/the-dahomey-amazons). Her parents were killed; she was taken to the court of King Ghezo.
 
 In 1850, Captain Frederick Forbes of the Royal Navy arrived in Dahomey on a diplomatic mission. Ghezo presented the young girl to Forbes as a "gift" for Queen Victoria, framing it as a gesture of goodwill. Forbes accepted, renamed her Sara Forbes Bonetta (after his ship and himself), and brought her to England. Queen Victoria took an interest in her, paid for her education, and became her godmother.
 
@@ -48,7 +49,7 @@ Her life raises difficult questions. She was "rescued" from one form of captivit
 
 ## Her Impact Today
 
-Sara Forbes Bonetta's life is a reminder that African history under colonialism is not a simple story of victimhood or triumph. She was neither fully free nor fully erased. She navigated a world that saw her as an object of curiosity while building a life of dignity and accomplishment. Her story continues to be studied and retold as part of the broader history of African women in the diaspora and the complex legacies of empire.
+Sara Forbes Bonetta's life is a reminder that African history under [colonialism](/articles/how-colonialism-rewrote-the-rules) is not a simple story of victimhood or triumph. She was neither fully free nor fully erased. She navigated a world that saw her as an object of curiosity while building a life of dignity and accomplishment. Her story continues to be studied and retold as part of the broader history of African women in the diaspora and the complex legacies of empire.
 
 ---
 

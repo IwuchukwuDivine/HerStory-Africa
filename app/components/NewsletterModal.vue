@@ -1,50 +1,74 @@
 <template>
-  <Transition name="modal">
-    <div v-if="visible" class="newsletter-modal" @click.self="dismiss">
-      <div class="newsletter-modal__card">
-        <button class="newsletter-modal__close" aria-label="Close" @click="dismiss">
-          <LucideX :size="20" />
-        </button>
+  <Transition name="newsletter-card">
+    <aside
+      v-if="visible"
+      class="newsletter-card"
+      role="complementary"
+      aria-label="Newsletter signup"
+    >
+      <button
+        class="icon-btn newsletter-card__close"
+        type="button"
+        aria-label="Dismiss newsletter signup"
+        @click="dismiss"
+      >
+        <LucideX :size="20" />
+      </button>
 
-        <div class="newsletter-modal__accent" />
-
-        <div class="newsletter-modal__body">
-          <h2 class="newsletter-modal__title">
-            Don't let these stories stay hidden.
-          </h2>
-          <p class="newsletter-modal__desc">
-            Get new stories of remarkable African women delivered to your inbox.
-            No spam, just history worth knowing.
-          </p>
-          <NewsletterForm
-            placeholder="Your email address"
-            @subscribed="onSubscribed"
-          />
-        </div>
+      <div class="newsletter-card__body">
+        <h2 class="newsletter-card__title">
+          Don't let these stories stay hidden.
+        </h2>
+        <p class="newsletter-card__desc">
+          New stories of remarkable African women, straight to your inbox.
+          No spam, just history worth knowing.
+        </p>
+        <NewsletterForm
+          placeholder="Your email address"
+          @subscribed="onSubscribed"
+        />
       </div>
-    </div>
+    </aside>
   </Transition>
 </template>
 
 <script setup lang="ts">
-const { hasSeenNewsletterPrompt, isSubscribed } = useApp();
+const SCROLL_THRESHOLD = 0.6;
+
+/** Individual profiles and articles (not listings, hubs or reading paths). */
+const READING_ROUTE = /^\/(women|articles)\/(?!all$|region\/|era\/|cause\/|path\/)[^/]+$/;
+
+const { hasSeenNewsletterPrompt, isSubscribed, setValue } = useApp();
 const searchOpen = useSearchOpen();
+const consentVisible = useState<boolean>("consent-visible", () => false);
+const readingFinished = useState<boolean>("reading-finished", () => false);
+const route = useRoute();
 
 const visible = ref(false);
 let scrollCleanup: (() => void) | null = null;
-let timeout: ReturnType<typeof setTimeout> | null = null;
 let pendingShow = false;
 
-const route = useRoute();
+const isReadingRoute = computed(() =>
+  READING_ROUTE.test(route.path.replace(/\/+$/, "")),
+);
+
+function isNarrow() {
+  return window.matchMedia("(max-width: 767px)").matches;
+}
 
 function shouldShow() {
   if (route.path.startsWith("/newsletter")) return false;
-  return !hasSeenNewsletterPrompt.value && !isSubscribed.value;
+  if (hasSeenNewsletterPrompt.value || isSubscribed.value) return false;
+  // Reading pages below 768px carry an inline newsletter panel instead.
+  if (isReadingRoute.value && isNarrow()) return false;
+  return true;
 }
+
+const blocked = computed(() => searchOpen.value || consentVisible.value);
 
 function show() {
   if (!shouldShow()) return;
-  if (searchOpen.value) {
+  if (blocked.value) {
     pendingShow = true;
     return;
   }
@@ -53,18 +77,22 @@ function show() {
   cleanup();
 }
 
-watch(searchOpen, (isOpen) => {
-  if (isOpen && visible.value) {
+watch(blocked, (isBlocked) => {
+  if (isBlocked && visible.value) {
     visible.value = false;
     pendingShow = true;
-  } else if (!isOpen && pendingShow) {
+  } else if (!isBlocked && pendingShow) {
     show();
   }
 });
 
+// On a profile or article, wait for the reader to reach the end of the body.
+watch(readingFinished, (finished) => {
+  if (finished && isReadingRoute.value) show();
+});
+
 function dismiss() {
   visible.value = false;
-  const { setValue } = useApp();
   setValue("hasSeenNewsletterPrompt", true);
 }
 
@@ -79,21 +107,18 @@ function cleanup() {
     scrollCleanup();
     scrollCleanup = null;
   }
-  if (timeout) {
-    clearTimeout(timeout);
-    timeout = null;
-  }
 }
 
 onMounted(() => {
-  if (!shouldShow()) return;
+  if (hasSeenNewsletterPrompt.value || isSubscribed.value) return;
 
-  timeout = setTimeout(show, 15000);
-
+  // Everywhere else the card appears at 60% of the page.
   function onScroll() {
+    if (isReadingRoute.value) return;
     const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (docHeight > 0 && scrollTop / docHeight >= 0.6) {
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0 && scrollTop / docHeight >= SCROLL_THRESHOLD) {
       show();
     }
   }
@@ -106,111 +131,101 @@ onUnmounted(cleanup);
 </script>
 
 <style scoped>
-.newsletter-modal {
+.newsletter-card {
   position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  background: var(--overlay-default);
-}
-
-.newsletter-modal__card {
-  position: relative;
-  width: 100%;
-  max-width: 28rem;
+  bottom: calc(20px + var(--bottom));
+  right: calc(20px + var(--right));
+  z-index: 250;
+  width: calc(100vw - 40px);
+  max-width: 22rem;
   background: var(--surface-elevated);
-  border-radius: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--shadow-elevated);
 }
 
-.newsletter-modal__close {
+.newsletter-card__close {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 6px;
+  right: 6px;
   z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 9999px;
-  border: none;
-  background: transparent;
   color: var(--text-muted);
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
 }
 
-.newsletter-modal__close:hover {
-  background: var(--surface-subtle);
-  color: var(--text-primary);
+.newsletter-card__body {
+  padding: 24px 20px 20px;
 }
 
-.newsletter-modal__accent {
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-}
-
-.newsletter-modal__body {
-  padding: 2rem 1.75rem 1.75rem;
-}
-
-.newsletter-modal__title {
-  font-size: 1.375rem;
+.newsletter-card__title {
+  font-size: 18px;
   font-weight: 800;
   color: var(--text-primary);
-  margin: 0 0 0.5rem;
+  margin: 0 32px 6px 0;
   line-height: 1.25;
 }
 
-.newsletter-modal__desc {
-  font-size: 0.9375rem;
-  line-height: 1.6;
+.newsletter-card__desc {
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--text-secondary);
-  margin: 0 0 1.25rem;
+  margin: 0 0 16px;
 }
 
-/* ── Transition ── */
-.modal-enter-active {
-  transition: opacity 0.3s ease;
+@media (max-width: 480px) {
+  .newsletter-card {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: none;
+    max-height: 40vh;
+    overflow-y: auto;
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+    padding-bottom: var(--bottom);
+  }
+
+  .newsletter-card__body {
+    padding: 20px 16px 16px;
+  }
+
+  .newsletter-card__title {
+    font-size: 16px;
+  }
+
+  .newsletter-card__desc {
+    margin-bottom: 12px;
+  }
 }
 
-.modal-enter-active .newsletter-modal__card {
+.newsletter-card-enter-active {
   transition:
-    opacity 0.3s ease,
-    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.modal-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.modal-leave-active .newsletter-modal__card {
+.newsletter-card-leave-active {
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
 }
 
-.modal-enter-from {
+.newsletter-card-enter-from,
+.newsletter-card-leave-to {
   opacity: 0;
+  transform: translateY(20px);
 }
 
-.modal-enter-from .newsletter-modal__card {
-  opacity: 0;
-  transform: translateY(1.5rem) scale(0.96);
-}
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-card-enter-active,
+  .newsletter-card-leave-active {
+    transition: opacity 0.2s ease;
+  }
 
-.modal-leave-to {
-  opacity: 0;
-}
-
-.modal-leave-to .newsletter-modal__card {
-  opacity: 0;
-  transform: translateY(0.5rem) scale(0.98);
+  .newsletter-card-enter-from,
+  .newsletter-card-leave-to {
+    transform: none;
+  }
 }
 </style>

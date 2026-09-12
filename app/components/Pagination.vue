@@ -1,6 +1,7 @@
 <template>
   <nav v-if="totalPages > 1" class="pagination" aria-label="Pagination">
     <button
+      type="button"
       class="pagination__btn"
       :disabled="modelValue <= 1"
       aria-label="Previous page"
@@ -13,6 +14,7 @@
       <span v-if="page === '...'" class="pagination__ellipsis">…</span>
       <button
         v-else
+        type="button"
         class="pagination__page"
         :class="{ 'pagination__page--active': page === modelValue }"
         :aria-label="`Page ${page}`"
@@ -24,6 +26,7 @@
     </template>
 
     <button
+      type="button"
       class="pagination__btn"
       :disabled="modelValue >= totalPages"
       aria-label="Next page"
@@ -35,44 +38,47 @@
 </template>
 
 <script setup lang="ts">
-import scrollToTop from '~/utils/scrollToTop'
+import scrollToTop from "~/utils/scrollToTop";
 
 const props = defineProps<{
-  modelValue: number
-  totalPages: number
-}>()
+  modelValue: number;
+  totalPages: number;
+}>();
 
 defineEmits<{
-  'update:modelValue': [page: number]
-}>()
+  "update:modelValue": [page: number];
+}>();
 
-watch(() => props.modelValue, () => {
-  scrollToTop()
-})
+watch(
+  () => props.modelValue,
+  () => {
+    scrollToTop();
+  },
+);
 
 const visiblePages = computed(() => {
-  const total = props.totalPages
-  const current = props.modelValue
-  const pages: (number | string)[] = []
+  const total = props.totalPages;
+  const current = props.modelValue;
+  const pages: (number | string)[] = [];
 
   if (total <= 7) {
-    for (let i = 1; i <= total; i++) pages.push(i)
-    return pages
+    for (let i = 1; i <= total; i++) pages.push(i);
+    return pages;
   }
 
-  pages.push(1)
+  pages.push(1);
 
-  if (current > 3) pages.push('...')
+  if (current > 3) pages.push("...");
 
-  const start = Math.max(2, current - 1)
-  const end = Math.min(total - 1, current + 1)
-  for (let i = start; i <= end; i++) pages.push(i)
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  for (let i = start; i <= end; i++) pages.push(i);
 
-  if (current < total - 2) pages.push('...')
+  if (current < total - 2) pages.push("...");
 
-  pages.push(total)
-  return pages
-})
+  pages.push(total);
+  return pages;
+});
 </script>
 
 <style scoped>
@@ -80,27 +86,48 @@ const visiblePages = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.375rem;
-  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 40px;
 }
 
-.pagination__btn {
+.pagination__btn,
+.pagination__page {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.625rem;
-  border: 1.5px solid var(--border-default);
-  background: var(--surface-elevated);
-  color: var(--text-secondary);
+  min-width: 44px;
+  height: 44px;
+  padding: 0 8px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background: transparent;
   font-family: var(--font-body);
-  transition: all 0.15s ease;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.pagination__btn:hover:not(:disabled) {
-  border-color: var(--ring-default);
-  color: var(--color-primary);
+.pagination__btn {
+  border-color: var(--border-default);
+  background: var(--surface-elevated);
+}
+
+@media (hover: hover) {
+  .pagination__btn:hover:not(:disabled) {
+    border-color: var(--ring-default);
+    color: var(--color-primary);
+  }
+
+  .pagination__page:hover:not(.pagination__page--active) {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
 }
 
 .pagination__btn:disabled {
@@ -108,44 +135,19 @@ const visiblePages = computed(() => {
   cursor: not-allowed;
 }
 
-.pagination__page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.5rem;
-  height: 2.5rem;
-  padding: 0 0.5rem;
-  border-radius: 0.625rem;
-  border: 1.5px solid transparent;
-  background: transparent;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  color: var(--text-secondary);
-  transition: all 0.15s ease;
-}
-
-.pagination__page:hover {
-  background: var(--surface-muted);
-  color: var(--text-primary);
-}
-
 .pagination__page--active {
   background: var(--color-primary);
-  color: var(--text-on-primary);
   border-color: var(--color-primary);
-}
-
-.pagination__page--active:hover {
-  background: var(--color-primary-600);
+  color: var(--text-on-primary);
 }
 
 .pagination__ellipsis {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 2rem;
-  font-size: 0.875rem;
+  min-width: 32px;
+  height: 44px;
+  font-size: 14px;
   color: var(--text-muted);
   user-select: none;
 }

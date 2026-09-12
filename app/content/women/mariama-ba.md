@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons / Public Domain"
 featured: true
 funFact: "Mariama Bâ's novel So Long a Letter became a landmark of African women's writing, redefining how women's inner lives were portrayed in African literature."
 summary: "Senegalese novelist and feminist whose novel So Long a Letter became a landmark of African women's writing. Teacher and advocate for women's education and equality."
+hook: "A teacher and mother of nine whose first novel won the first Noma Award in 1979."
 ---
 
 ## Biography
@@ -37,12 +38,12 @@ Mariama Bâ fought for **women’s right to speak and be heard** and for **educa
 
 - Author of *Une si longue lettre* (*So Long a Letter*, 1979), winner of the Noma Award, translated worldwide
 - Author of *Un chant écarlate* (*Scarlet Song*, 1981)
-- Teacher and advocate for women’s and girls’ education
+- Teacher and advocate for women’s and [girls’ education](/articles/why-educating-girls-changes-everything)
 - One of the most influential Francophone African women writers of the 20th century
 
 ## Her Impact Today
 
-Mariama Bâ died in 1981, shortly after the publication of her second novel. *So Long a Letter* remains a set text in schools and universities and a touchstone for discussions of gender, tradition, and resistance in African literature. Streets and schools in Senegal and elsewhere bear her name.
+Mariama Bâ died in 1981, shortly after the publication of her second novel. *So Long a Letter* remains a set text in schools and universities and a touchstone for discussions of gender, tradition, and resistance in [African literature](/articles/writing-africa-back). Streets and schools in Senegal and elsewhere bear her name.
 
 ---
 

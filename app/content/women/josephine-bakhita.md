@@ -16,6 +16,7 @@ imageCredit: "Photograph of Josephine Bakhita, c. 1910 / Wikimedia Commons / CC0
 featured: false
 funFact: "The slavers who kidnapped her mockingly named her Bakhita, Arabic for 'lucky', and she became the first Sudanese saint."
 summary: "Kidnapped and enslaved as a child in Darfur, sold five times and scarred with 114 cuts, she won her freedom in an Italian courtroom in 1889 and is now the patron saint of survivors of human trafficking."
+hook: "The slavers named her Bakhita, lucky, as a joke, and a Venice court made it true."
 ---
 
 ## Biography

@@ -17,6 +17,7 @@ imageCredit: "Wikimedia Commons"
 featured: false
 funFact: "In 2001, Agbani Darego became the first Black African woman in history to win the Miss World title."
 summary: "First Black African to win Miss World (2001). Model and advocate; used her platform for HIV/AIDS awareness and girls' education in Nigeria and Africa."
+hook: "In 2001 an 18-year-old from Abonnema became the first Black African Miss World."
 ---
 
 ## Biography
@@ -27,7 +28,7 @@ After her reign she pursued modelling and appeared in international campaigns. S
 
 ## Historical Context
 
-Beauty pageants were often criticised for narrow standards; Agbani Darego’s win was celebrated as a breakthrough for African representation on a global stage. She used the platform to speak about health and education rather than only fashion and appearance.
+Beauty pageants were often criticised for narrow standards; Agbani Darego’s win was celebrated as a breakthrough for [African representation](/articles/why-representation-matters) on a global stage. She used the platform to speak about health and education rather than only fashion and appearance.
 
 ## What She Fought For
 
