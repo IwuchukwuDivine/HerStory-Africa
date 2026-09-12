@@ -21,4 +21,4 @@ further:
   - "how-colonialism-rewrote-the-rules"
 ---
 
-The women who marched in 1929 mostly left no names behind, and the archive has no profile for Nwanyeruwa, whose question about a count started it. So this path reads the war through the lives around it: the market economy it grew out of, and the four Nigerian women who used its tactics for the next ninety years.
+The argument that started it belongs to [Nwanyeruwa](/women/nwanyeruwa), a widow in Oloko who was told to count her goats. This path reads the war through the market world it grew out of, and the Nigerian women who used its tactics for the next ninety years.
