@@ -51,6 +51,11 @@ const showRange = computed(
 @media (max-width: 899px) {
   .admin-shell {
     grid-template-columns: 1fr;
+    /* Without explicit rows, `min-height: 100dvh` plus two implicit `auto`
+       rows makes align-content stretch both, so the collapsed sidebar was
+       given a share of the leftover height (303px for 40px of content).
+       The bar takes what it needs; the view takes the rest. */
+    grid-template-rows: auto 1fr;
   }
 
   .admin-shell__body {

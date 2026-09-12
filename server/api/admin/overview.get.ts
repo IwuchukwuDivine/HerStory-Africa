@@ -1,4 +1,4 @@
-import { queryCollection } from "@nuxt/content/server";
+import snapshot from "herstory-content-snapshot";
 import type {
   AdminKpi,
   AdminOverview,
@@ -26,12 +26,13 @@ export default defineEventHandler(async (event): Promise<AdminOverview> => {
 
   const unavailable: string[] = [];
 
-  const [women, articles, health, opportunities, analytics, subscribers, suggestions] =
-    await Promise.all([
-      queryCollection(event, "women").select("slug", "name", "dateAdded").all(),
-      queryCollection(event, "articles").select("slug", "title", "date").all(),
-      contentHealth(event),
-      opportunityRows(event),
+  // Content comes from the build-time snapshot; only the three external
+  // services are actually awaited.
+  const { women, articles } = snapshot;
+  const health = contentHealth();
+  const opportunities = opportunityRows();
+
+  const [analytics, subscribers, suggestions] = await Promise.all([
       tryGa4Report(),
       subscriberCounts(),
       listSuggestions()

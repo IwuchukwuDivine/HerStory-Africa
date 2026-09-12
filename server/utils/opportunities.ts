@@ -1,5 +1,4 @@
-import { queryCollection } from "@nuxt/content/server";
-import type { H3Event } from "h3";
+import snapshot from "herstory-content-snapshot";
 import type {
   AdminOpportunities,
   AdminOpportunity,
@@ -16,21 +15,15 @@ const DATE_FMT = new Intl.DateTimeFormat("en", {
 });
 
 /**
- * Opportunity rows with a status derived at request time — the collection
- * stores a deadline, not a state, so "closing" has to be computed against
- * today on every load rather than baked in at build.
+ * Opportunity rows from the build-time snapshot, with a status derived at
+ * request time — the content stores a deadline, not a state, so "closing" has
+ * to be computed against today on every load rather than baked in at build.
  */
-export async function opportunityRows(
-  event: H3Event,
-): Promise<AdminOpportunities> {
-  const items = await queryCollection(event, "opportunities")
-    .select("slug", "title", "organization", "category", "deadline")
-    .all();
-
+export function opportunityRows(): AdminOpportunities {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const rows: AdminOpportunity[] = items.map((o) => {
+  const rows: AdminOpportunity[] = snapshot.opportunities.map((o) => {
     let status: AdminOpportunityStatus = "Needs review";
     let deadlineLabel = "No deadline";
 
@@ -46,7 +39,7 @@ export async function opportunityRows(
       title: o.title,
       org: o.organization,
       category: o.category,
-      deadline: o.deadline ?? null,
+      deadline: o.deadline,
       deadlineLabel,
       status,
     };
