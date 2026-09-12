@@ -10,6 +10,16 @@
       ],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "admin-ssr",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "NUXT_ADMIN_PASSPHRASE=${NUXT_ADMIN_PASSPHRASE:-localtest} NUXT_SESSION_PASSWORD=${NUXT_SESSION_PASSWORD:-local-dev-session-password-32-chars-min} node .output/server/index.mjs"
+      ],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }
