@@ -30,7 +30,7 @@
         <div class="article-page__hero-frame">
           <NuxtImg
             :src="article.image"
-            :alt="article.title"
+            :alt="article.imageAlt || article.title"
             width="1536"
             height="960"
             format="webp"
@@ -361,6 +361,18 @@ useHead(() => ({
             image: getAbsoluteUrl(ogImageUrl.value),
             url: canonicalUrl.value,
             mainEntityOfPage: canonicalUrl.value,
+            inLanguage: "en",
+            articleSection: article.value.category,
+            wordCount: wordCount(article.value.body?.value),
+            ...(article.value.keywords?.length
+              ? {
+                  keywords: article.value.keywords.join(", "),
+                  about: article.value.keywords.map((name) => ({
+                    "@type": "Thing",
+                    name,
+                  })),
+                }
+              : {}),
             datePublished: `${article.value.date}T00:00:00+00:00`,
             dateModified: `${article.value.updated ?? article.value.date}T00:00:00+00:00`,
             author: {

@@ -1,13 +1,35 @@
 ---
 title: "We Are Not Angry Enough"
-description: "Seven men are named in a lawsuit over a gang rape at Cornell. The woman left the university. Some of the men were given essays to write. This is not an American story. It is the same arithmetic women live under everywhere."
-seoTitle: "The Cornell Case and Why Women Are Not Angry Enough"
-seoDescription: "A lawsuit names seven Cornell fraternity members over an alleged gang rape. She left the school. Some of them wrote essays. What the numbers say about who the system was built for."
+description: "A lawsuit names seven Cornell Chi Phi members over an alleged gang rape. Two were expelled. Five got lesser sanctions, including essays. She left Cornell. The numbers behind why that outcome is ordinary."
+seoTitle: "Cornell Gang Rape Lawsuit: Seven Named, Essays Assigned"
+seoDescription: "A lawsuit names seven Cornell Chi Phi fraternity members over an alleged 2024 gang rape. Two expelled, five lesser sanctions including essays. She left Cornell."
+keywords:
+  - "Cornell gang rape lawsuit"
+  - "Cornell 7"
+  - "Chi Phi fraternity Cornell"
+  - "essay as punishment for rape"
+  - "campus sexual assault"
+  - "Title IX sanctions"
+  - "975 out of 1000 rapists walk free"
+  - "RAINN sexual assault statistics"
+  - "Tokyo Medical University entrance exam scandal"
+  - "rape conviction rate South Africa"
+  - "Uyinene Mrwetyana"
+  - "AmINext protest"
+  - "gender-based violence in Africa"
+  - "women in leadership statistics"
+  - "crash test dummy gender bias"
 date: 2026-09-30
 slug: we-are-not-angry-enough
 category: "Why It Matters"
 image: "/articles/we-are-not-angry-enough.jpg"
-imageCredit: "Original illustration. A student walking away from the campus that did not keep her."
+imageCredit: "Anti-femicide protest outside Parliament, Cape Town, 5 September 2019, after the rape and murder of student Uyinene Mrwetyana / Discott / Wikimedia Commons / CC BY-SA 4.0"
+imageAlt: "Thousands of protesters fill a Cape Town street outside Parliament. Two hand-made placards are raised above the crowd: \"When is enough, enough\" and \"Am I next?\""
+ogFocal: "50% 60%"
+women:
+  - nwanyeruwa
+  - meaza-ashenafi
+  - julienne-lusenge
 reflectionPrompt: "The last time a story like this crossed your timeline, what did you do with the feeling before it passed?"
 ---
 
@@ -17,7 +39,7 @@ At Cornell University, according to a civil lawsuit filed on 16 September 2026, 
 
 Sit with the shape of that. Not the outrage. The shape. A system that has an efficient, well-rehearsed, unambiguous response to a stolen paragraph, and a hesitant, committee-shaped, carefully worded response to a woman on a fraternity house floor.
 
-## What the lawsuit actually says
+## What the Cornell lawsuit actually says
 
 The woman is identified in the filing only as Jane Doe. She was 20 years old on 19 October 2024, the night she says she was drugged and raped at Cornell's Chi Phi fraternity house. The complaint runs to 101 pages. It alleges that the assault went on for hours, that she blacked out around 5:45 in the morning, and that members of the fraternity used a group chat to invite others to come and join in.
 
@@ -31,7 +53,7 @@ The Tompkins County District Attorney, Matthew Van Houten, declined to bring cha
 
 She left Cornell. In September 2026, after the lawsuit went public and the internet did what the process had not, Van Houten reopened the matter and said he would put it to a grand jury. Governor Kathy Hochul called for an independent review of how the university handled it. Two years after the night in question. Twelve days after a court filing made it impossible to ignore.
 
-## The arithmetic
+## The arithmetic: 975 out of every 1,000
 
 Here is the part nobody can argue with, because it is not an opinion.
 
@@ -43,7 +65,7 @@ People like to respond to that number by interrogating it. Fine. Interrogate it.
 
 So when a woman decides not to report, she is not being irrational, hysterical, or difficult. She is doing maths. She is weighing four years of her life, cross-examination about her clothes and her drinking, her name in her cousins' mouths, against a roughly one-in-twenty chance that the state does anything at all. Most people would not buy a lottery ticket at those odds. We ask women to buy one with their reputation.
 
-## Sometimes they just change the number
+## Tokyo Medical University just changed the number
 
 Discrimination is usually deniable. Someone was more qualified. It was a culture fit. She was not ready. There is never a document.
 
@@ -65,9 +87,13 @@ This is the pattern that makes sexism so hard to litigate case by case. In male-
 
 The same logic is built into objects. The crash test dummy used as the industry default is a mid-sized male body. The so-called female dummy is a scaled-down version of it. Researchers found that a belted woman driver had roughly **47 percent higher odds** of serious injury than a belted man in a comparable crash, even after controlling for weight and body mass. Nobody sat in a room and decided women should be hurt more. Somebody simply decided what a body is, and moved on.
 
-## We have been here before, on this continent
+## Africa has been here before
 
 None of this is foreign to African women. We have our own archive of institutions declining to be serious.
+
+The photograph at the top of this page was taken in Cape Town on 5 September 2019. Uyinene Mrwetyana, a 19-year-old University of Cape Town student, had gone to a post office to collect a parcel and was raped and murdered by the man working the counter. What followed was not a statement of condolence. It was tens of thousands of people in the street outside Parliament under placards reading *when is enough, enough* and *am I next*, the hashtag #AmINext moving faster than any official process, and a president forced out onto a stage to address a crowd that did not want to hear from him.
+
+That is what a country looks like when it stops waiting to be told the process is ongoing. And it still took a young woman's death to produce it.
 
 In 1929, [Nwanyeruwa](/women/nwanyeruwa) was a widow in Oloko who was grabbed by the throat by a census taker counting her property for taxation. The argument that followed became Ogu Umunwanyi, the [Aba Women's War](/articles/the-aba-womens-war), and tens of thousands of Igbo and Ibibio women shut down six thousand square miles of colonial administration. The British convened a commission of inquiry. The commission heard her evidence. It then recommended that the man who put his hands on her, and the chief who sent him, both be pardoned.
 

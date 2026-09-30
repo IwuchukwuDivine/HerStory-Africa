@@ -48,11 +48,15 @@ export default defineContentConfig({
         description: z.string(),
         seoTitle: z.string().optional(),
         seoDescription: z.string().optional(),
+        /** Entities and search terms this piece should be findable by. Emitted as schema.org keywords/about. */
+        keywords: z.array(z.string()).optional(),
         date: z.string(),
         slug: z.string(),
         category: z.string(),
         image: z.string().optional(),
         imageCredit: z.string().optional(),
+        /** Alt text for the hero. Falls back to the title, which describes the article, not the picture. */
+        imageAlt: z.string().optional(),
         reflectionPrompt: z.string().optional(),
         updated: z.string().optional(),
         featured: z.boolean().optional(),
