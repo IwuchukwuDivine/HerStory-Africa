@@ -153,6 +153,17 @@
       ],
       "region": null,
       "subject": "The Girl They Tried to Keep Hidden: The Story of Destiny Ayo Vaughan"
+    },
+    {
+      "date": "2026-10-01",
+      "type": "woman",
+      "mainFeature": "bessie-head",
+      "alsoRead": [
+        "writing-africa-back",
+        "daughters-of-independence"
+      ],
+      "region": "Southern Africa",
+      "subject": "Meet Bessie Head"
     }
   ]
 }
