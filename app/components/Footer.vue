@@ -40,6 +40,24 @@
             <LucideMail :size="16" />
             hello.herstoryafrica@gmail.com
           </a>
+          <a
+            href="https://www.tiktok.com/@herstoryafrica"
+            class="site-footer__link site-footer__link--contact"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.8V9.2a6.3 6.3 0 1 0 5.4 6.2V9a8.1 8.1 0 0 0 4.7 1.5V7.1a4.8 4.8 0 0 1-.9-.4z" />
+            </svg>
+            TikTok @herstoryafrica
+          </a>
         </div>
       </div>
 
