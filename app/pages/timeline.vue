@@ -80,8 +80,9 @@ const groupedEras = computed(() => {
   })).filter((group) => group.women.length > 0);
 });
 
-/** "60 BC" for negative years, otherwise the year as written. */
-function yearLabel(born: number): string {
+/** "60 BC" for negative years, otherwise the year as written; no label when the year is unknown (null). */
+function yearLabel(born: number | null): string {
+  if (born == null) return "";
   return born < 0 ? `${Math.abs(born)} BC` : String(born);
 }
 
