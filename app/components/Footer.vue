@@ -58,6 +58,15 @@
             </svg>
             TikTok @herstoryafrica
           </a>
+          <a
+            href="https://www.instagram.com/herstoryafrica_"
+            class="site-footer__link site-footer__link--contact"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LucideInstagram :size="16" />
+            Instagram @herstoryafrica_
+          </a>
         </div>
       </div>
 

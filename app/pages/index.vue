@@ -56,6 +56,8 @@ useHead({
             sameAs: [
               "https://x.com/_DeeVyn",
               "https://github.com/IwuchukwuDivine/herstory-africa",
+              "https://www.tiktok.com/@herstoryafrica",
+              "https://www.instagram.com/herstoryafrica_",
             ],
           },
           {
