@@ -58,6 +58,7 @@ useHead({
               "https://github.com/IwuchukwuDivine/herstory-africa",
               "https://www.tiktok.com/@herstoryafrica",
               "https://www.instagram.com/herstoryafrica_",
+              "https://www.facebook.com/herstoryafriq",
             ],
           },
           {

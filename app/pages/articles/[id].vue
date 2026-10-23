@@ -323,7 +323,16 @@ const metaDescription = computed(() => {
   );
 });
 
-useHead({ titleTemplate: "%s" });
+useHead({
+  titleTemplate: "%s",
+  // Links shares of this article to the HerStory Facebook page.
+  meta: [
+    {
+      property: "article:publisher",
+      content: "https://www.facebook.com/herstoryafriq",
+    },
+  ],
+});
 
 useSeoMeta({
   title: seoTitle,
@@ -383,6 +392,7 @@ useHead(() => ({
             publisher: {
               "@type": "Organization",
               name: "HerStory Africa",
+              sameAs: ["https://www.facebook.com/herstoryafriq"],
               logo: {
                 "@type": "ImageObject",
                 url: getAbsoluteUrl("/og-image.png"),

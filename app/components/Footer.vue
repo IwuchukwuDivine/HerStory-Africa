@@ -67,6 +67,15 @@
             <LucideInstagram :size="16" />
             Instagram @herstoryafrica_
           </a>
+          <a
+            href="https://www.facebook.com/herstoryafriq"
+            class="site-footer__link site-footer__link--contact"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LucideFacebook :size="16" />
+            Facebook @herstoryafriq
+          </a>
         </div>
       </div>
 
