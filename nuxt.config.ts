@@ -371,6 +371,10 @@ export default defineNuxtConfig({
   ogImage: {
     // app.head advertises 1200×630; the module default is 1200×600.
     defaults: { width: 1200, height: 630 },
+    // Prerender renders ~300 cards back to back and the timer includes time
+    // spent queued behind the others; on Vercel's builders that sits at
+    // ~14s, so the 15s default fails the whole build on one slow card.
+    security: { renderTimeout: 60_000 },
   },
 
   // ── Nuxt Content ────────────────────────────────────────────────────
