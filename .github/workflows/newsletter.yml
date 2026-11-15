@@ -1,49 +1,56 @@
-name: Draft Newsletter
+name: Newsletter reminder
+
+# Reminder only. Editions go out on the 1st and the 15th, and are written in a
+# session three days before (see docs/newsletter/voice-guide.md). This job
+# never drafts, builds or sends anything: it checks each morning whether an
+# edition is due in three days and, if so, says whether it is written yet.
+#
+# Sending happens only from /admin/newsletter ("Approve and schedule").
 
 on:
   schedule:
-    - cron: "0 9 1,15 * *" # 1st and 15th of every month at 9 AM UTC
+    - cron: "0 7 * * *" # every day, 08:00 in Lagos
   workflow_dispatch:
-    inputs:
-      feature_slug:
-        description: "Pin a specific woman or article slug as the main feature (leave empty for default)"
-        required: false
-        default: ""
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  draft:
+  remind:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: Check for an edition due in three days
+        id: due
+        run: |
+          DUE=$(date -u -d "+3 days" +%Y-%m-%d)
+          DAY=$(date -u -d "+3 days" +%d)
+          if [ "$DAY" != "01" ] && [ "$DAY" != "15" ]; then
+            echo "Nothing due on $DUE."
+            echo "due=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # A shipping edition is a non-sample file whose date matches.
+          FILE=$(grep -l "^date: *[\"']\?$DUE" app/content/newsletter/[!_]*.md 2>/dev/null | head -n 1 || true)
+          if [ -n "$FILE" ]; then
+            SLUG=$(basename "$FILE" .md)
+            MESSAGE="The edition for $DUE is written ($SLUG). Build it, test it in /admin/newsletter, then approve and schedule."
+          else
+            MESSAGE="An edition is due on $DUE and none is written yet. Time to pick the story and write the brief."
+          fi
+          echo "$MESSAGE"
+          echo "due=$DUE" >> "$GITHUB_OUTPUT"
+          echo "message=$MESSAGE" >> "$GITHUB_OUTPUT"
 
-      - name: Generate newsletter draft
+      - name: Notify
+        if: steps.due.outputs.due != ''
         env:
-          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          FEATURE_SLUG: ${{ github.event.inputs.feature_slug || '' }}
-        run: node scripts/draft-newsletter.mjs
-
-      - name: Commit updated newsletter log
+          MESSAGE: ${{ steps.due.outputs.message }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/newsletter-log.json
-          git diff --staged --quiet || git commit -m "chore: update newsletter log"
-          git push
-
-      - name: Notify draft is ready
-        run: |
-          SUBJECT=$(node -e "const l=JSON.parse(require('fs').readFileSync('data/newsletter-log.json','utf8'));const e=l.editions[l.editions.length-1];console.log(e.subject)")
           curl -s \
-            -H "Title: Newsletter draft ready" \
-            -H "Tags: newspaper" \
-            -H "Click: https://buttondown.com/emails" \
-            -d "Your HerStory Africa newsletter draft is ready: ${SUBJECT}. Review and send it in Buttondown." \
+            -H "Title: Newsletter due ${{ steps.due.outputs.due }}" \
+            -H "Tags: envelope" \
+            -H "Click: https://herstoryafrica.com.ng/admin/newsletter" \
+            -d "$MESSAGE" \
             ntfy.sh/herstory-africa-newsletter

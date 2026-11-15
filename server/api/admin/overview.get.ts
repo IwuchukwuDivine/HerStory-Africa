@@ -16,7 +16,7 @@ const monthKey = (d: Date) =>
 
 /**
  * The overview stitches six independent sources together: two content
- * collections, GA4, GitHub, Buttondown and the derived health/opportunity
+ * collections, GA4, GitHub, Resend and the derived health/opportunity
  * views. Any of them can be down or unconfigured, so each is caught
  * individually and named in `unavailable` — the page renders what it has and
  * says plainly what it could not reach, rather than showing a confident zero.
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event): Promise<AdminOverview> => {
 
   const [analytics, subscribers, suggestions] = await Promise.all([
       tryGa4Report(),
-      subscriberCounts(),
+      newsletterAudience(),
       listSuggestions()
         .then((issues) =>
           issues
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event): Promise<AdminOverview> => {
     ]);
 
   if (!analytics) unavailable.push("Google Analytics");
-  if (!subscribers) unavailable.push("Buttondown");
+  if (!subscribers) unavailable.push("Resend");
   if (!suggestions) unavailable.push("GitHub");
 
   const now = new Date();
@@ -126,9 +126,9 @@ export default defineEventHandler(async (event): Promise<AdminOverview> => {
     },
     {
       label: "Subscribers",
-      value: subscribers ? subscribers.confirmed.toLocaleString("en") : "—",
-      delta: subscribers && subscribers.pending ? `${subscribers.pending} pending` : "",
-      note: subscribers ? "confirmed" : "Buttondown not configured",
+      value: subscribers ? subscribers.subscribed.toLocaleString("en") : "—",
+      delta: subscribers && subscribers.unsubscribed ? `${subscribers.unsubscribed} left` : "",
+      note: subscribers ? "newsletter, in Resend" : "Resend unavailable",
       up: true,
     },
     {

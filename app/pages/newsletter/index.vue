@@ -3,46 +3,50 @@
     <header class="newsletter__header">
       <MuseumLabel
         level="h1"
-        eyebrow="Newsletter · twice a month"
-        title="Don't let these stories stay hidden."
+        eyebrow="The HerStory letter"
+        title="History has more stories to tell."
       />
       <p class="newsletter__intro">
-        Every edition brings you the story of a remarkable African woman who
-        shaped a continent but missed the textbooks. No spam, just history worth
-        knowing.
+        Discover the remarkable African women who shaped history, challenged
+        expectations, and left legacies worth remembering. Stories to inspire
+        you, surprise you, and sometimes change the way you see the world.
       </p>
     </header>
 
     <div class="newsletter__form">
-      <NewsletterForm placeholder="Your email address" />
+      <NewsletterForm placeholder="Your email address" button-label="Join the newsletter" />
+      <NuxtLink to="/newsletter/archive" class="newsletter__archive">
+        Explore past editions
+        <LucideArrowRight :size="14" aria-hidden="true" />
+      </NuxtLink>
     </div>
 
-    <section class="newsletter__perks" aria-label="What you'll get">
-      <MuseumLabel eyebrow="Every edition" title="What you'll get" />
+    <section class="newsletter__perks" aria-label="A look inside">
+      <MuseumLabel eyebrow="A look inside" title="A little history, a lot to discover." />
 
       <div class="newsletter__grid">
         <div class="panel newsletter__perk">
-          <LucideBookOpen :size="20" class="newsletter__perk-icon" />
-          <h3 class="newsletter__perk-title">New stories</h3>
+          <LucideUsers :size="20" class="newsletter__perk-icon" />
+          <h3 class="newsletter__perk-title">Women worth knowing</h3>
           <p class="newsletter__perk-text">
-            Profiles of queens, scientists, activists, and rebels as they're
-            published.
+            Meet the pioneers, trailblazers, and everyday women whose stories
+            deserve to be told.
           </p>
         </div>
         <div class="panel newsletter__perk">
-          <LucideNewspaper :size="20" class="newsletter__perk-icon" />
-          <h3 class="newsletter__perk-title">Articles and essays</h3>
+          <LucideBookOpen :size="20" class="newsletter__perk-icon" />
+          <h3 class="newsletter__perk-title">Beyond the history books</h3>
           <p class="newsletter__perk-text">
-            Deeper dives into the movements and moments that shaped the
-            continent.
+            Discover the moments, decisions, and untold details that bring
+            history to life.
           </p>
         </div>
         <div class="panel newsletter__perk">
           <LucideHeart :size="20" class="newsletter__perk-icon" />
-          <h3 class="newsletter__perk-title">No noise</h3>
+          <h3 class="newsletter__perk-title">Stories that stay with you</h3>
           <p class="newsletter__perk-text">
-            No spam, no fluff, no daily emails. Just stories that matter, when
-            they're ready.
+            The kind of stories that spark conversations, shift perspectives,
+            and make you want to know more.
           </p>
         </div>
       </div>
@@ -54,19 +58,19 @@
 useSeoMeta({
   title: "Subscribe to the Newsletter",
   description:
-    "Get stories of remarkable African women delivered to your inbox. Queens, scientists, activists, and rebels who shaped a continent.",
+    "Discover the remarkable African women who shaped history, challenged expectations, and left legacies worth remembering.",
   ogTitle: "Subscribe to HerStory Africa",
   ogDescription:
-    "Get stories of remarkable African women delivered to your inbox. No spam, just history worth knowing.",
+    "Discover the remarkable African women who shaped history, challenged expectations, and left legacies worth remembering.",
   ogUrl: getAbsoluteUrl("/newsletter"),
 });
 
 defineOgImage("Card", {
   variant: "page",
   pill: "Newsletter",
-  title: "Don't let these stories stay hidden.",
+  title: "History has more stories to tell.",
   description:
-    "Every edition brings you the story of a remarkable African woman who shaped a continent but missed the textbooks. No spam, just history worth knowing.",
+    "Discover the remarkable African women who shaped history, challenged expectations, and left legacies worth remembering.",
 });
 
 useHead({
@@ -103,7 +107,26 @@ useHead({
 }
 
 .newsletter__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   max-width: 32rem;
+}
+
+.newsletter__archive {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.newsletter__archive:hover {
+  text-decoration: underline;
 }
 
 .newsletter__perks {

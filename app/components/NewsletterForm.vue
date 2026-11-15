@@ -1,5 +1,16 @@
 <template>
   <form v-if="!success" class="newsletter-form" novalidate @submit.prevent="subscribe">
+    <!-- Honeypot: hidden from people and screen readers, filled in by bots.
+         The server quietly drops any signup that has it. -->
+    <input
+      v-model="website"
+      type="text"
+      name="website"
+      class="newsletter-form__trap"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    >
     <div class="newsletter-form__field">
       <input
         v-model="email"
@@ -24,7 +35,7 @@
           <LucideLoaderCircle :size="16" class="newsletter-form__spinner" />
           Subscribing…
         </template>
-        <template v-else>Subscribe</template>
+        <template v-else>{{ buttonLabel }}</template>
       </button>
     </div>
     <p v-if="showValidationError" class="newsletter-form__error" aria-live="polite">
@@ -45,9 +56,11 @@
 withDefaults(
   defineProps<{
     placeholder?: string;
+    buttonLabel?: string;
   }>(),
   {
     placeholder: "Enter your email",
+    buttonLabel: "Subscribe",
   },
 );
 
@@ -59,6 +72,7 @@ const { setSubscribed } = useApp();
 const { track } = useTag();
 
 const email = ref("");
+const website = ref("");
 const loading = ref(false);
 const success = ref(false);
 const alreadySubscribed = ref(false);
@@ -74,7 +88,7 @@ const showValidationError = computed(
 const successMessage = computed(() =>
   alreadySubscribed.value
     ? "You're already part of the family."
-    : "Check your email to confirm your subscription.",
+    : "You're in. A welcome email is on its way to your inbox.",
 );
 
 async function subscribe() {
@@ -90,7 +104,7 @@ async function subscribe() {
       "/api/subscribe",
       {
         method: "POST",
-        body: { email: email.value },
+        body: { email: email.value, website: website.value },
       },
     );
 
@@ -111,14 +125,26 @@ async function subscribe() {
 </script>
 
 <style scoped>
+.newsletter-form__trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* The button drops under the field when the two do not fit side by side
+   (a long label such as "Join the newsletter" on a phone), so the field is
+   never squeezed until its placeholder is cut off. */
 .newsletter-form__field {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   width: 100%;
 }
 
 .newsletter-form__input {
-  flex: 1;
+  flex: 1 1 14rem;
   min-width: 0;
   height: 48px;
   padding: 0 16px;
@@ -152,6 +178,7 @@ async function subscribe() {
 }
 
 .newsletter-form__btn {
+  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;

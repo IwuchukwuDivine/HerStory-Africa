@@ -91,6 +91,31 @@ export default defineContentConfig({
         further: z.array(z.string()).optional(),
       }),
     }),
+    // Newsletter editions. Files starting with "_" are samples and never ship.
+    // The body is written for the email build (scripts/newsletter/build.mjs),
+    // not for ContentRenderer: the site shows the built letter itself.
+    // Editions dated in the future are filtered out by the pages that list them.
+    newsletter: defineCollection({
+      type: 'data',
+      source: {
+        include: 'newsletter/*.md',
+        exclude: ['newsletter/_*.md'],
+        cwd: contentDir,
+      },
+      schema: z.object({
+        title: z.string(),
+        number: z.number(),
+        /** YYYY-MM-DD, the edition's date. */
+        date: z.string(),
+        layout: z.string(),
+        register: z.string(),
+        subject: z.string(),
+        preview: z.string(),
+        woman: z.string().optional(),
+        article: z.string().optional(),
+        photoAlt: z.string().optional(),
+      }),
+    }),
     opportunities: defineCollection({
       type: 'page',
       source: {

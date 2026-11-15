@@ -1,6 +1,8 @@
-// Suggestion emails are Resend-hosted templates. The HTML, the subject and the
-// sender all live in the Resend dashboard; this file only posts a template
-// reference plus its variables. No markup lives in this repo.
+// Suggestion emails are Resend-hosted templates. This file only posts a
+// template reference plus its variables. The HTML, subject and sender are
+// defined in emails/templates/index.mjs and pushed with `npm run resend:setup`
+// (the originals were lost with the old Resend account, so the source now
+// lives in the repo).
 //
 // Templates are addressed by alias rather than UUID — an alias is a stable
 // referenceable slug, so the dashboard can be reorganised without a deploy.

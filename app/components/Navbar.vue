@@ -93,7 +93,7 @@
 
         <div class="drawer__links">
           <NuxtLink
-            v-for="link in navLinks"
+            v-for="link in drawerLinks"
             :key="link.to"
             :to="link.to"
             class="drawer__link"
@@ -193,6 +193,18 @@ const navLinks = [
     icon: resolveComponent("LucideHeart"),
   },
   { to: "/about", label: "About", icon: resolveComponent("LucideInfo") },
+];
+
+// The drawer has room for the newsletter; the desktop bar is already full.
+const drawerLinks = [
+  ...navLinks.slice(0, -1),
+  { to: "/newsletter", label: "Newsletter", icon: resolveComponent("LucideMail") },
+  {
+    to: "/newsletter/archive",
+    label: "Past editions",
+    icon: resolveComponent("LucideArchive"),
+  },
+  ...navLinks.slice(-1),
 ];
 </script>
 

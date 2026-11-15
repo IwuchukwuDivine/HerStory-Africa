@@ -53,12 +53,30 @@ const womenEntries = readContentEntries("women");
 const articleEntries = readContentEntries("articles");
 const opportunityEntries = readContentEntries("opportunities");
 const pathEntries = readContentEntries("paths");
+// Samples ("_" prefix) never ship.
+const newsletterEntries = readContentEntries("newsletter").filter(
+  (e) => !e.slug.startsWith("_"),
+);
+/** Editions dated today or earlier, as of this build. Later ones stay unlisted. */
+const today = new Date().toISOString().slice(0, 10);
+const isPublished = (e: ContentEntry) =>
+  (frontmatterDate(e.frontmatter, "date") ?? "9999") <= today;
+const publishedEditions = newsletterEntries.filter(isPublished);
+const unpublishedEditionRoutes = newsletterEntries
+  .filter((e) => !isPublished(e))
+  .map((e) => `/newsletter/${e.slug}`);
 
 const contentRoutes = [
   ...womenEntries.map((e) => `/women/${e.slug}`),
   ...articleEntries.map((e) => `/articles/${e.slug}`),
   ...opportunityEntries.map((e) => `/opportunities/${e.slug}`),
   ...pathEntries.map((e) => `/women/path/${e.slug}`),
+  // Every edition is prerendered, even one dated in the future, so the
+  // "read in your browser" link works the moment it is sent without a
+  // rebuild. Future ones are noindex and left out of the archive and sitemap.
+  "/newsletter/archive",
+  "/newsletter/unsubscribe",
+  ...newsletterEntries.map((e) => `/newsletter/${e.slug}`),
 ];
 
 const contentSitemapUrls = [
@@ -74,6 +92,11 @@ const contentSitemapUrls = [
   })),
   ...opportunityEntries.map((e) => ({ loc: `/opportunities/${e.slug}` })),
   ...pathEntries.map((e) => ({ loc: `/women/path/${e.slug}` })),
+  { loc: "/newsletter/archive" },
+  ...publishedEditions.map((e) => ({
+    loc: `/newsletter/${e.slug}`,
+    lastmod: frontmatterDate(e.frontmatter, "date"),
+  })),
 ];
 
 // ── Admin content snapshot (build-time) ─────────────────────────────
@@ -161,11 +184,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   runtimeConfig: {
-    buttondownApiKey: "",
     githubToken: "",
     adminPassphrase: "",
     sessionPassword: "",
     resendApiKey: "",
+    // The only address "Send test to me" in /admin/newsletter can reach.
+    newsletterTestAddress: "",
+    // Signs unsubscribe tokens. Changing it breaks every link already sent.
+    newsletterSecret: "",
+    // Signing secret of the Resend webhook (bounces and complaints).
+    resendWebhookSecret: "",
     ga4PropertyId: "",
     ga4Credentials: "",
   },
@@ -208,6 +236,8 @@ export default defineNuxtConfig({
   // enforced by the admin layout's <meta robots> tag + sitemap exclusion.
   routeRules: {
     "/admin/**": { prerender: false },
+    // Buttondown's double opt-in landed here. Signup is single opt-in now.
+    "/newsletter/confirmed": { redirect: { to: "/newsletter", statusCode: 301 } },
   },
   gtag: {
     id: "G-V5FFHGH864",
@@ -440,6 +470,8 @@ export default defineNuxtConfig({
       "/admin/**",
       "/favorites",
       "/newsletter/confirmed",
+      "/newsletter/unsubscribe",
+      ...unpublishedEditionRoutes,
       "/newsletter",
       "/suggest",
     ],

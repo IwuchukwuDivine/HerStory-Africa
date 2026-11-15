@@ -86,20 +86,47 @@ export interface AdminHealth {
   rows: AdminHealthRow[];
 }
 
+/**
+ * Where an edition stands. "local" means it is built and deployed but Resend
+ * has no broadcast for it yet; the rest are Resend's broadcast statuses.
+ */
+export type AdminEditionStatus =
+  | "local"
+  | "draft"
+  | "scheduled"
+  | "queued"
+  | "sent"
+  | "canceled";
+
+export interface AdminEdition {
+  slug: string;
+  number: number;
+  subject: string;
+  preview: string;
+  layout: string;
+  register: string;
+  /** Edition date, YYYY-MM-DD. */
+  date: string;
+  /** ISO time it will be scheduled for on approval. */
+  sendAt: string;
+  status: AdminEditionStatus;
+  broadcastId: string | null;
+  scheduledAt: string | null;
+  sentAt: string | null;
+  /** The copy in Resend differs from the build. Null when there is nothing to compare. */
+  outOfDate: boolean | null;
+}
+
 export interface AdminNewsletter {
   tiles: AdminKpi[];
-  /** Newest first, from data/newsletter-log.json. */
-  sendLog: {
-    no: number;
-    subject: string;
-    sent: string;
-    type: string;
-    mainFeature: string;
-  }[];
-  /** Null when Buttondown is not configured. */
-  subscribers: { confirmed: number; pending: number } | null;
-  /** True when open/click rates could not be read from Buttondown. */
-  metricsUnavailable: boolean;
+  /** Newest first. */
+  editions: AdminEdition[];
+  /** Contacts in the General segment; null when Resend could not be asked. */
+  subscribers: { subscribed: number; unsubscribed: number } | null;
+  /** Where "Send test to me" goes; null when NUXT_NEWSLETTER_TEST_ADDRESS is unset. */
+  testAddress: string | null;
+  /** Resend was unreachable, so statuses are unknown. */
+  resendError: string | null;
 }
 
 export type AdminOpportunityStatus =

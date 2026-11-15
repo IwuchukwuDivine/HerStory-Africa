@@ -10,7 +10,8 @@ npm run newsletter:build -- dear-specioza   # build one edition
 
 A build writes:
 
-- `public/newsletter/<slug>/`: the edition's images. Commit and deploy these before sending, because the email loads them from the live site.
+- `public/newsletter/<slug>/`: the edition's images, plus `web.html`, the copy the site shows at `/newsletter/<slug>`. Commit and deploy these before sending, because the email loads them from the live site.
+- `server/assets/newsletter/<slug>/`: `email.html`, `email.txt` and `edition.json`, the copy `/admin/newsletter` tests, drafts and schedules. Commit this too.
 - `.newsletter/<slug>/preview.html`: a self-contained copy to open and check.
 - `.newsletter/<slug>/email.html` and `email.txt`: what gets sent.
 
@@ -66,4 +67,11 @@ Nothing in the build script changes. `--list` picks the new layout up from its `
 - Web fonts are a bonus (Apple Mail). Each layout must still look right in its fallback (Times or Georgia), because Gmail ignores web fonts.
 - Light only: these are paper, so they keep their colours in dark mode.
 - Under 102 KB of HTML, or Gmail clips it.
-- The unsubscribe link is `{{{RESEND_UNSUBSCRIBE_URL}}}`; Resend fills it in per reader.
+- The unsubscribe link is the `UNSUBSCRIBE` constant in `shared.mjs`. It is Resend's `{{{RESEND_UNSUBSCRIBE_URL}}}` until one test broadcast proves custom contact properties merge, then `OWN_UNSUBSCRIBE_PAGE` flips it to `/newsletter/unsubscribe`.
+- Send time is 08:00 Lagos time on the edition's `date`, unless the frontmatter sets `sendAt` (any ISO date and time).
+
+## Transactional templates
+
+The welcome email and the suggestion replies are Resend-hosted templates
+defined in `emails/templates/index.mjs`. Edit the copy there, then run
+`npm run resend:setup` to push and publish them.

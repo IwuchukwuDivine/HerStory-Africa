@@ -3,8 +3,21 @@
 
 export const SITE = "https://herstoryafrica.com.ng";
 
-/** Resend swaps this for each reader's own unsubscribe link. */
-export const UNSUBSCRIBE = "{{{RESEND_UNSUBSCRIBE_URL}}}";
+/**
+ * Where "Stop these letters" points. Resend fills both kinds in per reader.
+ *
+ * Our own page (/newsletter/unsubscribe) needs each contact's signed token,
+ * kept in the custom contact property `unsub_token` and merged by Resend at
+ * send time. Resend's docs say custom properties merge into broadcast HTML,
+ * but that is unproven on this account until one test broadcast arrives with
+ * a working link. Until then the footer uses Resend's own page. Flip this to
+ * true only after that test, then rebuild every edition not yet sent.
+ */
+export const OWN_UNSUBSCRIBE_PAGE = false;
+
+export const UNSUBSCRIBE = OWN_UNSUBSCRIBE_PAGE
+  ? `${SITE}/newsletter/unsubscribe?t={{{contact.unsub_token}}}`
+  : "{{{RESEND_UNSUBSCRIBE_URL}}}";
 
 export const esc = (s = "") =>
   String(s)

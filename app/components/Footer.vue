@@ -17,6 +17,8 @@
           <NuxtLink to="/timeline" class="site-footer__link">Timeline</NuxtLink>
           <NuxtLink to="/articles" class="site-footer__link">Articles</NuxtLink>
           <NuxtLink to="/opportunities" class="site-footer__link">Opportunities</NuxtLink>
+          <NuxtLink to="/newsletter" class="site-footer__link">Newsletter</NuxtLink>
+          <NuxtLink to="/newsletter/archive" class="site-footer__link">Past editions</NuxtLink>
           <NuxtLink to="/about" class="site-footer__link">About</NuxtLink>
           <NuxtLink to="/suggest" class="site-footer__link">Suggest a woman</NuxtLink>
         </div>
@@ -85,6 +87,10 @@
           New stories of remarkable African women, straight to your inbox.
         </p>
         <NewsletterForm placeholder="Your email address" />
+        <NuxtLink to="/newsletter/archive" class="site-footer__link site-footer__archive">
+          Explore past editions
+          <LucideArrowRight :size="14" aria-hidden="true" />
+        </NuxtLink>
       </div>
 
       <div class="site-footer__bottom">
@@ -196,6 +202,14 @@ const currentYear = new Date().getFullYear()
 
 .site-footer__newsletter .site-footer__col-title {
   margin-bottom: 0;
+}
+
+.site-footer__archive {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 6px;
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .site-footer__newsletter-desc {

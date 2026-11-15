@@ -81,7 +81,8 @@ herstory-africa/
 │   │   └── useTextToSpeech.ts        # Web Speech API logic (chunking, progress, seek)
 │   ├── content/
 │   │   ├── women/                    # 137 profiles (one .md file each)
-│   │   └── articles/                 # 24 educational explainers
+│   │   ├── articles/                 # 24 educational explainers
+│   │   └── newsletter/               # Newsletter editions (_* files are samples)
 │   ├── layouts/
 │   │   └── default.vue               # Skip-to-content link, Navbar, slot, Footer
 │   ├── pages/
@@ -96,8 +97,10 @@ herstory-africa/
 │   │   │   ├── index.vue             # Paginated article listing
 │   │   │   └── [id].vue              # Individual article page
 │   │   └── newsletter/
-│   │       ├── index.vue             # Newsletter landing page
-│   │       └── confirmed.vue         # Post-subscription confirmation
+│   │       ├── index.vue             # Newsletter landing page + signup
+│   │       ├── archive.vue           # Every letter sent so far
+│   │       ├── [slug].vue            # One letter, as it was emailed
+│   │       └── unsubscribe.vue       # Signed-token unsubscribe
 │   ├── store/
 │   │   └── app.ts                    # Pinia store (favourites, read list, TTS prefs)
 │   ├── utils/
@@ -198,6 +201,15 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
+
+### Newsletter
+
+The newsletter runs on Resend Broadcasts. Editions are Markdown in
+`app/content/newsletter/`, built into email with `npm run newsletter:build --
+<slug>`, and approved and scheduled from `/admin/newsletter`. Nothing sends
+without that click. See `emails/README.md` for the email kit and
+`docs/newsletter/` for the plan and voice guide. After changing the email
+templates in `emails/templates/`, push them with `npm run resend:setup`.
 
 ### Available Scripts
 

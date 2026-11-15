@@ -9,8 +9,13 @@
 //   .newsletter/<slug>/email.html          what gets sent (images point at the live site)
 //   .newsletter/<slug>/email.txt           plain-text alternative
 //   .newsletter/<slug>/preview.html        self-contained copy to open locally
+//   server/assets/newsletter/<slug>/       email.html, email.txt and edition.json,
+//                                          bundled into the deployed server so
+//                                          /admin/newsletter can test, draft and
+//                                          schedule it (samples are never written here)
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Resvg } from "@resvg/resvg-js";
@@ -18,12 +23,16 @@ import satori from "satori";
 import sharp from "sharp";
 import { parse as parseYaml } from "yaml";
 import { layoutById, layouts } from "../../emails/layouts/index.mjs";
-import { SITE, formatDate, parseBody } from "../../emails/layouts/shared.mjs";
+import { SITE, UNSUBSCRIBE, formatDate, parseBody } from "../../emails/layouts/shared.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const EDITIONS = join(ROOT, "app/content/newsletter");
 const PUBLIC = join(ROOT, "public");
 const OUT = join(ROOT, ".newsletter");
+const SERVER_ASSETS = join(ROOT, "server/assets/newsletter");
+
+/** Default send time when an edition sets no `sendAt`: 08:00 in Lagos (WAT, UTC+1) on its date. */
+const DEFAULT_SEND_TIME = "07:00:00.000Z";
 
 const SENSITIVE = ["slavery", "sexual violence", "abuse", "massacre", "execution", "child death", "living survivors"];
 const BANNED = [
@@ -90,6 +99,8 @@ function loadEdition(slug) {
   const { data, body } = frontmatter(file);
   const edition = { signedBy: "Deevyn", volume: "I", linkText: "Read her full story", sensitive: [], ...data, slug, body };
   edition.date = String(edition.date instanceof Date ? edition.date.toISOString().slice(0, 10) : edition.date);
+  if (edition.sendAt instanceof Date) edition.sendAt = edition.sendAt.toISOString();
+  edition.sendAt ??= `${edition.date}T${DEFAULT_SEND_TIME}`;
   edition.blocks = parseBody(body);
 
   // The profile or article on the site is the source for the photo, its credit and the link out.
@@ -136,6 +147,9 @@ function check(edition, layout) {
   if (besties && edition.register !== "playful") errors.push(`"Bestie" is only for playful editions.`);
   if (besties > 1) errors.push(`"Bestie" appears ${besties} times. Once at most.`);
 
+  if (Number.isNaN(Date.parse(edition.sendAt))) errors.push(`"sendAt" is not a date and time: ${edition.sendAt}`);
+  if (!/^[a-z0-9-]+$/.test(edition.slug.replace(/^_/, ""))) errors.push("The file name must be lowercase letters, digits and hyphens.");
+
   if (String(edition.subject).length > 50) warnings.push(`Subject is ${edition.subject.length} characters (aim for 50 or fewer).`);
   if (edition.preview === edition.subject) warnings.push("Preview text repeats the subject line.");
   const storyWords = edition.blocks.filter((b) => b.type === "p").map((b) => b.text).join(" ").split(/\s+/).filter(Boolean).length;
@@ -156,7 +170,7 @@ function plainText(edition) {
   }
   if (edition.closing) lines.push(edition.closing, edition.signedBy, "");
   if (edition.ps) lines.push(edition.ps.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1 ($2)"), "");
-  lines.push(`${edition.linkText}: ${edition.link}`, "", `Read in your browser: ${SITE}/newsletter/${edition.slug}`, "Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}");
+  lines.push(`${edition.linkText}: ${edition.link}`, "", `Read in your browser: ${SITE}/newsletter/${edition.slug}`, `Unsubscribe: ${UNSUBSCRIBE}`);
   return lines.join("\n").replace(/\n{3,}/g, "\n\n");
 }
 
@@ -195,8 +209,46 @@ async function build(slug) {
   };
 
   const html = layout.render(edition, assets);
+  const text = plainText(edition);
   writeFileSync(join(outDir, "email.html"), html);
-  writeFileSync(join(outDir, "email.txt"), plainText(edition));
+  writeFileSync(join(outDir, "email.txt"), text);
+
+  // The letter as the site shows it at /newsletter/<slug>. Images and links
+  // are relative to the site, links open in the page around the frame, and
+  // the footer link points at the newsletter page instead of a merge tag.
+  if (!sample) {
+    const web = html
+      .replaceAll(`${SITE}/newsletter/`, "/newsletter/")
+      .replaceAll(UNSUBSCRIBE, "/newsletter")
+      .replace("<head>", '<head>\n<base target="_top">');
+    writeFileSync(join(imageDir, "web.html"), web);
+  }
+
+  // What the deployed server sends. .newsletter/ is gitignored, so the admin
+  // reads this committed copy instead (Nitro bundles server/assets/).
+  if (!sample) {
+    const serverDir = join(SERVER_ASSETS, slug);
+    rmSync(serverDir, { recursive: true, force: true });
+    mkdirSync(serverDir, { recursive: true });
+    writeFileSync(join(serverDir, "email.html"), html);
+    writeFileSync(join(serverDir, "email.txt"), text);
+    const meta = {
+      slug,
+      number: edition.number,
+      title: edition.title,
+      subject: edition.subject,
+      preview: edition.preview,
+      date: edition.date,
+      sendAt: new Date(edition.sendAt).toISOString(),
+      layout: edition.layout,
+      register: edition.register,
+      link: edition.link,
+      woman: edition.woman ?? null,
+      article: edition.article ?? null,
+      hash: createHash("sha256").update(html).update("\0").update(text).digest("hex").slice(0, 16),
+    };
+    writeFileSync(join(serverDir, "edition.json"), `${JSON.stringify(meta, null, 2)}\n`);
+  }
 
   // Preview: same markup with every image inlined, so it opens before anything is deployed.
   const dataUri = (name, data) => `data:${MIME[extname(name)]};base64,${data.toString("base64")}`;
@@ -212,7 +264,11 @@ async function build(slug) {
   console.log(`\n  ✓ No. ${edition.number}, "${edition.subject}" (${layout.meta.name}, ${edition.register}, ${formatDate(edition.date)})`);
   console.log(`    .newsletter/${slug}/preview.html   open this to look at it`);
   console.log(`    .newsletter/${slug}/email.html     ${kb} KB${kb > 100 ? "  ! Gmail clips emails over 102 KB" : ""}`);
-  console.log(sample ? "    Sample edition: not for sending.\n" : `    public/newsletter/${slug}/         ${made.length} image${made.length === 1 ? "" : "s"}, deploy before sending\n`);
+  if (sample) console.log("    Sample edition: not for sending.\n");
+  else {
+    console.log(`    public/newsletter/${slug}/         ${made.length} image${made.length === 1 ? "" : "s"}, deploy before sending`);
+    console.log(`    server/assets/newsletter/${slug}/  commit this; /admin/newsletter sends from it\n`);
+  }
 }
 
 const arg = process.argv[2];
