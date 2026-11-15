@@ -1,4 +1,4 @@
-import { UNSUBSCRIBE, esc, formatDate, inline, links, shell } from "./shared.mjs";
+import { UNSUBSCRIBE, esc, formatDate, inline, links, shell, siteLink } from "./shared.mjs";
 
 export const meta = {
   id: "letter",
@@ -94,13 +94,13 @@ export function render(edition, a) {
     <tr><td class="pad hand" style="padding:26px 56px 0 56px; ${hand}">${esc(edition.salutation)}</td></tr>
     ${rows.join("\n    ")}
     <tr><td class="pad hand" style="padding:26px 56px 0 56px; ${hand}">${esc(edition.closing)}</td></tr>
-    <tr><td class="pad" style="padding:0 56px 0 50px;"><img src="${a.kit("signature-letter.png")}" width="230" alt="${esc(edition.signedBy)}" style="width:230px; height:auto; font-family:Georgia,serif; font-size:30px; font-style:italic; color:${INK};"></td></tr>
+    <tr><td class="pad" style="padding:0 56px 0 50px;"><img src="${a.kit("signature-letter.png")}" width="170" alt="${esc(edition.signedBy)}" style="width:170px; height:auto; font-family:Georgia,serif; font-size:30px; font-style:italic; color:${INK};"></td></tr>
     <tr><td class="pad hand" style="padding:10px 56px 0 56px; font-family:${HAND}; font-size:19px; line-height:30px; font-style:italic; color:${INK};">${inline(edition.ps, { link: `color:${TERRA}; text-decoration:underline;` })}</td></tr>
     <tr><td class="pad" style="padding:38px 56px 30px 56px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr><td style="border-top:1px solid #d8c9ac; font-size:0; line-height:0; height:1px;">&nbsp;</td></tr>
         <tr><td align="center" style="padding-top:14px; font-family:${HAND}; font-size:13px; line-height:21px; color:#6b5a4a;">
-          A letter from HerStory Africa, twice a month. You asked for these at herstoryafrica.com.ng.<br>
+          A letter from HerStory Africa, twice a month. You asked for these at ${siteLink("#6b5a4a")}.<br>
           <a href="${l.archive}" style="color:#6b5a4a;">Earlier letters</a> &nbsp;|&nbsp;
           <a href="${l.browser}" style="color:#6b5a4a;">Read in your browser</a> &nbsp;|&nbsp;
           <a href="${UNSUBSCRIBE}" style="color:#6b5a4a;">Stop these letters</a>

@@ -96,21 +96,36 @@ ${fontHref ? `<!--[if !mso]><!-->\n<link href="${fontHref}" rel="stylesheet">\n<
   img { border:0; display:block; outline:none; text-decoration:none; }
   @media only screen and (max-width:620px) {
     .shell { width:100% !important; }
+    .mat { width:100% !important; }
+    .mat-pad { padding:14px 10px 18px 10px !important; }
 ${css}
   }
 </style>
 </head>
-<body style="margin:0; padding:0; background-color:${background};">
-${preheader(preview, background)}
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${background};">
-<tr><td align="center" style="padding:26px 10px 40px 10px;">
+<body style="margin:0; padding:0;">
+${preheader(preview, "#ffffff")}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td align="center" style="padding:0;">
+  <!-- The mat: a narrow band of the layout's surface colour around the paper,
+       so wide screens do not get two slabs of colour either side. -->
+  <table role="presentation" class="mat" width="644" cellpadding="0" cellspacing="0" border="0" style="width:644px; max-width:100%; background-color:${background};">
+  <tr><td class="mat-pad" align="center" style="padding:22px 22px 26px 22px;">
 ${content}
+  </td></tr>
+  </table>
 </td></tr>
 </table>
 </body>
 </html>
 `;
 }
+
+/**
+ * The site's address as a real link in the layout's own ink. Left as plain
+ * text, Gmail turns it into a blue link of its own.
+ */
+export const siteLink = (colour) =>
+  `<a href="${SITE}" style="color:${colour}; text-decoration:none;">herstoryafrica.com.ng</a>`;
 
 /** Where "Read in your browser" and the archive point for an edition. */
 export const links = (edition) => ({

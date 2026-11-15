@@ -1,4 +1,4 @@
-import { UNSUBSCRIBE, esc, formatDate, inline, links, shell } from "./shared.mjs";
+import { UNSUBSCRIBE, esc, formatDate, inline, links, shell, siteLink } from "./shared.mjs";
 
 export const meta = {
   id: "bulletin",
@@ -180,7 +180,7 @@ export function render(edition, a) {
         ${rule(`border-top:1px solid ${INK};`)}
         <tr><td style="border-top:3px solid ${INK}; font-size:0; line-height:0; height:2px;">&nbsp;</td></tr>
         <tr><td align="center" style="padding-top:12px; font-family:${FACE}; font-size:12.5px; line-height:20px; color:#3d2c1e;">
-          Printed twice a month and passed from hand to hand. You are on the list because you signed up at herstoryafrica.com.ng.<br>
+          Printed twice a month and passed from hand to hand. You are on the list because you signed up at ${siteLink("#3d2c1e")}.<br>
           <a href="${l.archive}" style="color:${INK};">Back issues</a> &nbsp;|&nbsp;
           <a href="${l.browser}" style="color:${INK};">Read in your browser</a> &nbsp;|&nbsp;
           <a href="${UNSUBSCRIBE}" style="color:${INK};">Stop delivery</a>

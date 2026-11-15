@@ -1,4 +1,4 @@
-import { UNSUBSCRIBE, esc, formatDate, inline, links, shell } from "./shared.mjs";
+import { UNSUBSCRIBE, esc, formatDate, inline, links, shell, siteLink } from "./shared.mjs";
 
 export const meta = {
   id: "love-letter",
@@ -130,7 +130,7 @@ export function render(edition, a) {
           </td></tr></table>
         </td></tr>
         <tr><td class="pad" align="center" style="padding:26px 62px 10px 62px; font-family:${SERIF}; font-size:12px; line-height:20px; color:#6a4a2c;">
-          HerStory Africa, twice a month. You asked for these at herstoryafrica.com.ng.<br>
+          HerStory Africa, twice a month. You asked for these at ${siteLink("#6a4a2c")}.<br>
           <a href="${l.archive}" style="color:#6a4a2c;">Earlier letters</a> &nbsp;|&nbsp;
           <a href="${l.browser}" style="color:#6a4a2c;">Read in your browser</a> &nbsp;|&nbsp;
           <a href="${UNSUBSCRIBE}" style="color:#6a4a2c;">Stop these letters</a>
