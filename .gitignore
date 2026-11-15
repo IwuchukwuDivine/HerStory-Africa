@@ -31,3 +31,6 @@ drafts/
 FEATURES.md
 social/
 Claude outputs/
+
+# Newsletter build output (previews and the HTML that gets sent)
+.newsletter/
