@@ -217,9 +217,10 @@ async function build(slug) {
   // are relative to the site, links open in the page around the frame, and
   // the footer link points at the newsletter page instead of a merge tag.
   if (!sample) {
+    // The unsubscribe link goes first: it is itself a ${SITE}/newsletter/ URL.
     const web = html
-      .replaceAll(`${SITE}/newsletter/`, "/newsletter/")
       .replaceAll(UNSUBSCRIBE, "/newsletter")
+      .replaceAll(`${SITE}/newsletter/`, "/newsletter/")
       .replace("<head>", '<head>\n<base target="_top">');
     writeFileSync(join(imageDir, "web.html"), web);
   }

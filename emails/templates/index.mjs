@@ -6,7 +6,7 @@
 // Change the copy here, then run `npm run resend:setup` to push and publish.
 // Copy follows the house style in CLAUDE.md: no dashes, no AI phrasing.
 
-import { SITE, a, button, p, page, signature } from "./base.mjs";
+import { SITE, a, button, p, page, signature, signoff } from "./base.mjs";
 
 const FROM = "HerStory Africa <letters@herstoryafrica.com.ng>";
 const REPLY_TO = ["dee@herstoryafrica.com.ng"];
@@ -25,18 +25,26 @@ export const templates = [
     ],
     html: page({
       title: "Welcome to the HerStory Africa newsletter",
-      preview: "Twice a month, the story of an African woman worth knowing. Here is what to expect.",
+      preview: "I'm Deevyn, and I'm so glad you're here!",
       body: [
-        p("Hello,"),
-        p("Thank you for joining the HerStory Africa newsletter. I'm Deevyn, and I write it."),
+        p("Hey you! 🤎"),
+        p("I'm Deevyn, and I'm so glad you're here!"),
         p(
-          "Here is what to expect. Twice a month, a new edition arrives with the story of an African woman worth knowing: " +
-            "the moment, the decision or the detail that made her matter.",
+          "You know how you come across a story and immediately think, <em>wait, how have I never heard about this woman before?</em> " +
+            "That's pretty much how HerStory Africa started.",
         ),
-        p("You don't have to wait for the next one. Past editions are waiting for you, and every woman in the archive has her full story there too."),
-        button(`${SITE}/newsletter/archive`, "Explore past editions"),
-        p("If a story stays with you, reply and tell me. I read every one."),
-        signature(),
+        p(
+          "There are so many incredible African women whose stories we barely hear about, and I wanted to create a space " +
+            "where we could discover them, talk about them, and give them the attention they deserve.",
+        ),
+        p(
+          "So, welcome to our little corner of the internet! Think of this as our inner circle, where I get to share the " +
+            "stories, discoveries, and little bits of history I can't keep to myself.",
+        ),
+        p("And you don't have to wait for my next email. There's already plenty to explore."),
+        button(`${SITE}/newsletter/archive`, "Catch up on past letters"),
+        p("Here's to the stories we'll uncover, the history we'll unravel, and the women we'll never forget. 🥂"),
+        signoff("With love,"),
       ].join("\n"),
       footer: `You are getting this because you subscribed at ${a(SITE, "herstoryafrica.com.ng")}. If that wasn't you, or you have changed your mind, ${a("{{{unsubscribe_url}}}", "unsubscribe here")}.`,
     }),

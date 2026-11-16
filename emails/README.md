@@ -67,7 +67,7 @@ Nothing in the build script changes. `--list` picks the new layout up from its `
 - Web fonts are a bonus (Apple Mail). Each layout must still look right in its fallback (Times or Georgia), because Gmail ignores web fonts.
 - Light only: these are paper, so they keep their colours in dark mode.
 - Under 102 KB of HTML, or Gmail clips it.
-- The unsubscribe link is the `UNSUBSCRIBE` constant in `shared.mjs`. It is Resend's `{{{RESEND_UNSUBSCRIBE_URL}}}` until one test broadcast proves custom contact properties merge, then `OWN_UNSUBSCRIBE_PAGE` flips it to `/newsletter/unsubscribe`.
+- The unsubscribe link is the `UNSUBSCRIBE` constant in `shared.mjs`: our own `/newsletter/unsubscribe` page with each reader's signed token, merged by Resend from the `unsub_token` contact property (proven 16 Nov 2026). Set `OWN_UNSUBSCRIBE_PAGE` to false to fall back to Resend's `{{{RESEND_UNSUBSCRIBE_URL}}}`.
 - Send time is 08:00 Lagos time on the edition's `date`, unless the frontmatter sets `sendAt` (any ISO date and time).
 
 ## Transactional templates

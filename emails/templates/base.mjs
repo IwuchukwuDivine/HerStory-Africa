@@ -31,6 +31,10 @@ export const button = (href, label) => `
 export const signature = () =>
   `<p style="margin:26px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:20px; font-style:italic; color:${INK};">Deevyn</p>`;
 
+/** "With love," then the name in bold and "HerStory Africa" in italics. */
+export const signoff = (closing) =>
+  `<p style="margin:26px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:18px; line-height:1.5; color:${INK};">${closing}<br><strong>Deevyn</strong><br><em>HerStory Africa</em></p>`;
+
 export function page({ title, preview, body, footer }) {
   return `<!DOCTYPE html>
 <html lang="en">

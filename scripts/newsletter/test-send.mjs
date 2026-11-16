@@ -27,9 +27,15 @@ if (!key) fail("NUXT_RESEND_API_KEY is not set in .env.");
 const dir = join(ROOT, ".newsletter", slug);
 if (!existsSync(join(dir, "email.html"))) fail(`No build for "${slug}". Run: npm run newsletter:build -- ${slug}`);
 
-const placeholder = "{{{RESEND_UNSUBSCRIBE_URL}}}";
-let html = readFileSync(join(dir, "email.html"), "utf8").replaceAll(placeholder, `${SITE}/newsletter`);
-const text = readFileSync(join(dir, "email.txt"), "utf8").replaceAll(placeholder, `${SITE}/newsletter`);
+// Resend only fills merge tags in broadcasts. Our own unsubscribe link gets
+// the token "test", which /newsletter/unsubscribe explains; Resend's own tag,
+// if a build still uses it, points at the newsletter page.
+const fill = (content) =>
+  content
+    .replaceAll("{{{contact.unsub_token}}}", "test")
+    .replaceAll("{{{RESEND_UNSUBSCRIBE_URL}}}", `${SITE}/newsletter`);
+let html = fill(readFileSync(join(dir, "email.html"), "utf8"));
+const text = fill(readFileSync(join(dir, "email.txt"), "utf8"));
 const subject = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? slug;
 
 // Sample editions keep their images out of public/, so they ride along inline.

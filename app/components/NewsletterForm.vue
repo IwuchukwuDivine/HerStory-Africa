@@ -68,22 +68,18 @@ const emit = defineEmits<{
   subscribed: [email: string];
 }>();
 
-const { setSubscribed } = useApp();
-const { track } = useTag();
-
-const email = ref("");
-const website = ref("");
-const loading = ref(false);
-const success = ref(false);
-const alreadySubscribed = ref(false);
-const error = ref("");
-const touched = ref(false);
-
-const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const isValidEmail = computed(() => emailPattern.test(email.value));
-const showValidationError = computed(
-  () => touched.value && email.value.length > 0 && !isValidEmail.value,
-);
+const {
+  email,
+  website,
+  loading,
+  success,
+  alreadySubscribed,
+  error,
+  touched,
+  isValidEmail,
+  showValidationError,
+  subscribe: send,
+} = useSubscribe();
 
 const successMessage = computed(() =>
   alreadySubscribed.value
@@ -92,35 +88,7 @@ const successMessage = computed(() =>
 );
 
 async function subscribe() {
-  if (!isValidEmail.value) {
-    touched.value = true;
-    return;
-  }
-  error.value = "";
-  loading.value = true;
-
-  try {
-    const res = await $fetch<{ success: boolean; alreadySubscribed?: boolean }>(
-      "/api/subscribe",
-      {
-        method: "POST",
-        body: { email: email.value, website: website.value },
-      },
-    );
-
-    success.value = true;
-    alreadySubscribed.value = res.alreadySubscribed ?? false;
-    setSubscribed(email.value);
-    track("newsletter_subscribe", { already_subscribed: alreadySubscribed.value });
-    emit("subscribed", email.value);
-  } catch (err: unknown) {
-    const message =
-      (err as { data?: { message?: string } })?.data?.message ??
-      "Something went wrong. Please try again.";
-    error.value = message;
-  } finally {
-    loading.value = false;
-  }
+  if (await send()) emit("subscribed", email.value);
 }
 </script>
 

@@ -19,6 +19,8 @@ type EventPayloads = {
   };
   reflection_save: { slug: string };
   listen_play: { slug?: string };
+  /** A tap on the Instagram link-in-bio page (/links). */
+  links_click: { link: string };
 };
 type EventName = keyof EventPayloads;
 const CONSENT_STORAGE_KEY = "herstory-africa-consent-v1";

@@ -1,0 +1,139 @@
+<!doctype html>
+<!--
+  Share image for /links (the Instagram link-in-bio page), in the Bulletin
+  style. Satori cannot render these faces (it needs TTF; the site only has
+  the WOFF2 that @nuxt/fonts self-hosts), so this card is rendered once with
+  headless Chrome and committed as public/og/links.png.
+
+  To regenerate: `npm run generate` (so the fonts exist in .output), then
+  `node scripts/og/render-links-card.mjs`.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: "UnifrakturCook";
+    font-weight: 700;
+    src: url("../../.output/public/_fonts/4qrQ4sQib7AQj7wHHywQURQR7Er5VezLx4yOux9g2dM-wR5skqedI11lrNpcChk5GiEadMiqYFJl5zuLJoQJFbg.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Old Standard TT";
+    font-weight: 400;
+    src: url("../../.output/public/_fonts/J_WfbFCTXpAO4Zrg4IWl31qTRMMadjrxwPSjsMqdy0w-F11qZnO_BTCkMCi5idpWY0Zk4hKkwjHBF_ZORKmpEzU.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Old Standard TT";
+    font-weight: 400;
+    font-style: italic;
+    src: url("../../.output/public/_fonts/yuwVu1NG0F5o2AEPFX3l8LAA5QGRoSE3nCpZZDV-iBo-HuhpZhKQOHLeyqrO6svSuI_ugvKZJ0I2loHwUJT3shs.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Old Standard TT";
+    font-weight: 700;
+    src: url("../../.output/public/_fonts/wesVXj6WJbIrCg49RKHEtnQpQd7jqTn_OgJt5kfmn2Y-l9_D0hecYQigIleqLGMHoPQb-ClUHw2z5Cv3Zc19nWA.woff2") format("woff2");
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(92, 74, 58, 0.14) 100%),
+      #f1e8d3;
+    color: #1c0f07;
+    font-family: "Old Standard TT", "Times New Roman", serif;
+  }
+
+  .page {
+    position: absolute;
+    inset: 22px;
+    border: 2px solid #1c0f07;
+    padding: 26px 56px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid #1c0f07;
+    pointer-events: none;
+  }
+
+  .ears {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: baseline;
+    font-size: 21px;
+    letter-spacing: 0.12em;
+  }
+  .ears :last-child { text-align: right; }
+  .ears .mid { font-style: italic; letter-spacing: 0.02em; }
+
+  .nameplate {
+    margin: 10px 0 14px;
+    text-align: center;
+    font-family: "UnifrakturCook", serif;
+    font-weight: 700;
+    font-size: 138px;
+    line-height: 1.02;
+  }
+  .nameplate .her { color: #b5451b; }
+
+  .rule { border-top: 2px solid #1c0f07; }
+  .rule.thick { border-top-width: 7px; margin-bottom: 4px; }
+
+  .motto {
+    padding: 22px 0 22px;
+    text-align: center;
+    font-style: italic;
+    font-size: 40px;
+    line-height: 1.25;
+  }
+
+  .foot {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: #b5451b;
+  }
+  .foot .dot { color: #5c4a3a; }
+  .rule.thick.bottom { margin: 4px 0 30px; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="ears">
+      <span>VOL. I</span>
+      <span class="mid">herstoryafrica.com.ng</span>
+      <span>PASS IT ON</span>
+    </div>
+    <div class="nameplate"><span class="her">Her</span>Story Africa</div>
+    <div class="rule thick"></div>
+    <div class="rule"></div>
+    <p class="motto">History has always had remarkable women.<br>We tell their stories.</p>
+    <div class="rule"></div>
+    <div class="foot">
+      <span>Meet the women</span><span class="dot">·</span>
+      <span>Read the letters</span><span class="dot">·</span>
+      <span>Join the newsletter</span>
+    </div>
+    <div class="rule"></div>
+    <div class="rule thick bottom"></div>
+  </div>
+</body>
+</html>

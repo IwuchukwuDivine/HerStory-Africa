@@ -48,10 +48,8 @@ this repo.
 
 Items 2 to 10 are built and not yet committed. Item 7 (import) was done by
 Deevyn in the Resend dashboard: 24 contacts in General. Item 1 continues from
-real inbox screenshots. Waiting on a decision: one test broadcast to a
-one-person segment, to settle the unverified items below and decide whether
-the footer moves to our own unsubscribe page (`OWN_UNSUBSCRIBE_PAGE` in
-`emails/layouts/shared.mjs`).
+real inbox screenshots. The test broadcast on 16 Nov settled the open
+questions (below), and the footer now uses our own unsubscribe page.
 
 ## Still to build, in this order
 
@@ -83,19 +81,23 @@ the footer moves to our own unsubscribe page (`OWN_UNSUBSCRIBE_PAGE` in
 9. **Recreate the suggestion-email templates** on the new Resend account.
 10. Update `CLAUDE.md`, `README.md` and `.env.example`.
 
-## Still unverified (from the spike)
+## Settled by the test broadcast (16 Nov 2026)
 
-- Whether a custom contact property can be merged into a link in broadcast
-  HTML (decides item 5).
-- Whether unsubscribed contacts count toward the 1,000.
-- ~~Whether the Broadcast API takes a plain-text part and preview text.~~
-  Yes (15 Nov 2026): a draft created with `text` and `preview_text` read
-  back with both stored, and the HTML stored unchanged. The admin sends
-  `text` but not `preview_text`, because every layout already has its own
-  padded preheader.
-- That no Resend branding appears in a delivered broadcast on the free plan.
+One broadcast (`test/unsubscribe-merge`) went to a temporary one-person
+segment holding only the test address. The segment was deleted afterwards;
+Resend keeps sent broadcasts, so it stays in the broadcast history.
 
-Check each against Resend's current docs or a real call. Do not assume.
+- A custom contact property merges into broadcast HTML and text: the
+  delivered email carried the reader's real `unsub_token`. Item 5 uses our
+  own page (`OWN_UNSUBSCRIBE_PAGE = true` in `emails/layouts/shared.mjs`).
+  Every contact needs a token before a send; signups get one, imports need
+  `npm run resend:setup -- --backfill-tokens --apply`.
+- No Resend branding in the delivered email's HTML.
+- Unsubscribed contacts count toward the 1,000: Resend's quota is contacts
+  stored, and unsubscribed contacts stay stored until deleted (Resend's
+  "Managing unsubscribed Contacts" and "Usage Limits" docs). Delete them
+  periodically to stay under the limit.
+- The Broadcast API accepts `text` and `preview_text` (checked 15 Nov).
 
 ## Rules
 

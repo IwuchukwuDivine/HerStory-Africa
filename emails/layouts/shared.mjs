@@ -4,16 +4,19 @@
 export const SITE = "https://herstoryafrica.com.ng";
 
 /**
- * Where "Stop these letters" points. Resend fills both kinds in per reader.
+ * Where "Stop these letters" points. Resend fills it in per reader.
  *
  * Our own page (/newsletter/unsubscribe) needs each contact's signed token,
  * kept in the custom contact property `unsub_token` and merged by Resend at
- * send time. Resend's docs say custom properties merge into broadcast HTML,
- * but that is unproven on this account until one test broadcast arrives with
- * a working link. Until then the footer uses Resend's own page. Flip this to
- * true only after that test, then rebuild every edition not yet sent.
+ * send time. Proven on 16 Nov 2026 with one test broadcast to a one-person
+ * segment: the delivered email carried the reader's real token in both the
+ * HTML and text parts. Set to false to fall back to Resend's hosted page.
+ *
+ * Every contact must have a token before a broadcast goes out. Signups get
+ * one automatically; anything imported needs
+ * `npm run resend:setup -- --backfill-tokens --apply`.
  */
-export const OWN_UNSUBSCRIBE_PAGE = false;
+export const OWN_UNSUBSCRIBE_PAGE = true;
 
 export const UNSUBSCRIBE = OWN_UNSUBSCRIBE_PAGE
   ? `${SITE}/newsletter/unsubscribe?t={{{contact.unsub_token}}}`

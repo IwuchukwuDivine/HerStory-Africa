@@ -225,7 +225,7 @@ export default defineNuxtConfig({
         `export default ${JSON.stringify(contentSnapshot)}`,
     },
     prerender: {
-      routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities"],
+      routes: ["/", "/sitemap.xml", "/rss.xml", "/opportunities", "/links"],
       crawlLinks: true,
       ignore: ["/admin", "/admin/**"],
     },
@@ -394,6 +394,25 @@ export default defineNuxtConfig({
         styles: ["normal", "italic"],
         global: true,
       },
+      // The Bulletin faces, used only by /links (the Instagram link-in-bio
+      // page). Downloaded from Google at build time and served from /_fonts,
+      // so visitors never hit Google. Not global: the @font-face rules ship
+      // in the one stylesheet, but browsers only fetch a face a page uses.
+      {
+        name: "UnifrakturCook",
+        provider: "google",
+        weights: [700],
+        styles: ["normal"],
+        subsets: ["latin"],
+      },
+      {
+        name: "Old Standard TT",
+        provider: "google",
+        weights: [400, 700],
+        styles: ["normal", "italic"],
+        subsets: ["latin"],
+        fallbacks: ["Times New Roman", "Times", "serif"],
+      },
     ],
   },
 
@@ -474,6 +493,7 @@ export default defineNuxtConfig({
       ...unpublishedEditionRoutes,
       "/newsletter",
       "/suggest",
+      "/links",
     ],
     defaults: {
       changefreq: "weekly",

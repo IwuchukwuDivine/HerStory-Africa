@@ -24,4 +24,4 @@ P.S. To whoever is reading this over my shoulder: yes, she is real, and her full
 Read her full story: https://herstoryafrica.com.ng/women/specioza-wandira-kazibwe
 
 Read in your browser: https://herstoryafrica.com.ng/newsletter/dear-specioza
-Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}
+Unsubscribe: https://herstoryafrica.com.ng/newsletter/unsubscribe?t={{{contact.unsub_token}}}
