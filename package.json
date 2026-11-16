@@ -11,6 +11,7 @@
     "typecheck": "nuxi typecheck",
     "postinstall": "nuxt prepare",
     "newsletter:build": "node scripts/newsletter/build.mjs",
+    "newsletter:kit": "node scripts/newsletter/kit.mjs",
     "newsletter:test": "node --env-file=.env scripts/newsletter/test-send.mjs",
     "resend:setup": "node --env-file=.env scripts/resend-setup.mjs",
     "ai:generate": "node --env-file=.env scripts/generate-ai-content.mjs"

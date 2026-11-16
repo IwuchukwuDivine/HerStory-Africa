@@ -97,3 +97,15 @@ Nothing in the build script changes. `--list` picks the new layout up from its `
 The welcome email and the suggestion replies are Resend-hosted templates
 defined in `emails/templates/index.mjs`. Edit the copy there, then run
 `npm run resend:setup` to push and publish them.
+
+The welcome wears the By Air Mail envelope, with the brand mark on the stamp
+instead of a woman: it confirms a subscription, it is not an edition about
+anybody. Its artwork is fixed, because a hosted template is the same HTML for
+every reader, so it is drawn once by `npm run newsletter:kit` into
+`public/newsletter/kit/`. **Commit and deploy those files before
+`npm run resend:setup`**, or the first thing a new subscriber sees is a broken
+image.
+
+`npm run resend:setup -- --preview` writes each template to `.resend/` with its
+variables filled in, so the copy can be read in a browser before it is pushed.
+It needs no API key and sends nothing.

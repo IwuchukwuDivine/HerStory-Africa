@@ -1,4 +1,4 @@
-import { FACE, engrave, jpeg, mark, paper, raster, shadow, stroke, svg, sx, tapedPrint, uri } from "./art.mjs";
+import { FACE, creaseStrip, edgeStrip, engrave, jpeg, mark, paper, raster, shadow, stroke, svg, sx, tapedPrint, uri } from "./art.mjs";
 import { UNSUBSCRIBE, esc, formatDate, inline, links, shell, siteLink } from "./shared.mjs";
 
 export const meta = {
@@ -53,10 +53,10 @@ function nextPostings(iso, count = 3) {
   return out;
 }
 
-/** "15 NOV" and "2026", the two lines a postmark carries. */
+/** "15 NOV" and "2026", the two lines in the middle of a postmark. */
 function cancellation(iso) {
   const d = new Date(`${iso}T12:00:00Z`);
-  return [`${d.getUTCDate()} ${MONTHS[d.getUTCMonth()].slice(0, 3).toUpperCase()}`, String(d.getUTCFullYear())];
+  return { day: `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()].slice(0, 3).toUpperCase()}`, year: String(d.getUTCFullYear()) };
 }
 
 /** The wordmark as it is printed on the envelope and in the album. */
@@ -66,10 +66,14 @@ const wordmark = (x, y) => `
     <text x="${x + 33}" y="${y + 29}" font-family="${FACE.grotesque}" font-weight="500" font-size="7" letter-spacing="3.4" fill="${GOLD}">AFRICA</text>`;
 
 /**
- * A perforated postage stamp, 164 by 204 units, carrying the engraved portrait.
- * The holes are punched with a mask so the khaki of the desk shows through.
+ * A perforated postage stamp, 164 by 204 units. `ground` is the stamp's own
+ * paper and `plate` whatever it carries, usually an engraved portrait. The
+ * holes are punched with a mask so the desk shows through them.
+ *
+ * Exported because the welcome email borrows the envelope, with the brand mark
+ * on the stamp instead of a woman.
  */
-function stampArt({ portrait, number, name, line, ink = "#9a3816" }) {
+export function stampArt({ ground, plate, corner, name, line, ink = "#9a3816" }) {
   const W = 164;
   const H = 204;
   const px = 21;
@@ -89,13 +93,13 @@ function stampArt({ portrait, number, name, line, ink = "#9a3816" }) {
       <rect width="${W}" height="${H}" fill="white"/>${holes.join("")}
     </mask></defs>
     <g mask="url(#perf)">
-      <image href="${portrait.paper}" x="0" y="0" width="${W}" height="${H}"/>
+      <image href="${ground}" x="0" y="0" width="${W}" height="${H}"/>
       <g fill="${ink}" stroke="${ink}">
         <rect x="12.5" y="12.5" width="${W - 25}" height="${H - 25}" fill="none" stroke-width="1.5"/>
         <rect x="15.5" y="15.5" width="${W - 31}" height="${H - 31}" fill="none" stroke-width="0.5"/>
         <text x="21" y="27.5" font-family="${FACE.print}" font-weight="700" font-size="7.4" letter-spacing="1.5" stroke="none">HERSTORY AFRICA</text>
-        <text x="${W - 21}" y="28" text-anchor="end" font-family="${FACE.print}" font-weight="700" font-size="9.5" stroke="none">${sx(number)}</text>
-        <image href="${portrait.plate}" x="${px}" y="${py}" width="${pw}" height="${ph}"/>
+        <text x="${W - 21}" y="28" text-anchor="end" font-family="${FACE.print}" font-weight="700" font-size="9.5" stroke="none">${sx(corner)}</text>
+        <image href="${plate}" x="${px}" y="${py}" width="${pw}" height="${ph}"/>
         <rect x="${px}" y="${py}" width="${pw}" height="${ph}" fill="none" stroke-width="0.8"/>
         <text x="${W / 2}" y="${py + ph + 13}" text-anchor="middle" font-family="${FACE.print}" font-weight="700" font-size="6.9" letter-spacing="0.4"
               textLength="${Math.min(116, 4.9 * name.length)}" lengthAdjust="spacingAndGlyphs" stroke="none">${sx(name.toUpperCase())}</text>
@@ -106,7 +110,7 @@ function stampArt({ portrait, number, name, line, ink = "#9a3816" }) {
 }
 
 /** A circular date stamp with its cancellation waves running off to the right. */
-function postmarkArt(cx, cy, rotation, { top, bottom, day, year, colour, radius = 44 }) {
+export function postmarkArt(cx, cy, rotation, { top, bottom, day, year, colour, radius = 44 }) {
   const waves = [];
   for (let k = 0; k < 3; k++) {
     const points = [];
@@ -146,39 +150,47 @@ export async function assets(edition, t) {
   });
   const stamp = raster(
     stampArt({
-      portrait: {
-        paper: uri(await paper({ width: 164, height: 204, colour: "#f7f0dd", seed: 3, mottle: 0.06 })),
-        plate: uri(plate),
-      },
-      number,
+      ground: uri(await paper({ width: 164, height: 204, colour: "#f7f0dd", seed: 3, mottle: 0.06 })),
+      plate: uri(plate),
+      corner: number,
       name,
       line,
     }),
   );
 
   const out = [];
-  out.push({ name: "envelope.jpg", ...(await envelope(edition, stamp, number)) });
+  out.push({
+    name: "envelope.jpg",
+    ...(await envelopeScene({
+      stamp,
+      address: edition.addressedTo ?? "To you,\nwherever you are\nreading this.",
+      postmark: { top: "HERSTORY AFRICA", bottom: `LETTER ${number.toUpperCase()}`, ...cancellation(edition.date) },
+    })),
+  });
   out.push({
     name: "snapshot.jpg",
     ...(await tapedPrint(t.photoPath, { width: 600, height: 404, colour: PAPER, position: t.photoPosition, note: edition.answerNote ?? "the answer.", seed: 21 })),
   });
   out.push({ name: "album.jpg", ...(await album(edition, stamp)) });
-  out.push({ name: "fold.jpg", ...(await fold()) });
-  out.push({ name: "edge-top.jpg", ...(await edge("top")) });
-  out.push({ name: "edge-bottom.jpg", ...(await edge("bottom")) });
+  out.push({ name: "fold.jpg", ...(await creaseStrip({ sheet: PAPER })) });
+  out.push({ name: "edge-top.jpg", ...(await edgeStrip({ side: "top", sheet: PAPER, desk: DESK })) });
+  out.push({ name: "edge-bottom.jpg", ...(await edgeStrip({ side: "bottom", sheet: PAPER, desk: DESK })) });
   return out;
 }
 
-/** The envelope on the desk: airmail border, wordmark, label, stamp, postmark, address. */
-async function envelope(edition, stamp, number) {
+/**
+ * The envelope on the desk: airmail border, wordmark, label, stamp, postmark
+ * and the hand-written address. Exported, because the welcome email is the
+ * same envelope with a different stamp in the corner.
+ */
+export async function envelopeScene({ stamp, address, postmark }) {
   const W = 600;
   const H = 372;
   const EW = 552;
   const EH = 316;
   const ex = (W - EW) / 2;
   const ey = (H - EH) / 2 - 2;
-  const [day, year] = cancellation(edition.date);
-  const addressedTo = (edition.addressedTo ?? "To you,\nwherever you are\nreading this.").split("\n");
+  const addressedTo = String(address).split("\n");
 
   // The airmail border: slanted bars in the margin, every other one skipped.
   const bars = [];
@@ -219,7 +231,7 @@ async function envelope(edition, stamp, number) {
           <text x="58" y="200" font-size="19" transform="rotate(-3 58 200)">${sx(addressedTo[1] ?? "")}</text>
           <text x="80" y="240" font-size="19" transform="rotate(-3 80 240)">${sx(addressedTo[2] ?? "")}</text>
         </g>
-        <g opacity="0.8">${postmarkArt(stampX - 14, stampY + 26, -6, { top: "HERSTORY AFRICA", bottom: `LETTER ${number.toUpperCase()}`, day, year, colour: INK })}</g>
+        <g opacity="0.8">${postmarkArt(stampX - 14, stampY + 26, -6, { ...postmark, colour: INK })}</g>
       </g>
     </g>`,
   );
@@ -256,38 +268,6 @@ async function album(edition, stamp) {
     ${slots.join("")}`,
   );
   return jpeg(raster(doc), { width: W, height: H, background: PAPER, quality: 84 });
-}
-
-/** A crease across the sheet: shadow on one side of the line, light on the other. */
-async function fold() {
-  const W = 600;
-  const H = 14;
-  const doc = svg(
-    W,
-    H,
-    `<defs>
-      <linearGradient id="above" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#280e04" stop-opacity="0.16"/><stop offset="1" stop-color="#280e04" stop-opacity="0"/></linearGradient>
-      <linearGradient id="below" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0d2" stop-opacity="0.5"/><stop offset="1" stop-color="#fff0d2" stop-opacity="0"/></linearGradient>
-    </defs>
-    <rect width="${W}" height="${H}" fill="${PAPER}"/>
-    <rect y="0" width="${W}" height="${H / 2}" fill="url(#above)"/>
-    <rect y="${H / 2}" width="${W}" height="${H / 2}" fill="url(#below)"/>`,
-  );
-  return jpeg(raster(doc), { width: W, height: H, background: PAPER, quality: 88 });
-}
-
-/** The strip where the sheet meets the desk, so the paper has an edge and a shadow. */
-async function edge(side) {
-  const W = 600;
-  const H = 24;
-  const doc = svg(
-    W,
-    H,
-    `<defs>${shadow("cast", { blur: 11, dy: side === "top" ? 3 : 9, opacity: 0.45 })}</defs>
-    <rect width="${W}" height="${H}" fill="${DESK}"/>
-    <rect x="0" y="${side === "top" ? 10 : -70}" width="${W}" height="80" fill="${PAPER}" filter="url(#cast)"/>`,
-  );
-  return jpeg(raster(doc), { width: W, height: H, background: DESK, quality: 90 });
 }
 
 export function render(edition, a) {

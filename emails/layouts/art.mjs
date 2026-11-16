@@ -317,3 +317,34 @@ export async function tapedPrint(photoPath, { width, height, colour, position = 
   );
   return jpeg(raster(doc), { width, height, background: colour, quality: 84 });
 }
+
+/**
+ * The strip where a sheet meets the surface under it, so the paper has an edge
+ * and casts a shadow onto the desk instead of starting out of nowhere.
+ */
+export async function edgeStrip({ side, sheet, desk, height = 24, width = 600 }) {
+  const doc = svg(
+    width,
+    height,
+    `<defs>${shadow("cast", { blur: 11, dy: side === "top" ? 3 : 9, opacity: 0.46 })}</defs>
+    <rect width="${width}" height="${height}" fill="${desk}"/>
+    <rect x="0" y="${side === "top" ? height - 14 : -70}" width="${width}" height="80" fill="${sheet}" filter="url(#cast)"/>`,
+  );
+  return jpeg(raster(doc), { width, height, background: desk, quality: 90 });
+}
+
+/** A crease across the sheet: shadow on one side of the line, light on the other. */
+export async function creaseStrip({ sheet, height = 14, width = 600 }) {
+  const doc = svg(
+    width,
+    height,
+    `<defs>
+      <linearGradient id="above" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#280e04" stop-opacity="0.16"/><stop offset="1" stop-color="#280e04" stop-opacity="0"/></linearGradient>
+      <linearGradient id="below" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0d2" stop-opacity="0.5"/><stop offset="1" stop-color="#fff0d2" stop-opacity="0"/></linearGradient>
+    </defs>
+    <rect width="${width}" height="${height}" fill="${sheet}"/>
+    <rect y="0" width="${width}" height="${height / 2}" fill="url(#above)"/>
+    <rect y="${height / 2}" width="${width}" height="${height / 2}" fill="url(#below)"/>`,
+  );
+  return jpeg(raster(doc), { width, height, background: sheet, quality: 88 });
+}

@@ -1,4 +1,4 @@
-import { FACE, jpeg, mark, measure, paper, raster, ring, shadow, stroke, svg, sx, tapedPrint, uri, wrap } from "./art.mjs";
+import { FACE, edgeStrip, jpeg, mark, measure, paper, raster, ring, stroke, svg, sx, tapedPrint, uri, wrap } from "./art.mjs";
 import { UNSUBSCRIBE, esc, formatDate, inline, links, shell, siteLink } from "./shared.mjs";
 
 export const meta = {
@@ -87,8 +87,8 @@ export async function assets(edition, t) {
     ...(await tapedPrint(t.photoPath, { width: 600, height: 404, colour: PAPER, position: t.photoPosition, note: edition.answerNote ?? "the answer.", seed: 21 })),
   });
   out.push({ name: "resit.jpg", ...(await resit(edition)) });
-  out.push({ name: "edge-top.jpg", ...(await edge("top")) });
-  out.push({ name: "edge-bottom.jpg", ...(await edge("bottom")) });
+  out.push({ name: "edge-top.jpg", ...(await edgeStrip({ side: "top", sheet: PAPER, desk: DESK })) });
+  out.push({ name: "edge-bottom.jpg", ...(await edgeStrip({ side: "bottom", sheet: PAPER, desk: DESK })) });
   return out;
 }
 
@@ -199,20 +199,6 @@ async function resit(edition) {
     <g transform="rotate(-4 480 76)">${await score(480, 76, 22, "1", 42)}</g>`,
   );
   return jpeg(raster(doc), { width: W, height: H, background: PAPER, quality: 86 });
-}
-
-/** The strip where the script meets the desk it was handed back on. */
-async function edge(side) {
-  const W = 600;
-  const H = 24;
-  const doc = svg(
-    W,
-    H,
-    `<defs>${shadow("cast", { blur: 11, dy: side === "top" ? 3 : 9, opacity: 0.5 })}</defs>
-    <rect width="${W}" height="${H}" fill="${DESK}"/>
-    <rect x="0" y="${side === "top" ? 10 : -70}" width="${W}" height="80" fill="${PAPER}" filter="url(#cast)"/>`,
-  );
-  return jpeg(raster(doc), { width: W, height: H, background: DESK, quality: 90 });
 }
 
 const rule = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:2px solid ${PRINT}; font-size:0; line-height:0; height:3px;">&nbsp;</td></tr><tr><td style="border-top:1px solid ${PRINT}; font-size:0; line-height:0; height:1px;">&nbsp;</td></tr></table>`;

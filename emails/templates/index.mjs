@@ -6,7 +6,7 @@
 // Change the copy here, then run `npm run resend:setup` to push and publish.
 // Copy follows the house style in CLAUDE.md: no dashes, no AI phrasing.
 
-import { SITE, a, button, p, page, signature, signoff } from "./base.mjs";
+import { SITE, a, button, hand, letterButton, letterPage, line, p, page, row, signature, stress } from "./base.mjs";
 
 const FROM = "HerStory Africa <letters@herstoryafrica.com.ng>";
 const REPLY_TO = ["dee@herstoryafrica.com.ng"];
@@ -23,28 +23,45 @@ export const templates = [
     variables: [
       { key: "unsubscribe_url", type: "string", fallback_value: `${SITE}/newsletter` },
     ],
-    html: page({
+    html: letterPage({
       title: "Welcome to the HerStory Africa newsletter",
       preview: "I'm Deevyn, and I'm so glad you're here!",
+      heroAlt: "An airmail envelope addressed by hand: To you, wherever you are reading this. The stamp carries the HerStory Africa mark and reads, the women history forgot, posted twice a month.",
       body: [
-        p("Hey you! 🤎"),
-        p("I'm Deevyn, and I'm so glad you're here!"),
-        p(
-          "You know how you come across a story and immediately think, <em>wait, how have I never heard about this woman before?</em> " +
-            "That's pretty much how HerStory Africa started.",
+        row("Hey you! 🤎", { top: 26 }),
+        row(
+          [
+            line("I'm Deevyn, and I'm so glad you're here!"),
+            line(
+              `You know how you come across a story and immediately think, ${stress("wait, how have I never heard about this woman before?")} ` +
+                "That's pretty much how HerStory Africa started.",
+            ),
+            line(
+              "There are so many incredible African women whose stories we barely hear about, and I wanted to create a space " +
+                "where we could discover them, talk about them, and give them the attention they deserve.",
+            ),
+            line(
+              "So, welcome to our little corner of the internet! Think of this as our inner circle, where I get to share the " +
+                "stories, discoveries, and little bits of history I can't keep to myself.",
+            ),
+            line("And you don't have to wait for my next email. There's already plenty to explore.", { last: true }),
+          ].join("\n"),
         ),
-        p(
-          "There are so many incredible African women whose stories we barely hear about, and I wanted to create a space " +
-            "where we could discover them, talk about them, and give them the attention they deserve.",
+        row(letterButton(`${SITE}/newsletter/archive`, "Catch up on past letters"), { top: 20 }),
+        row(
+          line("Here's to the stories we'll uncover, the history we'll unravel, and the women we'll never forget. 🥂", { last: true }),
+          { top: 20 },
         ),
-        p(
-          "So, welcome to our little corner of the internet! Think of this as our inner circle, where I get to share the " +
-            "stories, discoveries, and little bits of history I can't keep to myself.",
+        row("With love,", { top: 26 }),
+        `    <tr><td class="pad" style="padding:0 56px 0 50px;">${hand()}</td></tr>`,
+        row(line("HerStory Africa", { last: true, small: true }), { top: 2 }),
+        row(
+          line(
+            "P.S. If this landed in Promotions, Updates, or even spam, could you drag it into your main inbox? That way my letters actually reach you.",
+            { last: true, small: true },
+          ),
+          { top: 16 },
         ),
-        p("And you don't have to wait for my next email. There's already plenty to explore."),
-        button(`${SITE}/newsletter/archive`, "Catch up on past letters"),
-        p("Here's to the stories we'll uncover, the history we'll unravel, and the women we'll never forget. 🥂"),
-        signoff("With love,"),
       ].join("\n"),
       footer: `You are getting this because you subscribed at ${a(SITE, "herstoryafrica.com.ng")}. If that wasn't you, or you have changed your mind, ${a("{{{unsubscribe_url}}}", "unsubscribe here")}.`,
     }),
