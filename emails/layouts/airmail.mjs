@@ -313,7 +313,7 @@ export function render(edition, a) {
     <tr><td class="pad hand" style="padding:26px 56px 0 56px; ${hand}">${esc(edition.salutation)}</td></tr>
     ${rows.join("\n    ")}
     <tr><td class="pad hand" style="padding:26px 56px 0 56px; ${hand}">${esc(edition.closing)}</td></tr>
-    <tr><td class="pad" style="padding:0 56px 0 50px;"><img src="${a.kit("signature-letter.png")}" width="170" alt="${esc(edition.signedBy)}" style="width:170px; height:auto; font-family:Georgia,serif; font-size:30px; font-style:italic; color:${INK};"></td></tr>
+    <tr><td class="pad" style="padding:0 56px 0 50px;"><img src="${a.kit("signature-letter.png")}" width="230" alt="${esc(edition.signedBy)}" style="width:230px; height:auto; font-family:Georgia,serif; font-size:30px; font-style:italic; color:${INK};"></td></tr>
     <tr><td class="pad hand" style="padding:10px 56px 0 56px; font-family:${HAND}; font-size:19px; line-height:30px; font-style:italic; color:${INK};">${inline(edition.ps, { link: `color:${TERRA}; text-decoration:underline;` })}</td></tr>
     <tr><td style="padding:30px 0 0 0; font-size:0; line-height:0;"><img src="${a.get("fold.jpg").url}" width="600" alt="" style="width:100%; height:auto;"></td></tr>
     <tr><td class="pad note" align="center" style="padding:16px 56px 0 56px; font-family:${HAND}; font-size:17px; line-height:27px; font-style:italic; color:${INK};">${inline(albumNote, { link: `color:${TERRA}; text-decoration:underline;` })}</td></tr>

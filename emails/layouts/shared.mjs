@@ -109,6 +109,8 @@ ${fontHref ? `<!--[if !mso]><!-->\n<link href="${fontHref}" rel="stylesheet">\n<
   :root { color-scheme: light only; }
   body { margin:0; padding:0; width:100% !important; -webkit-text-size-adjust:100%; }
   table { border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:0; }
+  /* Every layout sets display:block inline on its own artwork too. Gmail turns
+     some emoji into an <img>, and this blanket rule puts one on its own line. */
   img { border:0; display:block; outline:none; text-decoration:none; }
   @media only screen and (max-width:620px) {
     .shell { width:100% !important; }

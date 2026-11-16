@@ -42,7 +42,7 @@ export const letterLink = (href, label) =>
 
 /** The signature, written out, the same one the letters are signed with. */
 export const hand = () =>
-  `<img src="${KIT}/signature-letter.png" width="170" alt="Deevyn" style="width:170px; height:auto; display:block; font-family:Georgia, serif; font-size:30px; font-style:italic; color:${LETTER_INK};">`;
+  `<img src="${KIT}/signature-letter.png" width="230" alt="HerStory Africa" style="display:block; width:230px; height:auto; font-family:Georgia, serif; font-size:30px; font-style:italic; color:${LETTER_INK};">`;
 
 /** Writing paper on a desk: the shell the newsletter letters use. */
 export function letterPage({ title, preview, heroAlt, body, footer }) {
@@ -62,7 +62,10 @@ export function letterPage({ title, preview, heroAlt, body, footer }) {
   :root { color-scheme: light only; }
   body { margin:0; padding:0; width:100% !important; -webkit-text-size-adjust:100%; }
   table { border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:0; }
-  img { border:0; display:block; outline:none; text-decoration:none; }
+  /* No global display:block here. Gmail swaps some emoji for an <img> of its
+     own, and a blanket rule drops them onto a line by themselves. The artwork
+     carries display:block inline instead. */
+  img { border:0; outline:none; text-decoration:none; }
   @media only screen and (max-width:620px) {
     .shell { width:100% !important; }
     .mat-pad { padding:0 !important; }
@@ -78,8 +81,8 @@ export function letterPage({ title, preview, heroAlt, body, footer }) {
   <table role="presentation" width="644" cellpadding="0" cellspacing="0" border="0" style="width:644px; max-width:100%; background-color:${DESK};">
   <tr><td class="mat-pad" align="center" style="padding:22px 22px 26px 22px;">
     <table role="presentation" class="shell" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background-color:${SHEET};">
-    <tr><td bgcolor="${DESK}" style="font-size:0; line-height:0; background-color:${DESK};"><img src="${KIT}/welcome-envelope.jpg" width="600" alt="${heroAlt}" style="width:100%; height:auto; font-family:Georgia, serif; font-size:14px; line-height:20px; font-style:italic; color:${LETTER_INK};"></td></tr>
-    <tr><td bgcolor="${DESK}" style="font-size:0; line-height:0; background-color:${DESK};"><img src="${KIT}/welcome-edge-top.jpg" width="600" alt="" style="width:100%; height:auto;"></td></tr>
+    <tr><td bgcolor="${DESK}" style="font-size:0; line-height:0; background-color:${DESK};"><img src="${KIT}/welcome-envelope.jpg" width="600" alt="${heroAlt}" style="display:block; width:100%; height:auto; font-family:Georgia, serif; font-size:14px; line-height:20px; font-style:italic; color:${LETTER_INK};"></td></tr>
+    <tr><td bgcolor="${DESK}" style="font-size:0; line-height:0; background-color:${DESK};"><img src="${KIT}/welcome-edge-top.jpg" width="600" alt="" style="display:block; width:100%; height:auto;"></td></tr>
 ${body}
     <tr><td class="pad" style="padding:16px 56px 26px 56px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -87,7 +90,7 @@ ${body}
       <tr><td align="center" style="padding-top:14px; font-family:${HAND}; font-size:13px; line-height:21px; color:${FADED};">${footer}</td></tr>
       </table>
     </td></tr>
-    <tr><td bgcolor="${DESK}" style="font-size:0; line-height:0; background-color:${DESK};"><img src="${KIT}/welcome-edge-bottom.jpg" width="600" alt="" style="width:100%; height:auto;"></td></tr>
+    <tr><td bgcolor="${DESK}" style="font-size:0; line-height:0; background-color:${DESK};"><img src="${KIT}/welcome-edge-bottom.jpg" width="600" alt="" style="display:block; width:100%; height:auto;"></td></tr>
     </table>
   </td></tr>
   </table>
@@ -123,11 +126,11 @@ export const button = (href, label) => `
 </table>`;
 
 export const signature = () =>
-  `<p style="margin:26px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:20px; font-style:italic; color:${INK};">Deevyn</p>`;
+  `<p style="margin:26px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:20px; font-style:italic; color:${INK};">HerStory Africa</p>`;
 
-/** "With love," then the name in bold and "HerStory Africa" in italics. */
+/** "With love," then the masthead in bold. The letters are signed by the archive. */
 export const signoff = (closing) =>
-  `<p style="margin:26px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:18px; line-height:1.5; color:${INK};">${closing}<br><strong>Deevyn</strong><br><em>HerStory Africa</em></p>`;
+  `<p style="margin:26px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:18px; line-height:1.5; color:${INK};">${closing}<br><strong>HerStory Africa</strong></p>`;
 
 export function page({ title, preview, body, footer }) {
   return `<!DOCTYPE html>

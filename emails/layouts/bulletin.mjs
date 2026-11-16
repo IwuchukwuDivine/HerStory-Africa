@@ -172,7 +172,7 @@ export function render(edition, a) {
 
     <tr><td class="pad" align="center" style="padding:24px 40px 0 40px; font-family:${FACE}; font-size:17px; line-height:26px; font-style:italic; color:${INK};">
       ${inline(edition.signOff)}<br>
-      <span style="font-style:normal; font-weight:bold; letter-spacing:2px; font-size:13px;">${esc(edition.signedBy.toUpperCase())}, EDITOR</span>
+      <span style="font-style:normal; font-weight:bold; letter-spacing:2px; font-size:13px;">${esc(edition.signedBy.toUpperCase())}</span>
     </td></tr>
 
     <tr><td class="pad" style="padding:24px 28px 22px 28px;">

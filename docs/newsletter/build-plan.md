@@ -11,7 +11,8 @@ this repo.
   Safeguards instead: honeypot field, rate limit, immediate welcome email,
   remove contacts that bounce.
 - From `HerStory Africa <letters@herstoryafrica.com.ng>`, reply-to
-  `dee@herstoryafrica.com.ng`. Signed "Deevyn".
+  `dee@herstoryafrica.com.ng`. Signed "HerStory Africa": no editor is named
+  anywhere a reader can see.
 - Import all 24 Buttondown signups, including unconfirmed ones. The export CSV
   is kept by Deevyn outside the repo. Never commit subscriber data.
 - Past Buttondown editions are not carried into the new archive.

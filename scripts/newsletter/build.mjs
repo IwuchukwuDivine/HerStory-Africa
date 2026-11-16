@@ -18,10 +18,9 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { Resvg } from "@resvg/resvg-js";
-import satori from "satori";
 import sharp from "sharp";
 import { parse as parseYaml } from "yaml";
+import { scriptText } from "../../emails/layouts/art.mjs";
 import { layoutById, layouts } from "../../emails/layouts/index.mjs";
 import { SITE, UNSUBSCRIBE, formatDate, parseBody } from "../../emails/layouts/shared.mjs";
 
@@ -67,29 +66,6 @@ function listLayouts() {
   console.log("");
 }
 
-/** Cursive lines are drawn as images so they look the same in every inbox. */
-const scriptFont = readFileSync(join(ROOT, "emails/fonts/PinyonScript-Regular.woff"));
-async function scriptText(text, { size, colour }) {
-  const scale = 2;
-  const svg = await satori(
-    {
-      type: "div",
-      props: {
-        style: { display: "flex", fontFamily: "Pinyon Script", fontSize: size * scale, lineHeight: 1.3, color: colour, padding: size, whiteSpace: "nowrap" },
-        children: text,
-      },
-    },
-    { width: Math.ceil(text.length * size * scale * 0.8 + size * 4), height: size * scale * 3, fonts: [{ name: "Pinyon Script", data: scriptFont, weight: 400, style: "normal" }] },
-  );
-  const png = new Resvg(svg, { background: "rgba(0,0,0,0)" }).render().asPng();
-  const trimmed = await sharp(png)
-    .trim()
-    .extend({ top: 8, bottom: 12, left: 8, right: 8, background: { r: 0, g: 0, b: 0, alpha: 0 } })
-    .png()
-    .toBuffer({ resolveWithObject: true });
-  return { data: trimmed.data, width: Math.round(trimmed.info.width / scale), height: Math.round(trimmed.info.height / scale) };
-}
-
 function loadEdition(slug) {
   const file = join(EDITIONS, `${slug}.md`);
   if (!existsSync(file)) {
@@ -97,7 +73,7 @@ function loadEdition(slug) {
     fail(`No edition at app/content/newsletter/${slug}.md. Editions: ${have.join(", ") || "none yet"}`);
   }
   const { data, body } = frontmatter(file);
-  const edition = { signedBy: "Deevyn", volume: "I", linkText: "Read her full story", sensitive: [], ...data, slug, body };
+  const edition = { signedBy: "HerStory Africa", volume: "I", linkText: "Read her full story", sensitive: [], ...data, slug, body };
   edition.date = String(edition.date instanceof Date ? edition.date.toISOString().slice(0, 10) : edition.date);
   if (edition.sendAt instanceof Date) edition.sendAt = edition.sendAt.toISOString();
   edition.sendAt ??= `${edition.date}T${DEFAULT_SEND_TIME}`;

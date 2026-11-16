@@ -25,13 +25,13 @@ export const templates = [
     ],
     html: letterPage({
       title: "Welcome to the HerStory Africa newsletter",
-      preview: "I'm Deevyn, and I'm so glad you're here!",
+      preview: "I'm so glad you're here!",
       heroAlt: "An airmail envelope addressed by hand: To you, wherever you are reading this. The stamp carries the HerStory Africa mark and reads, the women history forgot, posted twice a month.",
       body: [
         row("Hey you! 🤎", { top: 26 }),
         row(
           [
-            line("I'm Deevyn, and I'm so glad you're here!"),
+            line("I'm so glad you're here!"),
             line(
               `You know how you come across a story and immediately think, ${stress("wait, how have I never heard about this woman before?")} ` +
                 "That's pretty much how HerStory Africa started.",
@@ -54,7 +54,6 @@ export const templates = [
         ),
         row("With love,", { top: 26 }),
         `    <tr><td class="pad" style="padding:0 56px 0 50px;">${hand()}</td></tr>`,
-        row(line("HerStory Africa", { last: true, small: true }), { top: 2 }),
         row(
           line(
             "P.S. If this landed in Promotions, Updates, or even spam, could you drag it into your main inbox? That way my letters actually reach you.",

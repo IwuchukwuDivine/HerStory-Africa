@@ -122,8 +122,9 @@ There is no fixed skeleton, but every edition has these parts in some order:
 - **One link out.** "Read her full story" to the profile or article. One
   primary link per edition. An optional second link only when it truly adds
   something.
-- **Sign-off.** Short, personal, in register. Signed with a name (proposed:
-  "Deevyn"). In `playful` and `warm` it can invite a reply.
+- **Sign-off.** Short, personal, in register. Signed "HerStory Africa": the
+  letters carry the archive's name, not an editor's, and the voice stays
+  anonymous. In `playful` and `warm` it can invite a reply.
 - **Footer.** Fixed. Why you are getting this, view in browser, unsubscribe.
 
 What an edition never contains: a list of "also read" links picked by a

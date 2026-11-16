@@ -7,9 +7,11 @@
 // unchanged edition writes the same bytes. None of this is sent to a browser:
 // the output is a JPEG or PNG in public/newsletter/<slug>/.
 
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Resvg } from "@resvg/resvg-js";
+import satori from "satori";
 import sharp from "sharp";
 
 const FONT_DIR = join(dirname(fileURLToPath(import.meta.url)), "../fonts");
@@ -60,6 +62,29 @@ export const raster = (doc, scale = DPR) =>
   })
     .render()
     .asPng();
+
+/** Cursive lines are drawn as images so they look the same in every inbox. */
+const scriptFont = readFileSync(join(FONT_DIR, "PinyonScript-Regular.woff"));
+export async function scriptText(text, { size, colour }) {
+  const scale = 2;
+  const doc = await satori(
+    {
+      type: "div",
+      props: {
+        style: { display: "flex", fontFamily: "Pinyon Script", fontSize: size * scale, lineHeight: 1.3, color: colour, padding: size, whiteSpace: "nowrap" },
+        children: text,
+      },
+    },
+    { width: Math.ceil(text.length * size * scale * 0.8 + size * 4), height: size * scale * 3, fonts: [{ name: "Pinyon Script", data: scriptFont, weight: 400, style: "normal" }] },
+  );
+  const png = new Resvg(doc, { background: "rgba(0,0,0,0)" }).render().asPng();
+  const trimmed = await sharp(png)
+    .trim()
+    .extend({ top: 8, bottom: 12, left: 8, right: 8, background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .png()
+    .toBuffer({ resolveWithObject: true });
+  return { data: trimmed.data, width: Math.round(trimmed.info.width / scale), height: Math.round(trimmed.info.height / scale) };
+}
 
 /**
  * How wide a line of type sets, in layout units. Drawn and measured rather

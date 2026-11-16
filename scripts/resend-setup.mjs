@@ -17,7 +17,7 @@
 // for the backfill.
 
 import { createHmac } from "node:crypto";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { templates } from "../emails/templates/index.mjs";
@@ -32,10 +32,14 @@ function fail(message) {
   process.exit(1);
 }
 
+const MIME = { ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg" };
+
 /**
  * Writes each template out with its variables filled in, so the copy can be
- * read in a browser before it is pushed. Artwork is read from the local
- * public/ folder, which is also where a missing kit image will show up.
+ * read before it is pushed. Artwork is inlined from the local public/ folder
+ * rather than linked, so the file opens anywhere: a browser, an editor's
+ * preview pane, or an attachment. A kit image that is missing locally stays a
+ * live URL and shows up as a broken image, which is the point.
  */
 function preview() {
   const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -49,14 +53,24 @@ function preview() {
     woman_name: "Nwanyeruwa",
     profile_url: "https://herstoryafrica.com.ng/women/nwanyeruwa",
   };
+  const missing = new Set();
   mkdirSync(out, { recursive: true });
   for (const template of templates) {
     let html = template.html;
     for (const [key, value] of Object.entries(sample)) html = html.replaceAll(`{{{${key}}}}`, value);
-    html = html.replaceAll("https://herstoryafrica.com.ng/newsletter/kit/", `file://${join(root, "public/newsletter/kit")}/`);
+    html = html.replace(/https:\/\/herstoryafrica\.com\.ng\/newsletter\/kit\/([\w.-]+)/g, (url, file) => {
+      const path = join(root, "public/newsletter/kit", file);
+      const type = MIME[file.slice(file.lastIndexOf("."))];
+      if (!type || !existsSync(path)) {
+        missing.add(`public/newsletter/kit/${file}`);
+        return url;
+      }
+      return `data:${type};base64,${readFileSync(path).toString("base64")}`;
+    });
     writeFileSync(join(out, `${template.alias}.html`), html);
     console.log(`  ✓ .resend/${template.alias}.html   subject: ${template.subject}`);
   }
+  for (const file of missing) console.warn(`  ! ${file} is not there. Run npm run newsletter:kit.`);
   console.log("\n  Nothing was sent or pushed. Open these to read them.\n");
 }
 
