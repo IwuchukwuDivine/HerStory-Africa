@@ -25,7 +25,12 @@ solemn register) and warns when the story is too short or too long.
 |---|---|---|
 | `love-letter` | Parchment, cursive and a wax seal. Written to the woman herself. | warm, solemn |
 | `letter` | Writing paper, italics and a taped snapshot. A friend writing to the reader. | playful, warm |
+| `airmail` | The letter, in an airmail envelope with her face engraved on the stamp. A stamp album at the foot fills a space every fortnight. | playful, warm |
+| `test` | The reader's own exam script, already marked. 0 out of 1 at the top, 1 out of 1 at the foot. | playful |
 | `bulletin` | An old newspaper front page with a gossip column. | playful, warm |
+
+`airmail` and `test` both need a photograph of her: one to engrave on the
+stamp, one to pin up as the model answer. Neither takes a solemn edition.
 
 `docs/newsletter/voice-guide.md` explains how to choose between them.
 
@@ -46,7 +51,24 @@ Body copy is plain paragraphs. Inline: `**bold**`, `*italic*`, `__underline__`,
 | `:::column` | Starts the second column (bulletin) |
 | `## Text` | A small subhead (bulletin) |
 
+In `test`, `:::photo` is also where the voice changes: everything before it is
+the examiner's hand, everything after it is the printed model answer.
+
 A layout ignores directives it has no use for, and the build says so.
+
+## Drawing artwork
+
+`emails/layouts/art.mjs` is the drawing kit: textured paper, line-engraved
+portraits, pen and pencil marks, taped prints, the continent mark. Drawings are
+hand-written SVG rendered by resvg against the TrueType files in
+`emails/fonts/`, so a build draws the same thing on any machine and the
+textures come from a seeded generator, which means rebuilding an unchanged
+edition writes the same bytes. Those font files are build-time only: nothing
+in `emails/fonts/` is ever sent to a reader, and the email itself still asks
+Google Fonts for its web fonts and falls back to Georgia and Times.
+
+`measure()` and `wrap()` draw a line and measure it rather than estimating its
+width, because the drawings put text on fixed coordinates.
 
 ## Adding a layout
 

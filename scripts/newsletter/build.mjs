@@ -108,6 +108,8 @@ function loadEdition(slug) {
     const profilePath = join(ROOT, "app/content/women", `${edition.woman}.md`);
     if (!existsSync(profilePath)) fail(`woman: "${edition.woman}" has no profile in app/content/women/.`);
     const profile = frontmatter(profilePath).data;
+    edition.womanName ??= profile.name;
+    edition.womanCountry ??= profile.country;
     edition.photo ??= profile.image;
     edition.photoCredit ??= `Photo: ${profile.imageCredit}.`;
     edition.photoCaption ??= `${profile.name}. Photograph: ${profile.imageCredit}.`;

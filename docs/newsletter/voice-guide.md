@@ -140,18 +140,38 @@ for the current set; more can be added (see `emails/README.md`).
 |---|---|---|---|
 | `love-letter` | A parchment love letter written to the woman herself | The edition is admiration for one woman; tender or bittersweet stories; women who have died; anniversaries | warm, solemn |
 | `letter` | A letter from a friend, with a snapshot taped in | A question or a conversation with the reader; the writer's own reaction is part of it | playful, warm |
+| `airmail` | The same letter, in an airmail envelope with her face on the stamp | A question-led edition that wants a reason to come back: the album at the foot fills a space every fortnight | playful, warm |
+| `test` | Their own exam script, marked in red | The edition opens on a question almost nobody can answer, and the point is who set the syllabus | playful |
 | `bulletin` | An old newspaper front page with a gossip column | Events, dates and stakes; a twist, a scandal, an underdog win; facts worth boxing up | playful, warm |
 
 How to decide, in order:
 
 1. If the content is sensitive (section 3), the register is solemn, and only
    layouts that allow solemn are open. Today that is the love letter.
-2. Who is being spoken to? Her: love letter. The reader: letter. A crowd:
-   bulletin.
+2. Who is being spoken to? Her: love letter. The reader: letter, airmail or
+   test. A crowd: bulletin.
 3. What carries the story? A person: a letter. An event: the bulletin.
 4. Not the same layout three editions in a row.
+5. The airmail and the test both need a photograph of her. Where no likeness
+   survives, neither is open: the stamp has nothing to engrave and the paper
+   has nothing to pin up.
 
 If no layout fits the story, say so and propose a new one. Do not force it.
+
+### The airmail and the test have their own rules
+
+- Both put a woman inside an object, so neither is ever used for sensitive
+  content. A stamp album turns her into a collectible; a mark out of one turns
+  her life into a quiz answer.
+- The airmail numbers its stamp from the edition number and dates the next
+  three spaces from the 1st and the 15th. Skipping an edition leaves a hole in
+  the album, so do not promise one you will not send.
+- The test speaks for the reader in pencil ("Nobody told me"). That is the
+  joke, and it only lands if almost nobody could have answered. If a reader
+  who did know would feel talked down to, use the letter instead.
+- In the test, everything before `:::photo` is the examiner's hand and
+  everything after it is the printed model answer. Write the two halves in
+  those two voices.
 
 ### The love letter has its own rules
 
@@ -217,7 +237,7 @@ why_now: ""                 # anniversary, news hook, reader request, or "none"
 sensitive_content: []       # slavery, sexual violence, abuse, massacre, execution, child death, living survivors
 register: ""                # playful | warm | solemn (solemn if the list above is not empty)
 opening: ""                 # question | letter | scene | archive | not-taught
-layout: ""                  # love-letter | letter | bulletin
+layout: ""                  # love-letter | letter | airmail | test | bulletin
 image: ""                   # path and credit, or "no likeness survives"
 the_line: ""                # the one fact or moment a reader should repeat to a friend
 previous_edition: ""        # opening and layout used last time, so this one differs
